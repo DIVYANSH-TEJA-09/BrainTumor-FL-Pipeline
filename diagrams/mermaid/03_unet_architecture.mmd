@@ -1,0 +1,48 @@
+graph TD
+    classDef encoder fill:#bbdefb,stroke:#1565c0,stroke-width:2px
+    classDef decoder fill:#c8e6c9,stroke:#2e7d32,stroke-width:2px
+    classDef att fill:#ffecb3,stroke:#ff8f00,stroke-width:2px
+    classDef io fill:#f5f5f5,stroke:#424242,stroke-width:2px
+
+    IN["Input: 4 x 96 x 96 x 96
+    T1, T1ce, T2, FLAIR"]:::io
+
+    subgraph ENCODER ["Encoder Path - Feature Extraction"]
+        E1["Conv3D Block 1
+        4 to 16 filters"]:::encoder
+        E2["Conv3D Block 2
+        16 to 32 filters"]:::encoder
+        E3["Conv3D Block 3
+        32 to 64 filters"]:::encoder
+        E4["Conv3D Block 4
+        64 to 128 filters"]:::encoder
+        E5["Bottleneck
+        128 to 256 filters"]:::encoder
+    end
+
+    subgraph DECODER ["Decoder Path - Upsampling"]
+        D4["UpConv plus AG
+        256 to 128"]:::decoder
+        D3["UpConv plus AG
+        128 to 64"]:::decoder
+        D2["UpConv plus AG
+        64 to 32"]:::decoder
+        D1["UpConv plus AG
+        32 to 16"]:::decoder
+    end
+
+    AG1["Attention Gate 1"]:::att
+    AG2["Attention Gate 2"]:::att
+    AG3["Attention Gate 3"]:::att
+    AG4["Attention Gate 4"]:::att
+
+    OUT["Output: 3 x 96 x 96 x 96
+    WT, TC, ET masks"]:::io
+
+    IN --> E1 --> E2 --> E3 --> E4 --> E5
+    E5 --> D4 --> D3 --> D2 --> D1 --> OUT
+
+    E4 -- "Skip AG" --> AG4 --> D4
+    E3 -- "Skip AG" --> AG3 --> D3
+    E2 -- "Skip AG" --> AG2 --> D2
+    E1 -- "Skip AG" --> AG1 --> D1

@@ -1,0 +1,27 @@
+sequenceDiagram
+    participant H1 as Hospital A - 1200 images
+    participant H2 as Hospital B - 3900 images
+    participant H3 as Hospital C - 4200 images
+    participant S as Central Server - QPSO Aggregator
+
+    Note over S: Initialize Global ResNet-18
+
+    loop 100 Federated Rounds
+        S->>H1: Broadcast Global Model W_global
+        S->>H2: Broadcast Global Model W_global
+        S->>H3: Broadcast Global Model W_global
+        
+        Note over H1: Local Training 5 epochs on PRIVATE data
+        Note over H2: Local Training 5 epochs on PRIVATE data
+        Note over H3: Local Training 5 epochs on PRIVATE data
+        
+        H1->>S: Send Updated Weights W1 only
+        H2->>S: Send Updated Weights W2 only
+        H3->>S: Send Updated Weights W3 only
+        
+        Note over S: QPSO Aggregation Step - Update pbest gbest mbest
+    end
+
+    S->>H1: Final Converged Global Model
+    S->>H2: Final Converged Global Model
+    S->>H3: Final Converged Global Model

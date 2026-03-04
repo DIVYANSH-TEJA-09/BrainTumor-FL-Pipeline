@@ -1,0 +1,36 @@
+graph LR
+    classDef fedavg fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px
+    classDef fedprox fill:#e3f2fd,stroke:#1565c0,stroke-width:2px
+    classDef qpso fill:#fff3e0,stroke:#e65100,stroke-width:2px
+
+    subgraph FedAvg_Method ["1. FedAvg - Baseline"]
+        FA1["Collect Client
+        Weights W1...Wk"]:::fedavg
+        FA2["Weighted Average
+        W = Sum nk/N times Wk"]:::fedavg
+        FA3["Deterministic
+        Single Point"]:::fedavg
+        FA1 --> FA2 --> FA3
+    end
+
+    subgraph FedProx_Method ["2. FedProx"]
+        FP1["Local Training with
+        Proximal Term"]:::fedprox
+        FP2["loss += mu/2 times
+        norm W-W_global squared"]:::fedprox
+        FP3["Prevents
+        Client Drift"]:::fedprox
+        FP1 --> FP2 --> FP3
+    end
+
+    subgraph QPSO_Method ["3. QPSO-FL - Ours"]
+        Q1["Track pbest gbest
+        per Client"]:::qpso
+        Q2["Compute Attraction Point
+        p = phi times mean pbest"]:::qpso
+        Q3["Quantum Update
+        x new = p plus-minus beta term"]:::qpso
+        Q4["Stochastic
+        Exploration"]:::qpso
+        Q1 --> Q2 --> Q3 --> Q4
+    end

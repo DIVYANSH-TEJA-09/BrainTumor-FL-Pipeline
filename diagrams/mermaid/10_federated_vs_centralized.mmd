@@ -1,0 +1,32 @@
+graph LR
+    subgraph CENTRALIZED ["Traditional Centralized"]
+        C1["Hospital A Data"]
+        C2["Hospital B Data"]
+        C3["Hospital C Data"]
+        C4["Central Server
+        All Data Pooled"]
+        C5["Single Model"]
+        C1 -- "Send Raw MRI" --> C4
+        C2 -- "Send Raw MRI" --> C4
+        C3 -- "Send Raw MRI" --> C4
+        C4 --> C5
+    end
+
+    subgraph FEDERATED ["Our FL-QPSO Approach"]
+        F1["Hospital A
+        Data Stays Local"]
+        F2["Hospital B
+        Data Stays Local"]
+        F3["Hospital C
+        Data Stays Local"]
+        F4["QPSO Server
+        Weights Only"]
+        F5["Global Model"]
+        F1 -- "Weights Only" --> F4
+        F2 -- "Weights Only" --> F4
+        F3 -- "Weights Only" --> F4
+        F4 --> F5
+    end
+
+    style CENTRALIZED fill:#ffcdd2,stroke:#c62828
+    style FEDERATED fill:#c8e6c9,stroke:#2e7d32

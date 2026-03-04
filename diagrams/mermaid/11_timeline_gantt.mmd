@@ -1,0 +1,26 @@
+gantt
+    title Brain Tumor Management System - 12 Week Timeline
+    dateFormat YYYY-MM-DD
+    axisFormat %b %d
+
+    section Module 1 Segmentation
+    Data Download and Setup       :done, seg1, 2025-12-01, 7d
+    3D U-Net Training             :done, seg2, after seg1, 14d
+    Streamlit App Development     :done, seg3, after seg2, 7d
+
+    section Module 2 Classification
+    Dataset Collection            :done, cls1, 2025-12-15, 7d
+    FL-QPSO Code Development      :done, cls2, after cls1, 14d
+    Setup 1 Training and Eval     :done, cls3, after cls2, 10d
+    Setup 2 and 3 Experiments     :active, cls4, 2026-03-01, 14d
+
+    section Module 3 Progression
+    Longitudinal Data Prep        :active, prog1, 2026-02-20, 14d
+    Mathematical Models           :active, prog2, after prog1, 10d
+    LSTM Development              :prog3, after prog2, 14d
+
+    section Integration and Delivery
+    Pipeline Integration          :intg, 2026-03-20, 10d
+    Dashboard and Reports         :dash, after intg, 7d
+    Testing and Documentation     :test, after dash, 7d
+    Final Presentation            :crit, pres, after test, 3d

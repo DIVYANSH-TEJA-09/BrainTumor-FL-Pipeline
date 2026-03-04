@@ -1,0 +1,18 @@
+graph LR
+    classDef lstm fill:#e8eaf6,stroke:#283593,stroke-width:2px
+    classDef data fill:#fce4ec,stroke:#c62828,stroke-width:2px
+
+    A["Volume Sequence
+    v1, v2, ..., vn"]:::data
+    B["Sliding Window
+    seq_len = 4"]:::data
+    C["LSTM Layer 1
+    hidden = 64"]:::lstm
+    D["LSTM Layer 2
+    hidden = 32"]:::lstm
+    E["Fully Connected
+    32 to 1"]:::lstm
+    F["Predicted Volume
+    v n+1"]:::data
+
+    A --> B --> C --> D --> E --> F

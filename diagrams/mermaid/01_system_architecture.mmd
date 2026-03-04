@@ -1,0 +1,59 @@
+graph TD
+    classDef input fill:#e3f2fd,stroke:#1565c0,stroke-width:2px,color:#0d47a1
+    classDef seg fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+    classDef cls fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px,color:#1b5e20
+    classDef prog fill:#fff3e0,stroke:#e65100,stroke-width:2px,color:#bf360c
+    classDef out fill:#fce4ec,stroke:#c62828,stroke-width:2px,color:#b71c1c
+
+    A["Patient MRI Scans
+    T1, T1ce, T2, FLAIR"]:::input
+    
+    subgraph MODULE_1 ["Module 1: 3D Segmentation"]
+        B["3D Attention U-Net
+        MONAI Framework"]:::seg
+        C["Tumor Masks
+        WT, TC, ET"]:::seg
+        D["Volume Extraction
+        cm3 per timepoint"]:::seg
+    end
+
+    subgraph MODULE_2 ["Module 2: Federated Classification"]
+        E["Hospital Node 1
+        Local ResNet-18"]:::cls
+        F["Hospital Node 2
+        Local ResNet-18"]:::cls
+        G["Hospital Node 3
+        Local ResNet-18"]:::cls
+        H["QPSO - FedAvg - FedProx
+        Aggregation Server"]:::cls
+        I["Tumor Type
+        Glioma - Meningioma - Pituitary"]:::cls
+    end
+
+    subgraph MODULE_3 ["Module 3: Progression Forecasting"]
+        J["Mathematical Models
+        Exponential, Gompertz, Logistic"]:::prog
+        K["LSTM Deep Learning
+        Forecaster"]:::prog
+        L["Best-Fit Model Selector
+        R2 Comparison"]:::prog
+        M["6-Month Growth Prediction
+        plus RANO Status"]:::prog
+    end
+
+    subgraph OUTPUT ["Clinical Decision Engine"]
+        N["Integrated Risk Score
+        0 to 100"]:::out
+        O["Clinical Dashboard
+        Streamlit"]:::out
+        P["PDF Patient Report
+        plus Alerts"]:::out
+    end
+
+    A --> B --> C --> D
+    A --> E & F & G
+    E & F & G -- "Send Weights Only" --> H
+    H --> I
+    D --> J & K
+    J & K --> L --> M
+    I & M --> N --> O & P

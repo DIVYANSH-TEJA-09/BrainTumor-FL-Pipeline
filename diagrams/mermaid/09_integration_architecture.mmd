@@ -1,0 +1,50 @@
+graph TD
+    classDef phase fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px
+    classDef risk fill:#ffcdd2,stroke:#c62828,stroke-width:2px
+    classDef deploy fill:#e3f2fd,stroke:#1565c0,stroke-width:2px
+
+    subgraph PHASE1 ["Phase 1: Classification"]
+        P1A["Load Patient Scan"]:::phase
+        P1B["FL-QPSO Classifier"]:::phase
+        P1C["Tumor Type plus
+        Confidence"]:::phase
+        P1A --> P1B --> P1C
+    end
+
+    subgraph PHASE2 ["Phase 2: Segmentation"]
+        P2A["Load All Timepoints"]:::phase
+        P2B["3D Attention U-Net"]:::phase
+        P2C["Volume Series
+        cm3 per timepoint"]:::phase
+        P2A --> P2B --> P2C
+    end
+
+    subgraph PHASE3 ["Phase 3: Progression"]
+        P3A["Fit Growth Models"]:::phase
+        P3B["LSTM Forecaster"]:::phase
+        P3C["6-Month Prediction
+        plus RANO Status"]:::phase
+        P3A --> P3C
+        P3B --> P3C
+    end
+
+    subgraph PHASE4 ["Phase 4: Risk Fusion"]
+        P4A["Type Risk Weight"]:::risk
+        P4B["Growth Risk Weight"]:::risk
+        P4C["Size Risk Weight"]:::risk
+        P4D["Composite Score
+        0 to 100"]:::risk
+        P4A & P4B & P4C --> P4D
+    end
+
+    subgraph DEPLOY ["Deployment"]
+        D1["Streamlit Dashboard"]:::deploy
+        D2["PDF Patient Report"]:::deploy
+        D3["Clinical Alerts"]:::deploy
+    end
+
+    P1C --> P4A
+    P2C --> PHASE3
+    P3C --> P4B
+    P2C --> P4C
+    P4D --> D1 & D2 & D3

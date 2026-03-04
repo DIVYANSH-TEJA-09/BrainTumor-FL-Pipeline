@@ -1,0 +1,41 @@
+flowchart TD
+    classDef input fill:#e3f2fd,stroke:#1565c0,stroke-width:2px
+    classDef process fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
+    classDef model fill:#fff3e0,stroke:#e65100,stroke-width:2px
+    classDef output fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px
+
+    A["Longitudinal MRI Scans
+    t1, t2, t3, ..."]:::input
+    B["3D Attention U-Net
+    Segmentation"]:::process
+    C["Volume Extraction
+    cm3 per timepoint"]:::process
+    D["Time-Series
+    Construction"]:::process
+
+    E["Path A: Mathematical
+    Curve Fitting"]:::model
+    F["Path B: LSTM
+    Deep Learning"]:::model
+
+    E1["Exponential Model"]:::model
+    E2["Gompertz Model"]:::model
+    E3["Logistic Model"]:::model
+    E4["Linear Model"]:::model
+
+    G["Best-Fit Selector
+    Highest R2"]:::model
+    H["6-Month Prediction"]:::output
+    I["RANO Status
+    CR/PR/SD/PD"]:::output
+    J["Growth Metrics
+    AGR, RGR, Td, VDE"]:::output
+    K["Clinical Risk Alert
+    LOW/MODERATE/HIGH/CRITICAL"]:::output
+
+    A --> B --> C --> D
+    D --> E & F
+    E --> E1 & E2 & E3 & E4
+    E1 & E2 & E3 & E4 --> G
+    F --> G
+    G --> H --> I & J --> K

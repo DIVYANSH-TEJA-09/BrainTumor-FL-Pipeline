@@ -1,0 +1,41 @@
+flowchart LR
+    subgraph INPUT ["Raw Data"]
+        A1["4-Modality
+        3D MRI Volumes"]
+        A2["Multi-Source
+        2D MRI Slices"]
+        A3["Longitudinal
+        MRI Series"]
+    end
+
+    subgraph PROCESS ["Processing"]
+        B1["MONAI Preprocessing
+        RAS, 1mm3, Z-norm"]
+        B2["Torchvision Transforms
+        224x224, Augment"]
+        B3["Co-Registration
+        and Resampling"]
+    end
+
+    subgraph MODEL ["Models"]
+        C1["3D Attention U-Net
+        4 in to 3 out"]
+        C2["ResNet-18
+        3-class FC"]
+        C3["Growth Models
+        plus LSTM"]
+    end
+
+    subgraph RESULT ["Outputs"]
+        D1["Segmentation Mask
+        WT/TC/ET"]
+        D2["Class plus Confidence
+        Glioma 94.2 pct"]
+        D3["Growth Curve
+        plus Risk Alert"]
+    end
+
+    A1 --> B1 --> C1 --> D1
+    A2 --> B2 --> C2 --> D2
+    A3 --> B3 --> C3 --> D3
+    D1 -- "Volume Series" --> C3

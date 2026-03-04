@@ -74,3 +74,8 @@ desktop.ini
 *.bak
 *.tmp
 *.temp
+
+# ---------- Node / Web ----------
+node_modules/
+package-lock.json
+package.json

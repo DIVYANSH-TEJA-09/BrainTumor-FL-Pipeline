@@ -1,0 +1,16 @@
+graph TD
+    classDef s1 fill:#c8e6c9,stroke:#2e7d32,stroke-width:2px
+    classDef s2 fill:#fff9c4,stroke:#f9a825,stroke-width:2px
+    classDef s3 fill:#ffcdd2,stroke:#c62828,stroke-width:2px
+
+    S1["Setup 1: Natural Heterogeneity
+    All 3 classes per client
+    Different sources - mild Non-IID"]:::s1
+    S2["Setup 2: Moderate Label Skew
+    80/10/10 distribution
+    One dominant class per client"]:::s2
+    S3["Setup 3: Extreme Skew
+    100 pct single class per client
+    Maximum Non-IID challenge"]:::s3
+
+    S1 -- "Increasing Difficulty" --> S2 -- "Maximum Challenge" --> S3
