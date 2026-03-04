@@ -1,0 +1,76 @@
+# ===========================
+# FL-QPSO Brain Tumor Project
+# ===========================
+
+# ---------- Python ----------
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+dist/
+build/
+*.egg
+
+# ---------- Jupyter ----------
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# ---------- Model Weights & Data ----------
+*.pth
+*.h5
+*.hdf5
+*.ckpt
+*.pkl
+*.npy
+*.npz
+*.pt
+*.onnx
+*.safetensors
+*.bin
+
+# ---------- Datasets ----------
+data/
+datasets/
+*.nii
+*.nii.gz
+*.dcm
+*.tar.gz
+*.zip
+
+# ---------- Results & Logs ----------
+logs/
+runs/
+wandb/
+mlruns/
+*.log
+
+# ---------- Environment ----------
+.env
+.venv/
+env/
+venv/
+ENV/
+
+# ---------- IDE / Editor ----------
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.settings/
+
+# ---------- OS ----------
+.DS_Store
+Thumbs.db
+desktop.ini
+*.lnk
+
+# ---------- Streamlit ----------
+.streamlit/secrets.toml
+
+# ---------- Misc ----------
+*.bak
+*.tmp
+*.temp

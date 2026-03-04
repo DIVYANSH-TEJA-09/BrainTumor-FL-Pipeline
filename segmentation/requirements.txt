@@ -1,0 +1,7 @@
+
+streamlit
+nibabel
+numpy
+matplotlib
+monai
+torch

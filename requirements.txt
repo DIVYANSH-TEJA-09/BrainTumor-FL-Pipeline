@@ -1,0 +1,39 @@
+# ==================================
+# FL-QPSO Brain Tumor Management
+# Unified Requirements
+# ==================================
+
+# Core
+torch>=1.12.0
+torchvision>=0.13.0
+numpy>=1.21.0
+pandas>=1.3.0
+matplotlib>=3.5.0
+scikit-learn>=1.0.0
+scipy>=1.7.0
+Pillow>=9.0.0
+tqdm>=4.62.0
+
+# Medical Imaging (Module 1: Segmentation)
+monai>=1.0.0
+nibabel>=4.0.0
+SimpleITK>=2.1.0
+
+# Federated Learning (Module 2: Classification)
+# No additional deps — pure PyTorch implementation
+
+# Progression (Module 3: Time Travel)
+# scipy (already listed) for curve_fit
+# lstm uses torch (already listed)
+
+# Dashboard & Visualization
+streamlit>=1.20.0
+plotly>=5.10.0
+seaborn>=0.12.0
+
+# Dataset Download
+tcia-utils>=1.0.0
+
+# Utilities
+openpyxl>=3.0.0
+fpdf2>=2.7.0

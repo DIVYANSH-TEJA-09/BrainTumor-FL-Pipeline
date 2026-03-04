@@ -126,7 +126,7 @@ Longitudinal growth prediction using mathematical models and LSTM deep learning.
 
 ```bash
 # Clone the repository
-git clone https://github.com/<your-username>/FL_QPSO_FedAvg.git
+git clone https://github.com/DIVYANSH-TEJA-09/BrainTumor-FL-Pipeline.git
 cd FL_QPSO_FedAvg
 
 # Create virtual environment
@@ -270,7 +270,7 @@ If you use this work, please cite:
   author    = {Edla, Divyansh Teja and Indhumathi, L. K.},
   year      = {2025},
   institution = {Matrusri Engineering College},
-  url       = {https://github.com/<your-username>/FL_QPSO_FedAvg}
+  url       = {https://github.com/DIVYANSH-TEJA-09/BrainTumor-FL-Pipeline}
 }
 ```
 
@@ -287,4 +287,3 @@ This project is licensed under the MIT License — see the [LICENSE](LICENSE) fi
 **Built with** ❤️ **for privacy-preserving medical AI**
 
 </div>
-# BrainTumor-FL-Pipeline
