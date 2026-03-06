@@ -1,0 +1,48 @@
+{
+  "fedavg": {
+    "final_acc": 88.16,
+    "best_acc": 90.56,
+    "round_to_target": 35,
+    "avg_round_time_s": 7.9,
+    "total_time_min": 13.16
+  },
+  "fedprox": {
+    "final_acc": 91.82,
+    "best_acc": 93.02,
+    "round_to_target": 17,
+    "avg_round_time_s": 8.02,
+    "total_time_min": 13.36
+  },
+  "qpso": {
+    "final_acc": 72.67,
+    "best_acc": 77.3,
+    "round_to_target": null,
+    "avg_round_time_s": 7.97,
+    "total_time_min": 13.28
+  },
+  "stats_fa_qp": {
+    "t_stat": -8.3464,
+    "p_value": 4.3213745718204546e-13,
+    "cohens_d": -0.8346,
+    "significant": true
+  },
+  "stats_fa_fp": {
+    "t_stat": 13.3946,
+    "p_value": 5.857362777648649e-24,
+    "cohens_d": 1.3395,
+    "significant": true
+  },
+  "phase3_config": {
+    "model": "SimpleCNN (~120K params)",
+    "img_size": 112,
+    "local_epochs": 1,
+    "lr": 0.01,
+    "batch_size": 64,
+    "beta_start": 1.0,
+    "beta_end": 0.5,
+    "beta_schedule": "linear_decay",
+    "fedprox_mu": 0.01,
+    "perturbation_clamp": "[-0.5, 0.5]",
+    "u_clamp": "[0.1, 1.0]"
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "phase": "Phase 4",
+  "fedavg": {
+    "final_acc": 88.16,
+    "best_acc": 90.56,
+    "rounds_run": 100,
+    "round_to_target": 35,
+    "avg_round_time_s": 8.03,
+    "total_time_min": 13.38
+  },
+  "fedprox": {
+    "final_acc": 91.82,
+    "best_acc": 93.02,
+    "rounds_run": 100,
+    "round_to_target": 17,
+    "avg_round_time_s": 8.16,
+    "total_time_min": 13.6
+  },
+  "qpso": {
+    "final_acc": 91.43,
+    "best_acc": 92.09,
+    "rounds_run": 100,
+    "round_to_target": 19,
+    "avg_round_time_s": 74.92,
+    "total_time_min": 124.87
+  },
+  "stats_fedavg_vs_qpso": {
+    "t_stat": 12.5859,
+    "p_value": 2.9116109479752896e-22,
+    "cohens_d": 1.2586,
+    "significant": true
+  },
+  "stats_fedavg_vs_fedprox": {
+    "t_stat": 13.3946,
+    "p_value": 5.857362777648649e-24,
+    "cohens_d": 1.3395,
+    "significant": true
+  },
+  "config": {
+    "model": "SimpleCNN (~120K params)",
+    "img_size": 112,
+    "local_epochs": 1,
+    "lr": 0.01,
+    "batch_size": 64,
+    "num_rounds": 100,
+    "fedprox_mu": 0.01,
+    "qpso_beta": 0.6,
+    "qpso_iters_per_layer": 5,
+    "qpso_val_batches": 4,
+    "early_stopping": {
+      "patience": 15,
+      "min_rounds": 30,
+      "target_acc": 95.0
+    },
+    "qpso_type": "layer-by-layer, loss-minimizing, ported from MNIST IID reference"
+  }
+}

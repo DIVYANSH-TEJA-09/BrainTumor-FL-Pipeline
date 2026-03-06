@@ -1,0 +1,35 @@
+{
+  "fedavg": {
+    "final_acc": 98.69,
+    "best_acc": 98.96,
+    "round_to_target": 2,
+    "avg_round_time_s": 96.52,
+    "total_time_min": 160.86
+  },
+  "fedprox": {
+    "final_acc": 98.91,
+    "best_acc": 99.13,
+    "round_to_target": 1,
+    "avg_round_time_s": 104.17,
+    "total_time_min": 173.61
+  },
+  "qpso": {
+    "final_acc": 98.58,
+    "best_acc": 98.8,
+    "round_to_target": 2,
+    "avg_round_time_s": 96.64,
+    "total_time_min": 161.06
+  },
+  "stats_fa_qp": {
+    "t_stat": 0.1642,
+    "p_value": 0.869891512368429,
+    "cohens_d": 0.0164,
+    "significant": false
+  },
+  "stats_fa_fp": {
+    "t_stat": 0.8482,
+    "p_value": 0.39834675584039214,
+    "cohens_d": 0.0848,
+    "significant": false
+  }
+}
