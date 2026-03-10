@@ -1,0 +1,8 @@
+Metric,FedAvg,FedProx,L-b-L QPSO
+Best Global Accuracy,90.56%,93.02%,92.09%
+Accuracy Gap vs Best,-2.46%,—,-0.93%
+Client 1 (smallest),60.42%,77.50%,80.00%
+Client 2,85.73%,86.80%,87.33%
+Client 3 (largest),89.17%,92.14%,88.10%
+Client Std Dev,12.82%,6.05%,3.65%
+Fairness Improvement,—,2.1x fairer than FedAvg,3.5x fairer than FedAvg

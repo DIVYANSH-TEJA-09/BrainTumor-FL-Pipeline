@@ -1,0 +1,28 @@
+C:\Users\divya\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\monai\utils\deprecate_utils.py:321: FutureWarning: monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+  warn_deprecated(argname, msg, warning_category)
+Device: cpu
+Checkpoint: best_metric_model.pth exists=True
+Available patients: ['BraTS2021_01601', 'BraTS2021_01602', 'BraTS2021_01603', 'BraTS2021_01604', 'BraTS2021_01605']
+Testing patient: BraTS2021_01601
+  t1: exists=True
+  t1ce: exists=True
+  t2: exists=True
+  flair: exists=True
+  seg: exists=True
+Image shape: torch.Size([4, 240, 240, 155])
+Label shape: torch.Size([1, 240, 240, 155])
+Image range: [-5.778, 12.398]
+Pred shape: (3, 240, 240, 155)
+TC(ch0): 146836 voxels
+WT(ch1): 438772 voxels
+ET(ch2): 46823 voxels
+Total voxels: 8928000
+WT coverage: 4.91%
+
+--- Known good (BraTS2021_01601) ---
+Shape: (240, 240, 155, 3)
+WT: 107398, TC: 49880, ET: 41764
+
+--- New patient (BraTS2021_01601) ---
+WT: 438772, TC: 146836, ET: 46823
+DONE

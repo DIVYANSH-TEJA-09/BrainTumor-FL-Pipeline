@@ -1,0 +1,17 @@
+=== Phase 4: Natural ===
+  fedavg  : best=90.56  final=88.16  C1=60.42  C2=85.73  C3=89.17  std=12.82
+  fedprox : best=93.02  final=91.82  C1=77.50  C2=86.80  C3=92.14  std=6.05
+  qpso    : best=92.09  final=91.43  C1=80.00  C2=87.33  C3=88.10  std=3.65
+=== Phase 4: Moderate Skew ===
+  fedavg  : best=90.56  final=88.16  C1=60.42  C2=85.73  C3=89.17  std=12.82
+  fedprox : best=93.02  final=91.82  C1=77.50  C2=86.80  C3=92.14  std=6.05
+  qpso    : best=92.09  final=91.43  C1=80.00  C2=87.33  C3=88.10  std=3.65
+
+=== Phase 3: Natural ===
+  fedavg  : best=95.80  final=92.53  C1=77.50  C2=83.73  C3=95.95  std=7.66
+  fedprox : best=96.07  final=92.47  C1=90.83  C2=79.07  C3=94.76  std=6.67
+  qpso    : best=85.71  final=82.87  C1=81.67  C2=81.20  C3=82.26  std=0.43
+=== Phase 3: Moderate Skew ===
+  fedavg  : best=90.56  final=88.16  C1=60.42  C2=85.73  C3=89.17  std=12.82
+  fedprox : best=93.02  final=91.82  C1=77.50  C2=86.80  C3=92.14  std=6.05
+  qpso    : best=77.30  final=72.67  C1=47.50  C2=70.40  C3=58.69  std=9.35

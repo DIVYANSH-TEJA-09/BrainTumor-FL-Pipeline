@@ -1,0 +1,46 @@
+
+===== Case 1: Transfer Learning (ResNet-18 Pretrained) =====
+  [Natural]
+    fedavg  : best=98.96%  final=98.69%  round_to_80=2  client_std=N/A
+    fedprox : best=99.13%  final=98.91%  round_to_80=1  client_std=N/A
+    qpso    : best=98.8%  final=98.58%  round_to_80=2  client_std=N/A
+    [Stats FedAvg vs QPSO] p=0.869892  cohen_d=0.0164  significant=False
+  [Moderate Skew]
+    fedavg  : best=98.58%  final=98.09%  round_to_80=2  client_std=N/A
+    fedprox : best=98.75%  final=97.76%  round_to_80=2  client_std=N/A
+    qpso    : best=98.04%  final=97.49%  round_to_80=1  client_std=N/A
+    [Stats FedAvg vs QPSO] p=0.717564  cohen_d=-0.0363  significant=False
+
+===== Case 2: From Scratch (ResNet-18) =====
+  [Natural]
+    fedavg  : best=99.02%  final=98.75%  round_to_80=2  client_std=N/A
+    fedprox : best=98.69%  final=98.2%  round_to_80=4  client_std=N/A
+    qpso    : best=98.58%  final=98.47%  round_to_80=2  client_std=N/A
+    [Stats FedAvg vs QPSO] p=0.000122  cohen_d=-0.4  significant=True
+  [Moderate Skew]
+    fedavg  : best=98.25%  final=97.27%  round_to_80=4  client_std=N/A
+    fedprox : best=98.15%  final=97.65%  round_to_80=6  client_std=N/A
+    qpso    : best=97.71%  final=97.55%  round_to_80=2  client_std=N/A
+    [Stats FedAvg vs QPSO] p=0.890447  cohen_d=0.0138  significant=False
+
+===== Case 3: Naive QPSO (SimpleCNN) =====
+  [Natural]
+    fedavg  : best=95.8%  final=92.53%  round_to_80=11  client_std=N/A
+    fedprox : best=96.07%  final=92.47%  round_to_80=9  client_std=N/A
+    qpso    : best=85.71%  final=82.87%  round_to_80=32  client_std=N/A
+    [Stats FedAvg vs QPSO] p=0.000000  cohen_d=-1.32  significant=True
+  [Moderate Skew]
+    fedavg  : best=90.56%  final=88.16%  round_to_80=35  client_std=N/A
+    fedprox : best=93.02%  final=91.82%  round_to_80=17  client_std=N/A
+    qpso    : best=77.3%  final=72.67%  round_to_80=None  client_std=N/A
+    [Stats FedAvg vs QPSO] p=0.000000  cohen_d=-0.8346  significant=True
+
+===== Case 4: Layer-by-Layer QPSO (SimpleCNN) =====
+  [Natural]
+    fedavg  : best=90.56%  final=88.16%  round_to_80=35  client_std=N/A
+    fedprox : best=93.02%  final=91.82%  round_to_80=17  client_std=N/A
+    qpso    : best=92.09%  final=91.43%  round_to_80=19  client_std=N/A
+  [Moderate Skew]
+    fedavg  : best=90.56%  final=88.16%  round_to_80=35  client_std=N/A
+    fedprox : best=93.02%  final=91.82%  round_to_80=17  client_std=N/A
+    qpso    : best=92.09%  final=91.43%  round_to_80=19  client_std=N/A
