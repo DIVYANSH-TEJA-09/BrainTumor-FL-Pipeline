@@ -21,7 +21,7 @@ import plotly.graph_objects as go
 st.set_page_config(page_title="Brain Tumor Classification", page_icon="🧠", layout="wide")
 
 # ─── paths ───────────────────────────────────────────────────────────────
-FL_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../federated_learning"))
+FL_ROOT = os.path.abspath(os.path.dirname(__file__))
 RESULTS = os.path.join(FL_ROOT, "results", "results_layer_by_layer_QPSO")
 # Use Setup 1 models by default (best performing)
 MODELS_DIR = os.path.join(RESULTS, "Setup_1", "models")
