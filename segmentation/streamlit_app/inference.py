@@ -209,4 +209,91 @@ def get_all_patients():
                 if os.path.exists(os.path.join(full, f"{d}_flair.nii.gz")):
                     patients.add(d)
 
+    # Custom uploaded patients (non-BraTS folders)
+    if os.path.isdir(DEMO_DIR):
+        for d in os.listdir(DEMO_DIR):
+            full = os.path.join(DEMO_DIR, d)
+            if os.path.isdir(full) and not d.startswith("BraTS"):
+                if os.path.exists(os.path.join(full, f"{d}_flair.nii.gz")):
+                    patients.add(d)
+        # Also check for custom *_image.nii.gz (already processed uploads)
+        for f in glob.glob(os.path.join(DEMO_DIR, "*_image.nii.gz")):
+            pid = os.path.basename(f).replace("_image.nii.gz", "")
+            patients.add(pid)
+
     return sorted(patients)
+
+
+def get_demo_candidates():
+    """
+    Return all patient IDs that have raw BraTS data in subfolders
+    (regardless of whether predictions exist).
+    These are candidates the user can select to run demo inference on.
+    """
+    candidates = []
+    if not os.path.isdir(DEMO_DIR):
+        return candidates
+
+    for d in sorted(os.listdir(DEMO_DIR)):
+        full = os.path.join(DEMO_DIR, d)
+        if os.path.isdir(full):
+            # Check it has at least the flair modality file
+            flair = os.path.join(full, f"{d}_flair.nii.gz")
+            if os.path.exists(flair):
+                candidates.append(d)
+    return candidates
+
+
+def prepare_demo_patient(patient_id):
+    """
+    Prepare a demo patient by running inference.
+    Returns True on success.
+    """
+    return ensure_prediction(patient_id)
+
+
+def prepare_uploaded_patient(patient_id, t1_file, t1ce_file, t2_file, flair_file,
+                              seg_file=None):
+    """
+    Save uploaded NIfTI files into a patient subfolder and run inference.
+
+    Parameters
+    ----------
+    patient_id : str
+        A unique ID for the upload (e.g. "Custom_Patient_01").
+    t1_file, t1ce_file, t2_file, flair_file : UploadedFile
+        Streamlit UploadedFile objects for each required modality.
+    seg_file : UploadedFile or None
+        Optional segmentation mask upload.
+
+    Returns
+    -------
+    bool
+        True if inference completed successfully.
+    """
+    # Create patient subfolder
+    p_dir = os.path.join(DEMO_DIR, patient_id)
+    os.makedirs(p_dir, exist_ok=True)
+
+    # Map of modality name -> uploaded file object
+    modalities = {
+        "t1": t1_file,
+        "t1ce": t1ce_file,
+        "t2": t2_file,
+        "flair": flair_file,
+    }
+
+    # Save each modality file
+    for mod_name, file_obj in modalities.items():
+        target = os.path.join(p_dir, f"{patient_id}_{mod_name}.nii.gz")
+        with open(target, "wb") as f:
+            f.write(file_obj.getbuffer())
+
+    # Save optional segmentation
+    if seg_file is not None:
+        seg_target = os.path.join(p_dir, f"{patient_id}_seg.nii.gz")
+        with open(seg_target, "wb") as f:
+            f.write(seg_file.getbuffer())
+
+    # Run inference
+    return ensure_prediction(patient_id)

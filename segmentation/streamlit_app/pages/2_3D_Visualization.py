@@ -82,10 +82,15 @@ st.sidebar.title("⚙️ 3D Controls")
 
 samples = get_all_patients()
 if not samples:
-    st.error("No processed prediction volumes found.")
+    st.error("No data found. Go to **Upload & Demo Data** to add patients or run demo inference.")
     st.stop()
 
-selected_id = st.sidebar.selectbox("🧑‍⚕️ Patient", samples)
+# Pre-select patient if coming from Upload page
+default_idx = 0
+if "selected_patient" in st.session_state and st.session_state["selected_patient"] in samples:
+    default_idx = samples.index(st.session_state["selected_patient"])
+
+selected_id = st.sidebar.selectbox("🧑‍⚕️ Patient", samples, index=default_idx)
 
 st.sidebar.markdown("---")
 view_mode = st.sidebar.radio(

@@ -20,7 +20,13 @@
 
 ## Overview
 
-This project presents an **end-to-end brain tumor management pipeline** that combines three deep learning modules while preserving patient privacy through Federated Learning:
+**Achieving Clinical Equity in Federated Learning.** Standard Federated Averaging (FedAvg) produces high global accuracy that actively conceals severe per-institution performance disparities — leaving smaller hospitals with sub-par diagnostic models. To solve this problem, we introduce **FedQPSO**, a layer-by-layer Quantum Particle Swarm Optimization aggregation algorithm. By evaluating candidate weight configurations against a combined cross-client validation loss, FedQPSO creates an **implicit fairness constraint** without explicit fairness regularizers.
+
+**The Finding:** Under natural heterogeneity, FedQPSO reduces the max-min accuracy gap between hospitals by **81%** compared to FedAvg. Under moderate label skew, it is the *only* method that maintains clinically useful accuracy (≥80%) at the weakest client, while achieving the highest Glioma recall.
+
+> 📄 **IEEE Paper [Link Placeholder]:** *FedQPSO: Layer-by-Layer Quantum Particle Swarm Optimization for Equitable Federated Brain Tumor Classification Under Non-IID Data* (To appear)
+
+This project presents a comprehensive **end-to-end brain tumor management pipeline** combining these advances with 3D segmentation and longitudinal progression forecasting, all trained on Kaggle Tesla P100 hardware:
 
 ```mermaid
 graph LR
@@ -94,14 +100,26 @@ Longitudinal growth prediction using mathematical models and LSTM deep learning.
 
 ## Results
 
-### Classification — Setup 1 (Natural Heterogeneity, 100 Rounds)
+### Classification — Setup 1 (Natural Heterogeneity)
 
-| Metric | FedAvg | FedProx | QPSO-FL |
-|--------|--------|---------|---------|
-| **Final Accuracy** | 98.79% | **99.29%** | 98.43% |
-| **Best Accuracy** | 99.14% | **99.29%** | 98.93% |
-| **Rounds to 80%** | 2 | **1** | **1** |
-| **Client Fairness (σ)** | 1.58 | 1.70 | **1.47** |
+| Metric | FedAvg | FedProx | **FedQPSO (Ours)** |
+|--------|--------|---------|----------------|
+| **Best Accuracy** | 95.80% | **96.13%** | 95.14% |
+| **Client Fairness (σ)** | 5.28% | 2.27% | **1.56%** |
+| **Max-Min Gap (pp)** | 12.20 | 5.30 | **2.32** |
+| **Compute Overhead / Round** | **7.84s** | 8.03s | 75.09s |
+
+### Classification — Setup 2 (Label Skew 70/10/10/10)
+
+| Metric | FedAvg | FedProx | **FedQPSO (Ours)** |
+|--------|--------|---------|----------------|
+| **Best Accuracy** | 90.56% | **93.02%** | 92.09% |
+| **Weakest Hospital Acc** | 60.42% | 77.50% | **80.00%** |
+| **Client Fairness (σ)** | 12.82% | 6.05% | **3.65%** |
+| **Glioma Recall** | 0.8371 | 0.8620 | **0.8914** |
+| **Compute Overhead / Round** | **8.03s** | 8.16s | 74.92s |
+
+> *Hardware Note: Models were accelerated using a Tesla P100 GPU on the Kaggle platform.*
 
 ### Segmentation — BraTS 2021
 
@@ -244,7 +262,8 @@ FL_QPSO_FedAvg/
 ### Key References
 - McMahan et al., 2017 — FedAvg
 - Li et al., 2020 — FedProx
-- Sun et al., 2004/2012 — QPSO Algorithm
+- Sun et al., 2004 — QPSO Algorithm
+- Bakas et al., 2018 — BraTS 2020 Dataset
 - Oktay et al., 2018 — Attention U-Net
 - Sheller et al., 2020 — FL for Brain Tumor Segmentation
 

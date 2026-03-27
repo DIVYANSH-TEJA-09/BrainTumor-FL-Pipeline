@@ -1,40 +1,40 @@
 {
   "phase": "Phase 4",
   "fedavg": {
-    "final_acc": 88.16,
-    "best_acc": 90.56,
-    "rounds_run": 100,
-    "round_to_target": 35,
-    "avg_round_time_s": 8.03,
-    "total_time_min": 13.38
+    "final_acc": 93.29,
+    "best_acc": 95.8,
+    "rounds_run": 98,
+    "round_to_target": 11,
+    "avg_round_time_s": 7.84,
+    "total_time_min": 12.81
   },
   "fedprox": {
-    "final_acc": 91.82,
-    "best_acc": 93.02,
+    "final_acc": 95.85,
+    "best_acc": 96.13,
     "rounds_run": 100,
-    "round_to_target": 17,
-    "avg_round_time_s": 8.16,
-    "total_time_min": 13.6
+    "round_to_target": 12,
+    "avg_round_time_s": 8.03,
+    "total_time_min": 13.39
   },
   "qpso": {
-    "final_acc": 91.43,
-    "best_acc": 92.09,
+    "final_acc": 93.78,
+    "best_acc": 95.14,
     "rounds_run": 100,
-    "round_to_target": 19,
-    "avg_round_time_s": 74.92,
-    "total_time_min": 124.87
+    "round_to_target": 9,
+    "avg_round_time_s": 75.09,
+    "total_time_min": 125.14
   },
   "stats_fedavg_vs_qpso": {
-    "t_stat": 12.5859,
-    "p_value": 2.9116109479752896e-22,
-    "cohens_d": 1.2586,
+    "t_stat": 3.4321,
+    "p_value": 0.0008817314276087829,
+    "cohens_d": 0.3467,
     "significant": true
   },
   "stats_fedavg_vs_fedprox": {
-    "t_stat": 13.3946,
-    "p_value": 5.857362777648649e-24,
-    "cohens_d": 1.3395,
-    "significant": true
+    "t_stat": 1.7239,
+    "p_value": 0.08791502092957525,
+    "cohens_d": 0.1741,
+    "significant": false
   },
   "config": {
     "model": "SimpleCNN (~120K params)",
