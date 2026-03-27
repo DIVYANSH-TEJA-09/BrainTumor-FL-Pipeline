@@ -24,7 +24,7 @@
 
 **The Finding:** Under natural heterogeneity, FedQPSO reduces the max-min accuracy gap between hospitals by **81%** compared to FedAvg. Under moderate label skew, it is the *only* method that maintains clinically useful accuracy (≥80%) at the weakest client, while achieving the highest Glioma recall.
 
-> 📄 **IEEE Paper [Link Placeholder]:** *FedQPSO: Layer-by-Layer Quantum Particle Swarm Optimization for Equitable Federated Brain Tumor Classification Under Non-IID Data* (To appear)
+> 📄 **IEEE Paper:** *FedQPSO: Layer-by-Layer Quantum Particle Swarm Optimization for Equitable Federated Brain Tumor Classification Under Non-IID Data* (To appear)
 
 This project presents a comprehensive **end-to-end brain tumor management pipeline** combining these advances with 3D segmentation and longitudinal progression forecasting, all trained on Kaggle Tesla P100 hardware:
 
