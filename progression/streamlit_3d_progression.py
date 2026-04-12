@@ -564,59 +564,6 @@ def scale_mask_by_volume(actual_mask, actual_volume, predicted_volume):
     return actual_mask * scale
 
 # ============================================================================
-# UI
-# ============================================================================
-
-st.title("3D Tumor Growth Prediction with Synchronized View")
-st.markdown("**Rotate any panel - all three move together!** | Actual (blue) vs Baseline (red) vs LSTM Hybrid (green)")
-
-# Load prediction index
-pred_index = load_prediction_index()
-if pred_index is None:
-    st.error("Prediction data not found. Please run Phase 2 training first.")
-    st.stop()
-
-# Sidebar controls
-st.sidebar.title("Controls")
-
-# Patient selection
-all_patients = sorted(pred_index['patients'].keys())
-hgg_patients = [p for p in all_patients if pred_index['patients'][p]['grade'] == 'HGG']
-lgg_patients = [p for p in all_patients if pred_index['patients'][p]['grade'] == 'LGG']
-
-grade_choice = st.sidebar.radio("Grade", ["All", "HGG", "LGG"], index=0)
-if grade_choice == "HGG":
-    available_patients = hgg_patients
-elif grade_choice == "LGG":
-    available_patients = lgg_patients
-else:
-    available_patients = all_patients
-
-patient_id = st.sidebar.selectbox("Patient ID", available_patients)
-patient_data = pred_index['patients'][patient_id]
-grade = patient_data['grade']
-n_timepoints = patient_data['n_timepoints']
-
-st.sidebar.markdown(f"**Grade:** {grade}")
-st.sidebar.markdown(f"**Timepoints:** {n_timepoints}")
-st.sidebar.markdown(f"**Baseline MAE:** {patient_data['mae_baseline_mean']:.0f} mm³")
-st.sidebar.markdown(f"**Hybrid MAE:** {patient_data['mae_hybrid_mean']:.0f} mm³")
-
-# Timepoint selection
-timepoint_idx = st.sidebar.slider("Timepoint", 0, n_timepoints - 1, 0)
-timepoint_data = patient_data['timepoints'][timepoint_idx]
-
-st.sidebar.markdown("---")
-st.sidebar.subheader("Display Options")
-show_brain = st.sidebar.checkbox("Show Brain Overlay", value=True)
-brain_opacity = st.sidebar.slider("Brain Opacity", 0.02, 0.30, 0.08, 0.02)
-tumor_opacity = st.sidebar.slider("Tumor Opacity", 0.2, 1.0, 0.7)
-step_size = st.sidebar.select_slider("Mesh Quality", options=[1, 2, 3, 4], value=2)
-
-st.sidebar.markdown("---")
-st.sidebar.info("💡 **Synchronized Camera:** Rotate any panel and all three move together!")
-
-# ============================================================================
 # 3D VISUALIZATION - THREE PANELS WITH SYNCHRONIZED CAMERA
 # ============================================================================
 
