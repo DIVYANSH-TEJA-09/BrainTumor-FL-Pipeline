@@ -247,114 +247,106 @@ else:
             logistic_mask = scale_mask_by_volume(actual_mask, v_actual, v_logistic)
             hybrid_mask = scale_mask_by_volume(actual_mask, v_actual, v_hybrid)
             
-            # Create scene layout with SYNCHRONIZED camera from session state
-            # All three scenes use IDENTICAL camera settings
-            synchronized_camera = dict(
+            # Create unified figure with 3 subplots for SYNCHRONIZED camera
+            from plotly.subplots import make_subplots
+            
+            # Collect all traces with proper scene assignments
+            traces_actual = []
+            traces_baseline = []
+            traces_hybrid = []
+            
+            # Add brain overlay to all panels
+            if show_brain and brain_img is not None:
+                brain_trace1 = build_brain_trace(brain_img, brain_opacity, step_size, "scene1")
+                brain_trace2 = build_brain_trace(brain_img, brain_opacity, step_size, "scene2")
+                brain_trace3 = build_brain_trace(brain_img, brain_opacity, step_size, "scene3")
+                if brain_trace1:
+                    traces_actual.append(brain_trace1)
+                if brain_trace2:
+                    traces_baseline.append(brain_trace2)
+                if brain_trace3:
+                    traces_hybrid.append(brain_trace3)
+            
+            # Add tumor meshes
+            trace_actual = make_mesh_trace(actual_mask, '#3498db', 'Actual Tumor', tumor_opacity, step_size, "scene1")
+            if trace_actual:
+                traces_actual.append(trace_actual)
+            
+            trace_baseline = make_mesh_trace(logistic_mask, '#e74c3c', 'Baseline', tumor_opacity, step_size, "scene2")
+            if trace_baseline:
+                traces_baseline.append(trace_baseline)
+            
+            trace_hybrid = make_mesh_trace(hybrid_mask, '#2ecc71', 'LSTM Hybrid', tumor_opacity, step_size, "scene3")
+            if trace_hybrid:
+                traces_hybrid.append(trace_hybrid)
+            
+            # Create subplots with 3D scenes
+            fig = make_subplots(
+                rows=1, cols=3,
+                specs=[[{'type': 'scatter3d'}, {'type': 'scatter3d'}, {'type': 'scatter3d'}]],
+                subplot_titles=("🔵 Actual Tumor", "🔴 Baseline (Logistic)", "🟢 LSTM Hybrid"),
+                horizontal_spacing=0.05
+            )
+            
+            # Add traces to each subplot
+            for trace in traces_actual:
+                trace.scene = "scene1"
+                fig.add_trace(trace, row=1, col=1)
+            
+            for trace in traces_baseline:
+                trace.scene = "scene2"
+                fig.add_trace(trace, row=1, col=2)
+            
+            for trace in traces_hybrid:
+                trace.scene = "scene3"
+                fig.add_trace(trace, row=1, col=3)
+            
+            # Update all scenes with synchronized camera
+            camera_settings = dict(
                 eye=st.session_state.sync_camera['eye'],
                 up=st.session_state.sync_camera['up'],
                 center=st.session_state.sync_camera['center']
             )
             
-            SCENE_LAYOUT = dict(
+            scene_dict = dict(
                 xaxis=dict(visible=False),
                 yaxis=dict(visible=False),
                 zaxis=dict(visible=False),
                 bgcolor="rgb(10, 10, 20)",
+                camera=camera_settings,
                 aspectmode="data",
-                camera=synchronized_camera,
             )
             
-            # Create three columns for the three predictions
+            fig.update_layout(
+                scene1=scene_dict,
+                scene2=scene_dict,
+                scene3=scene_dict,
+                height=600,
+                margin=dict(l=0, r=0, t=50, b=0),
+                paper_bgcolor="rgb(10, 10, 20)",
+                font=dict(color="white"),
+                showlegend=False,
+                hovermode='closest',
+            )
+            
+            # Display the synchronized figure
+            st.plotly_chart(fig, use_container_width=True, config={'responsive': True}, key="fig_3panel")
+            
+            # Display metrics below the visualization
+            st.markdown("---")
             col1, col2, col3 = st.columns(3)
             
-            # Helper function to create figure with SYNCHRONIZED camera
-            def create_synchronized_figure(traces, scene_name):
-                """Create figure with SYNCHRONIZED camera across all panels."""
-                fig = go.Figure(data=traces)
-                
-                # ALL scenes use the SAME camera from session state
-                layout_dict = {
-                    scene_name: SCENE_LAYOUT,
-                    "margin": dict(l=0, r=0, t=0, b=0),
-                    "height": 600,
-                    "paper_bgcolor": "rgb(10, 10, 20)",
-                    "legend": dict(
-                        font=dict(color="white", size=10),
-                        bgcolor="rgba(20,20,40,0.8)",
-                        x=0.01, y=0.99
-                    ),
-                }
-                fig.update_layout(**layout_dict)
-                return fig
-            
-            # ─── ACTUAL TUMOR (Column 1) ───────────────────────────────────────────
             with col1:
-                st.markdown("### 🔵 Actual Tumor")
-                
-                traces_actual = []
-                
-                # Add brain
-                if show_brain and brain_img is not None:
-                    brain_trace = build_brain_trace(brain_img, brain_opacity, step_size, "scene1")
-                    if brain_trace:
-                        traces_actual.append(brain_trace)
-                
-                # Add actual tumor
-                trace_actual = make_mesh_trace(actual_mask, '#3498db', 'Actual Tumor', tumor_opacity, step_size, "scene1")
-                if trace_actual:
-                    traces_actual.append(trace_actual)
-                
-                if traces_actual:
-                    fig_actual = create_synchronized_figure(traces_actual, "scene1")
-                    st.plotly_chart(fig_actual, use_container_width=True, config={'responsive': True}, key="fig_actual")
-                    st.metric("Volume", f"{v_actual:.0f} mm³")
+                st.metric("🔵 Actual Volume", f"{v_actual:.0f} mm³")
             
-            # ─── BASELINE PREDICTION (Column 2) ───────────────────────────────────
             with col2:
-                st.markdown("### 🔴 Baseline (Logistic)")
-                
-                traces_baseline = []
-                
-                # Add brain
-                if show_brain and brain_img is not None:
-                    brain_trace = build_brain_trace(brain_img, brain_opacity, step_size, "scene2")
-                    if brain_trace:
-                        traces_baseline.append(brain_trace)
-                
-                # Add baseline tumor
-                trace_baseline = make_mesh_trace(logistic_mask, '#e74c3c', 'Baseline', tumor_opacity, step_size, "scene2")
-                if trace_baseline:
-                    traces_baseline.append(trace_baseline)
-                
-                if traces_baseline:
-                    fig_baseline = create_synchronized_figure(traces_baseline, "scene2")
-                    st.plotly_chart(fig_baseline, use_container_width=True, config={'responsive': True}, key="fig_baseline")
-                    mae_baseline = abs(v_actual - v_logistic)
-                    st.metric("Volume", f"{v_logistic:.0f} mm³", f"MAE: {mae_baseline:.0f}")
+                mae_baseline = abs(v_actual - v_logistic)
+                st.metric("🔴 Baseline Volume", f"{v_logistic:.0f} mm³", f"MAE: {mae_baseline:.0f}")
             
-            # ─── HYBRID PREDICTION (Column 3) ───────────────────────────────────
             with col3:
-                st.markdown("### 🟢 LSTM Hybrid")
-                
-                traces_hybrid = []
-                
-                # Add brain
-                if show_brain and brain_img is not None:
-                    brain_trace = build_brain_trace(brain_img, brain_opacity, step_size, "scene3")
-                    if brain_trace:
-                        traces_hybrid.append(brain_trace)
-                
-                # Add hybrid tumor
-                trace_hybrid = make_mesh_trace(hybrid_mask, '#2ecc71', 'LSTM Hybrid', tumor_opacity, step_size, "scene3")
-                if trace_hybrid:
-                    traces_hybrid.append(trace_hybrid)
-                
-                if traces_hybrid:
-                    fig_hybrid = create_synchronized_figure(traces_hybrid, "scene3")
-                    st.plotly_chart(fig_hybrid, use_container_width=True, config={'responsive': True}, key="fig_hybrid")
-                    mae_hybrid = abs(v_actual - v_hybrid)
-                    improvement = (mae_baseline - mae_hybrid) / mae_baseline * 100 if mae_baseline > 0 else 0
-                    st.metric("Volume", f"{v_hybrid:.0f} mm³", f"MAE: {mae_hybrid:.0f} ({improvement:+.1f}%)")
+                mae_hybrid = abs(v_actual - v_hybrid)
+                improvement = (mae_baseline - mae_hybrid) / mae_baseline * 100 if mae_baseline > 0 else 0
+                st.metric("🟢 Hybrid Volume", f"{v_hybrid:.0f} mm³", f"MAE: {mae_hybrid:.0f} ({improvement:+.1f}%)")
 
 # ============================================================================
 # TRAJECTORY OVER TIME
