@@ -55,10 +55,35 @@ python run_streamlit_app.py
 
 The app should now start at `http://localhost:8501` without any duplicate element ID errors.
 
+## Additional Issue Fixed
+
+### Problem 2: Duplicate Plotly Chart Elements
+After fixing the first issue, another error appeared:
+
+```
+StreamlitDuplicateElementId: There are multiple plotly_chart elements 
+with the same auto-generated ID.
+```
+
+**Root Cause:** The entire app code was duplicated in the file:
+- First copy: Lines 27-437 (all logic)
+- Second copy: Lines 439-782 (exact duplicate)
+
+This caused all plotly_chart calls to render twice, creating duplicate IDs.
+
+**Solution:** 
+- Removed the entire second copy (lines 439-782)
+- Added unique `key` arguments to all `st.plotly_chart()` calls:
+  - `key="fig_actual"` - actual tumor panel
+  - `key="fig_baseline"` - baseline prediction panel  
+  - `key="fig_hybrid"` - LSTM hybrid prediction panel
+  - `key="fig_traj"` - trajectory plot
+
 ## Related Commits
 - `01c5baa` - Fix camera_state reference to sync_camera
-- `9eb1950` - Remove duplicate widget definitions (THIS FIX)
+- `9eb1950` - Remove duplicate widget definitions
 - `6dfec5c` - Update testing guide
+- `655cca8` - Remove massive code duplication and add unique plotly_chart keys (THIS FIX)
 
 ---
 
