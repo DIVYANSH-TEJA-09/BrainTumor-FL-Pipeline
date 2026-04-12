@@ -1,0 +1,3965 @@
+{
+  "PatientID_0186": {
+    "patient_id": "PatientID_0186",
+    "grade": "LGG",
+    "n_timepoints": 6,
+    "timepoints": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "days_since_baseline": [
+      0,
+      30,
+      60,
+      90,
+      120,
+      150
+    ],
+    "volumes_mm3": [
+      38457.0,
+      61323.0,
+      23707.0,
+      26303.0,
+      60901.0,
+      68455.0
+    ],
+    "volume_range": [
+      23707.0,
+      68455.0
+    ]
+  },
+  "PatientID_0187": {
+    "patient_id": "PatientID_0187",
+    "grade": "LGG",
+    "n_timepoints": 2,
+    "timepoints": [
+      1,
+      2
+    ],
+    "days_since_baseline": [
+      0,
+      30
+    ],
+    "volumes_mm3": [
+      75324.0,
+      30614.0
+    ],
+    "volume_range": [
+      30614.0,
+      75324.0
+    ]
+  },
+  "PatientID_0192": {
+    "patient_id": "PatientID_0192",
+    "grade": "LGG",
+    "n_timepoints": 3,
+    "timepoints": [
+      1,
+      2,
+      3
+    ],
+    "days_since_baseline": [
+      0,
+      30,
+      60
+    ],
+    "volumes_mm3": [
+      22920.0,
+      20584.0,
+      20569.0
+    ],
+    "volume_range": [
+      20569.0,
+      22920.0
+    ]
+  },
+  "PatientID_0195": {
+    "patient_id": "PatientID_0195",
+    "grade": "LGG",
+    "n_timepoints": 3,
+    "timepoints": [
+      1,
+      2,
+      3
+    ],
+    "days_since_baseline": [
+      0,
+      30,
+      60
+    ],
+    "volumes_mm3": [
+      32474.0,
+      29608.0,
+      18888.0
+    ],
+    "volume_range": [
+      18888.0,
+      32474.0
+    ]
+  },
+  "PatientID_0196": {
+    "patient_id": "PatientID_0196",
+    "grade": "LGG",
+    "n_timepoints": 3,
+    "timepoints": [
+      1,
+      2,
+      3
+    ],
+    "days_since_baseline": [
+      0,
+      30,
+      60
+    ],
+    "volumes_mm3": [
+      2444.0,
+      6474.0,
+      6729.0
+    ],
+    "volume_range": [
+      2444.0,
+      6729.0
+    ]
+  },
+  "PatientID_0197": {
+    "patient_id": "PatientID_0197",
+    "grade": "LGG",
+    "n_timepoints": 3,
+    "timepoints": [
+      1,
+      2,
+      3
+    ],
+    "days_since_baseline": [
+      0,
+      30,
+      60
+    ],
+    "volumes_mm3": [
+      870.0,
+      601.0,
+      305.0
+    ],
+    "volume_range": [
+      305.0,
+      870.0
+    ]
+  },
+  "PatientID_0202": {
+    "patient_id": "PatientID_0202",
+    "grade": "LGG",
+    "n_timepoints": 3,
+    "timepoints": [
+      1,
+      2,
+      3
+    ],
+    "days_since_baseline": [
+      0,
+      30,
+      60
+    ],
+    "volumes_mm3": [
+      15905.0,
+      26835.0,
+      306341.0
+    ],
+    "volume_range": [
+      15905.0,
+      306341.0
+    ]
+  },
+  "PatientID_0205": {
+    "patient_id": "PatientID_0205",
+    "grade": "LGG",
+    "n_timepoints": 5,
+    "timepoints": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "days_since_baseline": [
+      0,
+      30,
+      60,
+      90,
+      120
+    ],
+    "volumes_mm3": [
+      73099.0,
+      65643.0,
+      76005.0,
+      58713.0,
+      91560.0
+    ],
+    "volume_range": [
+      58713.0,
+      91560.0
+    ]
+  },
+  "PatientID_0210": {
+    "patient_id": "PatientID_0210",
+    "grade": "LGG",
+    "n_timepoints": 5,
+    "timepoints": [
+      1,
+      2,
+      3,
+      4,
+      6
+    ],
+    "days_since_baseline": [
+      0,
+      30,
+      60,
+      90,
+      150
+    ],
+    "volumes_mm3": [
+      18692.0,
+      28117.0,
+      25734.0,
+      25665.0,
+      38815.0
+    ],
+    "volume_range": [
+      18692.0,
+      38815.0
+    ]
+  },
+  "PatientID_0211": {
+    "patient_id": "PatientID_0211",
+    "grade": "LGG",
+    "n_timepoints": 3,
+    "timepoints": [
+      1,
+      2,
+      3
+    ],
+    "days_since_baseline": [
+      0,
+      30,
+      60
+    ],
+    "volumes_mm3": [
+      92006.0,
+      75726.0,
+      91554.0
+    ],
+    "volume_range": [
+      75726.0,
+      92006.0
+    ]
+  },
+  "PatientID_0212": {
+    "patient_id": "PatientID_0212",
+    "grade": "LGG",
+    "n_timepoints": 3,
+    "timepoints": [
+      1,
+      2,
+      3
+    ],
+    "days_since_baseline": [
+      0,
+      30,
+      60
+    ],
+    "volumes_mm3": [
+      179131.0,
+      205736.0,
+      265859.0
+    ],
+    "volume_range": [
+      179131.0,
+      265859.0
+    ]
+  },
+  "PatientID_0213": {
+    "patient_id": "PatientID_0213",
+    "grade": "LGG",
+    "n_timepoints": 5,
+    "timepoints": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "days_since_baseline": [
+      0,
+      30,
+      60,
+      90,
+      120
+    ],
+    "volumes_mm3": [
+      53123.0,
+      50653.0,
+      33245.0,
+      43605.0,
+      46056.0
+    ],
+    "volume_range": [
+      33245.0,
+      53123.0
+    ]
+  },
+  "PatientID_0214": {
+    "patient_id": "PatientID_0214",
+    "grade": "LGG",
+    "n_timepoints": 6,
+    "timepoints": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "days_since_baseline": [
+      0,
+      30,
+      60,
+      90,
+      120,
+      150
+    ],
+    "volumes_mm3": [
+      78399.0,
+      43159.0,
+      60959.0,
+      68997.0,
+      32113.0,
+      35473.0
+    ],
+    "volume_range": [
+      32113.0,
+      78399.0
+    ]
+  },
+  "PatientID_0220": {
+    "patient_id": "PatientID_0220",
+    "grade": "LGG",
+    "n_timepoints": 2,
+    "timepoints": [
+      1,
+      6
+    ],
+    "days_since_baseline": [
+      0,
+      150
+    ],
+    "volumes_mm3": [
+      41260.0,
+      11149.0
+    ],
+    "volume_range": [
+      11149.0,
+      41260.0
+    ]
+  },
+  "PatientID_0235": {
+    "patient_id": "PatientID_0235",
+    "grade": "LGG",
+    "n_timepoints": 3,
+    "timepoints": [
+      1,
+      3,
+      6
+    ],
+    "days_since_baseline": [
+      0,
+      60,
+      150
+    ],
+    "volumes_mm3": [
+      197145.0,
+      194552.0,
+      207726.0
+    ],
+    "volume_range": [
+      194552.0,
+      207726.0
+    ]
+  },
+  "PatientID_0236": {
+    "patient_id": "PatientID_0236",
+    "grade": "LGG",
+    "n_timepoints": 3,
+    "timepoints": [
+      1,
+      3,
+      6
+    ],
+    "days_since_baseline": [
+      0,
+      60,
+      150
+    ],
+    "volumes_mm3": [
+      13749.0,
+      2103.0,
+      936.0
+    ],
+    "volume_range": [
+      936.0,
+      13749.0
+    ]
+  },
+  "PatientID_0240": {
+    "patient_id": "PatientID_0240",
+    "grade": "LGG",
+    "n_timepoints": 3,
+    "timepoints": [
+      1,
+      3,
+      6
+    ],
+    "days_since_baseline": [
+      0,
+      60,
+      150
+    ],
+    "volumes_mm3": [
+      25818.0,
+      53395.0,
+      51362.0
+    ],
+    "volume_range": [
+      25818.0,
+      53395.0
+    ]
+  },
+  "PatientID_0242": {
+    "patient_id": "PatientID_0242",
+    "grade": "LGG",
+    "n_timepoints": 3,
+    "timepoints": [
+      1,
+      3,
+      6
+    ],
+    "days_since_baseline": [
+      0,
+      60,
+      150
+    ],
+    "volumes_mm3": [
+      12601.0,
+      951.0,
+      1550.0
+    ],
+    "volume_range": [
+      951.0,
+      12601.0
+    ]
+  },
+  "PatientID_0249": {
+    "patient_id": "PatientID_0249",
+    "grade": "LGG",
+    "n_timepoints": 2,
+    "timepoints": [
+      1,
+      3
+    ],
+    "days_since_baseline": [
+      0,
+      60
+    ],
+    "volumes_mm3": [
+      87431.0,
+      38514.0
+    ],
+    "volume_range": [
+      38514.0,
+      87431.0
+    ]
+  },
+  "PatientID_0259": {
+    "patient_id": "PatientID_0259",
+    "grade": "LGG",
+    "n_timepoints": 2,
+    "timepoints": [
+      1,
+      2
+    ],
+    "days_since_baseline": [
+      0,
+      30
+    ],
+    "volumes_mm3": [
+      29323.0,
+      118230.0
+    ],
+    "volume_range": [
+      29323.0,
+      118230.0
+    ]
+  },
+  "PatientID_0264": {
+    "patient_id": "PatientID_0264",
+    "grade": "LGG",
+    "n_timepoints": 2,
+    "timepoints": [
+      1,
+      2
+    ],
+    "days_since_baseline": [
+      0,
+      30
+    ],
+    "volumes_mm3": [
+      25798.0,
+      48437.0
+    ],
+    "volume_range": [
+      25798.0,
+      48437.0
+    ]
+  },
+  "PatientID_0265": {
+    "patient_id": "PatientID_0265",
+    "grade": "LGG",
+    "n_timepoints": 2,
+    "timepoints": [
+      1,
+      2
+    ],
+    "days_since_baseline": [
+      0,
+      30
+    ],
+    "volumes_mm3": [
+      105387.0,
+      84688.0
+    ],
+    "volume_range": [
+      84688.0,
+      105387.0
+    ]
+  },
+  "PatientID_0270": {
+    "patient_id": "PatientID_0270",
+    "grade": "LGG",
+    "n_timepoints": 3,
+    "timepoints": [
+      1,
+      3,
+      6
+    ],
+    "days_since_baseline": [
+      0,
+      60,
+      150
+    ],
+    "volumes_mm3": [
+      70082.0,
+      11244.0,
+      20049.0
+    ],
+    "volume_range": [
+      11244.0,
+      70082.0
+    ]
+  },
+  "PatientID_0271": {
+    "patient_id": "PatientID_0271",
+    "grade": "LGG",
+    "n_timepoints": 3,
+    "timepoints": [
+      1,
+      3,
+      6
+    ],
+    "days_since_baseline": [
+      0,
+      60,
+      150
+    ],
+    "volumes_mm3": [
+      17013.0,
+      1715.0,
+      713.0
+    ],
+    "volume_range": [
+      713.0,
+      17013.0
+    ]
+  },
+  "PatientID_0275": {
+    "patient_id": "PatientID_0275",
+    "grade": "LGG",
+    "n_timepoints": 3,
+    "timepoints": [
+      1,
+      3,
+      6
+    ],
+    "days_since_baseline": [
+      0,
+      60,
+      150
+    ],
+    "volumes_mm3": [
+      27039.0,
+      9836.0,
+      20120.0
+    ],
+    "volume_range": [
+      9836.0,
+      27039.0
+    ]
+  },
+  "PatientID_0003": {
+    "patient_id": "PatientID_0003",
+    "grade": "HGG",
+    "n_timepoints": 3,
+    "timepoints": [
+      1,
+      2,
+      5
+    ],
+    "days_since_baseline": [
+      0,
+      30,
+      120
+    ],
+    "volumes_mm3": [
+      84540.0,
+      85818.0,
+      193095.0
+    ],
+    "volume_range": [
+      84540.0,
+      193095.0
+    ]
+  },
+  "PatientID_0005": {
+    "patient_id": "PatientID_0005",
+    "grade": "HGG",
+    "n_timepoints": 2,
+    "timepoints": [
+      3,
+      4
+    ],
+    "days_since_baseline": [
+      60,
+      90
+    ],
+    "volumes_mm3": [
+      139453.0,
+      140311.0
+    ],
+    "volume_range": [
+      139453.0,
+      140311.0
+    ]
+  },
+  "PatientID_0006": {
+    "patient_id": "PatientID_0006",
+    "grade": "HGG",
+    "n_timepoints": 4,
+    "timepoints": [
+      2,
+      4,
+      5,
+      6
+    ],
+    "days_since_baseline": [
+      30,
+      90,
+      120,
+      150
+    ],
+    "volumes_mm3": [
+      165771.0,
+      83049.0,
+      97693.0,
+      119250.0
+    ],
+    "volume_range": [
+      83049.0,
+      165771.0
+    ]
+  },
+  "PatientID_0007": {
+    "patient_id": "PatientID_0007",
+    "grade": "HGG",
+    "n_timepoints": 5,
+    "timepoints": [
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "days_since_baseline": [
+      30,
+      60,
+      90,
+      120,
+      150
+    ],
+    "volumes_mm3": [
+      48582.0,
+      48109.0,
+      63926.0,
+      66995.0,
+      68044.0
+    ],
+    "volume_range": [
+      48109.0,
+      68044.0
+    ]
+  },
+  "PatientID_0008": {
+    "patient_id": "PatientID_0008",
+    "grade": "HGG",
+    "n_timepoints": 2,
+    "timepoints": [
+      4,
+      6
+    ],
+    "days_since_baseline": [
+      90,
+      150
+    ],
+    "volumes_mm3": [
+      87128.0,
+      31276.0
+    ],
+    "volume_range": [
+      31276.0,
+      87128.0
+    ]
+  },
+  "PatientID_0010": {
+    "patient_id": "PatientID_0010",
+    "grade": "HGG",
+    "n_timepoints": 3,
+    "timepoints": [
+      1,
+      4,
+      5
+    ],
+    "days_since_baseline": [
+      0,
+      90,
+      120
+    ],
+    "volumes_mm3": [
+      166963.0,
+      97234.0,
+      120602.0
+    ],
+    "volume_range": [
+      97234.0,
+      166963.0
+    ]
+  },
+  "PatientID_0011": {
+    "patient_id": "PatientID_0011",
+    "grade": "HGG",
+    "n_timepoints": 2,
+    "timepoints": [
+      1,
+      2
+    ],
+    "days_since_baseline": [
+      0,
+      30
+    ],
+    "volumes_mm3": [
+      231467.0,
+      248423.0
+    ],
+    "volume_range": [
+      231467.0,
+      248423.0
+    ]
+  },
+  "PatientID_0012": {
+    "patient_id": "PatientID_0012",
+    "grade": "HGG",
+    "n_timepoints": 2,
+    "timepoints": [
+      2,
+      3
+    ],
+    "days_since_baseline": [
+      30,
+      60
+    ],
+    "volumes_mm3": [
+      257791.0,
+      241356.0
+    ],
+    "volume_range": [
+      241356.0,
+      257791.0
+    ]
+  },
+  "PatientID_0013": {
+    "patient_id": "PatientID_0013",
+    "grade": "HGG",
+    "n_timepoints": 5,
+    "timepoints": [
+      1,
+      2,
+      4,
+      5,
+      6
+    ],
+    "days_since_baseline": [
+      0,
+      30,
+      90,
+      120,
+      150
+    ],
+    "volumes_mm3": [
+      43633.0,
+      56472.0,
+      81940.0,
+      75255.0,
+      117716.0
+    ],
+    "volume_range": [
+      43633.0,
+      117716.0
+    ]
+  },
+  "PatientID_0014": {
+    "patient_id": "PatientID_0014",
+    "grade": "HGG",
+    "n_timepoints": 6,
+    "timepoints": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "days_since_baseline": [
+      0,
+      30,
+      60,
+      90,
+      120,
+      150
+    ],
+    "volumes_mm3": [
+      86804.0,
+      11941.0,
+      22862.0,
+      47010.0,
+      47366.0,
+      47779.0
+    ],
+    "volume_range": [
+      11941.0,
+      86804.0
+    ]
+  },
+  "PatientID_0018": {
+    "patient_id": "PatientID_0018",
+    "grade": "HGG",
+    "n_timepoints": 5,
+    "timepoints": [
+      1,
+      2,
+      4,
+      5,
+      6
+    ],
+    "days_since_baseline": [
+      0,
+      30,
+      90,
+      120,
+      150
+    ],
+    "volumes_mm3": [
+      37035.0,
+      12647.0,
+      109536.0,
+      74423.0,
+      190798.0
+    ],
+    "volume_range": [
+      12647.0,
+      190798.0
+    ]
+  },
+  "PatientID_0019": {
+    "patient_id": "PatientID_0019",
+    "grade": "HGG",
+    "n_timepoints": 3,
+    "timepoints": [
+      4,
+      5,
+      6
+    ],
+    "days_since_baseline": [
+      90,
+      120,
+      150
+    ],
+    "volumes_mm3": [
+      39143.0,
+      42683.0,
+      46218.0
+    ],
+    "volume_range": [
+      39143.0,
+      46218.0
+    ]
+  },
+  "PatientID_0020": {
+    "patient_id": "PatientID_0020",
+    "grade": "HGG",
+    "n_timepoints": 4,
+    "timepoints": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "days_since_baseline": [
+      0,
+      30,
+      60,
+      90
+    ],
+    "volumes_mm3": [
+      61040.0,
+      47071.0,
+      41923.0,
+      59499.0
+    ],
+    "volume_range": [
+      41923.0,
+      61040.0
+    ]
+  },
+  "PatientID_0021": {
+    "patient_id": "PatientID_0021",
+    "grade": "HGG",
+    "n_timepoints": 5,
+    "timepoints": [
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "days_since_baseline": [
+      30,
+      60,
+      90,
+      120,
+      150
+    ],
+    "volumes_mm3": [
+      68417.0,
+      52723.0,
+      44692.0,
+      41906.0,
+      59896.0
+    ],
+    "volume_range": [
+      41906.0,
+      68417.0
+    ]
+  },
+  "PatientID_0022": {
+    "patient_id": "PatientID_0022",
+    "grade": "HGG",
+    "n_timepoints": 3,
+    "timepoints": [
+      1,
+      2,
+      3
+    ],
+    "days_since_baseline": [
+      0,
+      30,
+      60
+    ],
+    "volumes_mm3": [
+      154238.0,
+      222866.0,
+      97418.0
+    ],
+    "volume_range": [
+      97418.0,
+      222866.0
+    ]
+  },
+  "PatientID_0024": {
+    "patient_id": "PatientID_0024",
+    "grade": "HGG",
+    "n_timepoints": 2,
+    "timepoints": [
+      2,
+      3
+    ],
+    "days_since_baseline": [
+      30,
+      60
+    ],
+    "volumes_mm3": [
+      59953.0,
+      102443.0
+    ],
+    "volume_range": [
+      59953.0,
+      102443.0
+    ]
+  },
+  "PatientID_0025": {
+    "patient_id": "PatientID_0025",
+    "grade": "HGG",
+    "n_timepoints": 3,
+    "timepoints": [
+      1,
+      2,
+      3
+    ],
+    "days_since_baseline": [
+      0,
+      30,
+      60
+    ],
+    "volumes_mm3": [
+      101519.0,
+      115546.0,
+      35081.0
+    ],
+    "volume_range": [
+      35081.0,
+      115546.0
+    ]
+  },
+  "PatientID_0026": {
+    "patient_id": "PatientID_0026",
+    "grade": "HGG",
+    "n_timepoints": 2,
+    "timepoints": [
+      1,
+      2
+    ],
+    "days_since_baseline": [
+      0,
+      30
+    ],
+    "volumes_mm3": [
+      137089.0,
+      92854.0
+    ],
+    "volume_range": [
+      92854.0,
+      137089.0
+    ]
+  },
+  "PatientID_0029": {
+    "patient_id": "PatientID_0029",
+    "grade": "HGG",
+    "n_timepoints": 3,
+    "timepoints": [
+      1,
+      3,
+      4
+    ],
+    "days_since_baseline": [
+      0,
+      60,
+      90
+    ],
+    "volumes_mm3": [
+      16391.0,
+      47704.0,
+      46764.0
+    ],
+    "volume_range": [
+      16391.0,
+      47704.0
+    ]
+  },
+  "PatientID_0030": {
+    "patient_id": "PatientID_0030",
+    "grade": "HGG",
+    "n_timepoints": 3,
+    "timepoints": [
+      1,
+      3,
+      4
+    ],
+    "days_since_baseline": [
+      0,
+      60,
+      90
+    ],
+    "volumes_mm3": [
+      58011.0,
+      123452.0,
+      60542.0
+    ],
+    "volume_range": [
+      58011.0,
+      123452.0
+    ]
+  },
+  "PatientID_0031": {
+    "patient_id": "PatientID_0031",
+    "grade": "HGG",
+    "n_timepoints": 4,
+    "timepoints": [
+      2,
+      3,
+      4,
+      5
+    ],
+    "days_since_baseline": [
+      30,
+      60,
+      90,
+      120
+    ],
+    "volumes_mm3": [
+      143820.0,
+      101654.0,
+      165490.0,
+      173807.0
+    ],
+    "volume_range": [
+      101654.0,
+      173807.0
+    ]
+  },
+  "PatientID_0032": {
+    "patient_id": "PatientID_0032",
+    "grade": "HGG",
+    "n_timepoints": 6,
+    "timepoints": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "days_since_baseline": [
+      0,
+      30,
+      60,
+      90,
+      120,
+      150
+    ],
+    "volumes_mm3": [
+      37084.0,
+      12051.0,
+      121524.0,
+      107642.0,
+      74423.0,
+      190944.0
+    ],
+    "volume_range": [
+      12051.0,
+      190944.0
+    ]
+  },
+  "PatientID_0033": {
+    "patient_id": "PatientID_0033",
+    "grade": "HGG",
+    "n_timepoints": 5,
+    "timepoints": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "days_since_baseline": [
+      0,
+      30,
+      60,
+      90,
+      120
+    ],
+    "volumes_mm3": [
+      55937.0,
+      35180.0,
+      37308.0,
+      23671.0,
+      31535.0
+    ],
+    "volume_range": [
+      23671.0,
+      55937.0
+    ]
+  },
+  "PatientID_0034": {
+    "patient_id": "PatientID_0034",
+    "grade": "HGG",
+    "n_timepoints": 6,
+    "timepoints": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "days_since_baseline": [
+      0,
+      30,
+      60,
+      90,
+      120,
+      150
+    ],
+    "volumes_mm3": [
+      31646.0,
+      19646.0,
+      24090.0,
+      25123.0,
+      31632.0,
+      38098.0
+    ],
+    "volume_range": [
+      19646.0,
+      38098.0
+    ]
+  },
+  "PatientID_0035": {
+    "patient_id": "PatientID_0035",
+    "grade": "HGG",
+    "n_timepoints": 3,
+    "timepoints": [
+      1,
+      2,
+      3
+    ],
+    "days_since_baseline": [
+      0,
+      30,
+      60
+    ],
+    "volumes_mm3": [
+      174956.0,
+      70058.0,
+      158804.0
+    ],
+    "volume_range": [
+      70058.0,
+      174956.0
+    ]
+  },
+  "PatientID_0036": {
+    "patient_id": "PatientID_0036",
+    "grade": "HGG",
+    "n_timepoints": 6,
+    "timepoints": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "days_since_baseline": [
+      0,
+      30,
+      60,
+      90,
+      120,
+      150
+    ],
+    "volumes_mm3": [
+      136331.0,
+      167752.0,
+      288690.0,
+      126578.0,
+      136905.0,
+      157783.0
+    ],
+    "volume_range": [
+      126578.0,
+      288690.0
+    ]
+  },
+  "PatientID_0037": {
+    "patient_id": "PatientID_0037",
+    "grade": "HGG",
+    "n_timepoints": 4,
+    "timepoints": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "days_since_baseline": [
+      0,
+      30,
+      60,
+      90
+    ],
+    "volumes_mm3": [
+      60937.0,
+      90226.0,
+      86800.0,
+      116012.0
+    ],
+    "volume_range": [
+      60937.0,
+      116012.0
+    ]
+  },
+  "PatientID_0038": {
+    "patient_id": "PatientID_0038",
+    "grade": "HGG",
+    "n_timepoints": 6,
+    "timepoints": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "days_since_baseline": [
+      0,
+      30,
+      60,
+      90,
+      120,
+      150
+    ],
+    "volumes_mm3": [
+      101395.0,
+      86675.0,
+      152305.0,
+      243051.0,
+      199616.0,
+      244924.0
+    ],
+    "volume_range": [
+      86675.0,
+      244924.0
+    ]
+  },
+  "PatientID_0039": {
+    "patient_id": "PatientID_0039",
+    "grade": "HGG",
+    "n_timepoints": 5,
+    "timepoints": [
+      1,
+      2,
+      3,
+      4,
+      6
+    ],
+    "days_since_baseline": [
+      0,
+      30,
+      60,
+      90,
+      150
+    ],
+    "volumes_mm3": [
+      44906.0,
+      16794.0,
+      19541.0,
+      18676.0,
+      26672.0
+    ],
+    "volume_range": [
+      16794.0,
+      44906.0
+    ]
+  },
+  "PatientID_0041": {
+    "patient_id": "PatientID_0041",
+    "grade": "HGG",
+    "n_timepoints": 2,
+    "timepoints": [
+      1,
+      2
+    ],
+    "days_since_baseline": [
+      0,
+      30
+    ],
+    "volumes_mm3": [
+      3985.0,
+      9666.0
+    ],
+    "volume_range": [
+      3985.0,
+      9666.0
+    ]
+  },
+  "PatientID_0044": {
+    "patient_id": "PatientID_0044",
+    "grade": "HGG",
+    "n_timepoints": 6,
+    "timepoints": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "days_since_baseline": [
+      0,
+      30,
+      60,
+      90,
+      120,
+      150
+    ],
+    "volumes_mm3": [
+      64268.0,
+      39661.0,
+      39433.0,
+      39294.0,
+      155601.0,
+      52796.0
+    ],
+    "volume_range": [
+      39294.0,
+      155601.0
+    ]
+  },
+  "PatientID_0045": {
+    "patient_id": "PatientID_0045",
+    "grade": "HGG",
+    "n_timepoints": 4,
+    "timepoints": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "days_since_baseline": [
+      0,
+      30,
+      60,
+      90
+    ],
+    "volumes_mm3": [
+      47734.0,
+      94403.0,
+      45043.0,
+      39993.0
+    ],
+    "volume_range": [
+      39993.0,
+      94403.0
+    ]
+  },
+  "PatientID_0051": {
+    "patient_id": "PatientID_0051",
+    "grade": "HGG",
+    "n_timepoints": 3,
+    "timepoints": [
+      1,
+      3,
+      4
+    ],
+    "days_since_baseline": [
+      0,
+      60,
+      90
+    ],
+    "volumes_mm3": [
+      92637.0,
+      52828.0,
+      146162.0
+    ],
+    "volume_range": [
+      52828.0,
+      146162.0
+    ]
+  },
+  "PatientID_0052": {
+    "patient_id": "PatientID_0052",
+    "grade": "HGG",
+    "n_timepoints": 2,
+    "timepoints": [
+      1,
+      2
+    ],
+    "days_since_baseline": [
+      0,
+      30
+    ],
+    "volumes_mm3": [
+      124440.0,
+      73548.0
+    ],
+    "volume_range": [
+      73548.0,
+      124440.0
+    ]
+  },
+  "PatientID_0053": {
+    "patient_id": "PatientID_0053",
+    "grade": "HGG",
+    "n_timepoints": 5,
+    "timepoints": [
+      1,
+      3,
+      4,
+      5,
+      6
+    ],
+    "days_since_baseline": [
+      0,
+      60,
+      90,
+      120,
+      150
+    ],
+    "volumes_mm3": [
+      56865.0,
+      168138.0,
+      197421.0,
+      123219.0,
+      156201.0
+    ],
+    "volume_range": [
+      56865.0,
+      197421.0
+    ]
+  },
+  "PatientID_0054": {
+    "patient_id": "PatientID_0054",
+    "grade": "HGG",
+    "n_timepoints": 2,
+    "timepoints": [
+      1,
+      2
+    ],
+    "days_since_baseline": [
+      0,
+      30
+    ],
+    "volumes_mm3": [
+      135057.0,
+      81243.0
+    ],
+    "volume_range": [
+      81243.0,
+      135057.0
+    ]
+  },
+  "PatientID_0055": {
+    "patient_id": "PatientID_0055",
+    "grade": "HGG",
+    "n_timepoints": 4,
+    "timepoints": [
+      1,
+      4,
+      5,
+      6
+    ],
+    "days_since_baseline": [
+      0,
+      90,
+      120,
+      150
+    ],
+    "volumes_mm3": [
+      148668.0,
+      54846.0,
+      67198.0,
+      73384.0
+    ],
+    "volume_range": [
+      54846.0,
+      148668.0
+    ]
+  },
+  "PatientID_0059": {
+    "patient_id": "PatientID_0059",
+    "grade": "HGG",
+    "n_timepoints": 3,
+    "timepoints": [
+      1,
+      2,
+      3
+    ],
+    "days_since_baseline": [
+      0,
+      30,
+      60
+    ],
+    "volumes_mm3": [
+      66124.0,
+      25570.0,
+      32736.0
+    ],
+    "volume_range": [
+      25570.0,
+      66124.0
+    ]
+  },
+  "PatientID_0060": {
+    "patient_id": "PatientID_0060",
+    "grade": "HGG",
+    "n_timepoints": 2,
+    "timepoints": [
+      1,
+      2
+    ],
+    "days_since_baseline": [
+      0,
+      30
+    ],
+    "volumes_mm3": [
+      128652.0,
+      178728.0
+    ],
+    "volume_range": [
+      128652.0,
+      178728.0
+    ]
+  },
+  "PatientID_0062": {
+    "patient_id": "PatientID_0062",
+    "grade": "HGG",
+    "n_timepoints": 2,
+    "timepoints": [
+      1,
+      2
+    ],
+    "days_since_baseline": [
+      0,
+      30
+    ],
+    "volumes_mm3": [
+      129746.0,
+      178728.0
+    ],
+    "volume_range": [
+      129746.0,
+      178728.0
+    ]
+  },
+  "PatientID_0064": {
+    "patient_id": "PatientID_0064",
+    "grade": "HGG",
+    "n_timepoints": 2,
+    "timepoints": [
+      1,
+      2
+    ],
+    "days_since_baseline": [
+      0,
+      30
+    ],
+    "volumes_mm3": [
+      97840.0,
+      39431.0
+    ],
+    "volume_range": [
+      39431.0,
+      97840.0
+    ]
+  },
+  "PatientID_0065": {
+    "patient_id": "PatientID_0065",
+    "grade": "HGG",
+    "n_timepoints": 5,
+    "timepoints": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "days_since_baseline": [
+      0,
+      30,
+      60,
+      90,
+      120
+    ],
+    "volumes_mm3": [
+      99363.0,
+      157111.0,
+      99906.0,
+      202553.0,
+      225886.0
+    ],
+    "volume_range": [
+      99363.0,
+      225886.0
+    ]
+  },
+  "PatientID_0066": {
+    "patient_id": "PatientID_0066",
+    "grade": "HGG",
+    "n_timepoints": 5,
+    "timepoints": [
+      1,
+      2,
+      3,
+      5,
+      6
+    ],
+    "days_since_baseline": [
+      0,
+      30,
+      60,
+      120,
+      150
+    ],
+    "volumes_mm3": [
+      62346.0,
+      65596.0,
+      12560.0,
+      44929.0,
+      70470.0
+    ],
+    "volume_range": [
+      12560.0,
+      70470.0
+    ]
+  },
+  "PatientID_0067": {
+    "patient_id": "PatientID_0067",
+    "grade": "HGG",
+    "n_timepoints": 2,
+    "timepoints": [
+      1,
+      2
+    ],
+    "days_since_baseline": [
+      0,
+      30
+    ],
+    "volumes_mm3": [
+      75838.0,
+      37513.0
+    ],
+    "volume_range": [
+      37513.0,
+      75838.0
+    ]
+  },
+  "PatientID_0068": {
+    "patient_id": "PatientID_0068",
+    "grade": "HGG",
+    "n_timepoints": 5,
+    "timepoints": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "days_since_baseline": [
+      0,
+      30,
+      60,
+      90,
+      120
+    ],
+    "volumes_mm3": [
+      11458.0,
+      32682.0,
+      39154.0,
+      52515.0,
+      118031.0
+    ],
+    "volume_range": [
+      11458.0,
+      118031.0
+    ]
+  },
+  "PatientID_0069": {
+    "patient_id": "PatientID_0069",
+    "grade": "HGG",
+    "n_timepoints": 5,
+    "timepoints": [
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "days_since_baseline": [
+      30,
+      60,
+      90,
+      120,
+      150
+    ],
+    "volumes_mm3": [
+      15548.0,
+      16321.0,
+      22179.0,
+      18793.0,
+      20750.0
+    ],
+    "volume_range": [
+      15548.0,
+      22179.0
+    ]
+  },
+  "PatientID_0070": {
+    "patient_id": "PatientID_0070",
+    "grade": "HGG",
+    "n_timepoints": 4,
+    "timepoints": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "days_since_baseline": [
+      0,
+      30,
+      60,
+      90
+    ],
+    "volumes_mm3": [
+      62437.0,
+      160655.0,
+      142701.0,
+      97532.0
+    ],
+    "volume_range": [
+      62437.0,
+      160655.0
+    ]
+  },
+  "PatientID_0072": {
+    "patient_id": "PatientID_0072",
+    "grade": "HGG",
+    "n_timepoints": 3,
+    "timepoints": [
+      1,
+      2,
+      3
+    ],
+    "days_since_baseline": [
+      0,
+      30,
+      60
+    ],
+    "volumes_mm3": [
+      39463.0,
+      34472.0,
+      49758.0
+    ],
+    "volume_range": [
+      34472.0,
+      49758.0
+    ]
+  },
+  "PatientID_0073": {
+    "patient_id": "PatientID_0073",
+    "grade": "HGG",
+    "n_timepoints": 4,
+    "timepoints": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "days_since_baseline": [
+      0,
+      30,
+      60,
+      90
+    ],
+    "volumes_mm3": [
+      104121.0,
+      119057.0,
+      122462.0,
+      176847.0
+    ],
+    "volume_range": [
+      104121.0,
+      176847.0
+    ]
+  },
+  "PatientID_0074": {
+    "patient_id": "PatientID_0074",
+    "grade": "HGG",
+    "n_timepoints": 6,
+    "timepoints": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "days_since_baseline": [
+      0,
+      30,
+      60,
+      90,
+      120,
+      150
+    ],
+    "volumes_mm3": [
+      28222.0,
+      40739.0,
+      36135.0,
+      51664.0,
+      44224.0,
+      44209.0
+    ],
+    "volume_range": [
+      28222.0,
+      51664.0
+    ]
+  },
+  "PatientID_0076": {
+    "patient_id": "PatientID_0076",
+    "grade": "HGG",
+    "n_timepoints": 2,
+    "timepoints": [
+      1,
+      2
+    ],
+    "days_since_baseline": [
+      0,
+      30
+    ],
+    "volumes_mm3": [
+      81731.0,
+      254885.0
+    ],
+    "volume_range": [
+      81731.0,
+      254885.0
+    ]
+  },
+  "PatientID_0078": {
+    "patient_id": "PatientID_0078",
+    "grade": "HGG",
+    "n_timepoints": 3,
+    "timepoints": [
+      1,
+      2,
+      3
+    ],
+    "days_since_baseline": [
+      0,
+      30,
+      60
+    ],
+    "volumes_mm3": [
+      86677.0,
+      141730.0,
+      186672.0
+    ],
+    "volume_range": [
+      86677.0,
+      186672.0
+    ]
+  },
+  "PatientID_0079": {
+    "patient_id": "PatientID_0079",
+    "grade": "HGG",
+    "n_timepoints": 6,
+    "timepoints": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "days_since_baseline": [
+      0,
+      30,
+      60,
+      90,
+      120,
+      150
+    ],
+    "volumes_mm3": [
+      209264.0,
+      181140.0,
+      162437.0,
+      83951.0,
+      222560.0,
+      217015.0
+    ],
+    "volume_range": [
+      83951.0,
+      222560.0
+    ]
+  },
+  "PatientID_0080": {
+    "patient_id": "PatientID_0080",
+    "grade": "HGG",
+    "n_timepoints": 2,
+    "timepoints": [
+      1,
+      2
+    ],
+    "days_since_baseline": [
+      0,
+      30
+    ],
+    "volumes_mm3": [
+      38801.0,
+      145528.0
+    ],
+    "volume_range": [
+      38801.0,
+      145528.0
+    ]
+  },
+  "PatientID_0081": {
+    "patient_id": "PatientID_0081",
+    "grade": "HGG",
+    "n_timepoints": 2,
+    "timepoints": [
+      1,
+      2
+    ],
+    "days_since_baseline": [
+      0,
+      30
+    ],
+    "volumes_mm3": [
+      56795.0,
+      110361.0
+    ],
+    "volume_range": [
+      56795.0,
+      110361.0
+    ]
+  },
+  "PatientID_0082": {
+    "patient_id": "PatientID_0082",
+    "grade": "HGG",
+    "n_timepoints": 2,
+    "timepoints": [
+      1,
+      2
+    ],
+    "days_since_baseline": [
+      0,
+      30
+    ],
+    "volumes_mm3": [
+      114400.0,
+      53118.0
+    ],
+    "volume_range": [
+      53118.0,
+      114400.0
+    ]
+  },
+  "PatientID_0083": {
+    "patient_id": "PatientID_0083",
+    "grade": "HGG",
+    "n_timepoints": 6,
+    "timepoints": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "days_since_baseline": [
+      0,
+      30,
+      60,
+      90,
+      120,
+      150
+    ],
+    "volumes_mm3": [
+      170907.0,
+      127668.0,
+      140819.0,
+      205423.0,
+      165888.0,
+      156766.0
+    ],
+    "volume_range": [
+      127668.0,
+      205423.0
+    ]
+  },
+  "PatientID_0084": {
+    "patient_id": "PatientID_0084",
+    "grade": "HGG",
+    "n_timepoints": 6,
+    "timepoints": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "days_since_baseline": [
+      0,
+      30,
+      60,
+      90,
+      120,
+      150
+    ],
+    "volumes_mm3": [
+      92285.0,
+      137701.0,
+      126142.0,
+      133965.0,
+      49788.0,
+      62247.0
+    ],
+    "volume_range": [
+      49788.0,
+      137701.0
+    ]
+  },
+  "PatientID_0085": {
+    "patient_id": "PatientID_0085",
+    "grade": "HGG",
+    "n_timepoints": 4,
+    "timepoints": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "days_since_baseline": [
+      0,
+      30,
+      60,
+      90
+    ],
+    "volumes_mm3": [
+      28741.0,
+      15489.0,
+      3430.0,
+      5640.0
+    ],
+    "volume_range": [
+      3430.0,
+      28741.0
+    ]
+  },
+  "PatientID_0087": {
+    "patient_id": "PatientID_0087",
+    "grade": "HGG",
+    "n_timepoints": 3,
+    "timepoints": [
+      1,
+      2,
+      3
+    ],
+    "days_since_baseline": [
+      0,
+      30,
+      60
+    ],
+    "volumes_mm3": [
+      37571.0,
+      55384.0,
+      67574.0
+    ],
+    "volume_range": [
+      37571.0,
+      67574.0
+    ]
+  },
+  "PatientID_0088": {
+    "patient_id": "PatientID_0088",
+    "grade": "HGG",
+    "n_timepoints": 2,
+    "timepoints": [
+      1,
+      2
+    ],
+    "days_since_baseline": [
+      0,
+      30
+    ],
+    "volumes_mm3": [
+      19699.0,
+      35572.0
+    ],
+    "volume_range": [
+      19699.0,
+      35572.0
+    ]
+  },
+  "PatientID_0089": {
+    "patient_id": "PatientID_0089",
+    "grade": "HGG",
+    "n_timepoints": 6,
+    "timepoints": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "days_since_baseline": [
+      0,
+      30,
+      60,
+      90,
+      120,
+      150
+    ],
+    "volumes_mm3": [
+      126494.0,
+      184080.0,
+      193664.0,
+      222467.0,
+      232805.0,
+      240987.0
+    ],
+    "volume_range": [
+      126494.0,
+      240987.0
+    ]
+  },
+  "PatientID_0090": {
+    "patient_id": "PatientID_0090",
+    "grade": "HGG",
+    "n_timepoints": 2,
+    "timepoints": [
+      1,
+      2
+    ],
+    "days_since_baseline": [
+      0,
+      30
+    ],
+    "volumes_mm3": [
+      82491.0,
+      182952.0
+    ],
+    "volume_range": [
+      82491.0,
+      182952.0
+    ]
+  },
+  "PatientID_0091": {
+    "patient_id": "PatientID_0091",
+    "grade": "HGG",
+    "n_timepoints": 2,
+    "timepoints": [
+      1,
+      2
+    ],
+    "days_since_baseline": [
+      0,
+      30
+    ],
+    "volumes_mm3": [
+      227243.0,
+      157138.0
+    ],
+    "volume_range": [
+      157138.0,
+      227243.0
+    ]
+  },
+  "PatientID_0092": {
+    "patient_id": "PatientID_0092",
+    "grade": "HGG",
+    "n_timepoints": 2,
+    "timepoints": [
+      1,
+      2
+    ],
+    "days_since_baseline": [
+      0,
+      30
+    ],
+    "volumes_mm3": [
+      9114.0,
+      34153.0
+    ],
+    "volume_range": [
+      9114.0,
+      34153.0
+    ]
+  },
+  "PatientID_0093": {
+    "patient_id": "PatientID_0093",
+    "grade": "HGG",
+    "n_timepoints": 4,
+    "timepoints": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "days_since_baseline": [
+      0,
+      30,
+      60,
+      90
+    ],
+    "volumes_mm3": [
+      27198.0,
+      76424.0,
+      135415.0,
+      194035.0
+    ],
+    "volume_range": [
+      27198.0,
+      194035.0
+    ]
+  },
+  "PatientID_0094": {
+    "patient_id": "PatientID_0094",
+    "grade": "HGG",
+    "n_timepoints": 6,
+    "timepoints": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "days_since_baseline": [
+      0,
+      30,
+      60,
+      90,
+      120,
+      150
+    ],
+    "volumes_mm3": [
+      10036.0,
+      18008.0,
+      23460.0,
+      34046.0,
+      83279.0,
+      221304.0
+    ],
+    "volume_range": [
+      10036.0,
+      221304.0
+    ]
+  },
+  "PatientID_0095": {
+    "patient_id": "PatientID_0095",
+    "grade": "HGG",
+    "n_timepoints": 5,
+    "timepoints": [
+      1,
+      2,
+      3,
+      4,
+      6
+    ],
+    "days_since_baseline": [
+      0,
+      30,
+      60,
+      90,
+      150
+    ],
+    "volumes_mm3": [
+      100889.0,
+      300963.0,
+      184454.0,
+      127166.0,
+      139242.0
+    ],
+    "volume_range": [
+      100889.0,
+      300963.0
+    ]
+  },
+  "PatientID_0097": {
+    "patient_id": "PatientID_0097",
+    "grade": "HGG",
+    "n_timepoints": 6,
+    "timepoints": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "days_since_baseline": [
+      0,
+      30,
+      60,
+      90,
+      120,
+      150
+    ],
+    "volumes_mm3": [
+      175573.0,
+      79211.0,
+      77310.0,
+      95513.0,
+      246317.0,
+      255644.0
+    ],
+    "volume_range": [
+      77310.0,
+      255644.0
+    ]
+  },
+  "PatientID_0099": {
+    "patient_id": "PatientID_0099",
+    "grade": "HGG",
+    "n_timepoints": 2,
+    "timepoints": [
+      1,
+      2
+    ],
+    "days_since_baseline": [
+      0,
+      30
+    ],
+    "volumes_mm3": [
+      36416.0,
+      92842.0
+    ],
+    "volume_range": [
+      36416.0,
+      92842.0
+    ]
+  },
+  "PatientID_0103": {
+    "patient_id": "PatientID_0103",
+    "grade": "HGG",
+    "n_timepoints": 6,
+    "timepoints": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "days_since_baseline": [
+      0,
+      30,
+      60,
+      90,
+      120,
+      150
+    ],
+    "volumes_mm3": [
+      38404.0,
+      20829.0,
+      37291.0,
+      158242.0,
+      76307.0,
+      96766.0
+    ],
+    "volume_range": [
+      20829.0,
+      158242.0
+    ]
+  },
+  "PatientID_0105": {
+    "patient_id": "PatientID_0105",
+    "grade": "HGG",
+    "n_timepoints": 6,
+    "timepoints": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "days_since_baseline": [
+      0,
+      30,
+      60,
+      90,
+      120,
+      150
+    ],
+    "volumes_mm3": [
+      18272.0,
+      10113.0,
+      11756.0,
+      20237.0,
+      36460.0,
+      125028.0
+    ],
+    "volume_range": [
+      10113.0,
+      125028.0
+    ]
+  },
+  "PatientID_0109": {
+    "patient_id": "PatientID_0109",
+    "grade": "HGG",
+    "n_timepoints": 4,
+    "timepoints": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "days_since_baseline": [
+      0,
+      30,
+      60,
+      90
+    ],
+    "volumes_mm3": [
+      72434.0,
+      167200.0,
+      184247.0,
+      253875.0
+    ],
+    "volume_range": [
+      72434.0,
+      253875.0
+    ]
+  },
+  "PatientID_0110": {
+    "patient_id": "PatientID_0110",
+    "grade": "HGG",
+    "n_timepoints": 3,
+    "timepoints": [
+      1,
+      2,
+      3
+    ],
+    "days_since_baseline": [
+      0,
+      30,
+      60
+    ],
+    "volumes_mm3": [
+      177705.0,
+      100090.0,
+      263280.0
+    ],
+    "volume_range": [
+      100090.0,
+      263280.0
+    ]
+  },
+  "PatientID_0113": {
+    "patient_id": "PatientID_0113",
+    "grade": "HGG",
+    "n_timepoints": 3,
+    "timepoints": [
+      1,
+      2,
+      3
+    ],
+    "days_since_baseline": [
+      0,
+      30,
+      60
+    ],
+    "volumes_mm3": [
+      15907.0,
+      29201.0,
+      22878.0
+    ],
+    "volume_range": [
+      15907.0,
+      29201.0
+    ]
+  },
+  "PatientID_0114": {
+    "patient_id": "PatientID_0114",
+    "grade": "HGG",
+    "n_timepoints": 2,
+    "timepoints": [
+      1,
+      2
+    ],
+    "days_since_baseline": [
+      0,
+      30
+    ],
+    "volumes_mm3": [
+      158875.0,
+      97302.0
+    ],
+    "volume_range": [
+      97302.0,
+      158875.0
+    ]
+  },
+  "PatientID_0116": {
+    "patient_id": "PatientID_0116",
+    "grade": "HGG",
+    "n_timepoints": 2,
+    "timepoints": [
+      1,
+      2
+    ],
+    "days_since_baseline": [
+      0,
+      30
+    ],
+    "volumes_mm3": [
+      138675.0,
+      141650.0
+    ],
+    "volume_range": [
+      138675.0,
+      141650.0
+    ]
+  },
+  "PatientID_0117": {
+    "patient_id": "PatientID_0117",
+    "grade": "HGG",
+    "n_timepoints": 3,
+    "timepoints": [
+      1,
+      2,
+      3
+    ],
+    "days_since_baseline": [
+      0,
+      30,
+      60
+    ],
+    "volumes_mm3": [
+      158338.0,
+      69436.0,
+      76737.0
+    ],
+    "volume_range": [
+      69436.0,
+      158338.0
+    ]
+  },
+  "PatientID_0118": {
+    "patient_id": "PatientID_0118",
+    "grade": "HGG",
+    "n_timepoints": 3,
+    "timepoints": [
+      1,
+      2,
+      3
+    ],
+    "days_since_baseline": [
+      0,
+      30,
+      60
+    ],
+    "volumes_mm3": [
+      99417.0,
+      34653.0,
+      47899.0
+    ],
+    "volume_range": [
+      34653.0,
+      99417.0
+    ]
+  },
+  "PatientID_0121": {
+    "patient_id": "PatientID_0121",
+    "grade": "HGG",
+    "n_timepoints": 3,
+    "timepoints": [
+      1,
+      2,
+      3
+    ],
+    "days_since_baseline": [
+      0,
+      30,
+      60
+    ],
+    "volumes_mm3": [
+      15172.0,
+      16808.0,
+      34192.0
+    ],
+    "volume_range": [
+      15172.0,
+      34192.0
+    ]
+  },
+  "PatientID_0123": {
+    "patient_id": "PatientID_0123",
+    "grade": "HGG",
+    "n_timepoints": 2,
+    "timepoints": [
+      1,
+      2
+    ],
+    "days_since_baseline": [
+      0,
+      30
+    ],
+    "volumes_mm3": [
+      76962.0,
+      288753.0
+    ],
+    "volume_range": [
+      76962.0,
+      288753.0
+    ]
+  },
+  "PatientID_0125": {
+    "patient_id": "PatientID_0125",
+    "grade": "HGG",
+    "n_timepoints": 2,
+    "timepoints": [
+      1,
+      2
+    ],
+    "days_since_baseline": [
+      0,
+      30
+    ],
+    "volumes_mm3": [
+      60777.0,
+      246970.0
+    ],
+    "volume_range": [
+      60777.0,
+      246970.0
+    ]
+  },
+  "PatientID_0132": {
+    "patient_id": "PatientID_0132",
+    "grade": "HGG",
+    "n_timepoints": 3,
+    "timepoints": [
+      1,
+      2,
+      3
+    ],
+    "days_since_baseline": [
+      0,
+      30,
+      60
+    ],
+    "volumes_mm3": [
+      15907.0,
+      29201.0,
+      43739.0
+    ],
+    "volume_range": [
+      15907.0,
+      43739.0
+    ]
+  },
+  "PatientID_0135": {
+    "patient_id": "PatientID_0135",
+    "grade": "HGG",
+    "n_timepoints": 3,
+    "timepoints": [
+      1,
+      2,
+      3
+    ],
+    "days_since_baseline": [
+      0,
+      30,
+      60
+    ],
+    "volumes_mm3": [
+      9550.0,
+      14806.0,
+      93057.0
+    ],
+    "volume_range": [
+      9550.0,
+      93057.0
+    ]
+  },
+  "PatientID_0136": {
+    "patient_id": "PatientID_0136",
+    "grade": "HGG",
+    "n_timepoints": 3,
+    "timepoints": [
+      1,
+      2,
+      3
+    ],
+    "days_since_baseline": [
+      0,
+      30,
+      60
+    ],
+    "volumes_mm3": [
+      38081.0,
+      65537.0,
+      148956.0
+    ],
+    "volume_range": [
+      38081.0,
+      148956.0
+    ]
+  },
+  "PatientID_0138": {
+    "patient_id": "PatientID_0138",
+    "grade": "HGG",
+    "n_timepoints": 3,
+    "timepoints": [
+      1,
+      2,
+      3
+    ],
+    "days_since_baseline": [
+      0,
+      30,
+      60
+    ],
+    "volumes_mm3": [
+      172296.0,
+      18133.0,
+      40197.0
+    ],
+    "volume_range": [
+      18133.0,
+      172296.0
+    ]
+  },
+  "PatientID_0140": {
+    "patient_id": "PatientID_0140",
+    "grade": "HGG",
+    "n_timepoints": 3,
+    "timepoints": [
+      1,
+      2,
+      3
+    ],
+    "days_since_baseline": [
+      0,
+      30,
+      60
+    ],
+    "volumes_mm3": [
+      81760.0,
+      25226.0,
+      22556.0
+    ],
+    "volume_range": [
+      22556.0,
+      81760.0
+    ]
+  },
+  "PatientID_0142": {
+    "patient_id": "PatientID_0142",
+    "grade": "HGG",
+    "n_timepoints": 2,
+    "timepoints": [
+      1,
+      2
+    ],
+    "days_since_baseline": [
+      0,
+      30
+    ],
+    "volumes_mm3": [
+      161130.0,
+      112146.0
+    ],
+    "volume_range": [
+      112146.0,
+      161130.0
+    ]
+  },
+  "PatientID_0145": {
+    "patient_id": "PatientID_0145",
+    "grade": "HGG",
+    "n_timepoints": 2,
+    "timepoints": [
+      1,
+      2
+    ],
+    "days_since_baseline": [
+      0,
+      30
+    ],
+    "volumes_mm3": [
+      125079.0,
+      110183.0
+    ],
+    "volume_range": [
+      110183.0,
+      125079.0
+    ]
+  },
+  "PatientID_0147": {
+    "patient_id": "PatientID_0147",
+    "grade": "HGG",
+    "n_timepoints": 3,
+    "timepoints": [
+      1,
+      2,
+      3
+    ],
+    "days_since_baseline": [
+      0,
+      30,
+      60
+    ],
+    "volumes_mm3": [
+      93328.0,
+      130259.0,
+      157661.0
+    ],
+    "volume_range": [
+      93328.0,
+      157661.0
+    ]
+  },
+  "PatientID_0148": {
+    "patient_id": "PatientID_0148",
+    "grade": "HGG",
+    "n_timepoints": 2,
+    "timepoints": [
+      1,
+      2
+    ],
+    "days_since_baseline": [
+      0,
+      30
+    ],
+    "volumes_mm3": [
+      91375.0,
+      55059.0
+    ],
+    "volume_range": [
+      55059.0,
+      91375.0
+    ]
+  },
+  "PatientID_0149": {
+    "patient_id": "PatientID_0149",
+    "grade": "HGG",
+    "n_timepoints": 4,
+    "timepoints": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "days_since_baseline": [
+      0,
+      30,
+      60,
+      90
+    ],
+    "volumes_mm3": [
+      247376.0,
+      87010.0,
+      51818.0,
+      97619.0
+    ],
+    "volume_range": [
+      51818.0,
+      247376.0
+    ]
+  },
+  "PatientID_0150": {
+    "patient_id": "PatientID_0150",
+    "grade": "HGG",
+    "n_timepoints": 5,
+    "timepoints": [
+      1,
+      2,
+      3,
+      4,
+      6
+    ],
+    "days_since_baseline": [
+      0,
+      30,
+      60,
+      90,
+      150
+    ],
+    "volumes_mm3": [
+      22867.0,
+      23659.0,
+      49570.0,
+      54657.0,
+      68368.0
+    ],
+    "volume_range": [
+      22867.0,
+      68368.0
+    ]
+  },
+  "PatientID_0151": {
+    "patient_id": "PatientID_0151",
+    "grade": "HGG",
+    "n_timepoints": 2,
+    "timepoints": [
+      1,
+      2
+    ],
+    "days_since_baseline": [
+      0,
+      30
+    ],
+    "volumes_mm3": [
+      57452.0,
+      60540.0
+    ],
+    "volume_range": [
+      57452.0,
+      60540.0
+    ]
+  },
+  "PatientID_0152": {
+    "patient_id": "PatientID_0152",
+    "grade": "HGG",
+    "n_timepoints": 3,
+    "timepoints": [
+      1,
+      2,
+      3
+    ],
+    "days_since_baseline": [
+      0,
+      30,
+      60
+    ],
+    "volumes_mm3": [
+      8620.0,
+      9440.0,
+      47720.0
+    ],
+    "volume_range": [
+      8620.0,
+      47720.0
+    ]
+  },
+  "PatientID_0156": {
+    "patient_id": "PatientID_0156",
+    "grade": "HGG",
+    "n_timepoints": 3,
+    "timepoints": [
+      1,
+      2,
+      3
+    ],
+    "days_since_baseline": [
+      0,
+      30,
+      60
+    ],
+    "volumes_mm3": [
+      26953.0,
+      2316.0,
+      4744.0
+    ],
+    "volume_range": [
+      2316.0,
+      26953.0
+    ]
+  },
+  "PatientID_0157": {
+    "patient_id": "PatientID_0157",
+    "grade": "HGG",
+    "n_timepoints": 6,
+    "timepoints": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "days_since_baseline": [
+      0,
+      30,
+      60,
+      90,
+      120,
+      150
+    ],
+    "volumes_mm3": [
+      72081.0,
+      29006.0,
+      38725.0,
+      40435.0,
+      39850.0,
+      52732.0
+    ],
+    "volume_range": [
+      29006.0,
+      72081.0
+    ]
+  },
+  "PatientID_0159": {
+    "patient_id": "PatientID_0159",
+    "grade": "HGG",
+    "n_timepoints": 4,
+    "timepoints": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "days_since_baseline": [
+      0,
+      30,
+      60,
+      90
+    ],
+    "volumes_mm3": [
+      135151.0,
+      33181.0,
+      8684.0,
+      64208.0
+    ],
+    "volume_range": [
+      8684.0,
+      135151.0
+    ]
+  },
+  "PatientID_0160": {
+    "patient_id": "PatientID_0160",
+    "grade": "HGG",
+    "n_timepoints": 2,
+    "timepoints": [
+      1,
+      2
+    ],
+    "days_since_baseline": [
+      0,
+      30
+    ],
+    "volumes_mm3": [
+      18205.0,
+      17492.0
+    ],
+    "volume_range": [
+      17492.0,
+      18205.0
+    ]
+  },
+  "PatientID_0162": {
+    "patient_id": "PatientID_0162",
+    "grade": "HGG",
+    "n_timepoints": 6,
+    "timepoints": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "days_since_baseline": [
+      0,
+      30,
+      60,
+      90,
+      120,
+      150
+    ],
+    "volumes_mm3": [
+      60347.0,
+      51206.0,
+      21993.0,
+      31895.0,
+      68300.0,
+      96786.0
+    ],
+    "volume_range": [
+      21993.0,
+      96786.0
+    ]
+  },
+  "PatientID_0164": {
+    "patient_id": "PatientID_0164",
+    "grade": "HGG",
+    "n_timepoints": 5,
+    "timepoints": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "days_since_baseline": [
+      0,
+      30,
+      60,
+      90,
+      120
+    ],
+    "volumes_mm3": [
+      17077.0,
+      23877.0,
+      52728.0,
+      40926.0,
+      66012.0
+    ],
+    "volume_range": [
+      17077.0,
+      66012.0
+    ]
+  },
+  "PatientID_0169": {
+    "patient_id": "PatientID_0169",
+    "grade": "HGG",
+    "n_timepoints": 4,
+    "timepoints": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "days_since_baseline": [
+      0,
+      30,
+      60,
+      90
+    ],
+    "volumes_mm3": [
+      29208.0,
+      137300.0,
+      87450.0,
+      141242.0
+    ],
+    "volume_range": [
+      29208.0,
+      141242.0
+    ]
+  },
+  "PatientID_0170": {
+    "patient_id": "PatientID_0170",
+    "grade": "HGG",
+    "n_timepoints": 2,
+    "timepoints": [
+      1,
+      2
+    ],
+    "days_since_baseline": [
+      0,
+      30
+    ],
+    "volumes_mm3": [
+      20329.0,
+      23783.0
+    ],
+    "volume_range": [
+      20329.0,
+      23783.0
+    ]
+  },
+  "PatientID_0171": {
+    "patient_id": "PatientID_0171",
+    "grade": "HGG",
+    "n_timepoints": 3,
+    "timepoints": [
+      1,
+      2,
+      3
+    ],
+    "days_since_baseline": [
+      0,
+      30,
+      60
+    ],
+    "volumes_mm3": [
+      207342.0,
+      256254.0,
+      271135.0
+    ],
+    "volume_range": [
+      207342.0,
+      271135.0
+    ]
+  },
+  "PatientID_0173": {
+    "patient_id": "PatientID_0173",
+    "grade": "HGG",
+    "n_timepoints": 2,
+    "timepoints": [
+      1,
+      2
+    ],
+    "days_since_baseline": [
+      0,
+      30
+    ],
+    "volumes_mm3": [
+      69062.0,
+      10486.0
+    ],
+    "volume_range": [
+      10486.0,
+      69062.0
+    ]
+  },
+  "PatientID_0188": {
+    "patient_id": "PatientID_0188",
+    "grade": "HGG",
+    "n_timepoints": 2,
+    "timepoints": [
+      1,
+      2
+    ],
+    "days_since_baseline": [
+      0,
+      30
+    ],
+    "volumes_mm3": [
+      51084.0,
+      133146.0
+    ],
+    "volume_range": [
+      51084.0,
+      133146.0
+    ]
+  },
+  "PatientID_0191": {
+    "patient_id": "PatientID_0191",
+    "grade": "HGG",
+    "n_timepoints": 3,
+    "timepoints": [
+      2,
+      3,
+      4
+    ],
+    "days_since_baseline": [
+      30,
+      60,
+      90
+    ],
+    "volumes_mm3": [
+      51409.0,
+      44170.0,
+      72962.0
+    ],
+    "volume_range": [
+      44170.0,
+      72962.0
+    ]
+  },
+  "PatientID_0198": {
+    "patient_id": "PatientID_0198",
+    "grade": "HGG",
+    "n_timepoints": 4,
+    "timepoints": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "days_since_baseline": [
+      0,
+      30,
+      60,
+      90
+    ],
+    "volumes_mm3": [
+      16578.0,
+      16519.0,
+      57488.0,
+      67327.0
+    ],
+    "volume_range": [
+      16519.0,
+      67327.0
+    ]
+  },
+  "PatientID_0199": {
+    "patient_id": "PatientID_0199",
+    "grade": "HGG",
+    "n_timepoints": 3,
+    "timepoints": [
+      1,
+      2,
+      3
+    ],
+    "days_since_baseline": [
+      0,
+      30,
+      60
+    ],
+    "volumes_mm3": [
+      56688.0,
+      53312.0,
+      39054.0
+    ],
+    "volume_range": [
+      39054.0,
+      56688.0
+    ]
+  },
+  "PatientID_0201": {
+    "patient_id": "PatientID_0201",
+    "grade": "HGG",
+    "n_timepoints": 6,
+    "timepoints": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "days_since_baseline": [
+      0,
+      30,
+      60,
+      90,
+      120,
+      150
+    ],
+    "volumes_mm3": [
+      42671.0,
+      43680.0,
+      45925.0,
+      50903.0,
+      60793.0,
+      68797.0
+    ],
+    "volume_range": [
+      42671.0,
+      68797.0
+    ]
+  },
+  "PatientID_0204": {
+    "patient_id": "PatientID_0204",
+    "grade": "HGG",
+    "n_timepoints": 6,
+    "timepoints": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "days_since_baseline": [
+      0,
+      30,
+      60,
+      90,
+      120,
+      150
+    ],
+    "volumes_mm3": [
+      125071.0,
+      82991.0,
+      50741.0,
+      95156.0,
+      120555.0,
+      200801.0
+    ],
+    "volume_range": [
+      50741.0,
+      200801.0
+    ]
+  },
+  "PatientID_0207": {
+    "patient_id": "PatientID_0207",
+    "grade": "HGG",
+    "n_timepoints": 6,
+    "timepoints": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "days_since_baseline": [
+      0,
+      30,
+      60,
+      90,
+      120,
+      150
+    ],
+    "volumes_mm3": [
+      55091.0,
+      53521.0,
+      25340.0,
+      29758.0,
+      27671.0,
+      29946.0
+    ],
+    "volume_range": [
+      25340.0,
+      55091.0
+    ]
+  },
+  "PatientID_0209": {
+    "patient_id": "PatientID_0209",
+    "grade": "HGG",
+    "n_timepoints": 6,
+    "timepoints": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "days_since_baseline": [
+      0,
+      30,
+      60,
+      90,
+      120,
+      150
+    ],
+    "volumes_mm3": [
+      165337.0,
+      131287.0,
+      103792.0,
+      90902.0,
+      86119.0,
+      57939.0
+    ],
+    "volume_range": [
+      57939.0,
+      165337.0
+    ]
+  },
+  "PatientID_0215": {
+    "patient_id": "PatientID_0215",
+    "grade": "HGG",
+    "n_timepoints": 6,
+    "timepoints": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "days_since_baseline": [
+      0,
+      30,
+      60,
+      90,
+      120,
+      150
+    ],
+    "volumes_mm3": [
+      52395.0,
+      45983.0,
+      48222.0,
+      43052.0,
+      51504.0,
+      53051.0
+    ],
+    "volume_range": [
+      43052.0,
+      53051.0
+    ]
+  },
+  "PatientID_0237": {
+    "patient_id": "PatientID_0237",
+    "grade": "HGG",
+    "n_timepoints": 2,
+    "timepoints": [
+      1,
+      3
+    ],
+    "days_since_baseline": [
+      0,
+      60
+    ],
+    "volumes_mm3": [
+      92138.0,
+      88539.0
+    ],
+    "volume_range": [
+      88539.0,
+      92138.0
+    ]
+  },
+  "PatientID_0238": {
+    "patient_id": "PatientID_0238",
+    "grade": "HGG",
+    "n_timepoints": 3,
+    "timepoints": [
+      1,
+      3,
+      6
+    ],
+    "days_since_baseline": [
+      0,
+      60,
+      150
+    ],
+    "volumes_mm3": [
+      35203.0,
+      243616.0,
+      212024.0
+    ],
+    "volume_range": [
+      35203.0,
+      243616.0
+    ]
+  },
+  "PatientID_0239": {
+    "patient_id": "PatientID_0239",
+    "grade": "HGG",
+    "n_timepoints": 3,
+    "timepoints": [
+      1,
+      3,
+      6
+    ],
+    "days_since_baseline": [
+      0,
+      60,
+      150
+    ],
+    "volumes_mm3": [
+      13076.0,
+      7241.0,
+      71980.0
+    ],
+    "volume_range": [
+      7241.0,
+      71980.0
+    ]
+  },
+  "PatientID_0250": {
+    "patient_id": "PatientID_0250",
+    "grade": "HGG",
+    "n_timepoints": 3,
+    "timepoints": [
+      1,
+      2,
+      3
+    ],
+    "days_since_baseline": [
+      0,
+      30,
+      60
+    ],
+    "volumes_mm3": [
+      112063.0,
+      48281.0,
+      29394.0
+    ],
+    "volume_range": [
+      29394.0,
+      112063.0
+    ]
+  },
+  "PatientID_0251": {
+    "patient_id": "PatientID_0251",
+    "grade": "HGG",
+    "n_timepoints": 3,
+    "timepoints": [
+      1,
+      2,
+      3
+    ],
+    "days_since_baseline": [
+      0,
+      30,
+      60
+    ],
+    "volumes_mm3": [
+      29237.0,
+      49197.0,
+      115804.0
+    ],
+    "volume_range": [
+      29237.0,
+      115804.0
+    ]
+  },
+  "PatientID_0252": {
+    "patient_id": "PatientID_0252",
+    "grade": "HGG",
+    "n_timepoints": 3,
+    "timepoints": [
+      1,
+      2,
+      3
+    ],
+    "days_since_baseline": [
+      0,
+      30,
+      60
+    ],
+    "volumes_mm3": [
+      108168.0,
+      109736.0,
+      159502.0
+    ],
+    "volume_range": [
+      108168.0,
+      159502.0
+    ]
+  },
+  "PatientID_0254": {
+    "patient_id": "PatientID_0254",
+    "grade": "HGG",
+    "n_timepoints": 4,
+    "timepoints": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "days_since_baseline": [
+      0,
+      30,
+      60,
+      90
+    ],
+    "volumes_mm3": [
+      36681.0,
+      17370.0,
+      33012.0,
+      92632.0
+    ],
+    "volume_range": [
+      17370.0,
+      92632.0
+    ]
+  },
+  "PatientID_0255": {
+    "patient_id": "PatientID_0255",
+    "grade": "HGG",
+    "n_timepoints": 2,
+    "timepoints": [
+      1,
+      2
+    ],
+    "days_since_baseline": [
+      0,
+      30
+    ],
+    "volumes_mm3": [
+      10089.0,
+      5256.0
+    ],
+    "volume_range": [
+      5256.0,
+      10089.0
+    ]
+  },
+  "PatientID_0256": {
+    "patient_id": "PatientID_0256",
+    "grade": "HGG",
+    "n_timepoints": 5,
+    "timepoints": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "days_since_baseline": [
+      0,
+      30,
+      60,
+      90,
+      120
+    ],
+    "volumes_mm3": [
+      35122.0,
+      18682.0,
+      47643.0,
+      71282.0,
+      264819.0
+    ],
+    "volume_range": [
+      18682.0,
+      264819.0
+    ]
+  },
+  "PatientID_0260": {
+    "patient_id": "PatientID_0260",
+    "grade": "HGG",
+    "n_timepoints": 2,
+    "timepoints": [
+      1,
+      2
+    ],
+    "days_since_baseline": [
+      0,
+      30
+    ],
+    "volumes_mm3": [
+      9087.0,
+      31233.0
+    ],
+    "volume_range": [
+      9087.0,
+      31233.0
+    ]
+  },
+  "PatientID_0267": {
+    "patient_id": "PatientID_0267",
+    "grade": "HGG",
+    "n_timepoints": 2,
+    "timepoints": [
+      1,
+      2
+    ],
+    "days_since_baseline": [
+      0,
+      30
+    ],
+    "volumes_mm3": [
+      87760.0,
+      98037.0
+    ],
+    "volume_range": [
+      87760.0,
+      98037.0
+    ]
+  },
+  "PatientID_0268": {
+    "patient_id": "PatientID_0268",
+    "grade": "HGG",
+    "n_timepoints": 3,
+    "timepoints": [
+      1,
+      3,
+      6
+    ],
+    "days_since_baseline": [
+      0,
+      60,
+      150
+    ],
+    "volumes_mm3": [
+      19512.0,
+      221.0,
+      231.0
+    ],
+    "volume_range": [
+      221.0,
+      19512.0
+    ]
+  },
+  "PatientID_0272": {
+    "patient_id": "PatientID_0272",
+    "grade": "HGG",
+    "n_timepoints": 3,
+    "timepoints": [
+      1,
+      3,
+      6
+    ],
+    "days_since_baseline": [
+      0,
+      60,
+      150
+    ],
+    "volumes_mm3": [
+      42646.0,
+      13279.0,
+      14015.0
+    ],
+    "volume_range": [
+      13279.0,
+      42646.0
+    ]
+  },
+  "PatientID_0274": {
+    "patient_id": "PatientID_0274",
+    "grade": "HGG",
+    "n_timepoints": 2,
+    "timepoints": [
+      1,
+      3
+    ],
+    "days_since_baseline": [
+      0,
+      60
+    ],
+    "volumes_mm3": [
+      22547.0,
+      26522.0
+    ],
+    "volume_range": [
+      22547.0,
+      26522.0
+    ]
+  },
+  "PatientID_0189": {
+    "patient_id": "PatientID_0189",
+    "grade": "UNKNOWN",
+    "n_timepoints": 6,
+    "timepoints": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "days_since_baseline": [
+      0,
+      30,
+      60,
+      90,
+      120,
+      150
+    ],
+    "volumes_mm3": [
+      4632.0,
+      6442.0,
+      6746.0,
+      7113.0,
+      4216.0,
+      15015.0
+    ],
+    "volume_range": [
+      4216.0,
+      15015.0
+    ]
+  },
+  "PatientID_0208": {
+    "patient_id": "PatientID_0208",
+    "grade": "UNKNOWN",
+    "n_timepoints": 2,
+    "timepoints": [
+      1,
+      2
+    ],
+    "days_since_baseline": [
+      0,
+      30
+    ],
+    "volumes_mm3": [
+      35007.0,
+      4171.0
+    ],
+    "volume_range": [
+      4171.0,
+      35007.0
+    ]
+  }
+}

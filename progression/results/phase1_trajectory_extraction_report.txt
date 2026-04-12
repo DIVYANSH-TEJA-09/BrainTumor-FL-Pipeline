@@ -1,0 +1,48 @@
+================================================================================
+PHASE 1 (REVISED): REAL TUMOR VOLUME EXTRACTION SUMMARY
+================================================================================
+
+Total Patients Processed: 203
+Valid Trajectories Extracted: 155
+
+
+LGG STATISTICS
+--------------------------------------------------------------------------------
+Patients: 25
+Timepoints per patient:
+  Mean: 3.2
+  Std: 1.2
+  Range: 2 - 6
+
+Tumor volumes (mm3):
+  Mean: 54128.2
+  Std: 59976.9
+  Range: 305.0 - 306341.0
+
+HGG STATISTICS
+--------------------------------------------------------------------------------
+Patients: 128
+Timepoints per patient:
+  Mean: 3.6
+  Std: 1.5
+  Range: 2 - 6
+
+Tumor volumes (mm3):
+  Mean: 86430.3
+  Std: 65939.5
+  Range: 221.0 - 300963.0
+
+UNKNOWN STATISTICS
+--------------------------------------------------------------------------------
+Patients: 2
+Timepoints per patient:
+  Mean: 4.0
+  Std: 2.0
+  Range: 2 - 6
+
+Tumor volumes (mm3):
+  Mean: 10417.8
+  Std: 9854.8
+  Range: 4171.0 - 35007.0
+
+================================================================================
