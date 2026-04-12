@@ -1,0 +1,40 @@
+{
+  "overall": {
+    "mae_baseline": 48263.01953125,
+    "mae_hybrid": 46942.06640625,
+    "mae_improvement_pct": 2.736988067626953,
+    "rmse_baseline": 480863.96875,
+    "rmse_hybrid": 480641.34375,
+    "rmse_improvement_pct": 0.046296875923871994,
+    "r2_baseline": -63.43672180175781,
+    "r2_hybrid": -63.37706756591797,
+    "r2_improvement": 0.05965423583984375,
+    "n_points": 654
+  },
+  "by_grade": {
+    "HGG": {
+      "mae_baseline": 24671.662109375,
+      "mae_hybrid": 22727.693359375,
+      "mae_improvement_pct": 7.879358768463135,
+      "rmse_baseline": 42705.0,
+      "rmse_hybrid": 39286.7578125,
+      "rmse_improvement_pct": 8.004313468933105,
+      "r2_baseline": 0.5176838040351868,
+      "r2_hybrid": 0.5918058753013611,
+      "r2_improvement": 0.07412207126617432,
+      "n_points": 503
+    },
+    "LGG": {
+      "mae_baseline": 166728.484375,
+      "mae_hybrid": 167317.296875,
+      "mae_improvement_pct": -0.35315650701522827,
+      "rmse_baseline": 1153291.5,
+      "rmse_hybrid": 1153290.875,
+      "rmse_improvement_pct": 5.419271838036366e-05,
+      "r2_baseline": -501.99578857421875,
+      "r2_hybrid": -501.99517822265625,
+      "r2_improvement": 0.0006103515625,
+      "n_points": 113
+    }
+  }
+}
