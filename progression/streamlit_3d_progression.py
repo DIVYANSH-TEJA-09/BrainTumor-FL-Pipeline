@@ -201,9 +201,37 @@ st.sidebar.markdown(f"**Timepoints:** {n_timepoints}")
 st.sidebar.markdown(f"**Baseline MAE:** {patient_data['mae_baseline_mean']:.0f} mm³")
 st.sidebar.markdown(f"**Hybrid MAE:** {patient_data['mae_hybrid_mean']:.0f} mm³")
 
-# Timepoint selection
-timepoint_idx = st.sidebar.slider("Timepoint", 0, n_timepoints - 1, 0)
-timepoint_data = patient_data['timepoints'][timepoint_idx]
+# Timepoint selection - NOW shows BOTH current and next timepoint
+st.sidebar.markdown("---")
+st.sidebar.subheader("Growth Prediction")
+
+# Get available timepoints
+n_timepoints = patient_data['n_timepoints']
+available_timepoints = list(range(n_timepoints - 1))  # Can't predict from last timepoint
+
+if len(available_timepoints) == 0:
+    st.error("Patient has only 1 timepoint - cannot show growth prediction")
+    st.stop()
+
+# Select "FROM" timepoint (current state)
+timepoint_from_idx = st.sidebar.slider(
+    "Select Timepoint (FROM - Current State)", 
+    0, 
+    len(available_timepoints) - 1, 
+    0
+)
+
+# Next timepoint is automatically the next one
+timepoint_to_idx = timepoint_from_idx + 1
+
+# Get data for both timepoints
+timepoint_from_data = patient_data['timepoints'][timepoint_from_idx]
+timepoint_to_data = patient_data['timepoints'][timepoint_to_idx]
+
+st.sidebar.markdown(f"""
+**FROM:** Timepoint {timepoint_from_idx} (Current)
+**TO:** Timepoint {timepoint_to_idx} (Prediction)
+""")
 
 st.sidebar.markdown("---")
 st.sidebar.subheader("Display Options")
@@ -248,60 +276,89 @@ patient_dir = find_patient_data_path(patient_id)
 if patient_dir is None:
     st.error(f"Patient data not found: {patient_id}")
 else:
-    # Load actual mask
-    mask_path = get_tumor_mask_path(patient_dir, timepoint_idx)
-    brain_img_path = get_brain_image_path(patient_dir, timepoint_idx)
-    
-    if mask_path is None:
-        st.error(f"Tumor mask not found for timepoint {timepoint_idx}")
-    else:
-        actual_mask = load_nifti(mask_path)
-        brain_img = load_nifti(brain_img_path) if brain_img_path else None
+        # Load masks for BOTH timepoints (current and next)
+        mask_path_from = get_tumor_mask_path(patient_dir, timepoint_from_idx)
+        mask_path_to = get_tumor_mask_path(patient_dir, timepoint_to_idx)
+        brain_img_path = get_brain_image_path(patient_dir, timepoint_from_idx)
         
-        if actual_mask is None:
-            st.error("Failed to load tumor mask")
+        if mask_path_from is None or mask_path_to is None:
+            st.error(f"Tumor masks not found for timepoints {timepoint_from_idx} or {timepoint_to_idx}")
         else:
-            # Get prediction volumes
-            v_actual = timepoint_data['v_actual']
-            v_logistic = timepoint_data['v_logistic']
-            v_hybrid = timepoint_data['v_hybrid']
+            # Load both timepoints
+            actual_mask_from = load_nifti(mask_path_from)  # Current actual
+            actual_mask_to = load_nifti(mask_path_to)      # Next actual (ground truth)
+            brain_img = load_nifti(brain_img_path) if brain_img_path else None
             
-            # Generate predicted masks by scaling
-            logistic_mask = scale_mask_by_volume(actual_mask, v_actual, v_logistic)
-            hybrid_mask = scale_mask_by_volume(actual_mask, v_actual, v_hybrid)
-            
-            # Create unified figure with 3 subplots for SYNCHRONIZED camera
-            from plotly.subplots import make_subplots
-            
-            # Collect all traces with proper scene assignments
-            traces_actual = []
-            traces_baseline = []
-            traces_hybrid = []
-            
-            # Add brain overlay to all panels
-            if show_brain and brain_img is not None:
-                brain_trace1 = build_brain_trace(brain_img, brain_opacity, step_size, "scene1")
-                brain_trace2 = build_brain_trace(brain_img, brain_opacity, step_size, "scene2")
-                brain_trace3 = build_brain_trace(brain_img, brain_opacity, step_size, "scene3")
-                if brain_trace1:
-                    traces_actual.append(brain_trace1)
-                if brain_trace2:
-                    traces_baseline.append(brain_trace2)
-                if brain_trace3:
-                    traces_hybrid.append(brain_trace3)
-            
-            # Add tumor meshes
-            trace_actual = make_mesh_trace(actual_mask, '#3498db', 'Actual Tumor', tumor_opacity, step_size, "scene1")
-            if trace_actual:
-                traces_actual.append(trace_actual)
-            
-            trace_baseline = make_mesh_trace(logistic_mask, '#e74c3c', 'Baseline', tumor_opacity, step_size, "scene2")
-            if trace_baseline:
-                traces_baseline.append(trace_baseline)
-            
-            trace_hybrid = make_mesh_trace(hybrid_mask, '#2ecc71', 'LSTM Hybrid', tumor_opacity, step_size, "scene3")
-            if trace_hybrid:
-                traces_hybrid.append(trace_hybrid)
+            if actual_mask_from is None or actual_mask_to is None:
+                st.error("Failed to load tumor masks")
+            else:
+                # Get volumes for both timepoints
+                v_actual_from = timepoint_from_data['v_actual']
+                v_actual_to = timepoint_to_data['v_actual']
+                v_logistic_to = timepoint_to_data['v_logistic']
+                v_hybrid_to = timepoint_to_data['v_hybrid']
+                
+                # Calculate growth metrics
+                growth_actual = v_actual_to - v_actual_from
+                growth_actual_pct = (growth_actual / v_actual_from * 100) if v_actual_from > 0 else 0
+                
+                growth_logistic = v_logistic_to - v_actual_from
+                growth_logistic_pct = (growth_logistic / v_actual_from * 100) if v_actual_from > 0 else 0
+                
+                growth_hybrid = v_hybrid_to - v_actual_from
+                growth_hybrid_pct = (growth_hybrid / v_actual_from * 100) if v_actual_from > 0 else 0
+                
+                # Generate predicted masks by scaling FROM current volume
+                logistic_mask_to = scale_mask_by_volume(actual_mask_from, v_actual_from, v_logistic_to)
+                hybrid_mask_to = scale_mask_by_volume(actual_mask_from, v_actual_from, v_hybrid_to)
+                
+                # Create unified figure with 3 subplots for SYNCHRONIZED camera
+                from plotly.subplots import make_subplots
+                
+                # Collect all traces with proper scene assignments
+                traces_actual = []
+                traces_baseline = []
+                traces_hybrid = []
+                
+                # Add brain overlay to all panels
+                if show_brain and brain_img is not None:
+                    brain_trace1 = build_brain_trace(brain_img, brain_opacity, step_size, "scene1")
+                    brain_trace2 = build_brain_trace(brain_img, brain_opacity, step_size, "scene2")
+                    brain_trace3 = build_brain_trace(brain_img, brain_opacity, step_size, "scene3")
+                    if brain_trace1:
+                        traces_actual.append(brain_trace1)
+                    if brain_trace2:
+                        traces_baseline.append(brain_trace2)
+                    if brain_trace3:
+                        traces_hybrid.append(brain_trace3)
+                
+                # Add CURRENT tumor (FROM - timepoint 1) - MORE OPAQUE
+                trace_current_actual = make_mesh_trace(actual_mask_from, '#3498db', 'Actual (Current)', tumor_opacity, step_size, "scene1")
+                if trace_current_actual:
+                    traces_actual.append(trace_current_actual)
+                
+                # Add PREDICTED tumor (TO - timepoint 2) - MORE TRANSPARENT to show growth
+                trace_predicted_actual = make_mesh_trace(actual_mask_to, '#5dade2', 'Actual (Next)', tumor_opacity * 0.5, step_size, "scene1")
+                if trace_predicted_actual:
+                    traces_actual.append(trace_predicted_actual)
+                
+                # BASELINE: Current + Predicted
+                trace_current_baseline = make_mesh_trace(actual_mask_from, '#e74c3c', 'Baseline (Current)', tumor_opacity, step_size, "scene2")
+                if trace_current_baseline:
+                    traces_baseline.append(trace_current_baseline)
+                
+                trace_predicted_baseline = make_mesh_trace(logistic_mask_to, '#ec7063', 'Baseline (Predicted)', tumor_opacity * 0.5, step_size, "scene2")
+                if trace_predicted_baseline:
+                    traces_baseline.append(trace_predicted_baseline)
+                
+                # HYBRID: Current + Predicted
+                trace_current_hybrid = make_mesh_trace(actual_mask_from, '#2ecc71', 'Hybrid (Current)', tumor_opacity, step_size, "scene3")
+                if trace_current_hybrid:
+                    traces_hybrid.append(trace_current_hybrid)
+                
+                trace_predicted_hybrid = make_mesh_trace(hybrid_mask_to, '#58d68d', 'Hybrid (Predicted)', tumor_opacity * 0.5, step_size, "scene3")
+                if trace_predicted_hybrid:
+                    traces_hybrid.append(trace_predicted_hybrid)
             
             # Create three separate figures that share session state for camera
             fig_actual = go.Figure(data=traces_actual)
@@ -342,31 +399,62 @@ else:
             
             with col1:
                 st.markdown("### 🔵 Actual Tumor")
-                # Use on_select to capture camera changes
                 st.plotly_chart(fig_actual, use_container_width=True, 
                                config={'responsive': True, 'modeBarButtonsToRemove': ['lasso2d']}, 
                                key="fig_actual")
-                st.metric("Volume", f"{v_actual:.0f} mm³")
+                st.metric("Current Volume", f"{v_actual_from:.0f} mm³")
+                st.metric("Next Volume", f"{v_actual_to:.0f} mm³")
+                st.metric("Growth", f"{growth_actual:+.0f} mm³ ({growth_actual_pct:+.1f}%)")
             
             with col2:
                 st.markdown("### 🔴 Baseline (Logistic)")
                 st.plotly_chart(fig_baseline, use_container_width=True, 
                                config={'responsive': True, 'modeBarButtonsToRemove': ['lasso2d']}, 
                                key="fig_baseline")
-                mae_baseline = abs(v_actual - v_logistic)
-                st.metric("Volume", f"{v_logistic:.0f} mm³", f"MAE: {mae_baseline:.0f}")
+                st.metric("Predicts", f"{v_logistic_to:.0f} mm³")
+                mae_baseline = abs(v_actual_to - v_logistic_to)
+                st.metric("Error (MAE)", f"{mae_baseline:.0f} mm³")
+                vs_actual = growth_logistic - growth_actual
+                st.metric("Growth Error", f"{vs_actual:+.0f} mm³")
             
             with col3:
                 st.markdown("### 🟢 LSTM Hybrid")
                 st.plotly_chart(fig_hybrid, use_container_width=True, 
                                config={'responsive': True, 'modeBarButtonsToRemove': ['lasso2d']}, 
                                key="fig_hybrid")
-                mae_hybrid = abs(v_actual - v_hybrid)
+                st.metric("Predicts", f"{v_hybrid_to:.0f} mm³")
+                mae_hybrid = abs(v_actual_to - v_hybrid_to)
                 improvement = (mae_baseline - mae_hybrid) / mae_baseline * 100 if mae_baseline > 0 else 0
-                st.metric("Volume", f"{v_hybrid:.0f} mm³", f"MAE: {mae_hybrid:.0f} ({improvement:+.1f}%)")
+                st.metric("Error (MAE)", f"{mae_hybrid:.0f} mm³", f"{improvement:+.1f}% better")
+                vs_actual_hybrid = growth_hybrid - growth_actual
+                st.metric("Growth Error", f"{vs_actual_hybrid:+.0f} mm³")
             
-            # Display info about synchronization
-            st.info("💡 **Camera Sync Note:** The camera positions are synchronized from session state. Rotate the timepoint slider or change patient to see synchronized views of different data.")
+            # Display growth explanation
+            st.markdown("---")
+            st.subheader("Growth Prediction Visualization")
+            
+            growth_info = f"""
+            **Visualization shows growth from Timepoint {timepoint_from_idx} → {timepoint_to_idx}:**
+            
+            **Colors indicate opacity:**
+            - **Bright/Dark** = Current actual tumor (Timepoint {timepoint_from_idx})
+            - **Light/Faded** = Predicted tumor (Timepoint {timepoint_to_idx})
+            
+            **What you see:**
+            - Overlap = Tumor region at both timepoints
+            - Light halo = Predicted growth area
+            - Growth direction visible in 3D space
+            
+            **Growth metrics:**
+            - Actual growth: **{growth_actual_pct:+.1f}%** ({growth_actual:+.0f} mm³)
+            - Baseline predicts: **{growth_logistic_pct:+.1f}%** 
+            - Hybrid predicts: **{growth_hybrid_pct:+.1f}%**
+            
+            **Accuracy:**
+            - Baseline error: {mae_baseline:.0f} mm³
+            - Hybrid error: {mae_hybrid:.0f} mm³ ({improvement:+.1f}% better)
+            """
+            st.info(growth_info)
 
 # ============================================================================
 # TRAJECTORY OVER TIME
