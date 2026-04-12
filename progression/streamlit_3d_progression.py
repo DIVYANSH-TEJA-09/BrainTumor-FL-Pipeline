@@ -28,8 +28,8 @@ st.set_page_config(page_title="3D Tumor Growth Prediction", layout="wide")
 # DATA LOADING
 # ============================================================================
 
-DATA_DIR = Path(__file__).parent.parent / "data" / "raw" / "mu_glioma_post"
-RESULTS_DIR = Path(__file__).parent.parent / "streamlit_data"
+DATA_DIR = Path(__file__).parent / "data" / "raw" / "mu_glioma_post"
+RESULTS_DIR = Path(__file__).parent / "streamlit_data"
 PRED_INDEX_FILE = RESULTS_DIR / "prediction_index.json"
 
 @st.cache_data
