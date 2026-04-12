@@ -1,0 +1,235 @@
+{
+  "n_patients_modeled": 111,
+  "n_rows_modeled": 654,
+  "grade_fit_summary": [
+    {
+      "grade": "HGG",
+      "patients": 89,
+      "mean_points": 5.651685393258427,
+      "fit_r2_mean": 0.6172216879060793,
+      "fit_r2_std": 0.39049375608089726,
+      "fit_mae_mean": 13409.833112288392,
+      "fit_rmse_mean": 17218.97728571374,
+      "r_fit_mean": 0.07261452428893427,
+      "k_fit_mean": 1866574.4239801005
+    },
+    {
+      "grade": "LGG",
+      "patients": 19,
+      "mean_points": 5.947368421052632,
+      "fit_r2_mean": 0.7558027740512897,
+      "fit_r2_std": 0.28757755772247945,
+      "fit_mae_mean": 3733.0763528667135,
+      "fit_rmse_mean": 4984.739161221022,
+      "r_fit_mean": 0.061552214061364297,
+      "k_fit_mean": 2494732.948174175
+    },
+    {
+      "grade": "UNKNOWN",
+      "patients": 3,
+      "mean_points": 12.666666666666666,
+      "fit_r2_mean": 0.6825276724830177,
+      "fit_r2_std": 0.26641060089397073,
+      "fit_mae_mean": 1421.3067279270472,
+      "fit_rmse_mean": 2170.323120574542,
+      "r_fit_mean": 0.0038831864327517774,
+      "k_fit_mean": 335639.90713239415
+    }
+  ],
+  "cv_overall_summary": [
+    {
+      "model": "covariate_logistic",
+      "rmse_mean": 55337.266559846794,
+      "rmse_std": 9420.993157057244,
+      "mae_mean": 36644.43914788184,
+      "mae_std": 6535.613332740854,
+      "r2_mean": 0.04427429915937251,
+      "r2_std": 0.4833549592570625,
+      "n_obs_mean": 130.8
+    },
+    {
+      "model": "grade_median",
+      "rmse_mean": 54444.95603065546,
+      "rmse_std": 7287.811866555207,
+      "mae_mean": 38761.17412131171,
+      "mae_std": 4117.051456160234,
+      "r2_mean": 0.09140107401303539,
+      "r2_std": 0.38000572429530005,
+      "n_obs_mean": 130.8
+    }
+  ],
+  "cv_grade_summary": [
+    {
+      "model": "covariate_logistic",
+      "grade": "HGG",
+      "rmse_mean": 56951.774641947486,
+      "mae_mean": 38269.37355467638,
+      "r2_mean": 0.06262073993926875,
+      "n_obs_mean": 100.6
+    },
+    {
+      "model": "covariate_logistic",
+      "grade": "LGG",
+      "rmse_mean": 49145.6739709587,
+      "mae_mean": 27969.39809021997,
+      "r2_mean": -0.28921776066156635,
+      "n_obs_mean": 22.6
+    },
+    {
+      "model": "covariate_logistic",
+      "grade": "UNKNOWN",
+      "rmse_mean": 16503.31798692444,
+      "mae_mean": 13866.569397463943,
+      "r2_mean": 0.2520553911452776,
+      "n_obs_mean": 19.0
+    },
+    {
+      "model": "grade_median",
+      "grade": "HGG",
+      "rmse_mean": 54373.93168252637,
+      "mae_mean": 39307.93013261978,
+      "r2_mean": 0.166232500962991,
+      "n_obs_mean": 100.6
+    },
+    {
+      "model": "grade_median",
+      "grade": "LGG",
+      "rmse_mean": 47951.04804555998,
+      "mae_mean": 28641.06240555098,
+      "r2_mean": -0.3021954056227287,
+      "n_obs_mean": 22.6
+    },
+    {
+      "model": "grade_median",
+      "grade": "UNKNOWN",
+      "rmse_mean": 34992.73160472013,
+      "mae_mean": 28170.46395918519,
+      "r2_mean": -2.3041165736027485,
+      "n_obs_mean": 19.0
+    }
+  ],
+  "top_covariate_effects_log_r": [
+    {
+      "feature": "age_at_diagnosis",
+      "coef_std": 0.044661236419429685,
+      "effect_percent_per_1sd": 4.567356378021881
+    },
+    {
+      "feature": "idh1_present",
+      "coef_std": -0.022227762606606926,
+      "effect_percent_per_1sd": -2.1982546123039404
+    },
+    {
+      "feature": "idh2_mutation_is_unknown",
+      "coef_std": -0.02177445002849775,
+      "effect_percent_per_1sd": -2.1539098006876034
+    },
+    {
+      "feature": "atrx_present",
+      "coef_std": -0.008133492131017347,
+      "effect_percent_per_1sd": -0.8100504778603246
+    },
+    {
+      "feature": "sex_at_birth_Male",
+      "coef_std": 0.0,
+      "effect_percent_per_1sd": 0.0
+    },
+    {
+      "feature": "is_hgg",
+      "coef_std": 0.0,
+      "effect_percent_per_1sd": 0.0
+    },
+    {
+      "feature": "idh2_present",
+      "coef_std": 0.0,
+      "effect_percent_per_1sd": 0.0
+    },
+    {
+      "feature": "idh1_mutation_is_unknown",
+      "coef_std": -0.0,
+      "effect_percent_per_1sd": 0.0
+    },
+    {
+      "feature": "mgmt_present",
+      "coef_std": 0.0,
+      "effect_percent_per_1sd": 0.0
+    },
+    {
+      "feature": "mgmt_methylation_is_unknown",
+      "coef_std": -0.0,
+      "effect_percent_per_1sd": 0.0
+    },
+    {
+      "feature": "atrx_mutation_is_unknown",
+      "coef_std": -0.0,
+      "effect_percent_per_1sd": 0.0
+    },
+    {
+      "feature": "egfr_present",
+      "coef_std": -0.0,
+      "effect_percent_per_1sd": 0.0
+    }
+  ],
+  "top_covariate_effects_log_k": [
+    {
+      "feature": "idh1_mutation_is_unknown",
+      "coef_std": -0.23980976979367455,
+      "effect_percent_per_1sd": -21.322248431917178
+    },
+    {
+      "feature": "enhancing_fraction",
+      "coef_std": -0.23245394529448463,
+      "effect_percent_per_1sd": -20.74137491673833
+    },
+    {
+      "feature": "edema_fraction",
+      "coef_std": -0.21973563232704088,
+      "effect_percent_per_1sd": -19.726901396380036
+    },
+    {
+      "feature": "age_at_diagnosis",
+      "coef_std": 0.21264070140962968,
+      "effect_percent_per_1sd": 23.6940140543479
+    },
+    {
+      "feature": "cdkn2a_b_present",
+      "coef_std": -0.19103592220882312,
+      "effect_percent_per_1sd": -17.389708782313683
+    },
+    {
+      "feature": "initial_chemo_therapy_Yes",
+      "coef_std": 0.17411792503509976,
+      "effect_percent_per_1sd": 19.019591143970118
+    },
+    {
+      "feature": "idh1_present",
+      "coef_std": -0.1457952987679659,
+      "effect_percent_per_1sd": -13.56653845623833
+    },
+    {
+      "feature": "is_hgg",
+      "coef_std": 0.12901113298824124,
+      "effect_percent_per_1sd": 13.770279012701092
+    },
+    {
+      "feature": "previous_brain_tumor",
+      "coef_std": 0.11184638398606739,
+      "effect_percent_per_1sd": 11.83410523544508
+    },
+    {
+      "feature": "radiation_therapy_Yes",
+      "coef_std": 0.1108098992262676,
+      "effect_percent_per_1sd": 11.718250940719965
+    },
+    {
+      "feature": "egfr_present",
+      "coef_std": 0.11031898630520308,
+      "effect_percent_per_1sd": 11.663420467409512
+    },
+    {
+      "feature": "egfr_amplification_is_unknown",
+      "coef_std": -0.0898924306614724,
+      "effect_percent_per_1sd": -8.597049846789972
+    }
+  ]
+}

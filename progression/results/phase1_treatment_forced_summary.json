@@ -1,0 +1,74 @@
+{
+  "n_patients_evaluated": 60,
+  "n_test_points": 61,
+  "overall_plain": {
+    "mae": 82840.11761123285,
+    "rmse": 253928.6577299178,
+    "r2": -12.13304060060009,
+    "n": 61
+  },
+  "overall_forced": {
+    "mae": 83722.3926016553,
+    "rmse": 263737.0102789483,
+    "r2": -13.167199524090101,
+    "n": 61
+  },
+  "overall_delta_rmse_forced_minus_plain": 9808.352549030504,
+  "overlap_subset": {
+    "n_points": 21,
+    "plain": {
+      "mae": 129688.87058971106,
+      "rmse": 406876.4451173669,
+      "r2": -54.55019546771374,
+      "n": 21
+    },
+    "forced": {
+      "mae": 132786.9377441633,
+      "rmse": 424625.66833618755,
+      "r2": -59.502452795517236,
+      "n": 21
+    },
+    "delta_rmse_forced_minus_plain": 17749.22321882064
+  },
+  "patient_level": {
+    "improved_rmse_count": 32,
+    "worsened_rmse_count": 26,
+    "mean_delta_rmse_forced_minus_plain": 47.04681192719993,
+    "median_delta_rmse_forced_minus_plain": -1.7895326891448349e-06
+  },
+  "by_grade": [
+    {
+      "grade": "HGG",
+      "plain_mae": 90223.53440016652,
+      "plain_rmse": 267363.7646913056,
+      "plain_r2": -13.394940834007535,
+      "forced_mae": 90012.39126459042,
+      "forced_rmse": 277431.86694430833,
+      "forced_r2": -14.499492468948135,
+      "delta_rmse_forced_minus_plain": 10068.102253002755,
+      "n_obs": 55
+    },
+    {
+      "grade": "LGG",
+      "plain_mae": 16413.406940854686,
+      "plain_rmse": 17891.634093857734,
+      "plain_r2": 0.25014932950822877,
+      "forced_mae": 29499.73582897314,
+      "forced_rmse": 43924.12935777997,
+      "forced_r2": -3.519403238164611,
+      "delta_rmse_forced_minus_plain": 26032.49526392224,
+      "n_obs": 5
+    },
+    {
+      "grade": "UNKNOWN",
+      "plain_mae": 8885.747571771954,
+      "plain_rmse": 8885.747571771954,
+      "plain_r2": NaN,
+      "forced_mae": 8885.750003636149,
+      "forced_rmse": 8885.750003636149,
+      "forced_r2": NaN,
+      "delta_rmse_forced_minus_plain": 0.002431864195386879,
+      "n_obs": 1
+    }
+  ]
+}

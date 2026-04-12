@@ -1,0 +1,74 @@
+{
+  "n_patients_evaluated": 60,
+  "n_test_points": 61,
+  "overall_plain": {
+    "mae": 82840.11761123285,
+    "rmse": 253928.6577299178,
+    "r2": -12.13304060060009,
+    "n": 61
+  },
+  "overall_forced_v2": {
+    "mae": 258420.6189946338,
+    "rmse": 1294039.1333671599,
+    "r2": -340.0646220016384,
+    "n": 61
+  },
+  "overall_delta_rmse_forced_minus_plain": 1040110.4756372421,
+  "patient_level": {
+    "improved_rmse_count": 32,
+    "worsened_rmse_count": 26,
+    "mean_delta_rmse_forced_minus_plain": 178991.9618266955,
+    "median_delta_rmse_forced_minus_plain": -1.7895326891448349e-06
+  },
+  "overlap_subset": {
+    "n_points": 0,
+    "plain": {
+      "mae": NaN,
+      "rmse": NaN,
+      "r2": NaN,
+      "n": 0
+    },
+    "forced_v2": {
+      "mae": NaN,
+      "rmse": NaN,
+      "r2": NaN,
+      "n": 0
+    },
+    "delta_rmse_forced_minus_plain": NaN
+  },
+  "by_grade": [
+    {
+      "grade": "HGG",
+      "plain_mae": 90223.53440016652,
+      "plain_rmse": 267363.7646913056,
+      "plain_r2": -13.394940834007535,
+      "forced_v2_mae": 282365.4494166925,
+      "forced_v2_rmse": 1362588.817374708,
+      "forced_v2_r2": -372.8818899901418,
+      "delta_rmse_forced_minus_plain": 1095225.0526834023,
+      "n_obs": 55
+    },
+    {
+      "grade": "LGG",
+      "plain_mae": 16413.406940854686,
+      "plain_rmse": 17891.634093857734,
+      "plain_r2": 0.25014932950822877,
+      "forced_v2_mae": 44910.282515227365,
+      "forced_v2_rmse": 78787.29919092832,
+      "forced_v2_r2": -13.540762973351722,
+      "delta_rmse_forced_minus_plain": 60895.66509707058,
+      "n_obs": 5
+    },
+    {
+      "grade": "UNKNOWN",
+      "plain_mae": 8885.747571771954,
+      "plain_rmse": 8885.747571771954,
+      "plain_r2": NaN,
+      "forced_v2_mae": 9006.628178437724,
+      "forced_v2_rmse": 9006.628178437724,
+      "forced_v2_r2": NaN,
+      "delta_rmse_forced_minus_plain": 120.88060666577076,
+      "n_obs": 1
+    }
+  ]
+}
