@@ -28,9 +28,22 @@ st.set_page_config(page_title="3D Tumor Growth Prediction", layout="wide")
 # DATA LOADING
 # ============================================================================
 
-DATA_DIR = Path(__file__).parent / "data" / "raw" / "mu_glioma_post"
-RESULTS_DIR = Path(__file__).parent / "streamlit_data"
+# Ensure we're using the correct directory - get absolute paths
+APP_DIR = Path(__file__).resolve().parent
+DATA_DIR = APP_DIR / "data" / "raw" / "mu_glioma_post"
+RESULTS_DIR = APP_DIR / "streamlit_data"
 PRED_INDEX_FILE = RESULTS_DIR / "prediction_index.json"
+
+# Debug output
+if not PRED_INDEX_FILE.exists():
+    import sys
+    print(f"DEBUG: App directory: {APP_DIR}", file=sys.stderr)
+    print(f"DEBUG: Looking for: {PRED_INDEX_FILE}", file=sys.stderr)
+    print(f"DEBUG: Exists: {PRED_INDEX_FILE.exists()}", file=sys.stderr)
+    if RESULTS_DIR.exists():
+        print(f"DEBUG: Files in {RESULTS_DIR}:", file=sys.stderr)
+        for f in list(RESULTS_DIR.glob("*"))[:5]:
+            print(f"       - {f.name}", file=sys.stderr)
 
 @st.cache_data
 def load_prediction_index():
@@ -38,6 +51,19 @@ def load_prediction_index():
     if PRED_INDEX_FILE.exists():
         with open(PRED_INDEX_FILE) as f:
             return json.load(f)
+    
+    # Debug: show what paths we're looking for
+    st.error(f"""
+    Prediction data not found. 
+    
+    Looking for: {PRED_INDEX_FILE.resolve()}
+    
+    Expected location: {RESULTS_DIR.resolve()}
+    
+    Files in that directory: {list(RESULTS_DIR.glob('*')) if RESULTS_DIR.exists() else 'Directory does not exist'}
+    
+    Please run: python src/08_generate_viz_data.py
+    """)
     return None
 
 @st.cache_data
