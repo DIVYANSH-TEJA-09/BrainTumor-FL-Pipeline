@@ -213,7 +213,30 @@ tumor_opacity = st.sidebar.slider("Tumor Opacity", 0.2, 1.0, 0.7)
 step_size = st.sidebar.select_slider("Mesh Quality", options=[1, 2, 3, 4], value=2)
 
 st.sidebar.markdown("---")
-st.sidebar.info("💡 **Synchronized Camera:** Rotate/zoom any panel and all three move together for perfect comparison!")
+st.sidebar.subheader("Manual Camera Controls")
+st.sidebar.info("Use these sliders to rotate the view. All three panels will rotate together.")
+
+# Camera rotation controls
+cam_angle_x = st.sidebar.slider("Camera Pitch (X-axis rotation)", -180, 180, 45, 5)
+cam_angle_y = st.sidebar.slider("Camera Yaw (Y-axis rotation)", -180, 180, 45, 5)
+cam_distance = st.sidebar.slider("Camera Distance (Zoom)", 0.5, 3.0, 1.6, 0.1)
+
+# Convert angles to camera eye position
+import math
+rad_x = math.radians(cam_angle_x)
+rad_y = math.radians(cam_angle_y)
+
+# Calculate camera position based on angles
+cam_x = cam_distance * math.sin(rad_y) * math.cos(rad_x)
+cam_y = cam_distance * math.sin(rad_x)
+cam_z = cam_distance * math.cos(rad_y) * math.cos(rad_x)
+
+# Store in session state
+st.session_state.sync_camera = dict(
+    eye=dict(x=cam_x, y=cam_y, z=cam_z),
+    up=dict(x=0, y=1, z=0),
+    center=dict(x=0, y=0, z=0)
+)
 
 # ============================================================================
 # 3D VISUALIZATION - THREE PANELS WITH SYNCHRONIZED CAMERA
@@ -280,28 +303,12 @@ else:
             if trace_hybrid:
                 traces_hybrid.append(trace_hybrid)
             
-            # Create subplots with 3D scenes
-            fig = make_subplots(
-                rows=1, cols=3,
-                specs=[[{'type': 'scatter3d'}, {'type': 'scatter3d'}, {'type': 'scatter3d'}]],
-                subplot_titles=("🔵 Actual Tumor", "🔴 Baseline (Logistic)", "🟢 LSTM Hybrid"),
-                horizontal_spacing=0.05
-            )
+            # Create three separate figures that share session state for camera
+            fig_actual = go.Figure(data=traces_actual)
+            fig_baseline = go.Figure(data=traces_baseline)
+            fig_hybrid = go.Figure(data=traces_hybrid)
             
-            # Add traces to each subplot
-            for trace in traces_actual:
-                trace.scene = "scene1"
-                fig.add_trace(trace, row=1, col=1)
-            
-            for trace in traces_baseline:
-                trace.scene = "scene2"
-                fig.add_trace(trace, row=1, col=2)
-            
-            for trace in traces_hybrid:
-                trace.scene = "scene3"
-                fig.add_trace(trace, row=1, col=3)
-            
-            # Update all scenes with synchronized camera
+            # Shared camera settings
             camera_settings = dict(
                 eye=st.session_state.sync_camera['eye'],
                 up=st.session_state.sync_camera['up'],
@@ -317,36 +324,49 @@ else:
                 aspectmode="data",
             )
             
-            fig.update_layout(
-                scene1=scene_dict,
-                scene2=scene_dict,
-                scene3=scene_dict,
-                height=600,
-                margin=dict(l=0, r=0, t=50, b=0),
-                paper_bgcolor="rgb(10, 10, 20)",
-                font=dict(color="white"),
-                showlegend=False,
-                hovermode='closest',
-            )
+            # Apply same scene layout to all three figures
+            for fig, scene_name in [(fig_actual, "scene1"), (fig_baseline, "scene2"), (fig_hybrid, "scene3")]:
+                layout_dict = {
+                    scene_name: scene_dict,
+                    "margin": dict(l=0, r=0, t=30, b=0),
+                    "height": 600,
+                    "paper_bgcolor": "rgb(10, 10, 20)",
+                    "font": dict(color="white"),
+                    "title": dict(text="", font=dict(size=1)),  # Minimal title
+                    "showlegend": False,
+                }
+                fig.update_layout(**layout_dict)
             
-            # Display the synchronized figure
-            st.plotly_chart(fig, use_container_width=True, config={'responsive': True}, key="fig_3panel")
-            
-            # Display metrics below the visualization
-            st.markdown("---")
+            # Display three figures in columns
             col1, col2, col3 = st.columns(3)
             
             with col1:
-                st.metric("🔵 Actual Volume", f"{v_actual:.0f} mm³")
+                st.markdown("### 🔵 Actual Tumor")
+                # Use on_select to capture camera changes
+                st.plotly_chart(fig_actual, use_container_width=True, 
+                               config={'responsive': True, 'modeBarButtonsToRemove': ['lasso2d']}, 
+                               key="fig_actual")
+                st.metric("Volume", f"{v_actual:.0f} mm³")
             
             with col2:
+                st.markdown("### 🔴 Baseline (Logistic)")
+                st.plotly_chart(fig_baseline, use_container_width=True, 
+                               config={'responsive': True, 'modeBarButtonsToRemove': ['lasso2d']}, 
+                               key="fig_baseline")
                 mae_baseline = abs(v_actual - v_logistic)
-                st.metric("🔴 Baseline Volume", f"{v_logistic:.0f} mm³", f"MAE: {mae_baseline:.0f}")
+                st.metric("Volume", f"{v_logistic:.0f} mm³", f"MAE: {mae_baseline:.0f}")
             
             with col3:
+                st.markdown("### 🟢 LSTM Hybrid")
+                st.plotly_chart(fig_hybrid, use_container_width=True, 
+                               config={'responsive': True, 'modeBarButtonsToRemove': ['lasso2d']}, 
+                               key="fig_hybrid")
                 mae_hybrid = abs(v_actual - v_hybrid)
                 improvement = (mae_baseline - mae_hybrid) / mae_baseline * 100 if mae_baseline > 0 else 0
-                st.metric("🟢 Hybrid Volume", f"{v_hybrid:.0f} mm³", f"MAE: {mae_hybrid:.0f} ({improvement:+.1f}%)")
+                st.metric("Volume", f"{v_hybrid:.0f} mm³", f"MAE: {mae_hybrid:.0f} ({improvement:+.1f}%)")
+            
+            # Display info about synchronization
+            st.info("💡 **Camera Sync Note:** The camera positions are synchronized from session state. Rotate the timepoint slider or change patient to see synchronized views of different data.")
 
 # ============================================================================
 # TRAJECTORY OVER TIME
