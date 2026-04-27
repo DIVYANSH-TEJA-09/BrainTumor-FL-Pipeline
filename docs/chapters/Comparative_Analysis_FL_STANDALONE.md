@@ -423,7 +423,7 @@ Conclusion: Reproduces literature results + adds fairness analysis
 ```
 Prior QPSO Work:
   - Sun et al. (2004, 2012): PSO theory
-  - Edla & Indhumathi (2025): QPSO on MNIST IID data
+  - Edla (2025): QPSO on MNIST IID data
   
 Our Contribution - QPSO-FL:
   - First application to federated learning on non-IID healthcare data

@@ -1,7 +1,7 @@
 # Comprehensive Research Analysis: QPSO-FL for Privacy-Preserving Brain Tumor Classification
 ## Federated Learning with Quantum Particle Swarm Optimization Under Non-IID Medical Data
 
-**Authors:** Divyansh Teja Edla, Dr. L. K. Indhumathi  
+**Author:** Divyansh Teja Edla  
 **Institution:** Department of Computer Science, Matrusri Engineering College  
 **Prior Work:** *"Enhancing Federated Learning with Quantum-Inspired PSO: An IID MNIST Study"* (2025)
 
@@ -213,7 +213,7 @@ For each FL round:
 ## 7. Aggregation Approach 4: Layer-by-Layer QPSO (The Contribution)
 
 ### The Key Insight
-The original MNIST QPSO implementation (Edla & Indhumathi, 2025) that achieved remarkable performance (QPSO: 81.5% vs FedAvg: 41.2%) used a fundamentally different approach: **layer-by-layer optimization with validation-loss fitness evaluation**.
+The original MNIST QPSO implementation (Edla, 2025) that achieved remarkable performance (QPSO: 81.5% vs FedAvg: 41.2%) used a fundamentally different approach: **layer-by-layer optimization with validation-loss fitness evaluation**.
 
 ### Algorithm (Faithfully Ported from MNIST Reference)
 

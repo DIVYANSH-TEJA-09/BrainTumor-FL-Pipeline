@@ -4,7 +4,7 @@
 
 **Project Title:** Privacy-Preserving Brain Tumor Classification, Segmentation & Progression Forecasting using Federated Learning with QPSO Optimization  
 **Team Size:** 3 Members | **Platform:** Kaggle (Tesla T4 / P100 GPUs) | **Framework:** PyTorch + MONAI  
-**Prior Publication:** *"Enhancing Federated Learning with Quantum-Inspired PSO: An IID MNIST Study"* — Edla & Indhumathi, 2025
+**Prior Publication:** *"Enhancing Federated Learning with Quantum-Inspired PSO: An IID MNIST Study"* — Edla, 2025
 
 ---
 
@@ -985,7 +985,7 @@ gantt
 | "Tumor Time Travel: Longitudinal Volumetric Forecasting" | Medical Image Analysis | LSTM vs Mathematical models for prediction |
 
 ### Prior Work Foundation
-> *Edla & Indhumathi, 2025: "Enhancing Federated Learning with Quantum-Inspired PSO: An IID MNIST Study"*
+> *Edla, 2025: "Enhancing Federated Learning with Quantum-Inspired PSO: An IID MNIST Study"*
 > — Demonstrated QPSO improved FedAvg from 41% → 81% on IID data. This project extends to the harder **Non-IID medical imaging** setting.
 
 ### Key References

@@ -36,7 +36,7 @@
 
 ## 9.5 QPSO-FL Application Papers
 
-[14] Edla, D. T., & Indhumathi, L. K. (2025). Enhancing federated learning with quantum-inspired PSO: An IID MNIST study. *In preparation* (Prior work cited in project research documentation).
+[14] Edla, D. T. (2025). Enhancing federated learning with quantum-inspired PSO: An IID MNIST study. *In preparation* (Prior work cited in project research documentation).
 
 ## 9.6 Brain Tumor Segmentation and Classification
 
@@ -172,7 +172,7 @@
 
 ## 9.20 Project Documentation and Source Code
 
-[67] Edla, D. T. & Indhumathi, L. K. (2025). FL-QPSO-FedAvg: Privacy-Preserving Brain Tumor Classification with Federated Learning and Quantum Particle Swarm Optimization. GitHub Repository: https://github.com/Major_Project/FL_QPSO_FedAvg
+[67] Edla, D. T. (2025). FL-QPSO-FedAvg: Privacy-Preserving Brain Tumor Classification with Federated Learning and Quantum Particle Swarm Optimization. GitHub Repository: https://github.com/Major_Project/FL_QPSO_FedAvg
 
 [68] Edla, D. T. (2025). Federated Learning Research Documentation. Project Documentation File: `federated_learning/docs/RESEARCH_DOCUMENTATION.md`
 

@@ -46,7 +46,7 @@ graph LR
 | **Classification** | Privacy-preserving tumor typing via FL | Accuracy: **99.29%** |
 | **Progression** | 6-month growth prediction + RANO alerts | LSTM + Math models |
 
-> **Prior Work:** Extends our published research *"Enhancing Federated Learning with Quantum-Inspired PSO: An IID MNIST Study"* (Edla & Indhumathi, 2025) to the harder Non-IID medical imaging setting.
+> **Prior Work:** Extends our published research *"Enhancing Federated Learning with Quantum-Inspired PSO: An IID MNIST Study"* (Edla, 2025) to the harder Non-IID medical imaging setting.
 
 ---
 
@@ -275,7 +275,7 @@ FL_QPSO_FedAvg/
 ## Research & Publications
 
 ### Prior Publication
-> Edla, D.T. & Indhumathi, L.K. (2025). *"Enhancing Federated Learning with Quantum-Inspired Particle Swarm Optimization: An IID MNIST Study."* Matrusri Engineering College.
+> Edla, D.T. (2025). *"Enhancing Federated Learning with Quantum-Inspired Particle Swarm Optimization: An IID MNIST Study."* Matrusri Engineering College.
 
 ### Target Venues
 - **IEEE Transactions on Medical Imaging**
@@ -309,7 +309,7 @@ If you use this work, please cite:
 ```bibtex
 @software{edla2025flqpso,
   title     = {FL-QPSO: Privacy-Preserving Brain Tumor Management System},
-  author    = {Edla, Divyansh Teja and Indhumathi, L. K.},
+  author    = {Edla, Divyansh Teja},
   year      = {2025},
   institution = {Matrusri Engineering College},
   url       = {https://github.com/DIVYANSH-TEJA-09/BrainTumor-FL-Pipeline}

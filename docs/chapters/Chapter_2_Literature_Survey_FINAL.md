@@ -383,7 +383,7 @@ This project sits at the intersection of three research areas:
 12. **Bonawitz et al. (2017)** - "Towards Federated Learning at Scale"  
     *MLSys 2019* — Secure aggregation protocol
 
-13. **Edla & Indhumathi (2025)** - "Enhancing Federated Learning with Quantum-Inspired PSO: An IID MNIST Study"  
+13. **Edla (2025)** - "Enhancing Federated Learning with Quantum-Inspired PSO: An IID MNIST Study"  
     *Matrusri Engineering College* — Prior work on QPSO for FL
 
 ---

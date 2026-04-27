@@ -1,7 +1,7 @@
 # FL-QPSO-FedAvg Documentation: Complete Index
 
 **Project:** Privacy-Preserving Brain Tumor Classification via Federated Learning with Quantum Particle Swarm Optimization  
-**Authors:** Divyansh Teja Edla, Dr. L. K. Indhumathi  
+**Author:** Divyansh Teja Edla  
 **Institution:** Department of Computer Science, Matrusri Engineering College  
 **Documentation Version:** 1.0 (Final)  
 **Total Pages:** ~120 pages across 9 chapters + 1 standalone analysis  
@@ -380,7 +380,7 @@ All figures are embedded in their respective chapters (Ch. 4 for architecture, C
 ### **For Citing This Work**
 ```
 @thesis{Edla2026,
-  author={Edla, Divyansh Teja and Indhumathi, L. K.},
+  author={Edla, Divyansh Teja},
   title={Privacy-Preserving Brain Tumor Classification via Federated Learning with Quantum Particle Swarm Optimization},
   school={Matrusri Engineering College},
   year={2026},
@@ -422,7 +422,7 @@ All figures are embedded in their respective chapters (Ch. 4 for architecture, C
 For questions about this documentation:
 - **Technical Issues:** Refer to `federated_learning/docs/FL_QPSO_COMPLETE_GUIDE.md` in the repository
 - **Project Repository:** https://github.com/Major_Project/FL_QPSO_FedAvg
-- **Authors:** Divyansh Teja Edla, Dr. L. K. Indhumathi (Matrusri Engineering College)
+- **Author:** Divyansh Teja Edla (Matrusri Engineering College)
 
 ---
 

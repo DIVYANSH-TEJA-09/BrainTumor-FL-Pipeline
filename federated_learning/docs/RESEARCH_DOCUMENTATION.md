@@ -1,7 +1,7 @@
 # FL-QPSO: Complete Research Documentation
 ## Privacy-Preserving Brain Tumor Classification via Federated Learning with Quantum Particle Swarm Optimization
 
-**Authors:** Divyansh Teja Edla, Dr. L. K. Indhumathi  
+**Author:** Divyansh Teja Edla  
 **Institution:** Department of Computer Science, Matrusri Engineering College  
 **Prior Work:** *"Enhancing Federated Learning with Quantum-Inspired PSO: An IID MNIST Study"* (2025)
 
@@ -360,7 +360,7 @@ Early rounds of QPSO training produced NaN values because:
 | 5 | Zhao et al., 2018 | Analysis of non-IID problem in FL |
 | 6 | Sheller et al., 2020 | FL for brain tumor segmentation (BraTS) |
 | 7 | Rieke et al., 2020 | FL in healthcare — survey |
-| 8 | Edla & Indhumathi, 2025 | Prior QPSO-FL on IID MNIST |
+| 8 | Edla, 2025 | Prior QPSO-FL on IID MNIST |
 
 ---
 
@@ -369,7 +369,7 @@ Early rounds of QPSO training produced NaN values because:
 ```bibtex
 @software{edla2025flqpso,
   title     = {FL-QPSO: Privacy-Preserving Brain Tumor Classification},
-  author    = {Edla, Divyansh Teja and Indhumathi, L. K.},
+  author    = {Edla, Divyansh Teja},
   year      = {2025},
   institution = {Matrusri Engineering College},
   url       = {https://github.com/DIVYANSH-TEJA-09/BrainTumor-FL-Pipeline}
