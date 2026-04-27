@@ -1,0 +1,62 @@
+flowchart TB
+    subgraph Actors
+        H1[("🏥 Hospital A\n(Radiologist)")]
+        H2[("🏥 Hospital B\n(Radiologist)")]
+        H3[("🏥 Hospital C\n(Radiologist)")]
+        Admin[("👤 System Admin")]
+    end
+
+    subgraph "Module 1: Federated Classification"
+        UC1["Upload MRI Scans"]
+        UC2["Train Local Model"]
+        UC3["Send Model Weights"]
+        UC4["Receive Global Model"]
+        UC5["View Classification Result"]
+        UC6["Select Aggregation Strategy"]
+        UC7["Aggregate Client Weights"]
+        UC8["Evaluate Global Accuracy"]
+        UC9["Monitor Fairness Metrics"]
+    end
+
+    subgraph "Module 2: Segmentation"
+        UC10["Load 3D MRI Volume"]
+        UC11["Run 3D Segmentation"]
+        UC12["View Tumor Regions\n(WT, TC, ET)"]
+    end
+
+    subgraph "Module 3: Progression"
+        UC13["Input Historical Scans"]
+        UC14["Fit Growth Models"]
+        UC15["Run LSTM Hybrid Forecast"]
+        UC16["View 6-Month Prediction"]
+    end
+
+    H1 --> UC1
+    H2 --> UC1
+    H3 --> UC1
+    H1 --> UC2
+    H2 --> UC2
+    H3 --> UC2
+    H1 --> UC3
+    H2 --> UC3
+    H3 --> UC3
+    H1 --> UC4
+    H2 --> UC4
+    H3 --> UC4
+    H1 --> UC5
+    H2 --> UC5
+    H3 --> UC5
+
+    Admin --> UC6
+    Admin --> UC7
+    Admin --> UC8
+    Admin --> UC9
+
+    H1 --> UC10
+    H1 --> UC11
+    H1 --> UC12
+
+    H1 --> UC13
+    H1 --> UC14
+    H1 --> UC15
+    H1 --> UC16

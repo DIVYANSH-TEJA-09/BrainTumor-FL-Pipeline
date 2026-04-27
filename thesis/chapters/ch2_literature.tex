@@ -1,0 +1,451 @@
+\chapter{Literature Survey}
+\label{ch:2}
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{10_federated_vs_centralized.png}
+\caption{Federated vs Centralized Learning Comparison}
+\label{fig:10_federated_vs_centralized}
+\end{figure}
+
+
+\section{2.1 Introduction to Literature Context}
+Developing a privacy-preserving brain tumor classification system requires understanding three interconnected research domains:
+
+\begin{enumerate}
+  \item **Federated Learning (FL):** Algorithms, optimization strategies, and non-IID challenges
+  \item **Medical Image Analysis:** Brain tumor classification, segmentation, and progression forecasting
+  \item **Privacy and Security in Healthcare:** Regulatory frameworks and technical implementations
+\end{enumerate}
+
+This chapter synthesizes foundational work, identifies research gaps, and positions this project's contributions within the broader context.
+
+
+\section{2.2 Federated Learning: Fundamentals and Evolution}
+
+\subsection{2.2.1 Foundational Algorithm: Federated Averaging (FedAvg)}
+McMahan et al. (2017) introduced Federated Averaging, the foundational algorithm that revolutionized distributed learning. In their seminal paper, they demonstrated that training a global model across multiple decentralized devices (clients) through weighted averaging could achieve comparable accuracy to centralized training while preserving privacy.
+
+Key Contributions:
+
+\begin{itemize}
+  \item **Algorithm:** Simple weighted averaging of client-side model weights by dataset size
+  \item **Convergence Proof:** Theoretical convergence guarantees under convex loss functions
+  \item **Practical Impact:** Enabled large-scale distributed training on mobile devices, IoT sensors, and healthcare institutions
+\end{itemize}
+
+Formula:
+
+w\_global\^(t+1) = Σ (n\_k / N) × w\_k\^(t)
+
+where n\_k is Client k's dataset size, N is total data across all clients.
+
+Limitations Identified: FedAvg performs poorly when client data is non-IID (heterogeneous class distributions, different data qualities across institutions).
+
+
+\subsection{2.2.2 Non-IID Challenge and Proximal Solutions}
+Li et al. (2020) extended FedAvg by introducing Federated Proximal (FedProx), addressing the core challenge of data heterogeneity in federated settings.
+
+Problem: When clients have different data distributions (non-IID), naively averaging weights from diverse clients can result in:
+
+\begin{itemize}
+  \item Rapid divergence of client models from the global optimum
+  \item Slower convergence
+  \item Bias toward clients with larger datasets
+\end{itemize}
+
+FedProx Solution:
+
+\begin{itemize}
+  \item Added a **proximal regularization term** to local client training loss
+  \item Prevents clients from drifting too far from the global model during local updates
+  \item Mathematically: `loss\_local = loss\_data + (μ/2) × ||w\_local - w\_global||²`
+\end{itemize}
+
+Clinical Relevance: In multi-hospital settings where each hospital has different patient populations (e.g., different tumor incidence rates, imaging protocols), FedProx helps maintain model agreement while allowing local adaptation.
+
+Limitation: Proximal term can be too restrictive, preventing clients from learning local-specific patterns (explored in this project through fairness analysis).
+
+
+\subsection{2.2.3 Variance Reduction: SCAFFOLD}
+Karimireddy et al. (2020) introduced SCAFFOLD (Stochastic Controlled Averaging for Federated Learning), addressing client-drift through variance reduction:
+
+\begin{itemize}
+  \item Maintains client control variates to track divergence from global model
+  \item Reduces impact of heterogeneous data on convergence
+  \item Provides improved convergence guarantees for non-convex functions (relevant for neural networks)
+\end{itemize}
+
+Not used in this project but important context: SCAFFOLD demonstrates that sophisticated variance-based methods can improve FL robustness.
+
+
+\subsection{2.2.4 Non-IID Analysis and Characterization}
+Zhao et al. (2018) conducted foundational analysis of non-IID data in federated settings, categorizing heterogeneity types:
+
+This Project: Implements both natural heterogeneity (Setup 1) and moderate label skew (Setup 2) based on Zhao et al.'s taxonomy.
+
+
+\section{2.3 Quantum-Inspired Optimization: QPSO}
+
+\subsection{2.3.1 Classical Particle Swarm Optimization (PSO)}
+Kennedy \& Eberhart (1995) introduced Particle Swarm Optimization, a bio-inspired optimization algorithm mimicking bird flocking behavior. Each "particle" represents a potential solution, iteratively improving through:
+
+\begin{itemize}
+  \item Personal best memory (pbest): best position each particle has found
+  \item Global best memory (gbest): best position found by any particle
+  \item Velocity update rules balancing exploration and exploitation
+\end{itemize}
+
+PSO Formula:
+
+v(t+1) = w×v(t) + c1×r1×(pbest - x(t)) + c2×r2×(gbest - x(t))
+x(t+1) = x(t) + v(t+1)
+
+
+\subsection{2.3.2 Quantum-Behaved PSO (QPSO)}
+Sun et al. (2004, 2012) introduced Quantum-Behaved Particle Swarm Optimization, replacing classical velocity dynamics with quantum mechanics-inspired position updates:
+
+Key Innovation: Instead of classical velocity, particles occupy quantum states with probabilistic position distributions. Position update:
+
+x\_new = p ± β × |mbest - x| × ln(1/u)
+
+where:
+
+\begin{itemize}
+  \item `p` is the attraction point (weighted combination of pbest and gbest)
+  \item `β` is the contraction-expansion coefficient (exploration vs. exploitation)
+  \item `u ∈ [0,1]` is a random variable providing stochasticity
+  \item `mbest` is the mean of all personal bests
+\end{itemize}
+
+Advantages Over Classical PSO:
+
+\begin{itemize}
+  \item **Faster convergence:** Quantum uncertainty principle enables more efficient exploration
+  \item **Better escape from local optima:** Stochastic quantum jumps explore solution space more thoroughly
+  \item **Fewer parameters:** Only `β` and `u` range need tuning vs. 3+ parameters in classical PSO
+\end{itemize}
+
+Application to Federated Learning (Novel in this Project):
+
+\begin{itemize}
+  \item Treat each client's model weights as a "particle" in optimization space
+  \item Track personal best (best weights client has produced) and global best (best weights overall)
+  \item Use QPSO updates to aggregate weights, balancing stability (exploitation) with exploration of better solutions
+\end{itemize}
+
+
+\section{2.4 Brain Tumor Classification and Detection}
+
+\subsection{2.4.1 Traditional CNN Approaches}
+Krizhevsky et al. (2012) introduced AlexNet, demonstrating deep convolutional neural networks' superiority on image classification tasks. For medical imaging:
+
+ResNet Architecture (He et al., 2015):
+
+\begin{itemize}
+  \item Introduced residual connections enabling training of very deep networks
+  \item ResNet-18: 18 layers, \~11.2M parameters
+  \item ImageNet pretraining provides strong feature initialization for downstream tasks like brain tumor classification
+\end{itemize}
+
+In this Project: ResNet-18 serves as the classification backbone across all 3 federated clients, fine-tuned for 3-class (Glioma, Meningioma, Pituitary) and 4-class problems.
+
+
+\subsection{2.4.2 Transfer Learning for Medical Imaging}
+Tan \& Le (2019) systematized transfer learning, showing pre-trained features from large-scale datasets (ImageNet) transfer effectively to specialized medical domains with limited data.
+
+Findings Relevant to Our Work:
+
+\begin{itemize}
+  \item Pre-trained ImageNet weights significantly accelerate medical image model training
+  \item Fine-tuning on task-specific data improves performance
+  \item Works well even with moderate dataset sizes (9,000+ images as in this project)
+\end{itemize}
+
+
+\subsection{2.4.3 Brain Tumor Classification Datasets}
+Masoud Brain Tumor MRI (Kaggle Dataset - nickparvar):
+
+\begin{itemize}
+  \item \~7,000 2D MRI slices
+  \item Classes: Glioma, Meningioma, No Tumor, Pituitary
+  \item Splits available: training/testing
+  \item Used in Client 1 and Client 3 in federated setup
+\end{itemize}
+
+BRISC 2025 (Brain Tumor Image Segmentation Challenge):
+
+\begin{itemize}
+  \item \~4,600 multimodal 3D brain MRI volumes
+  \item Standardized preprocessing and evaluation metrics
+  \item Used in Client 2 federated setup
+\end{itemize}
+
+Masoud + BRISC Combination:
+
+\begin{itemize}
+  \item Provides natural data heterogeneity: different imaging protocols, scanner types, patient populations
+  \item Simulates realistic multi-hospital scenario without explicit dataset redistribution
+\end{itemize}
+
+
+\section{2.5 Brain Tumor Segmentation}
+
+\subsection{2.5.1 U-Net: Foundational Architecture}
+Ronneberger et al. (2015) introduced U-Net, the seminal architecture for biomedical image segmentation:
+
+Architecture Features:
+
+\begin{itemize}
+  \item **Encoder-Decoder Structure:** Downsampling path captures context, upsampling path enables precise localization
+  \item **Skip Connections:** Concatenate encoder features to decoder, preserving fine-grained spatial information
+  \item **Efficiency:** Requires relatively few training samples compared to fully convolutional networks
+\end{itemize}
+
+Extension to 3D: MONAI framework implements 3D variants for volumetric medical imaging.
+
+
+\subsection{2.5.2 Attention Mechanisms in U-Net}
+Oktay et al. (2018) enhanced U-Net with Attention Gates (AGs), enabling the network to automatically learn which spatial regions are important:
+
+Attention Gate Mechanism:
+
+\begin{itemize}
+  \item Suppresses irrelevant regions (healthy tissue)
+  \item Focuses network capacity on target regions (tumor)
+  \item Mathematically: `attention\_coeff = sigmoid(transform(encoder\_features, decoder\_features))`
+  \item Applied channel-wise, reducing computational overhead
+\end{itemize}
+
+In this Project: 3D Attention U-Net processes 4-channel MRI inputs (T1, T1ce, T2, FLAIR) to segment 3 tumor sub-regions (WT, TC, ET).
+
+
+\subsection{2.5.3 BraTS Challenge and Benchmarks}
+Menze et al. (2014) → Baid et al. (2021): Multi-year Brain Tumor Segmentation Challenge establishing benchmarks and best practices:
+
+This Project: Uses BraTS 2021 for Module 2 (Segmentation), achieving Mean Dice 0.76 against benchmark standards (\~0.75-0.78).
+
+
+\section{2.6 Tumor Progression and Growth Forecasting}
+
+\subsection{2.6.1 Mathematical Growth Models}
+Classical mathematical models from population biology have been adapted for tumor growth:
+
+Logistic Growth Model (Verhulst, 1838 → Adapted for Tumors):
+
+V(t) = K / (1 + ((K - V0)/V0) × exp(-r×t))
+
+\begin{itemize}
+  \item `K`: Carrying capacity (maximum sustainable tumor volume)
+  \item `V0`: Initial tumor volume
+  \item `r`: Intrinsic growth rate
+  \item Produces S-shaped curve with growth saturation
+\end{itemize}
+
+Gompertz Growth Model (Gompertz, 1825 → Adapted for Tumors):
+
+V(t) = V0 × exp((a/b) × (1 - exp(-b×t)))
+
+\begin{itemize}
+  \item More realistic for solid tumors (deceleration over time)
+  \item Biologically motivated: growth rate decreases as tumor size increases
+\end{itemize}
+
+Clinical Application: Different tumor types show different growth patterns:
+
+\begin{itemize}
+  \item **HGG (High-Grade Glioma):** Aggressive, exponential-like growth
+  \item **LGG (Low-Grade Glioma):** Slow, often logistic or gompertz patterns
+\end{itemize}
+
+
+\subsection{2.6.2 LSTM for Time-Series Medical Data}
+Hochreiter \& Schmidhuber (1997): Introduced Long Short-Term Memory networks, capable of learning long-range dependencies in sequential data.
+
+LSTM Architecture:
+
+\begin{itemize}
+  \item **Input Gate:** Controls information flow into cell state
+  \item **Forget Gate:** Selectively retains or discards past information
+  \item **Output Gate:** Controls what cell state information is output
+\end{itemize}
+
+Medical Time-Series Applications:
+
+\begin{itemize}
+  \item Patient vital sign monitoring
+  \item Disease progression prediction
+  \item Treatment response forecasting
+\end{itemize}
+
+
+\subsection{2.6.3 Hybrid Approaches: Mathematical + Deep Learning}
+Recent Trend in Medical AI (Rajkomar et al., 2018):
+
+\begin{itemize}
+  \item Combine interpretable mathematical models with flexible deep learning
+  \item Approach: Hybrid = Math\_baseline + LSTM\_correction
+  \item Allows model interpretability (math component) + adaptability (LSTM)
+\end{itemize}
+
+In this Project:
+
+V\_hybrid(t) = V\_logistic(t) + LSTM\_correction(residual\_sequence)
+
+Achieves 7.88\% MAE improvement for HGG patients by learning where logistic model fails.
+
+
+\section{2.7 Privacy and Security in Healthcare AI}
+
+\subsection{2.7.1 Regulatory Framework}
+HIPAA (Health Insurance Portability and Accountability Act, USA):
+
+\begin{itemize}
+  \item Requires de-identification or aggregate statistical analysis for research
+  \item Prohibits direct patient data sharing without explicit consent
+\end{itemize}
+
+GDPR (General Data Protection Regulation, EU):
+
+\begin{itemize}
+  \item Right to deletion ("right to be forgotten")
+  \item Data minimization principle
+  \item Data processing transparency
+\end{itemize}
+
+Challenge: Traditional federated learning still requires hospitals to trust a central server. With GDPR, even aggregated insights may require consent.
+
+
+\subsection{2.7.2 Differential Privacy in FL}
+Dwork et al. (2006): Introduced formal definition of Differential Privacy:
+
+Definition: An algorithm is ε-differentially private if removing one patient's data changes output probability by at most e\^ε.
+
+Application to FL:
+
+\begin{itemize}
+  \item Add Laplace or Gaussian noise to client gradients before sending to server
+  \item Provides formal privacy guarantees independent of computational power of adversary
+  \item Trade-off: privacy vs. model accuracy
+\end{itemize}
+
+Not Implemented in This Project: Module 1 implements structural privacy (FL) but not formal DP-epsilon guarantees. Recommended future work.
+
+
+\subsection{2.7.3 Secure Aggregation}
+Bonawitz et al. (2017): Introduced secure aggregation protocol where server cannot decode individual client updates, only aggregated result.
+
+Key Idea:
+
+\begin{itemize}
+  \item Client weights encrypted before transmission
+  \item Server performs encrypted aggregation (uses homomorphic encryption properties)
+  \item Only aggregated result decrypted
+\end{itemize}
+
+Implementation Complexity: Trade-off with computational overhead. Not implemented in this project (synchronous aggregation without encryption).
+
+
+\section{2.8 Research Gaps and Project Positioning}
+
+\subsection{2.8.1 Identified Gaps}
+
+\subsection{2.8.2 Positioning}
+This project sits at the intersection of three research areas:
+
+Novelty:
+
+\begin{itemize}
+  \item First application of QPSO to federated medical imaging
+  \item Fairness-aware aggregation strategy proven statistically superior (p = 2.91 × 10⁻²²) in non-IID settings
+  \item Integrated framework allowing multi-hospital brain tumor analysis with privacy guarantees
+\end{itemize}
+
+
+\section{2.9 Chapter Summary}
+
+\section{2.10 Key References}
+Literature Cited:
+
+\begin{enumerate}
+  \item **McMahan et al. (2017)** - "Communication-Efficient Learning of Deep Networks from Decentralized Data"
+\end{enumerate}
+
+AISTATS 2017 — Introduced FedAvg algorithm
+
+\begin{enumerate}
+  \item **Li et al. (2020)** - "Federated Optimization in Heterogeneous Networks"
+\end{enumerate}
+
+MLSys 2020 — Introduced FedProx for non-IID data
+
+\begin{enumerate}
+  \item **Karimireddy et al. (2020)** - "SCAFFOLD: Stochastic Controlled Averaging for Federated Learning"
+\end{enumerate}
+
+ICML 2020 — Variance reduction approach
+
+\begin{enumerate}
+  \item **Zhao et al. (2018)** - "Federated Learning with Non-IID Data"
+\end{enumerate}
+
+arXiv:1806.00582 — Analysis of data heterogeneity
+
+\begin{enumerate}
+  \item **Sun et al. (2004, 2012)** - "Quantum-Behaved Particle Swarm Optimization"
+\end{enumerate}
+
+IJCNN 2004, IEEE Transactions 2012 — Quantum PSO algorithm
+
+\begin{enumerate}
+  \item **He et al. (2015)** - "Deep Residual Learning for Image Recognition"
+\end{enumerate}
+
+CVPR 2015 — ResNet architecture
+
+\begin{enumerate}
+  \item **Ronneberger et al. (2015)** - "U-Net: Convolutional Networks for Biomedical Image Segmentation"
+\end{enumerate}
+
+MICCAI 2015 — U-Net segmentation architecture
+
+\begin{enumerate}
+  \item **Oktay et al. (2018)** - "Attention U-Net: Learning Where to Look for the Pancreas"
+\end{enumerate}
+
+MIDL 2018 — Attention mechanisms for medical imaging
+
+\begin{enumerate}
+  \item **Baid et al. (2021)** - "The RSNA-ASNR-MICCAI BraTS 2021 Benchmark on Brain Tumor Segmentation and Radiogenomic Classification"
+\end{enumerate}
+
+arXiv:2107.02314 — BraTS 2021 benchmark dataset
+
+\begin{enumerate}
+  \item **Hochreiter \& Schmidhuert (1997)** - "Long Short-Term Memory"
+\end{enumerate}
+
+Neural Computation 9(8) — LSTM architecture
+
+\begin{enumerate}
+  \item **Dwork et al. (2006)** - "Differential Privacy"
+\end{enumerate}
+
+ICALP 2006 — Formal privacy framework
+
+\begin{enumerate}
+  \item **Bonawitz et al. (2017)** - "Towards Federated Learning at Scale"
+\end{enumerate}
+
+MLSys 2019 — Secure aggregation protocol
+
+\begin{enumerate}
+  \item **Edla \& Indhumathi (2025)** - "Enhancing Federated Learning with Quantum-Inspired PSO: An IID MNIST Study"
+\end{enumerate}
+
+Matrusri Engineering College — Prior work on QPSO for FL
+
+
+\section{Chapter Summary}
+This chapter reviewed existing literature on federated learning, brain tumor analysis, and identified key research gaps in fairness-aware FL for healthcare.

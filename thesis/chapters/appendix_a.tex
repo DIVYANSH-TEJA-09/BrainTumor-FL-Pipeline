@@ -1,0 +1,63 @@
+\chapter{Federated Learning Comparative Analysis}
+\label{app:a}
+
+This appendix compares the three federated learning aggregation strategies evaluated in this project.
+
+\section{Algorithm Comparison}
+
+\begin{table}[H]
+\centering
+\caption{Comparison of FL Aggregation Strategies}
+\label{tab:fl_compare}
+\begin{tabular}{p{3cm}p{3.5cm}p{3.5cm}p{3.5cm}}
+\toprule
+\textbf{Feature} & \textbf{FedAvg} & \textbf{FedProx} & \textbf{QPSO-FL} \\
+\midrule
+Aggregation & Weighted average & Weighted average & Quantum PSO search \\
+Client modification & None & Proximal term ($\mu=0.01$) & None \\
+Fairness mechanism & None & Partial drift reduction & Implicit via cross-client fitness \\
+Computational cost & Low & Low & High ($K \cdot L \cdot T$ evals/round) \\
+Best for & IID data & Mild non-IID & Severe non-IID \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Results Summary}
+
+\begin{table}[H]
+\centering
+\caption{Comprehensive Results Comparison (S1 = Natural, S2 = Label Skew)}
+\label{tab:fl_results}
+\begin{tabular}{lccc}
+\toprule
+\textbf{Metric} & \textbf{FedAvg} & \textbf{FedProx} & \textbf{QPSO-FL} \\
+\midrule
+Best Accuracy (S1)     & 95.80\% & \textbf{96.13\%} & 95.14\% \\
+Best Accuracy (S2)     & 90.56\% & \textbf{93.02\%} & 92.09\% \\
+Client $\sigma$ (S1)   & 5.28\%  & 2.27\%  & \textbf{1.56\%} \\
+Client $\sigma$ (S2)   & 12.82\% & 6.05\%  & \textbf{3.65\%} \\
+Max--Min Gap (S1)      & 12.20\,pp & 5.30\,pp & \textbf{2.32\,pp} \\
+Max--Min Gap (S2)      & 28.75\,pp & 14.64\,pp & \textbf{8.10\,pp} \\
+Weakest Client (S2)    & 60.42\% & 77.50\% & \textbf{80.00\%} \\
+Max Round Drop (S2)    & $-$14.78\,pp & $-$9.93\,pp & \textbf{$-$3.38\,pp} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Key Finding}
+
+QPSO-FL reduces FedAvg's max-min accuracy gap by \textbf{81\%} in Setup~1 and \textbf{72\%} in Setup~2. It is the only method that maintains clinically meaningful accuracy ($\geq$80\%) at the weakest hospital under severe label skew. The fairness advantage grows with heterogeneity severity (Cohen's $d$: $0.35 \to 1.26$), confirming QPSO-FL is most beneficial precisely when conditions are most challenging.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{05_aggregation_strategies.png}
+\caption{Aggregation Strategies Comparison}
+\label{fig:app_agg}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{19_strategy_decision_tree.png}
+\caption{Strategy Selection Decision Tree}
+\label{fig:app_decision}
+\end{figure}

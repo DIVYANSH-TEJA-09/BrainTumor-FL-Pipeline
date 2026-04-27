@@ -1,0 +1,143 @@
+{
+  "results": {
+    "BraTS-Protocol": {
+      "class_name": "Glioma",
+      "class_idx": 0,
+      "confidence": 0.99,
+      "probabilities": {
+        "Glioma": 0.99,
+        "Meningioma": 0.0033333333333333335,
+        "No Tumor": 0.0033333333333333335,
+        "Pituitary": 0.0033333333333333335
+      },
+      "color": "#E74C3C",
+      "icon": "R"
+    }
+  },
+  "consensus": {
+    "class_name": "Glioma",
+    "class_idx": 0,
+    "unanimous": true,
+    "vote_count": 1,
+    "total_models": 1,
+    "color": "#E74C3C",
+    "icon": "R"
+  },
+  "ensemble": {
+    "class_name": "Glioma",
+    "class_idx": 0,
+    "confidence": 0.99,
+    "probabilities": {
+      "Glioma": 0.99,
+      "Meningioma": 0.0033333333333333335,
+      "No Tumor": 0.0033333333333333335,
+      "Pituitary": 0.0033333333333333335
+    }
+  },
+  "is_glioma": true,
+  "source": "brats_protocol",
+  "brats_override": true,
+  "note": "BraTS datasets are glioma-only; tumor-type classification was bypassed.",
+  "uncertainty": {
+    "entropy": 0.06698765724152834,
+    "entropy_normalized": 0.0483213804515613,
+    "margin_top1_top2": 0.9866666666666668,
+    "level": "low",
+    "review_recommended": false
+  },
+  "explainability": null,
+  "source_modality": "flair",
+  "slice_index": 94,
+  "total_slices": 155,
+  "quality_checks": {
+    "flair": {
+      "shape": [
+        240,
+        240,
+        155
+      ],
+      "nonzero_ratio": 0.1471499775985663,
+      "intensity_percentiles": {
+        "p1": 40.067385559082034,
+        "p50": 217.90684509277344,
+        "p99": 292.8638140869141
+      },
+      "dynamic_range": 252.79642852783206,
+      "status": "ok",
+      "warnings": []
+    },
+    "t1": {
+      "shape": [
+        240,
+        240,
+        155
+      ],
+      "nonzero_ratio": 0.1471499775985663,
+      "intensity_percentiles": {
+        "p1": 165.57215087890626,
+        "p50": 461.017333984375,
+        "p99": 567.6871008300782
+      },
+      "dynamic_range": 402.1149499511719,
+      "status": "ok",
+      "warnings": []
+    },
+    "t1ce": {
+      "shape": [
+        240,
+        240,
+        155
+      ],
+      "nonzero_ratio": 0.1471499775985663,
+      "intensity_percentiles": {
+        "p1": 182.90793853759766,
+        "p50": 486.679931640625,
+        "p99": 698.2750830078115
+      },
+      "dynamic_range": 515.3671444702138,
+      "status": "ok",
+      "warnings": []
+    },
+    "t2": {
+      "shape": [
+        240,
+        240,
+        155
+      ],
+      "nonzero_ratio": 0.1471486335125448,
+      "intensity_percentiles": {
+        "p1": 186.855322265625,
+        "p50": 468.7719421386719,
+        "p99": 1015.1995385742191
+      },
+      "dynamic_range": 828.3442163085941,
+      "status": "ok",
+      "warnings": []
+    }
+  },
+  "quality_overview": {
+    "status": "ok",
+    "warnings": [],
+    "modalities_checked": 4
+  },
+  "quality_check": {
+    "shape": [
+      240,
+      240,
+      155
+    ],
+    "nonzero_ratio": 0.1471499775985663,
+    "intensity_percentiles": {
+      "p1": 40.067385559082034,
+      "p50": 217.90684509277344,
+      "p99": 292.8638140869141
+    },
+    "dynamic_range": 252.79642852783206,
+    "status": "ok",
+    "warnings": []
+  },
+  "insights": [
+    "Glioma pathway active: proceed with segmentation and progression modules.",
+    "Low uncertainty: prediction confidence is consistent across top probabilities."
+  ]
+}

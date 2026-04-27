@@ -1,0 +1,4863 @@
+{
+  "n_pairs": 391,
+  "n_train": 318,
+  "n_val": 73,
+  "crop_size": [
+    96,
+    96,
+    64
+  ],
+  "pairs": [
+    {
+      "patient_id": "PatientID_0003",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 84540,
+      "vol_to": 85818,
+      "center": [
+        147,
+        171,
+        63
+      ]
+    },
+    {
+      "patient_id": "PatientID_0003",
+      "tp_from": 2,
+      "tp_to": 5,
+      "vol_from": 85818,
+      "vol_to": 193095,
+      "center": [
+        146,
+        162,
+        66
+      ]
+    },
+    {
+      "patient_id": "PatientID_0005",
+      "tp_from": 3,
+      "tp_to": 4,
+      "vol_from": 139453,
+      "vol_to": 140311,
+      "center": [
+        118,
+        168,
+        81
+      ]
+    },
+    {
+      "patient_id": "PatientID_0006",
+      "tp_from": 2,
+      "tp_to": 4,
+      "vol_from": 165771,
+      "vol_to": 83049,
+      "center": [
+        87,
+        139,
+        66
+      ]
+    },
+    {
+      "patient_id": "PatientID_0006",
+      "tp_from": 4,
+      "tp_to": 5,
+      "vol_from": 83049,
+      "vol_to": 97693,
+      "center": [
+        82,
+        148,
+        72
+      ]
+    },
+    {
+      "patient_id": "PatientID_0006",
+      "tp_from": 5,
+      "tp_to": 6,
+      "vol_from": 97693,
+      "vol_to": 119250,
+      "center": [
+        86,
+        144,
+        80
+      ]
+    },
+    {
+      "patient_id": "PatientID_0007",
+      "tp_from": 2,
+      "tp_to": 3,
+      "vol_from": 48582,
+      "vol_to": 48109,
+      "center": [
+        146,
+        77,
+        88
+      ]
+    },
+    {
+      "patient_id": "PatientID_0007",
+      "tp_from": 3,
+      "tp_to": 4,
+      "vol_from": 48109,
+      "vol_to": 63926,
+      "center": [
+        142,
+        82,
+        90
+      ]
+    },
+    {
+      "patient_id": "PatientID_0007",
+      "tp_from": 4,
+      "tp_to": 5,
+      "vol_from": 63926,
+      "vol_to": 66995,
+      "center": [
+        141,
+        84,
+        91
+      ]
+    },
+    {
+      "patient_id": "PatientID_0007",
+      "tp_from": 5,
+      "tp_to": 6,
+      "vol_from": 66995,
+      "vol_to": 68044,
+      "center": [
+        140,
+        87,
+        92
+      ]
+    },
+    {
+      "patient_id": "PatientID_0008",
+      "tp_from": 4,
+      "tp_to": 6,
+      "vol_from": 87128,
+      "vol_to": 31276,
+      "center": [
+        154,
+        133,
+        56
+      ]
+    },
+    {
+      "patient_id": "PatientID_0010",
+      "tp_from": 1,
+      "tp_to": 4,
+      "vol_from": 166963,
+      "vol_to": 97234,
+      "center": [
+        87,
+        140,
+        67
+      ]
+    },
+    {
+      "patient_id": "PatientID_0010",
+      "tp_from": 4,
+      "tp_to": 5,
+      "vol_from": 97234,
+      "vol_to": 120602,
+      "center": [
+        85,
+        144,
+        80
+      ]
+    },
+    {
+      "patient_id": "PatientID_0011",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 231467,
+      "vol_to": 248423,
+      "center": [
+        97,
+        103,
+        90
+      ]
+    },
+    {
+      "patient_id": "PatientID_0012",
+      "tp_from": 2,
+      "tp_to": 3,
+      "vol_from": 257791,
+      "vol_to": 241356,
+      "center": [
+        99,
+        115,
+        88
+      ]
+    },
+    {
+      "patient_id": "PatientID_0013",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 43633,
+      "vol_to": 56472,
+      "center": [
+        153,
+        132,
+        51
+      ]
+    },
+    {
+      "patient_id": "PatientID_0013",
+      "tp_from": 2,
+      "tp_to": 4,
+      "vol_from": 56472,
+      "vol_to": 81940,
+      "center": [
+        149,
+        133,
+        65
+      ]
+    },
+    {
+      "patient_id": "PatientID_0013",
+      "tp_from": 4,
+      "tp_to": 5,
+      "vol_from": 81940,
+      "vol_to": 75255,
+      "center": [
+        148,
+        130,
+        69
+      ]
+    },
+    {
+      "patient_id": "PatientID_0013",
+      "tp_from": 5,
+      "tp_to": 6,
+      "vol_from": 75255,
+      "vol_to": 117716,
+      "center": [
+        148,
+        127,
+        68
+      ]
+    },
+    {
+      "patient_id": "PatientID_0014",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 86804,
+      "vol_to": 11941,
+      "center": [
+        99,
+        158,
+        105
+      ]
+    },
+    {
+      "patient_id": "PatientID_0014",
+      "tp_from": 2,
+      "tp_to": 3,
+      "vol_from": 11941,
+      "vol_to": 22862,
+      "center": [
+        103,
+        165,
+        113
+      ]
+    },
+    {
+      "patient_id": "PatientID_0014",
+      "tp_from": 3,
+      "tp_to": 4,
+      "vol_from": 22862,
+      "vol_to": 47010,
+      "center": [
+        96,
+        150,
+        102
+      ]
+    },
+    {
+      "patient_id": "PatientID_0014",
+      "tp_from": 4,
+      "tp_to": 5,
+      "vol_from": 47010,
+      "vol_to": 47366,
+      "center": [
+        95,
+        147,
+        100
+      ]
+    },
+    {
+      "patient_id": "PatientID_0014",
+      "tp_from": 5,
+      "tp_to": 6,
+      "vol_from": 47366,
+      "vol_to": 47779,
+      "center": [
+        95,
+        146,
+        100
+      ]
+    },
+    {
+      "patient_id": "PatientID_0018",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 37035,
+      "vol_to": 12647,
+      "center": [
+        157,
+        120,
+        52
+      ]
+    },
+    {
+      "patient_id": "PatientID_0018",
+      "tp_from": 2,
+      "tp_to": 4,
+      "vol_from": 12647,
+      "vol_to": 109536,
+      "center": [
+        154,
+        142,
+        62
+      ]
+    },
+    {
+      "patient_id": "PatientID_0018",
+      "tp_from": 4,
+      "tp_to": 5,
+      "vol_from": 109536,
+      "vol_to": 74423,
+      "center": [
+        153,
+        143,
+        62
+      ]
+    },
+    {
+      "patient_id": "PatientID_0018",
+      "tp_from": 5,
+      "tp_to": 6,
+      "vol_from": 74423,
+      "vol_to": 190798,
+      "center": [
+        149,
+        144,
+        63
+      ]
+    },
+    {
+      "patient_id": "PatientID_0019",
+      "tp_from": 4,
+      "tp_to": 5,
+      "vol_from": 39143,
+      "vol_to": 42683,
+      "center": [
+        78,
+        131,
+        62
+      ]
+    },
+    {
+      "patient_id": "PatientID_0019",
+      "tp_from": 5,
+      "tp_to": 6,
+      "vol_from": 42683,
+      "vol_to": 46218,
+      "center": [
+        78,
+        131,
+        63
+      ]
+    },
+    {
+      "patient_id": "PatientID_0020",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 61040,
+      "vol_to": 47071,
+      "center": [
+        130,
+        136,
+        100
+      ]
+    },
+    {
+      "patient_id": "PatientID_0020",
+      "tp_from": 2,
+      "tp_to": 3,
+      "vol_from": 47071,
+      "vol_to": 41923,
+      "center": [
+        129,
+        134,
+        98
+      ]
+    },
+    {
+      "patient_id": "PatientID_0020",
+      "tp_from": 3,
+      "tp_to": 4,
+      "vol_from": 41923,
+      "vol_to": 59499,
+      "center": [
+        127,
+        137,
+        98
+      ]
+    },
+    {
+      "patient_id": "PatientID_0021",
+      "tp_from": 2,
+      "tp_to": 3,
+      "vol_from": 68417,
+      "vol_to": 52723,
+      "center": [
+        132,
+        133,
+        101
+      ]
+    },
+    {
+      "patient_id": "PatientID_0021",
+      "tp_from": 3,
+      "tp_to": 4,
+      "vol_from": 52723,
+      "vol_to": 44692,
+      "center": [
+        130,
+        136,
+        102
+      ]
+    },
+    {
+      "patient_id": "PatientID_0021",
+      "tp_from": 4,
+      "tp_to": 5,
+      "vol_from": 44692,
+      "vol_to": 41906,
+      "center": [
+        128,
+        134,
+        98
+      ]
+    },
+    {
+      "patient_id": "PatientID_0021",
+      "tp_from": 5,
+      "tp_to": 6,
+      "vol_from": 41906,
+      "vol_to": 59896,
+      "center": [
+        127,
+        137,
+        98
+      ]
+    },
+    {
+      "patient_id": "PatientID_0022",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 154238,
+      "vol_to": 222866,
+      "center": [
+        106,
+        84,
+        82
+      ]
+    },
+    {
+      "patient_id": "PatientID_0022",
+      "tp_from": 2,
+      "tp_to": 3,
+      "vol_from": 222866,
+      "vol_to": 97418,
+      "center": [
+        103,
+        84,
+        83
+      ]
+    },
+    {
+      "patient_id": "PatientID_0024",
+      "tp_from": 2,
+      "tp_to": 3,
+      "vol_from": 59953,
+      "vol_to": 102443,
+      "center": [
+        136,
+        165,
+        91
+      ]
+    },
+    {
+      "patient_id": "PatientID_0025",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 101519,
+      "vol_to": 115546,
+      "center": [
+        134,
+        83,
+        78
+      ]
+    },
+    {
+      "patient_id": "PatientID_0025",
+      "tp_from": 2,
+      "tp_to": 3,
+      "vol_from": 115546,
+      "vol_to": 35081,
+      "center": [
+        135,
+        86,
+        77
+      ]
+    },
+    {
+      "patient_id": "PatientID_0026",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 137089,
+      "vol_to": 92854,
+      "center": [
+        123,
+        115,
+        100
+      ]
+    },
+    {
+      "patient_id": "PatientID_0029",
+      "tp_from": 1,
+      "tp_to": 3,
+      "vol_from": 16391,
+      "vol_to": 47704,
+      "center": [
+        152,
+        139,
+        80
+      ]
+    },
+    {
+      "patient_id": "PatientID_0029",
+      "tp_from": 3,
+      "tp_to": 4,
+      "vol_from": 47704,
+      "vol_to": 46764,
+      "center": [
+        151,
+        139,
+        81
+      ]
+    },
+    {
+      "patient_id": "PatientID_0030",
+      "tp_from": 1,
+      "tp_to": 3,
+      "vol_from": 58011,
+      "vol_to": 123452,
+      "center": [
+        153,
+        149,
+        72
+      ]
+    },
+    {
+      "patient_id": "PatientID_0030",
+      "tp_from": 3,
+      "tp_to": 4,
+      "vol_from": 123452,
+      "vol_to": 60542,
+      "center": [
+        154,
+        149,
+        72
+      ]
+    },
+    {
+      "patient_id": "PatientID_0031",
+      "tp_from": 2,
+      "tp_to": 3,
+      "vol_from": 143820,
+      "vol_to": 101654,
+      "center": [
+        137,
+        110,
+        99
+      ]
+    },
+    {
+      "patient_id": "PatientID_0031",
+      "tp_from": 3,
+      "tp_to": 4,
+      "vol_from": 101654,
+      "vol_to": 165490,
+      "center": [
+        139,
+        111,
+        94
+      ]
+    },
+    {
+      "patient_id": "PatientID_0031",
+      "tp_from": 4,
+      "tp_to": 5,
+      "vol_from": 165490,
+      "vol_to": 173807,
+      "center": [
+        137,
+        111,
+        94
+      ]
+    },
+    {
+      "patient_id": "PatientID_0032",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 37084,
+      "vol_to": 12051,
+      "center": [
+        156,
+        120,
+        52
+      ]
+    },
+    {
+      "patient_id": "PatientID_0032",
+      "tp_from": 2,
+      "tp_to": 3,
+      "vol_from": 12051,
+      "vol_to": 121524,
+      "center": [
+        154,
+        142,
+        63
+      ]
+    },
+    {
+      "patient_id": "PatientID_0032",
+      "tp_from": 3,
+      "tp_to": 4,
+      "vol_from": 121524,
+      "vol_to": 107642,
+      "center": [
+        154,
+        142,
+        64
+      ]
+    },
+    {
+      "patient_id": "PatientID_0032",
+      "tp_from": 4,
+      "tp_to": 5,
+      "vol_from": 107642,
+      "vol_to": 74423,
+      "center": [
+        154,
+        143,
+        63
+      ]
+    },
+    {
+      "patient_id": "PatientID_0032",
+      "tp_from": 5,
+      "tp_to": 6,
+      "vol_from": 74423,
+      "vol_to": 190944,
+      "center": [
+        149,
+        144,
+        63
+      ]
+    },
+    {
+      "patient_id": "PatientID_0033",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 55937,
+      "vol_to": 35180,
+      "center": [
+        134,
+        124,
+        109
+      ]
+    },
+    {
+      "patient_id": "PatientID_0033",
+      "tp_from": 2,
+      "tp_to": 3,
+      "vol_from": 35180,
+      "vol_to": 37308,
+      "center": [
+        135,
+        116,
+        114
+      ]
+    },
+    {
+      "patient_id": "PatientID_0033",
+      "tp_from": 3,
+      "tp_to": 4,
+      "vol_from": 37308,
+      "vol_to": 23671,
+      "center": [
+        135,
+        116,
+        112
+      ]
+    },
+    {
+      "patient_id": "PatientID_0033",
+      "tp_from": 4,
+      "tp_to": 5,
+      "vol_from": 23671,
+      "vol_to": 31535,
+      "center": [
+        136,
+        122,
+        110
+      ]
+    },
+    {
+      "patient_id": "PatientID_0034",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 31646,
+      "vol_to": 19646,
+      "center": [
+        85,
+        114,
+        81
+      ]
+    },
+    {
+      "patient_id": "PatientID_0034",
+      "tp_from": 2,
+      "tp_to": 3,
+      "vol_from": 19646,
+      "vol_to": 24090,
+      "center": [
+        85,
+        114,
+        82
+      ]
+    },
+    {
+      "patient_id": "PatientID_0034",
+      "tp_from": 3,
+      "tp_to": 4,
+      "vol_from": 24090,
+      "vol_to": 25123,
+      "center": [
+        83,
+        113,
+        78
+      ]
+    },
+    {
+      "patient_id": "PatientID_0034",
+      "tp_from": 4,
+      "tp_to": 5,
+      "vol_from": 25123,
+      "vol_to": 31632,
+      "center": [
+        84,
+        113,
+        75
+      ]
+    },
+    {
+      "patient_id": "PatientID_0034",
+      "tp_from": 5,
+      "tp_to": 6,
+      "vol_from": 31632,
+      "vol_to": 38098,
+      "center": [
+        85,
+        114,
+        74
+      ]
+    },
+    {
+      "patient_id": "PatientID_0035",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 174956,
+      "vol_to": 70058,
+      "center": [
+        150,
+        170,
+        63
+      ]
+    },
+    {
+      "patient_id": "PatientID_0035",
+      "tp_from": 2,
+      "tp_to": 3,
+      "vol_from": 70058,
+      "vol_to": 158804,
+      "center": [
+        151,
+        153,
+        65
+      ]
+    },
+    {
+      "patient_id": "PatientID_0036",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 136331,
+      "vol_to": 167752,
+      "center": [
+        91,
+        152,
+        78
+      ]
+    },
+    {
+      "patient_id": "PatientID_0036",
+      "tp_from": 2,
+      "tp_to": 3,
+      "vol_from": 167752,
+      "vol_to": 288690,
+      "center": [
+        94,
+        148,
+        81
+      ]
+    },
+    {
+      "patient_id": "PatientID_0036",
+      "tp_from": 3,
+      "tp_to": 4,
+      "vol_from": 288690,
+      "vol_to": 126578,
+      "center": [
+        93,
+        148,
+        80
+      ]
+    },
+    {
+      "patient_id": "PatientID_0036",
+      "tp_from": 4,
+      "tp_to": 5,
+      "vol_from": 126578,
+      "vol_to": 136905,
+      "center": [
+        87,
+        152,
+        75
+      ]
+    },
+    {
+      "patient_id": "PatientID_0036",
+      "tp_from": 5,
+      "tp_to": 6,
+      "vol_from": 136905,
+      "vol_to": 157783,
+      "center": [
+        90,
+        151,
+        75
+      ]
+    },
+    {
+      "patient_id": "PatientID_0037",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 60937,
+      "vol_to": 90226,
+      "center": [
+        85,
+        146,
+        89
+      ]
+    },
+    {
+      "patient_id": "PatientID_0037",
+      "tp_from": 2,
+      "tp_to": 3,
+      "vol_from": 90226,
+      "vol_to": 86800,
+      "center": [
+        86,
+        145,
+        90
+      ]
+    },
+    {
+      "patient_id": "PatientID_0037",
+      "tp_from": 3,
+      "tp_to": 4,
+      "vol_from": 86800,
+      "vol_to": 116012,
+      "center": [
+        84,
+        147,
+        88
+      ]
+    },
+    {
+      "patient_id": "PatientID_0038",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 101395,
+      "vol_to": 86675,
+      "center": [
+        94,
+        174,
+        79
+      ]
+    },
+    {
+      "patient_id": "PatientID_0038",
+      "tp_from": 2,
+      "tp_to": 3,
+      "vol_from": 86675,
+      "vol_to": 152305,
+      "center": [
+        102,
+        169,
+        78
+      ]
+    },
+    {
+      "patient_id": "PatientID_0038",
+      "tp_from": 3,
+      "tp_to": 4,
+      "vol_from": 152305,
+      "vol_to": 243051,
+      "center": [
+        103,
+        165,
+        82
+      ]
+    },
+    {
+      "patient_id": "PatientID_0038",
+      "tp_from": 4,
+      "tp_to": 5,
+      "vol_from": 243051,
+      "vol_to": 199616,
+      "center": [
+        104,
+        165,
+        82
+      ]
+    },
+    {
+      "patient_id": "PatientID_0038",
+      "tp_from": 5,
+      "tp_to": 6,
+      "vol_from": 199616,
+      "vol_to": 244924,
+      "center": [
+        105,
+        163,
+        79
+      ]
+    },
+    {
+      "patient_id": "PatientID_0039",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 44906,
+      "vol_to": 16794,
+      "center": [
+        85,
+        109,
+        51
+      ]
+    },
+    {
+      "patient_id": "PatientID_0039",
+      "tp_from": 2,
+      "tp_to": 3,
+      "vol_from": 16794,
+      "vol_to": 19541,
+      "center": [
+        79,
+        106,
+        45
+      ]
+    },
+    {
+      "patient_id": "PatientID_0039",
+      "tp_from": 3,
+      "tp_to": 4,
+      "vol_from": 19541,
+      "vol_to": 18676,
+      "center": [
+        79,
+        108,
+        46
+      ]
+    },
+    {
+      "patient_id": "PatientID_0039",
+      "tp_from": 4,
+      "tp_to": 6,
+      "vol_from": 18676,
+      "vol_to": 26672,
+      "center": [
+        79,
+        112,
+        48
+      ]
+    },
+    {
+      "patient_id": "PatientID_0041",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 3985,
+      "vol_to": 9666,
+      "center": [
+        146,
+        175,
+        51
+      ]
+    },
+    {
+      "patient_id": "PatientID_0044",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 64268,
+      "vol_to": 39661,
+      "center": [
+        134,
+        153,
+        101
+      ]
+    },
+    {
+      "patient_id": "PatientID_0044",
+      "tp_from": 2,
+      "tp_to": 3,
+      "vol_from": 39661,
+      "vol_to": 39433,
+      "center": [
+        136,
+        152,
+        105
+      ]
+    },
+    {
+      "patient_id": "PatientID_0044",
+      "tp_from": 3,
+      "tp_to": 4,
+      "vol_from": 39433,
+      "vol_to": 39294,
+      "center": [
+        136,
+        152,
+        104
+      ]
+    },
+    {
+      "patient_id": "PatientID_0044",
+      "tp_from": 4,
+      "tp_to": 5,
+      "vol_from": 39294,
+      "vol_to": 155601,
+      "center": [
+        135,
+        152,
+        96
+      ]
+    },
+    {
+      "patient_id": "PatientID_0044",
+      "tp_from": 5,
+      "tp_to": 6,
+      "vol_from": 155601,
+      "vol_to": 52796,
+      "center": [
+        133,
+        150,
+        96
+      ]
+    },
+    {
+      "patient_id": "PatientID_0045",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 47734,
+      "vol_to": 94403,
+      "center": [
+        86,
+        144,
+        96
+      ]
+    },
+    {
+      "patient_id": "PatientID_0045",
+      "tp_from": 2,
+      "tp_to": 3,
+      "vol_from": 94403,
+      "vol_to": 45043,
+      "center": [
+        85,
+        142,
+        95
+      ]
+    },
+    {
+      "patient_id": "PatientID_0045",
+      "tp_from": 3,
+      "tp_to": 4,
+      "vol_from": 45043,
+      "vol_to": 39993,
+      "center": [
+        83,
+        145,
+        94
+      ]
+    },
+    {
+      "patient_id": "PatientID_0051",
+      "tp_from": 1,
+      "tp_to": 3,
+      "vol_from": 92637,
+      "vol_to": 52828,
+      "center": [
+        110,
+        97,
+        86
+      ]
+    },
+    {
+      "patient_id": "PatientID_0051",
+      "tp_from": 3,
+      "tp_to": 4,
+      "vol_from": 52828,
+      "vol_to": 146162,
+      "center": [
+        116,
+        103,
+        88
+      ]
+    },
+    {
+      "patient_id": "PatientID_0052",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 124440,
+      "vol_to": 73548,
+      "center": [
+        85,
+        136,
+        71
+      ]
+    },
+    {
+      "patient_id": "PatientID_0053",
+      "tp_from": 1,
+      "tp_to": 3,
+      "vol_from": 56865,
+      "vol_to": 168138,
+      "center": [
+        154,
+        154,
+        81
+      ]
+    },
+    {
+      "patient_id": "PatientID_0053",
+      "tp_from": 3,
+      "tp_to": 4,
+      "vol_from": 168138,
+      "vol_to": 197421,
+      "center": [
+        154,
+        147,
+        78
+      ]
+    },
+    {
+      "patient_id": "PatientID_0053",
+      "tp_from": 4,
+      "tp_to": 5,
+      "vol_from": 197421,
+      "vol_to": 123219,
+      "center": [
+        151,
+        144,
+        79
+      ]
+    },
+    {
+      "patient_id": "PatientID_0053",
+      "tp_from": 5,
+      "tp_to": 6,
+      "vol_from": 123219,
+      "vol_to": 156201,
+      "center": [
+        141,
+        146,
+        85
+      ]
+    },
+    {
+      "patient_id": "PatientID_0054",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 135057,
+      "vol_to": 81243,
+      "center": [
+        98,
+        148,
+        92
+      ]
+    },
+    {
+      "patient_id": "PatientID_0055",
+      "tp_from": 1,
+      "tp_to": 4,
+      "vol_from": 148668,
+      "vol_to": 54846,
+      "center": [
+        152,
+        124,
+        67
+      ]
+    },
+    {
+      "patient_id": "PatientID_0055",
+      "tp_from": 4,
+      "tp_to": 5,
+      "vol_from": 54846,
+      "vol_to": 67198,
+      "center": [
+        158,
+        120,
+        60
+      ]
+    },
+    {
+      "patient_id": "PatientID_0055",
+      "tp_from": 5,
+      "tp_to": 6,
+      "vol_from": 67198,
+      "vol_to": 73384,
+      "center": [
+        158,
+        121,
+        60
+      ]
+    },
+    {
+      "patient_id": "PatientID_0059",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 66124,
+      "vol_to": 25570,
+      "center": [
+        81,
+        130,
+        58
+      ]
+    },
+    {
+      "patient_id": "PatientID_0059",
+      "tp_from": 2,
+      "tp_to": 3,
+      "vol_from": 25570,
+      "vol_to": 32736,
+      "center": [
+        101,
+        126,
+        63
+      ]
+    },
+    {
+      "patient_id": "PatientID_0060",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 128652,
+      "vol_to": 178728,
+      "center": [
+        94,
+        100,
+        86
+      ]
+    },
+    {
+      "patient_id": "PatientID_0062",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 129746,
+      "vol_to": 178728,
+      "center": [
+        94,
+        100,
+        86
+      ]
+    },
+    {
+      "patient_id": "PatientID_0064",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 97840,
+      "vol_to": 39431,
+      "center": [
+        97,
+        104,
+        95
+      ]
+    },
+    {
+      "patient_id": "PatientID_0065",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 99363,
+      "vol_to": 157111,
+      "center": [
+        148,
+        160,
+        85
+      ]
+    },
+    {
+      "patient_id": "PatientID_0065",
+      "tp_from": 2,
+      "tp_to": 3,
+      "vol_from": 157111,
+      "vol_to": 99906,
+      "center": [
+        149,
+        160,
+        85
+      ]
+    },
+    {
+      "patient_id": "PatientID_0065",
+      "tp_from": 3,
+      "tp_to": 4,
+      "vol_from": 99906,
+      "vol_to": 202553,
+      "center": [
+        149,
+        152,
+        84
+      ]
+    },
+    {
+      "patient_id": "PatientID_0065",
+      "tp_from": 4,
+      "tp_to": 5,
+      "vol_from": 202553,
+      "vol_to": 225886,
+      "center": [
+        149,
+        151,
+        83
+      ]
+    },
+    {
+      "patient_id": "PatientID_0066",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 62346,
+      "vol_to": 65596,
+      "center": [
+        141,
+        143,
+        71
+      ]
+    },
+    {
+      "patient_id": "PatientID_0066",
+      "tp_from": 2,
+      "tp_to": 3,
+      "vol_from": 65596,
+      "vol_to": 12560,
+      "center": [
+        140,
+        142,
+        69
+      ]
+    },
+    {
+      "patient_id": "PatientID_0066",
+      "tp_from": 3,
+      "tp_to": 5,
+      "vol_from": 12560,
+      "vol_to": 44929,
+      "center": [
+        118,
+        138,
+        85
+      ]
+    },
+    {
+      "patient_id": "PatientID_0066",
+      "tp_from": 5,
+      "tp_to": 6,
+      "vol_from": 44929,
+      "vol_to": 70470,
+      "center": [
+        117,
+        135,
+        93
+      ]
+    },
+    {
+      "patient_id": "PatientID_0067",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 75838,
+      "vol_to": 37513,
+      "center": [
+        94,
+        141,
+        60
+      ]
+    },
+    {
+      "patient_id": "PatientID_0068",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 11458,
+      "vol_to": 32682,
+      "center": [
+        97,
+        144,
+        105
+      ]
+    },
+    {
+      "patient_id": "PatientID_0068",
+      "tp_from": 2,
+      "tp_to": 3,
+      "vol_from": 32682,
+      "vol_to": 39154,
+      "center": [
+        97,
+        144,
+        105
+      ]
+    },
+    {
+      "patient_id": "PatientID_0068",
+      "tp_from": 3,
+      "tp_to": 4,
+      "vol_from": 39154,
+      "vol_to": 52515,
+      "center": [
+        97,
+        144,
+        105
+      ]
+    },
+    {
+      "patient_id": "PatientID_0068",
+      "tp_from": 4,
+      "tp_to": 5,
+      "vol_from": 52515,
+      "vol_to": 118031,
+      "center": [
+        95,
+        144,
+        101
+      ]
+    },
+    {
+      "patient_id": "PatientID_0069",
+      "tp_from": 2,
+      "tp_to": 3,
+      "vol_from": 15548,
+      "vol_to": 16321,
+      "center": [
+        132,
+        181,
+        86
+      ]
+    },
+    {
+      "patient_id": "PatientID_0069",
+      "tp_from": 3,
+      "tp_to": 4,
+      "vol_from": 16321,
+      "vol_to": 22179,
+      "center": [
+        132,
+        180,
+        87
+      ]
+    },
+    {
+      "patient_id": "PatientID_0069",
+      "tp_from": 4,
+      "tp_to": 5,
+      "vol_from": 22179,
+      "vol_to": 18793,
+      "center": [
+        132,
+        180,
+        87
+      ]
+    },
+    {
+      "patient_id": "PatientID_0069",
+      "tp_from": 5,
+      "tp_to": 6,
+      "vol_from": 18793,
+      "vol_to": 20750,
+      "center": [
+        133,
+        180,
+        87
+      ]
+    },
+    {
+      "patient_id": "PatientID_0070",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 62437,
+      "vol_to": 160655,
+      "center": [
+        149,
+        135,
+        68
+      ]
+    },
+    {
+      "patient_id": "PatientID_0070",
+      "tp_from": 2,
+      "tp_to": 3,
+      "vol_from": 160655,
+      "vol_to": 142701,
+      "center": [
+        148,
+        136,
+        67
+      ]
+    },
+    {
+      "patient_id": "PatientID_0070",
+      "tp_from": 3,
+      "tp_to": 4,
+      "vol_from": 142701,
+      "vol_to": 97532,
+      "center": [
+        146,
+        137,
+        67
+      ]
+    },
+    {
+      "patient_id": "PatientID_0072",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 39463,
+      "vol_to": 34472,
+      "center": [
+        134,
+        128,
+        114
+      ]
+    },
+    {
+      "patient_id": "PatientID_0072",
+      "tp_from": 2,
+      "tp_to": 3,
+      "vol_from": 34472,
+      "vol_to": 49758,
+      "center": [
+        132,
+        121,
+        107
+      ]
+    },
+    {
+      "patient_id": "PatientID_0073",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 104121,
+      "vol_to": 119057,
+      "center": [
+        150,
+        127,
+        68
+      ]
+    },
+    {
+      "patient_id": "PatientID_0073",
+      "tp_from": 2,
+      "tp_to": 3,
+      "vol_from": 119057,
+      "vol_to": 122462,
+      "center": [
+        149,
+        126,
+        70
+      ]
+    },
+    {
+      "patient_id": "PatientID_0073",
+      "tp_from": 3,
+      "tp_to": 4,
+      "vol_from": 122462,
+      "vol_to": 176847,
+      "center": [
+        150,
+        139,
+        71
+      ]
+    },
+    {
+      "patient_id": "PatientID_0074",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 28222,
+      "vol_to": 40739,
+      "center": [
+        119,
+        171,
+        51
+      ]
+    },
+    {
+      "patient_id": "PatientID_0074",
+      "tp_from": 2,
+      "tp_to": 3,
+      "vol_from": 40739,
+      "vol_to": 36135,
+      "center": [
+        116,
+        173,
+        51
+      ]
+    },
+    {
+      "patient_id": "PatientID_0074",
+      "tp_from": 3,
+      "tp_to": 4,
+      "vol_from": 36135,
+      "vol_to": 51664,
+      "center": [
+        120,
+        168,
+        69
+      ]
+    },
+    {
+      "patient_id": "PatientID_0074",
+      "tp_from": 4,
+      "tp_to": 5,
+      "vol_from": 51664,
+      "vol_to": 44224,
+      "center": [
+        123,
+        166,
+        67
+      ]
+    },
+    {
+      "patient_id": "PatientID_0074",
+      "tp_from": 5,
+      "tp_to": 6,
+      "vol_from": 44224,
+      "vol_to": 44209,
+      "center": [
+        118,
+        171,
+        53
+      ]
+    },
+    {
+      "patient_id": "PatientID_0076",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 81731,
+      "vol_to": 254885,
+      "center": [
+        109,
+        115,
+        88
+      ]
+    },
+    {
+      "patient_id": "PatientID_0078",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 86677,
+      "vol_to": 141730,
+      "center": [
+        93,
+        112,
+        96
+      ]
+    },
+    {
+      "patient_id": "PatientID_0078",
+      "tp_from": 2,
+      "tp_to": 3,
+      "vol_from": 141730,
+      "vol_to": 186672,
+      "center": [
+        94,
+        115,
+        93
+      ]
+    },
+    {
+      "patient_id": "PatientID_0079",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 209264,
+      "vol_to": 181140,
+      "center": [
+        86,
+        134,
+        73
+      ]
+    },
+    {
+      "patient_id": "PatientID_0079",
+      "tp_from": 2,
+      "tp_to": 3,
+      "vol_from": 181140,
+      "vol_to": 162437,
+      "center": [
+        86,
+        136,
+        72
+      ]
+    },
+    {
+      "patient_id": "PatientID_0079",
+      "tp_from": 3,
+      "tp_to": 4,
+      "vol_from": 162437,
+      "vol_to": 83951,
+      "center": [
+        85,
+        137,
+        73
+      ]
+    },
+    {
+      "patient_id": "PatientID_0079",
+      "tp_from": 4,
+      "tp_to": 5,
+      "vol_from": 83951,
+      "vol_to": 222560,
+      "center": [
+        84,
+        137,
+        75
+      ]
+    },
+    {
+      "patient_id": "PatientID_0079",
+      "tp_from": 5,
+      "tp_to": 6,
+      "vol_from": 222560,
+      "vol_to": 217015,
+      "center": [
+        85,
+        137,
+        76
+      ]
+    },
+    {
+      "patient_id": "PatientID_0080",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 38801,
+      "vol_to": 145528,
+      "center": [
+        143,
+        165,
+        91
+      ]
+    },
+    {
+      "patient_id": "PatientID_0081",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 56795,
+      "vol_to": 110361,
+      "center": [
+        143,
+        133,
+        97
+      ]
+    },
+    {
+      "patient_id": "PatientID_0082",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 114400,
+      "vol_to": 53118,
+      "center": [
+        148,
+        135,
+        68
+      ]
+    },
+    {
+      "patient_id": "PatientID_0083",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 170907,
+      "vol_to": 127668,
+      "center": [
+        101,
+        145,
+        81
+      ]
+    },
+    {
+      "patient_id": "PatientID_0083",
+      "tp_from": 2,
+      "tp_to": 3,
+      "vol_from": 127668,
+      "vol_to": 140819,
+      "center": [
+        98,
+        149,
+        84
+      ]
+    },
+    {
+      "patient_id": "PatientID_0083",
+      "tp_from": 3,
+      "tp_to": 4,
+      "vol_from": 140819,
+      "vol_to": 205423,
+      "center": [
+        98,
+        150,
+        84
+      ]
+    },
+    {
+      "patient_id": "PatientID_0083",
+      "tp_from": 4,
+      "tp_to": 5,
+      "vol_from": 205423,
+      "vol_to": 165888,
+      "center": [
+        98,
+        148,
+        85
+      ]
+    },
+    {
+      "patient_id": "PatientID_0083",
+      "tp_from": 5,
+      "tp_to": 6,
+      "vol_from": 165888,
+      "vol_to": 156766,
+      "center": [
+        96,
+        146,
+        86
+      ]
+    },
+    {
+      "patient_id": "PatientID_0084",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 92285,
+      "vol_to": 137701,
+      "center": [
+        81,
+        123,
+        65
+      ]
+    },
+    {
+      "patient_id": "PatientID_0084",
+      "tp_from": 2,
+      "tp_to": 3,
+      "vol_from": 137701,
+      "vol_to": 126142,
+      "center": [
+        82,
+        122,
+        66
+      ]
+    },
+    {
+      "patient_id": "PatientID_0084",
+      "tp_from": 3,
+      "tp_to": 4,
+      "vol_from": 126142,
+      "vol_to": 133965,
+      "center": [
+        82,
+        122,
+        66
+      ]
+    },
+    {
+      "patient_id": "PatientID_0084",
+      "tp_from": 4,
+      "tp_to": 5,
+      "vol_from": 133965,
+      "vol_to": 49788,
+      "center": [
+        81,
+        124,
+        65
+      ]
+    },
+    {
+      "patient_id": "PatientID_0084",
+      "tp_from": 5,
+      "tp_to": 6,
+      "vol_from": 49788,
+      "vol_to": 62247,
+      "center": [
+        76,
+        122,
+        57
+      ]
+    },
+    {
+      "patient_id": "PatientID_0085",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 28741,
+      "vol_to": 15489,
+      "center": [
+        122,
+        131,
+        75
+      ]
+    },
+    {
+      "patient_id": "PatientID_0085",
+      "tp_from": 2,
+      "tp_to": 3,
+      "vol_from": 15489,
+      "vol_to": 3430,
+      "center": [
+        121,
+        132,
+        74
+      ]
+    },
+    {
+      "patient_id": "PatientID_0085",
+      "tp_from": 3,
+      "tp_to": 4,
+      "vol_from": 3430,
+      "vol_to": 5640,
+      "center": [
+        121,
+        135,
+        75
+      ]
+    },
+    {
+      "patient_id": "PatientID_0087",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 37571,
+      "vol_to": 55384,
+      "center": [
+        155,
+        123,
+        51
+      ]
+    },
+    {
+      "patient_id": "PatientID_0087",
+      "tp_from": 2,
+      "tp_to": 3,
+      "vol_from": 55384,
+      "vol_to": 67574,
+      "center": [
+        155,
+        123,
+        62
+      ]
+    },
+    {
+      "patient_id": "PatientID_0088",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 19699,
+      "vol_to": 35572,
+      "center": [
+        132,
+        137,
+        78
+      ]
+    },
+    {
+      "patient_id": "PatientID_0089",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 126494,
+      "vol_to": 184080,
+      "center": [
+        83,
+        121,
+        75
+      ]
+    },
+    {
+      "patient_id": "PatientID_0089",
+      "tp_from": 2,
+      "tp_to": 3,
+      "vol_from": 184080,
+      "vol_to": 193664,
+      "center": [
+        81,
+        120,
+        78
+      ]
+    },
+    {
+      "patient_id": "PatientID_0089",
+      "tp_from": 3,
+      "tp_to": 4,
+      "vol_from": 193664,
+      "vol_to": 222467,
+      "center": [
+        81,
+        121,
+        80
+      ]
+    },
+    {
+      "patient_id": "PatientID_0089",
+      "tp_from": 4,
+      "tp_to": 5,
+      "vol_from": 222467,
+      "vol_to": 232805,
+      "center": [
+        84,
+        120,
+        82
+      ]
+    },
+    {
+      "patient_id": "PatientID_0089",
+      "tp_from": 5,
+      "tp_to": 6,
+      "vol_from": 232805,
+      "vol_to": 240987,
+      "center": [
+        86,
+        119,
+        83
+      ]
+    },
+    {
+      "patient_id": "PatientID_0090",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 82491,
+      "vol_to": 182952,
+      "center": [
+        139,
+        161,
+        85
+      ]
+    },
+    {
+      "patient_id": "PatientID_0091",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 227243,
+      "vol_to": 157138,
+      "center": [
+        90,
+        148,
+        88
+      ]
+    },
+    {
+      "patient_id": "PatientID_0092",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 9114,
+      "vol_to": 34153,
+      "center": [
+        98,
+        94,
+        79
+      ]
+    },
+    {
+      "patient_id": "PatientID_0093",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 27198,
+      "vol_to": 76424,
+      "center": [
+        144,
+        142,
+        78
+      ]
+    },
+    {
+      "patient_id": "PatientID_0093",
+      "tp_from": 2,
+      "tp_to": 3,
+      "vol_from": 76424,
+      "vol_to": 135415,
+      "center": [
+        145,
+        139,
+        83
+      ]
+    },
+    {
+      "patient_id": "PatientID_0093",
+      "tp_from": 3,
+      "tp_to": 4,
+      "vol_from": 135415,
+      "vol_to": 194035,
+      "center": [
+        141,
+        125,
+        88
+      ]
+    },
+    {
+      "patient_id": "PatientID_0094",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 10036,
+      "vol_to": 18008,
+      "center": [
+        136,
+        180,
+        83
+      ]
+    },
+    {
+      "patient_id": "PatientID_0094",
+      "tp_from": 2,
+      "tp_to": 3,
+      "vol_from": 18008,
+      "vol_to": 23460,
+      "center": [
+        139,
+        172,
+        83
+      ]
+    },
+    {
+      "patient_id": "PatientID_0094",
+      "tp_from": 3,
+      "tp_to": 4,
+      "vol_from": 23460,
+      "vol_to": 34046,
+      "center": [
+        140,
+        167,
+        84
+      ]
+    },
+    {
+      "patient_id": "PatientID_0094",
+      "tp_from": 4,
+      "tp_to": 5,
+      "vol_from": 34046,
+      "vol_to": 83279,
+      "center": [
+        137,
+        171,
+        89
+      ]
+    },
+    {
+      "patient_id": "PatientID_0094",
+      "tp_from": 5,
+      "tp_to": 6,
+      "vol_from": 83279,
+      "vol_to": 221304,
+      "center": [
+        143,
+        164,
+        87
+      ]
+    },
+    {
+      "patient_id": "PatientID_0095",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 100889,
+      "vol_to": 300963,
+      "center": [
+        86,
+        127,
+        73
+      ]
+    },
+    {
+      "patient_id": "PatientID_0095",
+      "tp_from": 2,
+      "tp_to": 3,
+      "vol_from": 300963,
+      "vol_to": 184454,
+      "center": [
+        87,
+        127,
+        73
+      ]
+    },
+    {
+      "patient_id": "PatientID_0095",
+      "tp_from": 3,
+      "tp_to": 4,
+      "vol_from": 184454,
+      "vol_to": 127166,
+      "center": [
+        86,
+        126,
+        72
+      ]
+    },
+    {
+      "patient_id": "PatientID_0095",
+      "tp_from": 4,
+      "tp_to": 6,
+      "vol_from": 127166,
+      "vol_to": 139242,
+      "center": [
+        80,
+        127,
+        68
+      ]
+    },
+    {
+      "patient_id": "PatientID_0097",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 175573,
+      "vol_to": 79211,
+      "center": [
+        133,
+        88,
+        86
+      ]
+    },
+    {
+      "patient_id": "PatientID_0097",
+      "tp_from": 2,
+      "tp_to": 3,
+      "vol_from": 79211,
+      "vol_to": 77310,
+      "center": [
+        138,
+        79,
+        92
+      ]
+    },
+    {
+      "patient_id": "PatientID_0097",
+      "tp_from": 3,
+      "tp_to": 4,
+      "vol_from": 77310,
+      "vol_to": 95513,
+      "center": [
+        137,
+        82,
+        93
+      ]
+    },
+    {
+      "patient_id": "PatientID_0097",
+      "tp_from": 4,
+      "tp_to": 5,
+      "vol_from": 95513,
+      "vol_to": 246317,
+      "center": [
+        137,
+        96,
+        90
+      ]
+    },
+    {
+      "patient_id": "PatientID_0097",
+      "tp_from": 5,
+      "tp_to": 6,
+      "vol_from": 246317,
+      "vol_to": 255644,
+      "center": [
+        138,
+        98,
+        88
+      ]
+    },
+    {
+      "patient_id": "PatientID_0099",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 36416,
+      "vol_to": 92842,
+      "center": [
+        142,
+        130,
+        66
+      ]
+    },
+    {
+      "patient_id": "PatientID_0103",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 38404,
+      "vol_to": 20829,
+      "center": [
+        135,
+        120,
+        112
+      ]
+    },
+    {
+      "patient_id": "PatientID_0103",
+      "tp_from": 2,
+      "tp_to": 3,
+      "vol_from": 20829,
+      "vol_to": 37291,
+      "center": [
+        138,
+        117,
+        113
+      ]
+    },
+    {
+      "patient_id": "PatientID_0103",
+      "tp_from": 3,
+      "tp_to": 4,
+      "vol_from": 37291,
+      "vol_to": 158242,
+      "center": [
+        142,
+        124,
+        99
+      ]
+    },
+    {
+      "patient_id": "PatientID_0103",
+      "tp_from": 4,
+      "tp_to": 5,
+      "vol_from": 158242,
+      "vol_to": 76307,
+      "center": [
+        141,
+        124,
+        99
+      ]
+    },
+    {
+      "patient_id": "PatientID_0103",
+      "tp_from": 5,
+      "tp_to": 6,
+      "vol_from": 76307,
+      "vol_to": 96766,
+      "center": [
+        139,
+        119,
+        99
+      ]
+    },
+    {
+      "patient_id": "PatientID_0105",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 18272,
+      "vol_to": 10113,
+      "center": [
+        162,
+        109,
+        47
+      ]
+    },
+    {
+      "patient_id": "PatientID_0105",
+      "tp_from": 2,
+      "tp_to": 3,
+      "vol_from": 10113,
+      "vol_to": 11756,
+      "center": [
+        165,
+        108,
+        45
+      ]
+    },
+    {
+      "patient_id": "PatientID_0105",
+      "tp_from": 3,
+      "tp_to": 4,
+      "vol_from": 11756,
+      "vol_to": 20237,
+      "center": [
+        162,
+        108,
+        46
+      ]
+    },
+    {
+      "patient_id": "PatientID_0105",
+      "tp_from": 4,
+      "tp_to": 5,
+      "vol_from": 20237,
+      "vol_to": 36460,
+      "center": [
+        163,
+        110,
+        49
+      ]
+    },
+    {
+      "patient_id": "PatientID_0105",
+      "tp_from": 5,
+      "tp_to": 6,
+      "vol_from": 36460,
+      "vol_to": 125028,
+      "center": [
+        157,
+        125,
+        60
+      ]
+    },
+    {
+      "patient_id": "PatientID_0109",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 72434,
+      "vol_to": 167200,
+      "center": [
+        100,
+        98,
+        92
+      ]
+    },
+    {
+      "patient_id": "PatientID_0109",
+      "tp_from": 2,
+      "tp_to": 3,
+      "vol_from": 167200,
+      "vol_to": 184247,
+      "center": [
+        100,
+        96,
+        90
+      ]
+    },
+    {
+      "patient_id": "PatientID_0109",
+      "tp_from": 3,
+      "tp_to": 4,
+      "vol_from": 184247,
+      "vol_to": 253875,
+      "center": [
+        102,
+        104,
+        92
+      ]
+    },
+    {
+      "patient_id": "PatientID_0110",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 177705,
+      "vol_to": 100090,
+      "center": [
+        88,
+        126,
+        62
+      ]
+    },
+    {
+      "patient_id": "PatientID_0110",
+      "tp_from": 2,
+      "tp_to": 3,
+      "vol_from": 100090,
+      "vol_to": 263280,
+      "center": [
+        88,
+        125,
+        73
+      ]
+    },
+    {
+      "patient_id": "PatientID_0113",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 15907,
+      "vol_to": 29201,
+      "center": [
+        161,
+        140,
+        57
+      ]
+    },
+    {
+      "patient_id": "PatientID_0113",
+      "tp_from": 2,
+      "tp_to": 3,
+      "vol_from": 29201,
+      "vol_to": 22878,
+      "center": [
+        161,
+        141,
+        57
+      ]
+    },
+    {
+      "patient_id": "PatientID_0114",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 158875,
+      "vol_to": 97302,
+      "center": [
+        98,
+        92,
+        92
+      ]
+    },
+    {
+      "patient_id": "PatientID_0116",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 138675,
+      "vol_to": 141650,
+      "center": [
+        109,
+        78,
+        76
+      ]
+    },
+    {
+      "patient_id": "PatientID_0117",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 158338,
+      "vol_to": 69436,
+      "center": [
+        127,
+        90,
+        89
+      ]
+    },
+    {
+      "patient_id": "PatientID_0117",
+      "tp_from": 2,
+      "tp_to": 3,
+      "vol_from": 69436,
+      "vol_to": 76737,
+      "center": [
+        138,
+        79,
+        94
+      ]
+    },
+    {
+      "patient_id": "PatientID_0118",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 99417,
+      "vol_to": 34653,
+      "center": [
+        149,
+        125,
+        64
+      ]
+    },
+    {
+      "patient_id": "PatientID_0118",
+      "tp_from": 2,
+      "tp_to": 3,
+      "vol_from": 34653,
+      "vol_to": 47899,
+      "center": [
+        150,
+        126,
+        63
+      ]
+    },
+    {
+      "patient_id": "PatientID_0121",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 15172,
+      "vol_to": 16808,
+      "center": [
+        138,
+        177,
+        82
+      ]
+    },
+    {
+      "patient_id": "PatientID_0121",
+      "tp_from": 2,
+      "tp_to": 3,
+      "vol_from": 16808,
+      "vol_to": 34192,
+      "center": [
+        139,
+        167,
+        83
+      ]
+    },
+    {
+      "patient_id": "PatientID_0123",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 76962,
+      "vol_to": 288753,
+      "center": [
+        99,
+        139,
+        96
+      ]
+    },
+    {
+      "patient_id": "PatientID_0125",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 60777,
+      "vol_to": 246970,
+      "center": [
+        151,
+        150,
+        62
+      ]
+    },
+    {
+      "patient_id": "PatientID_0132",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 15907,
+      "vol_to": 29201,
+      "center": [
+        161,
+        140,
+        57
+      ]
+    },
+    {
+      "patient_id": "PatientID_0132",
+      "tp_from": 2,
+      "tp_to": 3,
+      "vol_from": 29201,
+      "vol_to": 43739,
+      "center": [
+        161,
+        137,
+        57
+      ]
+    },
+    {
+      "patient_id": "PatientID_0135",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 9550,
+      "vol_to": 14806,
+      "center": [
+        105,
+        138,
+        105
+      ]
+    },
+    {
+      "patient_id": "PatientID_0135",
+      "tp_from": 2,
+      "tp_to": 3,
+      "vol_from": 14806,
+      "vol_to": 93057,
+      "center": [
+        100,
+        135,
+        103
+      ]
+    },
+    {
+      "patient_id": "PatientID_0136",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 38081,
+      "vol_to": 65537,
+      "center": [
+        155,
+        147,
+        54
+      ]
+    },
+    {
+      "patient_id": "PatientID_0136",
+      "tp_from": 2,
+      "tp_to": 3,
+      "vol_from": 65537,
+      "vol_to": 148956,
+      "center": [
+        155,
+        144,
+        62
+      ]
+    },
+    {
+      "patient_id": "PatientID_0138",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 172296,
+      "vol_to": 18133,
+      "center": [
+        90,
+        146,
+        71
+      ]
+    },
+    {
+      "patient_id": "PatientID_0138",
+      "tp_from": 2,
+      "tp_to": 3,
+      "vol_from": 18133,
+      "vol_to": 40197,
+      "center": [
+        77,
+        156,
+        62
+      ]
+    },
+    {
+      "patient_id": "PatientID_0140",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 81760,
+      "vol_to": 25226,
+      "center": [
+        82,
+        131,
+        56
+      ]
+    },
+    {
+      "patient_id": "PatientID_0140",
+      "tp_from": 2,
+      "tp_to": 3,
+      "vol_from": 25226,
+      "vol_to": 22556,
+      "center": [
+        79,
+        117,
+        46
+      ]
+    },
+    {
+      "patient_id": "PatientID_0142",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 161130,
+      "vol_to": 112146,
+      "center": [
+        91,
+        166,
+        73
+      ]
+    },
+    {
+      "patient_id": "PatientID_0145",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 125079,
+      "vol_to": 110183,
+      "center": [
+        81,
+        126,
+        65
+      ]
+    },
+    {
+      "patient_id": "PatientID_0147",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 93328,
+      "vol_to": 130259,
+      "center": [
+        101,
+        98,
+        91
+      ]
+    },
+    {
+      "patient_id": "PatientID_0147",
+      "tp_from": 2,
+      "tp_to": 3,
+      "vol_from": 130259,
+      "vol_to": 157661,
+      "center": [
+        103,
+        98,
+        94
+      ]
+    },
+    {
+      "patient_id": "PatientID_0148",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 91375,
+      "vol_to": 55059,
+      "center": [
+        93,
+        143,
+        59
+      ]
+    },
+    {
+      "patient_id": "PatientID_0149",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 247376,
+      "vol_to": 87010,
+      "center": [
+        139,
+        135,
+        89
+      ]
+    },
+    {
+      "patient_id": "PatientID_0149",
+      "tp_from": 2,
+      "tp_to": 3,
+      "vol_from": 87010,
+      "vol_to": 51818,
+      "center": [
+        139,
+        143,
+        87
+      ]
+    },
+    {
+      "patient_id": "PatientID_0149",
+      "tp_from": 3,
+      "tp_to": 4,
+      "vol_from": 51818,
+      "vol_to": 97619,
+      "center": [
+        135,
+        150,
+        81
+      ]
+    },
+    {
+      "patient_id": "PatientID_0150",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 22867,
+      "vol_to": 23659,
+      "center": [
+        157,
+        153,
+        81
+      ]
+    },
+    {
+      "patient_id": "PatientID_0150",
+      "tp_from": 2,
+      "tp_to": 3,
+      "vol_from": 23659,
+      "vol_to": 49570,
+      "center": [
+        152,
+        147,
+        85
+      ]
+    },
+    {
+      "patient_id": "PatientID_0150",
+      "tp_from": 3,
+      "tp_to": 4,
+      "vol_from": 49570,
+      "vol_to": 54657,
+      "center": [
+        151,
+        147,
+        86
+      ]
+    },
+    {
+      "patient_id": "PatientID_0150",
+      "tp_from": 4,
+      "tp_to": 6,
+      "vol_from": 54657,
+      "vol_to": 68368,
+      "center": [
+        150,
+        147,
+        87
+      ]
+    },
+    {
+      "patient_id": "PatientID_0151",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 57452,
+      "vol_to": 60540,
+      "center": [
+        96,
+        86,
+        79
+      ]
+    },
+    {
+      "patient_id": "PatientID_0152",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 8620,
+      "vol_to": 9440,
+      "center": [
+        157,
+        112,
+        54
+      ]
+    },
+    {
+      "patient_id": "PatientID_0152",
+      "tp_from": 2,
+      "tp_to": 3,
+      "vol_from": 9440,
+      "vol_to": 47720,
+      "center": [
+        155,
+        129,
+        62
+      ]
+    },
+    {
+      "patient_id": "PatientID_0156",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 26953,
+      "vol_to": 2316,
+      "center": [
+        92,
+        122,
+        59
+      ]
+    },
+    {
+      "patient_id": "PatientID_0156",
+      "tp_from": 2,
+      "tp_to": 3,
+      "vol_from": 2316,
+      "vol_to": 4744,
+      "center": [
+        83,
+        118,
+        54
+      ]
+    },
+    {
+      "patient_id": "PatientID_0157",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 72081,
+      "vol_to": 29006,
+      "center": [
+        112,
+        157,
+        88
+      ]
+    },
+    {
+      "patient_id": "PatientID_0157",
+      "tp_from": 2,
+      "tp_to": 3,
+      "vol_from": 29006,
+      "vol_to": 38725,
+      "center": [
+        110,
+        160,
+        85
+      ]
+    },
+    {
+      "patient_id": "PatientID_0157",
+      "tp_from": 3,
+      "tp_to": 4,
+      "vol_from": 38725,
+      "vol_to": 40435,
+      "center": [
+        108,
+        163,
+        88
+      ]
+    },
+    {
+      "patient_id": "PatientID_0157",
+      "tp_from": 4,
+      "tp_to": 5,
+      "vol_from": 40435,
+      "vol_to": 39850,
+      "center": [
+        112,
+        160,
+        89
+      ]
+    },
+    {
+      "patient_id": "PatientID_0157",
+      "tp_from": 5,
+      "tp_to": 6,
+      "vol_from": 39850,
+      "vol_to": 52732,
+      "center": [
+        116,
+        157,
+        90
+      ]
+    },
+    {
+      "patient_id": "PatientID_0159",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 135151,
+      "vol_to": 33181,
+      "center": [
+        83,
+        133,
+        64
+      ]
+    },
+    {
+      "patient_id": "PatientID_0159",
+      "tp_from": 2,
+      "tp_to": 3,
+      "vol_from": 33181,
+      "vol_to": 8684,
+      "center": [
+        74,
+        127,
+        52
+      ]
+    },
+    {
+      "patient_id": "PatientID_0159",
+      "tp_from": 3,
+      "tp_to": 4,
+      "vol_from": 8684,
+      "vol_to": 64208,
+      "center": [
+        83,
+        130,
+        72
+      ]
+    },
+    {
+      "patient_id": "PatientID_0160",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 18205,
+      "vol_to": 17492,
+      "center": [
+        81,
+        130,
+        112
+      ]
+    },
+    {
+      "patient_id": "PatientID_0162",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 60347,
+      "vol_to": 51206,
+      "center": [
+        154,
+        158,
+        59
+      ]
+    },
+    {
+      "patient_id": "PatientID_0162",
+      "tp_from": 2,
+      "tp_to": 3,
+      "vol_from": 51206,
+      "vol_to": 21993,
+      "center": [
+        151,
+        169,
+        56
+      ]
+    },
+    {
+      "patient_id": "PatientID_0162",
+      "tp_from": 3,
+      "tp_to": 4,
+      "vol_from": 21993,
+      "vol_to": 31895,
+      "center": [
+        160,
+        158,
+        54
+      ]
+    },
+    {
+      "patient_id": "PatientID_0162",
+      "tp_from": 4,
+      "tp_to": 5,
+      "vol_from": 31895,
+      "vol_to": 68300,
+      "center": [
+        158,
+        156,
+        60
+      ]
+    },
+    {
+      "patient_id": "PatientID_0162",
+      "tp_from": 5,
+      "tp_to": 6,
+      "vol_from": 68300,
+      "vol_to": 96786,
+      "center": [
+        156,
+        157,
+        65
+      ]
+    },
+    {
+      "patient_id": "PatientID_0164",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 17077,
+      "vol_to": 23877,
+      "center": [
+        163,
+        147,
+        72
+      ]
+    },
+    {
+      "patient_id": "PatientID_0164",
+      "tp_from": 2,
+      "tp_to": 3,
+      "vol_from": 23877,
+      "vol_to": 52728,
+      "center": [
+        159,
+        150,
+        75
+      ]
+    },
+    {
+      "patient_id": "PatientID_0164",
+      "tp_from": 3,
+      "tp_to": 4,
+      "vol_from": 52728,
+      "vol_to": 40926,
+      "center": [
+        160,
+        150,
+        76
+      ]
+    },
+    {
+      "patient_id": "PatientID_0164",
+      "tp_from": 4,
+      "tp_to": 5,
+      "vol_from": 40926,
+      "vol_to": 66012,
+      "center": [
+        163,
+        150,
+        75
+      ]
+    },
+    {
+      "patient_id": "PatientID_0169",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 29208,
+      "vol_to": 137300,
+      "center": [
+        159,
+        151,
+        78
+      ]
+    },
+    {
+      "patient_id": "PatientID_0169",
+      "tp_from": 2,
+      "tp_to": 3,
+      "vol_from": 137300,
+      "vol_to": 87450,
+      "center": [
+        159,
+        151,
+        78
+      ]
+    },
+    {
+      "patient_id": "PatientID_0169",
+      "tp_from": 3,
+      "tp_to": 4,
+      "vol_from": 87450,
+      "vol_to": 141242,
+      "center": [
+        159,
+        149,
+        76
+      ]
+    },
+    {
+      "patient_id": "PatientID_0170",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 20329,
+      "vol_to": 23783,
+      "center": [
+        152,
+        113,
+        45
+      ]
+    },
+    {
+      "patient_id": "PatientID_0171",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 207342,
+      "vol_to": 256254,
+      "center": [
+        101,
+        106,
+        89
+      ]
+    },
+    {
+      "patient_id": "PatientID_0171",
+      "tp_from": 2,
+      "tp_to": 3,
+      "vol_from": 256254,
+      "vol_to": 271135,
+      "center": [
+        101,
+        109,
+        90
+      ]
+    },
+    {
+      "patient_id": "PatientID_0173",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 69062,
+      "vol_to": 10486,
+      "center": [
+        89,
+        138,
+        93
+      ]
+    },
+    {
+      "patient_id": "PatientID_0186",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 38457,
+      "vol_to": 61323,
+      "center": [
+        108,
+        76,
+        90
+      ]
+    },
+    {
+      "patient_id": "PatientID_0186",
+      "tp_from": 2,
+      "tp_to": 3,
+      "vol_from": 61323,
+      "vol_to": 23707,
+      "center": [
+        103,
+        76,
+        91
+      ]
+    },
+    {
+      "patient_id": "PatientID_0186",
+      "tp_from": 3,
+      "tp_to": 4,
+      "vol_from": 23707,
+      "vol_to": 26303,
+      "center": [
+        102,
+        80,
+        92
+      ]
+    },
+    {
+      "patient_id": "PatientID_0186",
+      "tp_from": 4,
+      "tp_to": 5,
+      "vol_from": 26303,
+      "vol_to": 60901,
+      "center": [
+        105,
+        78,
+        93
+      ]
+    },
+    {
+      "patient_id": "PatientID_0186",
+      "tp_from": 5,
+      "tp_to": 6,
+      "vol_from": 60901,
+      "vol_to": 68455,
+      "center": [
+        106,
+        79,
+        94
+      ]
+    },
+    {
+      "patient_id": "PatientID_0187",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 75324,
+      "vol_to": 30614,
+      "center": [
+        147,
+        172,
+        79
+      ]
+    },
+    {
+      "patient_id": "PatientID_0188",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 51084,
+      "vol_to": 133146,
+      "center": [
+        149,
+        134,
+        66
+      ]
+    },
+    {
+      "patient_id": "PatientID_0189",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 4632,
+      "vol_to": 6442,
+      "center": [
+        121,
+        145,
+        20
+      ]
+    },
+    {
+      "patient_id": "PatientID_0189",
+      "tp_from": 2,
+      "tp_to": 3,
+      "vol_from": 6442,
+      "vol_to": 6746,
+      "center": [
+        122,
+        146,
+        19
+      ]
+    },
+    {
+      "patient_id": "PatientID_0189",
+      "tp_from": 3,
+      "tp_to": 4,
+      "vol_from": 6746,
+      "vol_to": 7113,
+      "center": [
+        122,
+        150,
+        18
+      ]
+    },
+    {
+      "patient_id": "PatientID_0189",
+      "tp_from": 4,
+      "tp_to": 5,
+      "vol_from": 7113,
+      "vol_to": 4216,
+      "center": [
+        119,
+        153,
+        18
+      ]
+    },
+    {
+      "patient_id": "PatientID_0189",
+      "tp_from": 5,
+      "tp_to": 6,
+      "vol_from": 4216,
+      "vol_to": 15015,
+      "center": [
+        118,
+        151,
+        18
+      ]
+    },
+    {
+      "patient_id": "PatientID_0191",
+      "tp_from": 2,
+      "tp_to": 3,
+      "vol_from": 51409,
+      "vol_to": 44170,
+      "center": [
+        101,
+        86,
+        95
+      ]
+    },
+    {
+      "patient_id": "PatientID_0191",
+      "tp_from": 3,
+      "tp_to": 4,
+      "vol_from": 44170,
+      "vol_to": 72962,
+      "center": [
+        101,
+        86,
+        94
+      ]
+    },
+    {
+      "patient_id": "PatientID_0192",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 22920,
+      "vol_to": 20584,
+      "center": [
+        84,
+        99,
+        92
+      ]
+    },
+    {
+      "patient_id": "PatientID_0192",
+      "tp_from": 2,
+      "tp_to": 3,
+      "vol_from": 20584,
+      "vol_to": 20569,
+      "center": [
+        85,
+        98,
+        92
+      ]
+    },
+    {
+      "patient_id": "PatientID_0195",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 32474,
+      "vol_to": 29608,
+      "center": [
+        156,
+        115,
+        53
+      ]
+    },
+    {
+      "patient_id": "PatientID_0195",
+      "tp_from": 2,
+      "tp_to": 3,
+      "vol_from": 29608,
+      "vol_to": 18888,
+      "center": [
+        156,
+        115,
+        55
+      ]
+    },
+    {
+      "patient_id": "PatientID_0196",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 2444,
+      "vol_to": 6474,
+      "center": [
+        98,
+        169,
+        115
+      ]
+    },
+    {
+      "patient_id": "PatientID_0196",
+      "tp_from": 2,
+      "tp_to": 3,
+      "vol_from": 6474,
+      "vol_to": 6729,
+      "center": [
+        100,
+        167,
+        116
+      ]
+    },
+    {
+      "patient_id": "PatientID_0197",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 870,
+      "vol_to": 601,
+      "center": [
+        167,
+        152,
+        47
+      ]
+    },
+    {
+      "patient_id": "PatientID_0197",
+      "tp_from": 2,
+      "tp_to": 3,
+      "vol_from": 601,
+      "vol_to": 305,
+      "center": [
+        167,
+        151,
+        46
+      ]
+    },
+    {
+      "patient_id": "PatientID_0198",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 16578,
+      "vol_to": 16519,
+      "center": [
+        151,
+        176,
+        76
+      ]
+    },
+    {
+      "patient_id": "PatientID_0198",
+      "tp_from": 2,
+      "tp_to": 3,
+      "vol_from": 16519,
+      "vol_to": 57488,
+      "center": [
+        147,
+        170,
+        78
+      ]
+    },
+    {
+      "patient_id": "PatientID_0198",
+      "tp_from": 3,
+      "tp_to": 4,
+      "vol_from": 57488,
+      "vol_to": 67327,
+      "center": [
+        146,
+        171,
+        78
+      ]
+    },
+    {
+      "patient_id": "PatientID_0199",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 56688,
+      "vol_to": 53312,
+      "center": [
+        107,
+        122,
+        107
+      ]
+    },
+    {
+      "patient_id": "PatientID_0199",
+      "tp_from": 2,
+      "tp_to": 3,
+      "vol_from": 53312,
+      "vol_to": 39054,
+      "center": [
+        108,
+        122,
+        110
+      ]
+    },
+    {
+      "patient_id": "PatientID_0201",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 42671,
+      "vol_to": 43680,
+      "center": [
+        136,
+        90,
+        79
+      ]
+    },
+    {
+      "patient_id": "PatientID_0201",
+      "tp_from": 2,
+      "tp_to": 3,
+      "vol_from": 43680,
+      "vol_to": 45925,
+      "center": [
+        136,
+        90,
+        80
+      ]
+    },
+    {
+      "patient_id": "PatientID_0201",
+      "tp_from": 3,
+      "tp_to": 4,
+      "vol_from": 45925,
+      "vol_to": 50903,
+      "center": [
+        135,
+        91,
+        79
+      ]
+    },
+    {
+      "patient_id": "PatientID_0201",
+      "tp_from": 4,
+      "tp_to": 5,
+      "vol_from": 50903,
+      "vol_to": 60793,
+      "center": [
+        134,
+        92,
+        78
+      ]
+    },
+    {
+      "patient_id": "PatientID_0201",
+      "tp_from": 5,
+      "tp_to": 6,
+      "vol_from": 60793,
+      "vol_to": 68797,
+      "center": [
+        133,
+        95,
+        77
+      ]
+    },
+    {
+      "patient_id": "PatientID_0202",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 15905,
+      "vol_to": 26835,
+      "center": [
+        100,
+        72,
+        89
+      ]
+    },
+    {
+      "patient_id": "PatientID_0202",
+      "tp_from": 2,
+      "tp_to": 3,
+      "vol_from": 26835,
+      "vol_to": 306341,
+      "center": [
+        106,
+        88,
+        86
+      ]
+    },
+    {
+      "patient_id": "PatientID_0204",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 125071,
+      "vol_to": 82991,
+      "center": [
+        85,
+        146,
+        64
+      ]
+    },
+    {
+      "patient_id": "PatientID_0204",
+      "tp_from": 2,
+      "tp_to": 3,
+      "vol_from": 82991,
+      "vol_to": 50741,
+      "center": [
+        81,
+        143,
+        59
+      ]
+    },
+    {
+      "patient_id": "PatientID_0204",
+      "tp_from": 3,
+      "tp_to": 4,
+      "vol_from": 50741,
+      "vol_to": 95156,
+      "center": [
+        79,
+        152,
+        59
+      ]
+    },
+    {
+      "patient_id": "PatientID_0204",
+      "tp_from": 4,
+      "tp_to": 5,
+      "vol_from": 95156,
+      "vol_to": 120555,
+      "center": [
+        82,
+        157,
+        62
+      ]
+    },
+    {
+      "patient_id": "PatientID_0204",
+      "tp_from": 5,
+      "tp_to": 6,
+      "vol_from": 120555,
+      "vol_to": 200801,
+      "center": [
+        88,
+        155,
+        69
+      ]
+    },
+    {
+      "patient_id": "PatientID_0205",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 73099,
+      "vol_to": 65643,
+      "center": [
+        102,
+        91,
+        92
+      ]
+    },
+    {
+      "patient_id": "PatientID_0205",
+      "tp_from": 2,
+      "tp_to": 3,
+      "vol_from": 65643,
+      "vol_to": 76005,
+      "center": [
+        97,
+        88,
+        95
+      ]
+    },
+    {
+      "patient_id": "PatientID_0205",
+      "tp_from": 3,
+      "tp_to": 4,
+      "vol_from": 76005,
+      "vol_to": 58713,
+      "center": [
+        96,
+        87,
+        96
+      ]
+    },
+    {
+      "patient_id": "PatientID_0205",
+      "tp_from": 4,
+      "tp_to": 5,
+      "vol_from": 58713,
+      "vol_to": 91560,
+      "center": [
+        112,
+        112,
+        78
+      ]
+    },
+    {
+      "patient_id": "PatientID_0207",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 55091,
+      "vol_to": 53521,
+      "center": [
+        128,
+        91,
+        102
+      ]
+    },
+    {
+      "patient_id": "PatientID_0207",
+      "tp_from": 2,
+      "tp_to": 3,
+      "vol_from": 53521,
+      "vol_to": 25340,
+      "center": [
+        130,
+        88,
+        103
+      ]
+    },
+    {
+      "patient_id": "PatientID_0207",
+      "tp_from": 3,
+      "tp_to": 4,
+      "vol_from": 25340,
+      "vol_to": 29758,
+      "center": [
+        134,
+        87,
+        104
+      ]
+    },
+    {
+      "patient_id": "PatientID_0207",
+      "tp_from": 4,
+      "tp_to": 5,
+      "vol_from": 29758,
+      "vol_to": 27671,
+      "center": [
+        135,
+        88,
+        105
+      ]
+    },
+    {
+      "patient_id": "PatientID_0207",
+      "tp_from": 5,
+      "tp_to": 6,
+      "vol_from": 27671,
+      "vol_to": 29946,
+      "center": [
+        134,
+        89,
+        104
+      ]
+    },
+    {
+      "patient_id": "PatientID_0208",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 35007,
+      "vol_to": 4171,
+      "center": [
+        105,
+        155,
+        29
+      ]
+    },
+    {
+      "patient_id": "PatientID_0209",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 165337,
+      "vol_to": 131287,
+      "center": [
+        145,
+        160,
+        84
+      ]
+    },
+    {
+      "patient_id": "PatientID_0209",
+      "tp_from": 2,
+      "tp_to": 3,
+      "vol_from": 131287,
+      "vol_to": 103792,
+      "center": [
+        142,
+        162,
+        85
+      ]
+    },
+    {
+      "patient_id": "PatientID_0209",
+      "tp_from": 3,
+      "tp_to": 4,
+      "vol_from": 103792,
+      "vol_to": 90902,
+      "center": [
+        140,
+        164,
+        88
+      ]
+    },
+    {
+      "patient_id": "PatientID_0209",
+      "tp_from": 4,
+      "tp_to": 5,
+      "vol_from": 90902,
+      "vol_to": 86119,
+      "center": [
+        140,
+        165,
+        87
+      ]
+    },
+    {
+      "patient_id": "PatientID_0209",
+      "tp_from": 5,
+      "tp_to": 6,
+      "vol_from": 86119,
+      "vol_to": 57939,
+      "center": [
+        140,
+        165,
+        88
+      ]
+    },
+    {
+      "patient_id": "PatientID_0210",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 18692,
+      "vol_to": 28117,
+      "center": [
+        136,
+        134,
+        70
+      ]
+    },
+    {
+      "patient_id": "PatientID_0210",
+      "tp_from": 2,
+      "tp_to": 3,
+      "vol_from": 28117,
+      "vol_to": 25734,
+      "center": [
+        136,
+        134,
+        70
+      ]
+    },
+    {
+      "patient_id": "PatientID_0210",
+      "tp_from": 3,
+      "tp_to": 4,
+      "vol_from": 25734,
+      "vol_to": 25665,
+      "center": [
+        137,
+        138,
+        67
+      ]
+    },
+    {
+      "patient_id": "PatientID_0210",
+      "tp_from": 4,
+      "tp_to": 6,
+      "vol_from": 25665,
+      "vol_to": 38815,
+      "center": [
+        142,
+        136,
+        72
+      ]
+    },
+    {
+      "patient_id": "PatientID_0211",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 92006,
+      "vol_to": 75726,
+      "center": [
+        146,
+        133,
+        78
+      ]
+    },
+    {
+      "patient_id": "PatientID_0211",
+      "tp_from": 2,
+      "tp_to": 3,
+      "vol_from": 75726,
+      "vol_to": 91554,
+      "center": [
+        148,
+        128,
+        79
+      ]
+    },
+    {
+      "patient_id": "PatientID_0212",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 179131,
+      "vol_to": 205736,
+      "center": [
+        98,
+        101,
+        77
+      ]
+    },
+    {
+      "patient_id": "PatientID_0212",
+      "tp_from": 2,
+      "tp_to": 3,
+      "vol_from": 205736,
+      "vol_to": 265859,
+      "center": [
+        94,
+        111,
+        80
+      ]
+    },
+    {
+      "patient_id": "PatientID_0213",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 53123,
+      "vol_to": 50653,
+      "center": [
+        90,
+        164,
+        93
+      ]
+    },
+    {
+      "patient_id": "PatientID_0213",
+      "tp_from": 2,
+      "tp_to": 3,
+      "vol_from": 50653,
+      "vol_to": 33245,
+      "center": [
+        89,
+        164,
+        94
+      ]
+    },
+    {
+      "patient_id": "PatientID_0213",
+      "tp_from": 3,
+      "tp_to": 4,
+      "vol_from": 33245,
+      "vol_to": 43605,
+      "center": [
+        90,
+        166,
+        97
+      ]
+    },
+    {
+      "patient_id": "PatientID_0213",
+      "tp_from": 4,
+      "tp_to": 5,
+      "vol_from": 43605,
+      "vol_to": 46056,
+      "center": [
+        90,
+        166,
+        95
+      ]
+    },
+    {
+      "patient_id": "PatientID_0214",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 78399,
+      "vol_to": 43159,
+      "center": [
+        86,
+        118,
+        62
+      ]
+    },
+    {
+      "patient_id": "PatientID_0214",
+      "tp_from": 2,
+      "tp_to": 3,
+      "vol_from": 43159,
+      "vol_to": 60959,
+      "center": [
+        82,
+        116,
+        59
+      ]
+    },
+    {
+      "patient_id": "PatientID_0214",
+      "tp_from": 3,
+      "tp_to": 4,
+      "vol_from": 60959,
+      "vol_to": 68997,
+      "center": [
+        83,
+        116,
+        58
+      ]
+    },
+    {
+      "patient_id": "PatientID_0214",
+      "tp_from": 4,
+      "tp_to": 5,
+      "vol_from": 68997,
+      "vol_to": 32113,
+      "center": [
+        82,
+        117,
+        58
+      ]
+    },
+    {
+      "patient_id": "PatientID_0214",
+      "tp_from": 5,
+      "tp_to": 6,
+      "vol_from": 32113,
+      "vol_to": 35473,
+      "center": [
+        80,
+        117,
+        56
+      ]
+    },
+    {
+      "patient_id": "PatientID_0215",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 52395,
+      "vol_to": 45983,
+      "center": [
+        99,
+        91,
+        101
+      ]
+    },
+    {
+      "patient_id": "PatientID_0215",
+      "tp_from": 2,
+      "tp_to": 3,
+      "vol_from": 45983,
+      "vol_to": 48222,
+      "center": [
+        98,
+        92,
+        102
+      ]
+    },
+    {
+      "patient_id": "PatientID_0215",
+      "tp_from": 3,
+      "tp_to": 4,
+      "vol_from": 48222,
+      "vol_to": 43052,
+      "center": [
+        97,
+        90,
+        102
+      ]
+    },
+    {
+      "patient_id": "PatientID_0215",
+      "tp_from": 4,
+      "tp_to": 5,
+      "vol_from": 43052,
+      "vol_to": 51504,
+      "center": [
+        98,
+        88,
+        102
+      ]
+    },
+    {
+      "patient_id": "PatientID_0215",
+      "tp_from": 5,
+      "tp_to": 6,
+      "vol_from": 51504,
+      "vol_to": 53051,
+      "center": [
+        100,
+        91,
+        102
+      ]
+    },
+    {
+      "patient_id": "PatientID_0220",
+      "tp_from": 1,
+      "tp_to": 6,
+      "vol_from": 41260,
+      "vol_to": 11149,
+      "center": [
+        129,
+        95,
+        101
+      ]
+    },
+    {
+      "patient_id": "PatientID_0235",
+      "tp_from": 1,
+      "tp_to": 3,
+      "vol_from": 197145,
+      "vol_to": 194552,
+      "center": [
+        154,
+        141,
+        78
+      ]
+    },
+    {
+      "patient_id": "PatientID_0235",
+      "tp_from": 3,
+      "tp_to": 6,
+      "vol_from": 194552,
+      "vol_to": 207726,
+      "center": [
+        151,
+        146,
+        79
+      ]
+    },
+    {
+      "patient_id": "PatientID_0236",
+      "tp_from": 1,
+      "tp_to": 3,
+      "vol_from": 13749,
+      "vol_to": 2103,
+      "center": [
+        118,
+        108,
+        54
+      ]
+    },
+    {
+      "patient_id": "PatientID_0236",
+      "tp_from": 3,
+      "tp_to": 6,
+      "vol_from": 2103,
+      "vol_to": 936,
+      "center": [
+        119,
+        104,
+        49
+      ]
+    },
+    {
+      "patient_id": "PatientID_0237",
+      "tp_from": 1,
+      "tp_to": 3,
+      "vol_from": 92138,
+      "vol_to": 88539,
+      "center": [
+        155,
+        152,
+        89
+      ]
+    },
+    {
+      "patient_id": "PatientID_0238",
+      "tp_from": 1,
+      "tp_to": 3,
+      "vol_from": 35203,
+      "vol_to": 243616,
+      "center": [
+        84,
+        129,
+        71
+      ]
+    },
+    {
+      "patient_id": "PatientID_0238",
+      "tp_from": 3,
+      "tp_to": 6,
+      "vol_from": 243616,
+      "vol_to": 212024,
+      "center": [
+        85,
+        130,
+        70
+      ]
+    },
+    {
+      "patient_id": "PatientID_0239",
+      "tp_from": 1,
+      "tp_to": 3,
+      "vol_from": 13076,
+      "vol_to": 7241,
+      "center": [
+        128,
+        115,
+        114
+      ]
+    },
+    {
+      "patient_id": "PatientID_0239",
+      "tp_from": 3,
+      "tp_to": 6,
+      "vol_from": 7241,
+      "vol_to": 71980,
+      "center": [
+        100,
+        109,
+        96
+      ]
+    },
+    {
+      "patient_id": "PatientID_0240",
+      "tp_from": 1,
+      "tp_to": 3,
+      "vol_from": 25818,
+      "vol_to": 53395,
+      "center": [
+        155,
+        143,
+        79
+      ]
+    },
+    {
+      "patient_id": "PatientID_0240",
+      "tp_from": 3,
+      "tp_to": 6,
+      "vol_from": 53395,
+      "vol_to": 51362,
+      "center": [
+        157,
+        146,
+        77
+      ]
+    },
+    {
+      "patient_id": "PatientID_0242",
+      "tp_from": 1,
+      "tp_to": 3,
+      "vol_from": 12601,
+      "vol_to": 951,
+      "center": [
+        113,
+        151,
+        86
+      ]
+    },
+    {
+      "patient_id": "PatientID_0242",
+      "tp_from": 3,
+      "tp_to": 6,
+      "vol_from": 951,
+      "vol_to": 1550,
+      "center": [
+        115,
+        145,
+        93
+      ]
+    },
+    {
+      "patient_id": "PatientID_0249",
+      "tp_from": 1,
+      "tp_to": 3,
+      "vol_from": 87431,
+      "vol_to": 38514,
+      "center": [
+        150,
+        170,
+        81
+      ]
+    },
+    {
+      "patient_id": "PatientID_0250",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 112063,
+      "vol_to": 48281,
+      "center": [
+        87,
+        131,
+        72
+      ]
+    },
+    {
+      "patient_id": "PatientID_0250",
+      "tp_from": 2,
+      "tp_to": 3,
+      "vol_from": 48281,
+      "vol_to": 29394,
+      "center": [
+        79,
+        138,
+        68
+      ]
+    },
+    {
+      "patient_id": "PatientID_0251",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 29237,
+      "vol_to": 49197,
+      "center": [
+        101,
+        145,
+        105
+      ]
+    },
+    {
+      "patient_id": "PatientID_0251",
+      "tp_from": 2,
+      "tp_to": 3,
+      "vol_from": 49197,
+      "vol_to": 115804,
+      "center": [
+        95,
+        147,
+        99
+      ]
+    },
+    {
+      "patient_id": "PatientID_0252",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 108168,
+      "vol_to": 109736,
+      "center": [
+        150,
+        127,
+        68
+      ]
+    },
+    {
+      "patient_id": "PatientID_0252",
+      "tp_from": 2,
+      "tp_to": 3,
+      "vol_from": 109736,
+      "vol_to": 159502,
+      "center": [
+        148,
+        141,
+        68
+      ]
+    },
+    {
+      "patient_id": "PatientID_0254",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 36681,
+      "vol_to": 17370,
+      "center": [
+        135,
+        120,
+        110
+      ]
+    },
+    {
+      "patient_id": "PatientID_0254",
+      "tp_from": 2,
+      "tp_to": 3,
+      "vol_from": 17370,
+      "vol_to": 33012,
+      "center": [
+        138,
+        118,
+        111
+      ]
+    },
+    {
+      "patient_id": "PatientID_0254",
+      "tp_from": 3,
+      "tp_to": 4,
+      "vol_from": 33012,
+      "vol_to": 92632,
+      "center": [
+        138,
+        119,
+        98
+      ]
+    },
+    {
+      "patient_id": "PatientID_0255",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 10089,
+      "vol_to": 5256,
+      "center": [
+        94,
+        114,
+        84
+      ]
+    },
+    {
+      "patient_id": "PatientID_0256",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 35122,
+      "vol_to": 18682,
+      "center": [
+        148,
+        175,
+        72
+      ]
+    },
+    {
+      "patient_id": "PatientID_0256",
+      "tp_from": 2,
+      "tp_to": 3,
+      "vol_from": 18682,
+      "vol_to": 47643,
+      "center": [
+        151,
+        169,
+        74
+      ]
+    },
+    {
+      "patient_id": "PatientID_0256",
+      "tp_from": 3,
+      "tp_to": 4,
+      "vol_from": 47643,
+      "vol_to": 71282,
+      "center": [
+        149,
+        162,
+        80
+      ]
+    },
+    {
+      "patient_id": "PatientID_0256",
+      "tp_from": 4,
+      "tp_to": 5,
+      "vol_from": 71282,
+      "vol_to": 264819,
+      "center": [
+        144,
+        151,
+        79
+      ]
+    },
+    {
+      "patient_id": "PatientID_0259",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 29323,
+      "vol_to": 118230,
+      "center": [
+        157,
+        124,
+        62
+      ]
+    },
+    {
+      "patient_id": "PatientID_0260",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 9087,
+      "vol_to": 31233,
+      "center": [
+        148,
+        135,
+        81
+      ]
+    },
+    {
+      "patient_id": "PatientID_0264",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 25798,
+      "vol_to": 48437,
+      "center": [
+        95,
+        101,
+        105
+      ]
+    },
+    {
+      "patient_id": "PatientID_0265",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 105387,
+      "vol_to": 84688,
+      "center": [
+        148,
+        114,
+        71
+      ]
+    },
+    {
+      "patient_id": "PatientID_0267",
+      "tp_from": 1,
+      "tp_to": 2,
+      "vol_from": 87760,
+      "vol_to": 98037,
+      "center": [
+        158,
+        154,
+        65
+      ]
+    },
+    {
+      "patient_id": "PatientID_0268",
+      "tp_from": 1,
+      "tp_to": 3,
+      "vol_from": 19512,
+      "vol_to": 221,
+      "center": [
+        149,
+        113,
+        60
+      ]
+    },
+    {
+      "patient_id": "PatientID_0268",
+      "tp_from": 3,
+      "tp_to": 6,
+      "vol_from": 221,
+      "vol_to": 231,
+      "center": [
+        146,
+        112,
+        64
+      ]
+    },
+    {
+      "patient_id": "PatientID_0270",
+      "tp_from": 1,
+      "tp_to": 3,
+      "vol_from": 70082,
+      "vol_to": 11244,
+      "center": [
+        131,
+        96,
+        92
+      ]
+    },
+    {
+      "patient_id": "PatientID_0270",
+      "tp_from": 3,
+      "tp_to": 6,
+      "vol_from": 11244,
+      "vol_to": 20049,
+      "center": [
+        135,
+        88,
+        104
+      ]
+    },
+    {
+      "patient_id": "PatientID_0271",
+      "tp_from": 1,
+      "tp_to": 3,
+      "vol_from": 17013,
+      "vol_to": 1715,
+      "center": [
+        122,
+        140,
+        76
+      ]
+    },
+    {
+      "patient_id": "PatientID_0271",
+      "tp_from": 3,
+      "tp_to": 6,
+      "vol_from": 1715,
+      "vol_to": 713,
+      "center": [
+        124,
+        119,
+        98
+      ]
+    },
+    {
+      "patient_id": "PatientID_0272",
+      "tp_from": 1,
+      "tp_to": 3,
+      "vol_from": 42646,
+      "vol_to": 13279,
+      "center": [
+        110,
+        162,
+        31
+      ]
+    },
+    {
+      "patient_id": "PatientID_0272",
+      "tp_from": 3,
+      "tp_to": 6,
+      "vol_from": 13279,
+      "vol_to": 14015,
+      "center": [
+        105,
+        170,
+        27
+      ]
+    },
+    {
+      "patient_id": "PatientID_0274",
+      "tp_from": 1,
+      "tp_to": 3,
+      "vol_from": 22547,
+      "vol_to": 26522,
+      "center": [
+        152,
+        112,
+        46
+      ]
+    },
+    {
+      "patient_id": "PatientID_0275",
+      "tp_from": 1,
+      "tp_to": 3,
+      "vol_from": 27039,
+      "vol_to": 9836,
+      "center": [
+        105,
+        118,
+        102
+      ]
+    },
+    {
+      "patient_id": "PatientID_0275",
+      "tp_from": 3,
+      "tp_to": 6,
+      "vol_from": 9836,
+      "vol_to": 20120,
+      "center": [
+        99,
+        113,
+        112
+      ]
+    }
+  ],
+  "train_patients": [
+    "PatientID_0003",
+    "PatientID_0006",
+    "PatientID_0007",
+    "PatientID_0008",
+    "PatientID_0010",
+    "PatientID_0011",
+    "PatientID_0012",
+    "PatientID_0013",
+    "PatientID_0014",
+    "PatientID_0018",
+    "PatientID_0019",
+    "PatientID_0020",
+    "PatientID_0021",
+    "PatientID_0024",
+    "PatientID_0025",
+    "PatientID_0026",
+    "PatientID_0029",
+    "PatientID_0030",
+    "PatientID_0033",
+    "PatientID_0034",
+    "PatientID_0035",
+    "PatientID_0036",
+    "PatientID_0037",
+    "PatientID_0038",
+    "PatientID_0039",
+    "PatientID_0041",
+    "PatientID_0044",
+    "PatientID_0045",
+    "PatientID_0051",
+    "PatientID_0052",
+    "PatientID_0053",
+    "PatientID_0054",
+    "PatientID_0055",
+    "PatientID_0060",
+    "PatientID_0062",
+    "PatientID_0064",
+    "PatientID_0065",
+    "PatientID_0066",
+    "PatientID_0067",
+    "PatientID_0068",
+    "PatientID_0069",
+    "PatientID_0070",
+    "PatientID_0072",
+    "PatientID_0074",
+    "PatientID_0078",
+    "PatientID_0080",
+    "PatientID_0082",
+    "PatientID_0083",
+    "PatientID_0087",
+    "PatientID_0088",
+    "PatientID_0089",
+    "PatientID_0090",
+    "PatientID_0092",
+    "PatientID_0093",
+    "PatientID_0094",
+    "PatientID_0095",
+    "PatientID_0097",
+    "PatientID_0099",
+    "PatientID_0103",
+    "PatientID_0109",
+    "PatientID_0110",
+    "PatientID_0114",
+    "PatientID_0116",
+    "PatientID_0117",
+    "PatientID_0118",
+    "PatientID_0121",
+    "PatientID_0123",
+    "PatientID_0125",
+    "PatientID_0132",
+    "PatientID_0135",
+    "PatientID_0136",
+    "PatientID_0138",
+    "PatientID_0140",
+    "PatientID_0147",
+    "PatientID_0148",
+    "PatientID_0149",
+    "PatientID_0151",
+    "PatientID_0152",
+    "PatientID_0156",
+    "PatientID_0157",
+    "PatientID_0159",
+    "PatientID_0160",
+    "PatientID_0164",
+    "PatientID_0169",
+    "PatientID_0173",
+    "PatientID_0186",
+    "PatientID_0189",
+    "PatientID_0191",
+    "PatientID_0192",
+    "PatientID_0195",
+    "PatientID_0196",
+    "PatientID_0197",
+    "PatientID_0198",
+    "PatientID_0202",
+    "PatientID_0204",
+    "PatientID_0205",
+    "PatientID_0207",
+    "PatientID_0209",
+    "PatientID_0210",
+    "PatientID_0211",
+    "PatientID_0212",
+    "PatientID_0213",
+    "PatientID_0214",
+    "PatientID_0215",
+    "PatientID_0236",
+    "PatientID_0237",
+    "PatientID_0238",
+    "PatientID_0239",
+    "PatientID_0240",
+    "PatientID_0242",
+    "PatientID_0249",
+    "PatientID_0250",
+    "PatientID_0251",
+    "PatientID_0252",
+    "PatientID_0254",
+    "PatientID_0255",
+    "PatientID_0256",
+    "PatientID_0259",
+    "PatientID_0264",
+    "PatientID_0265",
+    "PatientID_0267",
+    "PatientID_0270",
+    "PatientID_0271",
+    "PatientID_0274"
+  ],
+  "val_patients": [
+    "PatientID_0005",
+    "PatientID_0022",
+    "PatientID_0031",
+    "PatientID_0032",
+    "PatientID_0059",
+    "PatientID_0073",
+    "PatientID_0076",
+    "PatientID_0079",
+    "PatientID_0081",
+    "PatientID_0084",
+    "PatientID_0085",
+    "PatientID_0091",
+    "PatientID_0105",
+    "PatientID_0113",
+    "PatientID_0142",
+    "PatientID_0145",
+    "PatientID_0150",
+    "PatientID_0162",
+    "PatientID_0170",
+    "PatientID_0171",
+    "PatientID_0187",
+    "PatientID_0188",
+    "PatientID_0199",
+    "PatientID_0201",
+    "PatientID_0208",
+    "PatientID_0220",
+    "PatientID_0235",
+    "PatientID_0260",
+    "PatientID_0268",
+    "PatientID_0272",
+    "PatientID_0275"
+  ]
+}

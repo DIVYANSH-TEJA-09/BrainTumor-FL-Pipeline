@@ -1,0 +1,62 @@
+flowchart TD
+    subgraph External["External Data Sources"]
+        DS1[("Masoud Brain Tumor\nMRI Dataset\n~7,000 images")]
+        DS2[("BRISC 2025\nDataset\n~4,600 images")]
+        DS3[("BraTS 2021\n3D MRI Volumes")]
+        DS4[("MU-Glioma-Post\nTCIA\n203 patients")]
+    end
+
+    subgraph Hospitals["Hospital Clients"]
+        H1["Hospital A\n(Client 1)\n~1,300 imgs"]
+        H2["Hospital B\n(Client 2)\n~4,600 imgs"]
+        H3["Hospital C\n(Client 3)\n~5,700 imgs"]
+    end
+
+    subgraph Server["Central Aggregation Server"]
+        AGG["Aggregation Engine\n(FedAvg / FedProx / QPSO-FL)"]
+        GLOBAL["Global Model\nResNet-18"]
+        METRICS["Metrics & Fairness\nEvaluation"]
+    end
+
+    subgraph LocalProcessing["Local Hospital Processing"]
+        SEG["3D Segmentation\nAttention U-Net"]
+        PROG["Progression Forecast\nMath + LSTM Hybrid"]
+    end
+
+    subgraph Output["Clinical Output"]
+        OUT1["Tumor Classification\n(Glioma/Meningioma/Pituitary/None)"]
+        OUT2["Segmentation Masks\n(WT, TC, ET)"]
+        OUT3["6-Month Volume\nPrediction"]
+        REPORT["Clinical Report"]
+    end
+
+    DS1 --> H1
+    DS1 --> H3
+    DS2 --> H2
+    DS3 --> SEG
+    DS4 --> PROG
+
+    H1 -->|"Local Weights"| AGG
+    H2 -->|"Local Weights"| AGG
+    H3 -->|"Local Weights"| AGG
+    AGG --> GLOBAL
+    GLOBAL -->|"Global Weights"| H1
+    GLOBAL -->|"Global Weights"| H2
+    GLOBAL -->|"Global Weights"| H3
+    AGG --> METRICS
+
+    GLOBAL --> OUT1
+    OUT1 -->|"If Glioma"| SEG
+    SEG --> OUT2
+    OUT2 --> PROG
+    PROG --> OUT3
+
+    OUT1 --> REPORT
+    OUT2 --> REPORT
+    OUT3 --> REPORT
+
+    style External fill:#fff3e0,stroke:#e65100
+    style Hospitals fill:#e3f2fd,stroke:#1565c0
+    style Server fill:#e8eaf6,stroke:#283593
+    style LocalProcessing fill:#e8f5e9,stroke:#2e7d32
+    style Output fill:#fce4ec,stroke:#c62828

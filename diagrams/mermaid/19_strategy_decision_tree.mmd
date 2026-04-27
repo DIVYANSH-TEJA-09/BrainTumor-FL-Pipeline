@@ -1,0 +1,13 @@
+flowchart TD
+    Q1{"Are all hospitals\nsimilar in data\ndistribution?"}
+    Q1 -->|"Yes (IID Data)"| R1["Use FedAvg\n✅ Simplest, fastest\n✅ Proven convergence\n⚡ Lowest overhead"]
+    Q1 -->|"No (Non-IID Data)"| Q2{"Is fairness for\nsmall hospitals\ncritical?"}
+    Q2 -->|"No\n(Global accuracy priority)"| R2["Use FedProx\n✅ Better than FedAvg on non-IID\n✅ Reduces client drift\n⚠️ Small hospitals may underperform"]
+    Q2 -->|"Yes\n(Equity is priority)"| Q3{"Can you accept\n~1% accuracy\ntrade-off?"}
+    Q3 -->|"Yes"| R3["Use QPSO-FL ★ RECOMMENDED\n✅ Best fairness: σ=3.65%\n✅ All hospitals ≥80% accuracy\n✅ p=2.91×10⁻²² significance\n⚠️ 0.93% lower global accuracy"]
+    Q3 -->|"No"| R4["Use FedProx + Monitoring\n✅ Higher global accuracy\n⚠️ Monitor smallest hospital\n⚠️ Alert if accuracy <75%"]
+
+    style R1 fill:#e8f5e9,stroke:#2e7d32
+    style R2 fill:#fff3e0,stroke:#e65100
+    style R3 fill:#e3f2fd,stroke:#1565c0,stroke-width:3px
+    style R4 fill:#fff8e1,stroke:#f57f17

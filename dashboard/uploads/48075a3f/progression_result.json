@@ -1,0 +1,68 @@
+{
+  "current_volume": 4326.0,
+  "grade": "LGG",
+  "logistic": {
+    "params": {
+      "v0": 4326.0,
+      "k": 2500000.0,
+      "r": 0.062,
+      "grade": "LGG"
+    },
+    "projections": [
+      {
+        "day": 30,
+        "volume": 27530.703178677413,
+        "growth_pct": 536.4009056559735
+      },
+      {
+        "day": 60,
+        "volume": 166882.48110408845,
+        "growth_pct": 3757.662531301166
+      },
+      {
+        "day": 90,
+        "volume": 787055.2557898147,
+        "growth_pct": 18093.602769066452
+      },
+      {
+        "day": 180,
+        "volume": 2479640.6611449844,
+        "growth_pct": 57219.478990868796
+      },
+      {
+        "day": 365,
+        "volume": 2499999.7857320644,
+        "growth_pct": 57690.101380768945
+      }
+    ]
+  },
+  "spatial": {
+    "stats": {
+      "growth_voxels": 58931,
+      "regression_voxels": 376,
+      "stable_voxels": 3950,
+      "input_volume": 4326.0,
+      "predicted_volume": 62881.0,
+      "volume_change_pct": 1353.5598705501618
+    }
+  },
+  "insights": [
+    "Current tumor burden is relatively low; trend stability is key.",
+    "6-month logistic projection indicates notable volumetric increase.",
+    "Spatial model suggests growth-dominant morphology."
+  ],
+  "explainability": {
+    "drivers": {
+      "initial_volume_mm3": 4326.0,
+      "growth_rate_r_per_day": 0.062,
+      "carrying_capacity_mm3": 2500000.0
+    },
+    "grade_context": "Low-Grade Glioma",
+    "spatial_balance": {
+      "growth_voxels": 58931,
+      "stable_voxels": 3950,
+      "regression_voxels": 376,
+      "volume_change_pct": 1353.5598705501618
+    }
+  }
+}

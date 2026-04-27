@@ -1,0 +1,48 @@
+flowchart TD
+    Start([Start]) --> A[Patient MRI Scan Acquired]
+    A --> B{MRI Preprocessed?\nResized to 224x224}
+    B -->|No| B1[Preprocess: Resize + Normalize]
+    B1 --> B
+    B -->|Yes| C[Module 1: Federated Classification]
+
+    subgraph FL["Federated Learning Round"]
+        C --> D[Load Global Model]
+        D --> E[Local Training at Hospital\n5 epochs per round]
+        E --> F[Send Updated Weights to Server]
+        F --> G{Aggregation Strategy?}
+        G -->|FedAvg| G1[Weighted Average]
+        G -->|FedProx| G2[Proximal Regularization\n+ Weighted Average]
+        G -->|QPSO-FL| G3[Quantum PSO\nUpdate with pbest/gbest]
+        G1 --> H[Update Global Model]
+        G2 --> H
+        G3 --> H
+        H --> I{100 Rounds\nComplete?}
+        I -->|No| D
+        I -->|Yes| J[Final Classification]
+    end
+
+    J --> K{Tumor Type?}
+    K -->|Glioma| L[Module 2: 3D Segmentation]
+    K -->|Meningioma| Z1[Report: Meningioma Detected]
+    K -->|Pituitary| Z2[Report: Pituitary Tumor Detected]
+    K -->|No Tumor| Z3[Report: No Tumor Found]
+
+    L --> M[Load 4-Channel 3D MRI\nT1 T1ce T2 FLAIR]
+    M --> N[MONAI Preprocessing\nRAS + 1mm³ + Z-norm]
+    N --> O[3D Attention U-Net\nSliding Window Inference]
+    O --> P[Segmentation Output\nWT TC ET masks]
+
+    P --> Q[Module 3: Progression Forecasting]
+    Q --> R[Extract Tumor Volumes\nfrom Segmentation]
+    R --> S[Fit Mathematical Models\nLogistic Gompertz Exponential Linear]
+    S --> T[LSTM Residual Correction]
+    T --> U[6-Month Volume Prediction\nwith Confidence Interval]
+
+    U --> V([End: Complete Report\nDiagnosis + Segmentation + Prognosis])
+    Z1 --> V
+    Z2 --> V
+    Z3 --> V
+
+    style FL fill:#e8f4fd,stroke:#1a73e8
+    style Start fill:#4caf50,color:#fff
+    style V fill:#4caf50,color:#fff

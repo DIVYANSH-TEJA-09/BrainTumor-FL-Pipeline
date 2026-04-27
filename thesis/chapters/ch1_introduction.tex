@@ -1,0 +1,183 @@
+\chapter{Introduction}
+\label{ch:1}
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.85\textwidth]{01_system_architecture.png}
+\caption{System Architecture Overview}
+\label{fig:01_system_architecture}
+\end{figure}
+
+
+\section{1.1 Background and Motivation}
+Brain tumors represent a significant global health challenge, requiring timely and accurate diagnosis, precise localization, and continuous monitoring. Traditional approaches to brain tumor analysis rely on centralized medical systems where patient data is pooled for collaborative model training. However, this centralized paradigm violates patient privacy and conflicts with healthcare regulations such as HIPAA (Health Insurance Portability and Accountability Act) and GDPR (General Data Protection Regulation).
+
+Federated Learning (FL) offers a paradigm shift: multiple hospitals can collaboratively train a shared machine learning model without sharing any raw patient data. Instead, only model weights are exchanged between hospitals and a central aggregation server. This preserves privacy while enabling the development of robust, generalizable diagnostic systems.
+
+
+\subsection{The Three-Stage Clinical Pipeline}
+This project implements a comprehensive brain tumor analysis system combining three independent modules executed in sequence:
+
+MRI Scans → [Module 1: Classification (FL)] → IF Glioma → [Module 2: Segmentation] → [Module 3: Progression]
+                    ↓
+             Tumor Type Identified
+             (Glioma/Meningioma/Pituitary)
+
+Critical Point: Federated Learning is applied exclusively to Module 1 (Classification). Modules 2 and 3 operate independently at individual hospitals after classification, requiring no federated infrastructure.
+
+
+\section{1.2 Research Problem and Objectives}
+
+\subsection{1.2.1 The Core Research Question}
+Can Quantum-behaved Particle Swarm Optimization (QPSO) outperform traditional Federated Averaging (FedAvg) and Federated Proximal (FedProx) aggregation strategies for brain tumor classification under non-IID (non-Independently-and-Identically-Distributed) data conditions while maintaining clinical equity across hospitals?
+
+
+\subsection{1.2.2 Primary Objectives}
+\begin{enumerate}
+  \item **Module 1 - Federated Classification:**
+\end{enumerate}
+
+- Implement three FL aggregation strategies: FedAvg, FedProx, and QPSO-FL
+
+- Train across 3 simulated hospital clients with heterogeneous datasets
+
+- Classify tumors into 4 classes: Glioma, Meningioma, No Tumor, Pituitary
+
+- Evaluate under two data heterogeneity setups: Natural Heterogeneity and Moderate Label Skew
+
+\begin{enumerate}
+  \item **Module 2 - 3D Brain Tumor Segmentation:**
+\end{enumerate}
+
+- Segment volumetric brain MRI (BraTS 2021) into tumor sub-regions
+
+- Identify Whole Tumor (WT), Tumor Core (TC), and Enhancing Tumor (ET)
+
+- Achieve clinical-grade segmentation (Mean Dice Score ≥ 0.75)
+
+\begin{enumerate}
+  \item **Module 3 - Longitudinal Tumor Progression Forecasting:**
+\end{enumerate}
+
+- Predict 6-month tumor volume growth from historical MRI scans
+
+- Combine mathematical models (Logistic, Gompertz) with LSTM deep learning
+
+- Improve prediction accuracy through hybrid modeling approach
+
+
+\subsection{1.2.3 Secondary Objectives}
+\begin{itemize}
+  \item Compare QPSO's ability to preserve **clinical equity** (fairness across hospitals) vs. FedAvg/FedProx
+  \item Demonstrate practical privacy preservation through federated learning
+  \item Provide interpretable results suitable for clinical decision-making
+  \item Build a modular, extensible pipeline for future multi-hospital deployment
+\end{itemize}
+
+
+\section{1.3 Project Scope and Limitations}
+
+\subsection{1.3.1 Scope}
+\begin{itemize}
+  \item **Federation Size:** 3 simulated hospitals with geographically distributed but computationally simulated clients
+  \item **Classification Data:** \~9,300 total MRI images from Masoud (Kaggle) and BRISC 2025 datasets
+  \item **Segmentation Data:** BraTS 2021 dataset with volumetric 3D MRI volumes and annotated tumor masks
+  \item **Progression Data:** MU-Glioma-Post dataset from The Cancer Imaging Archive (TCIA) with 203 patients, 791 longitudinal timepoints
+  \item **Training Infrastructure:** PyTorch, MONAI framework, Kaggle GPUs or local NVIDIA GPUs
+  \item **Privacy Guarantee:** Structural privacy through federated learning (no raw patient data shared)
+\end{itemize}
+
+
+\subsection{1.3.2 Limitations}
+\begin{enumerate}
+  \item **Classification Scalability:** Currently tested with 3 clients only; scalability to 5+ hospitals untested
+  \item **Data Distribution:** Natural heterogeneity simulated through different dataset sources rather than true geographic/institutional variation
+  \item **No Differential Privacy:** System implements only structural privacy (FL); formal DP-epsilon guarantees not provided
+  \item **Extreme Non-IID Conditions:** Single-class-per-client scenarios remain unsolved without personalization techniques
+  \item **Progression Sample Size:** LGG (slow-growing) sub-cohort limited to \~22 patients
+  \item **Model Capacity:** ResNet-18 is computationally powerful for a 4-class problem; may mask aggregation strategy differences
+\end{enumerate}
+
+
+\section{1.4 System Architecture Overview}
+
+\subsection{1.4.1 Three-Module Design}
+The system is structured as three independent, sequential modules:
+
+
+\subsection{1.4.2 Federated Learning Architecture (Module 1 Only)}
+See also: Diagram 01\_system\_architecture.png in /diagrams/rendered/
+
+
+\section{1.5 Key Contributions}
+
+\subsection{1.5.1 Federated Learning Contribution}
+\begin{enumerate}
+  \item **QPSO-based Aggregation for FL:**
+\end{enumerate}
+
+- Novel layer-by-layer QPSO aggregation with validation-loss fitness evaluation
+
+- Achieves superior clinical fairness: reduces max-min client performance gap by 72-81\%
+
+- Statistically significant outperformance vs. FedAvg under label skew (p = 2.91 × 10⁻²²)
+
+\begin{enumerate}
+  \item **Fairness-Focused Evaluation:**
+\end{enumerate}
+
+- Demonstrates that global accuracy alone masks clinical inequity
+
+- Proposes client-level fairness metric (standard deviation of per-client accuracies)
+
+- Shows QPSO protects smallest/most data-deprived hospital clients
+
+
+\subsection{1.5.2 Clinical Workflow Contribution}
+\begin{enumerate}
+  \item **End-to-End Privacy-Preserving Pipeline:**
+\end{enumerate}
+
+- Privacy-preserved tumor classification (FL) followed by local-only segmentation and progression
+
+- Modular design allows independent hospital adoption
+
+\begin{enumerate}
+  \item **Multi-Modal Deep Learning Integration:**
+\end{enumerate}
+
+- 3D multimodal segmentation (T1, T1ce, T2, FLAIR)
+
+- Attention mechanisms for automated region-of-interest focus
+
+- Hybrid mathematical + deep learning progression model
+
+
+\section{1.6 Document Roadmap}
+This technical report is organized as follows:
+
+
+\section{1.7 Reading Guide for Different Audiences}
+\begin{itemize}
+  \item **Clinical Decision-Makers:** Start with §1.1-1.2, then skip to Chapter 7 (Results) for accuracy/performance metrics
+  \item **ML/AI Researchers:** Follow standard document flow; focus on Chapter 4 (Algorithms) and Chapter 7 (Comparative Analysis)
+  \item **Privacy/Security Officers:** Focus on §1.3 (Limitations), Chapter 3 (System Analysis - Privacy Design), and Chapter 5 (Implementation)
+  \item **Developers/Engineers:** Prioritize Chapters 4-6 (Design, Implementation, Testing) for deployment guidance
+\end{itemize}
+
+
+\section{1.8 Definitions and Terminology}
+
+\section{1.9 Key Metrics and Success Criteria}
+
+\subsection{Module 1 (Classification - FL)}
+
+\subsection{Module 2 (Segmentation)}
+
+\subsection{Module 3 (Progression)}
+Figure: Complete System Architecture Overview
+
+
+\section{Chapter Summary}
+This chapter introduced the motivation behind privacy-preserving brain tumor analysis, outlined the three-module pipeline, and established the project scope.

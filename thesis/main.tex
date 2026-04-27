@@ -1,0 +1,254 @@
+% ============================================================
+%  Final Project Report - Matrusri Engineering College
+%  Department of Computer Science and Engineering
+%  Privacy-Preserving Brain Tumor Analysis using FL + QPSO
+% ============================================================
+\documentclass[12pt,a4paper,oneside]{report}
+
+% ---- Fonts & Encoding ----
+\usepackage[T1]{fontenc}
+\usepackage{mathptmx}           % Times New Roman
+\usepackage[utf8]{inputenc}
+
+% ---- Page Layout ----
+\usepackage[top=2.54cm, bottom=2.54cm, left=3.17cm, right=2.54cm]{geometry}
+\usepackage{setspace}
+\onehalfspacing                 % 1.5 line spacing
+
+% ---- Headers & Page Numbers ----
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+
+% ---- Graphics ----
+\usepackage{graphicx}
+\graphicspath{{figures/}}
+\usepackage{float}
+\usepackage{subcaption}
+
+% ---- Tables ----
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{tabularx}
+
+% ---- Math ----
+\usepackage{amsmath,amssymb}
+
+% ---- Code Listings ----
+\usepackage{listings}
+\lstset{
+    language=Python,
+    basicstyle=\ttfamily\small,
+    keywordstyle=\bfseries\color[rgb]{0.13,0.29,0.53},
+    commentstyle=\itshape\color[rgb]{0.13,0.55,0.13},
+    stringstyle=\color[rgb]{0.63,0.13,0.13},
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    numbersep=8pt,
+    frame=single,
+    framesep=3pt,
+    backgroundcolor=\color[rgb]{0.97,0.97,0.97},
+    breaklines=true,
+    breakatwhitespace=true,
+    tabsize=4,
+    showstringspaces=false,
+    captionpos=b,
+    xleftmargin=1em,
+    framexleftmargin=1em,
+}
+
+% ---- Algorithms ----
+\usepackage{algorithm}
+\usepackage{algorithmic}
+
+% ---- Hyperlinks ----
+\usepackage[hidelinks]{hyperref}
+\usepackage{url}
+
+% ---- Bibliography ----
+\usepackage{cite}
+
+% ---- Misc ----
+\usepackage{enumitem}
+\usepackage{caption}
+\captionsetup{font=small, labelfont=bf}
+
+% ---- Chapter Formatting ----
+\usepackage{titlesec}
+\titleformat{\chapter}[display]
+    {\normalfont\Large\bfseries\centering}
+    {\MakeUppercase{\chaptertitlename}\ \thechapter}{12pt}{\Large}
+\titlespacing*{\chapter}{0pt}{-20pt}{20pt}
+
+% ---- Custom Commands ----
+\newcommand{\projecttitle}{Privacy-Preserving Brain Tumor Classification, Segmentation and Progression Forecasting Using Federated Learning with Quantum Particle Swarm Optimization}
+\newcommand{\guidename}{Mrs. P. Uma Maheshwari}
+\newcommand{\guidetitle}{Assistant Professor}
+\newcommand{\coordinatorname}{Mrs. J. Samatha}
+\newcommand{\hodname}{Dr. T. Raghunadha Reddy}
+\newcommand{\hodtitle}{Associate Professor \& HOD}
+\newcommand{\collegename}{Matrusri Engineering College}
+\newcommand{\collegesub}{(Affiliated to Osmania University, Approved by AICTE)}
+\newcommand{\collegeaddr}{Saidabad, Hyderabad, T.S--500059}
+\newcommand{\deptname}{Department of Computer Science and Engineering}
+\newcommand{\academicyear}{2025--2026}
+
+% ============================================================
+\begin{document}
+% ============================================================
+
+% ---- Front Pages (Roman numerals) ----
+\pagenumbering{roman}
+
+% ---- TITLE PAGE ----
+\begin{titlepage}
+\begin{center}
+\vspace*{1cm}
+{\Large\bfseries\MakeUppercase{\projecttitle}}\\[2cm]
+
+{\large A Project Report}\\[0.3cm]
+Submitted in partial fulfillment of the requirements\\
+for the award of the degree of\\[0.3cm]
+{\large\bfseries BACHELOR OF ENGINEERING}\\[0.2cm]
+in\\[0.2cm]
+{\large\bfseries Computer Science and Engineering}\\[1.5cm]
+
+by\\[0.5cm]
+\begin{tabular}{ll}
+DIVYANSH TEJA EDLA & 1608-22-733-019 \\
+V. STACY           & 1608-22-733-061 \\
+N. VISHNU          & 1608-22-733-064 \\
+\end{tabular}\\[1.5cm]
+
+Under the guidance of\\[0.3cm]
+{\bfseries \guidename}\\
+\guidetitle, Dept.\ of CSE\\[1.5cm]
+
+{\bfseries \deptname}\\
+{\large\bfseries \collegename}\\
+\collegesub\\
+\collegeaddr\\[0.3cm]
+{\bfseries (\academicyear)}
+\end{center}
+\end{titlepage}
+
+% ---- CERTIFICATE ----
+\newpage
+\begin{center}
+{\bfseries \deptname}\\
+{\large\bfseries \collegename}\\
+\collegesub\\
+\collegeaddr\\
+{\bfseries (\academicyear)}\\[1cm]
+{\Large\bfseries CERTIFICATE}\\[1cm]
+\end{center}
+
+This is to certify that the project entitled \textit{``\projecttitle''} submitted by \textbf{DIVYANSH TEJA EDLA, V.~STACY} and \textbf{N.~VISHNU} bearing HT.No: 1608-22-733-019, 1608-22-733-061, 1608-22-733-064 in the partial fulfillment of the requirement for the award of the degree of Bachelor of Engineering in Computer Science and Engineering is a bonafide work carried by them.
+
+The results of the investigations enclosed in this report have been verified and found satisfactory.
+
+\vspace{3cm}
+\noindent
+\begin{tabular}{p{7cm}p{7cm}}
+\textbf{Project Guide} & \textbf{H.O.D.}\\[1.5cm]
+\guidename & \hodname\\
+\guidetitle & \hodtitle\\
+Dept.\ of CSE & Dept.\ of CSE\\
+\end{tabular}
+
+\vspace{2cm}
+\begin{center}
+\textbf{External Examiner(s)}
+\end{center}
+
+% ---- ACKNOWLEDGEMENT ----
+\newpage
+\begin{center}
+{\Large\bfseries ACKNOWLEDGEMENT}\\[1cm]
+\end{center}
+
+This project consumed a significant amount of work, research and dedication. Implementation would not have been possible without the support from our Project Guide, Project Coordinator, Head of the Department and Principal. Therefore, we extend our sincere gratitude to all of them.
+
+We are grateful to our project guide \textbf{\guidename}, \guidetitle, Dept.\ of CSE, \collegename\ for provision of expertise, technical support and guidance in the implementation.
+
+We wish to express our gratitude to project coordinator \textbf{\coordinatorname} for her indefatigable inspiration, constructive criticisms and encouragement throughout this dissertation work.
+
+We would like to express our sincere thanks to the \hodtitle\ and Head of the Department, \textbf{\hodname}, for permitting us to do this project.
+
+We would like to thank the CSE Department for providing us this opportunity to share and contribute our part of work to accomplish the project in time and all the teaching and support staff for their steadfast support and encouragement.
+
+Nevertheless, we express our gratitude towards our families and colleagues for their kind cooperation and encouragement which helped us in completion of this project.
+
+% ---- DECLARATION ----
+\newpage
+\begin{center}
+{\Large\bfseries DECLARATION}\\[1cm]
+\end{center}
+
+We hereby declare that the project entitled \textit{``\projecttitle''} is submitted to Osmania University in the partial fulfillment of the requirement for the award of the degree of Bachelor of Engineering in Computer Science and Engineering.
+
+This is a record of the bonafide work carried out by us under the guidance of \textbf{\guidename}, \guidetitle, \collegename, \collegeaddr. The results embodied in this report have not been reproduced/copied from any source. The results embodied in this report have not been submitted to any other University or Institute for the award of any other degree or diploma.
+
+\vspace{3cm}
+\begin{center}
+\begin{tabular}{ll}
+DIVYANSH TEJA EDLA & 1608-22-733-019\\
+V. STACY           & 1608-22-733-061\\
+N. VISHNU          & 1608-22-733-064\\
+\end{tabular}\\[0.5cm]
+Dept of CSE, MECS.
+\end{center}
+
+% ---- ABSTRACT ----
+\newpage
+\begin{center}
+{\Large\bfseries ABSTRACT}\\[1cm]
+\end{center}
+
+Brain tumors represent a significant global health challenge, requiring timely and accurate diagnosis, precise localization, and continuous monitoring. Traditional centralized approaches to medical image analysis raise critical privacy concerns when patient data must be shared across institutions. This project presents a comprehensive privacy-preserving brain tumor analysis system combining three sequential modules: (1)~Federated Classification using Quantum-behaved Particle Swarm Optimization (QPSO-FL), (2)~3D Brain Tumor Segmentation using Attention U-Net, and (3)~Longitudinal Tumor Progression Forecasting using hybrid mathematical-LSTM models.
+
+The federated learning component enables multiple hospitals to collaboratively train a ResNet-18 classifier without sharing raw patient data. Three aggregation strategies are compared: FedAvg, FedProx, and the novel QPSO-FL. Experiments on ${\sim}9{,}300$ MRI images across 3~simulated hospital clients demonstrate that QPSO-FL achieves superior clinical fairness (standard deviation of per-client accuracies $\sigma = 3.65\%$) compared to FedAvg ($12.82\%$) and FedProx ($6.05\%$) under non-IID label skew conditions, with statistical significance ($p = 2.91 \times 10^{-22}$). The segmentation module achieves clinical-grade performance (Mean Dice $= 0.76$, Tumor Core Dice $= 0.85$) on BraTS 2021 data, while the progression module improves HGG tumor volume prediction by 7.88\% MAE over logistic baselines using LSTM residual correction.
+
+The integrated system processes patient MRI scans through classification, segmentation (for gliomas), and progression forecasting in ${\sim}25$~seconds, demonstrating practical viability for multi-hospital deployment with privacy preservation and clinical equity.
+
+\textbf{Keywords:} Federated Learning, QPSO, Brain Tumor Classification, 3D Segmentation, Progression Forecasting, Privacy-Preserving AI, Non-IID Data, Clinical Fairness
+
+% ---- TABLE OF CONTENTS ----
+\newpage
+\tableofcontents
+\newpage
+\listoffigures
+\newpage
+\listoftables
+
+% ============================================================
+% ---- Main Content (Arabic numerals) ----
+\newpage
+\pagenumbering{arabic}
+% ============================================================
+
+\input{chapters/ch1_introduction}
+\input{chapters/ch2_literature}
+\input{chapters/ch3_system_analysis}
+\input{chapters/ch4_system_design}
+\input{chapters/ch5_implementation}
+\input{chapters/ch6_testing}
+\input{chapters/ch7_results}
+\input{chapters/ch8_conclusion}
+
+% ---- References ----
+\newpage
+\bibliographystyle{IEEEtran}
+\bibliography{references}
+
+% ---- Appendices ----
+\appendix
+\input{chapters/appendix_a}
+\input{chapters/appendix_b}
+\input{chapters/appendix_c}
+
+\end{document}

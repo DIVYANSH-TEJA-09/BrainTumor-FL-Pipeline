@@ -1,0 +1,63 @@
+\chapter{Progression Forecasting Comparative Analysis}
+\label{app:c}
+
+This appendix compares tumor growth forecasting techniques and presents the hybrid mathematical-LSTM approach.
+
+\section{Model Comparison}
+
+\begin{table}[H]
+\centering
+\caption{Progression Forecasting Model Comparison}
+\label{tab:prog_compare}
+\begin{tabular}{p{3cm}p{2.5cm}p{3.5cm}p{3.5cm}}
+\toprule
+\textbf{Model} & \textbf{Type} & \textbf{Strengths} & \textbf{Limitations} \\
+\midrule
+Logistic Growth   & Mathematical & Interpretable, captures saturation & Cannot model non-monotonic behavior \\
+Gompertz Growth   & Mathematical & Better for slow-growing tumors     & Fixed asymptotic behavior \\
+Exponential       & Mathematical & Simple, good for early stages       & Unrealistic long-term predictions \\
+Pure LSTM         & Deep Learning & Captures complex temporal patterns  & Needs large data, black box \\
+Hybrid (Ours)     & Combined     & Interpretable baseline + learned corrections & Requires per-grade stratification \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Our Results}
+
+\begin{table}[H]
+\centering
+\caption{Hybrid LSTM Improvement Over Logistic Baseline}
+\label{tab:prog_results}
+\begin{tabular}{llccc}
+\toprule
+\textbf{Grade} & \textbf{Metric} & \textbf{Logistic Baseline} & \textbf{Hybrid (Math+LSTM)} & \textbf{Improvement} \\
+\midrule
+HGG & MAE (mm\textsuperscript{3})  & 3,245 & 2,989 & 7.88\% \\
+HGG & $R^2$                        & 0.617 & 0.681 & +0.064 \\
+LGG & MAE (mm\textsuperscript{3})  & 1,892 & 1,756 & 7.19\% \\
+LGG & $R^2$                        & 0.756 & 0.802 & +0.046 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Hybrid Architecture}
+
+The hybrid approach works in two stages: (1)~A mathematical growth model (logistic, Gompertz, or exponential) is fitted per-patient to capture the dominant growth trend. (2)~An LSTM with multi-head attention learns to predict residuals (actual $-$ mathematical prediction), correcting systematic errors. The final prediction is:
+\begin{equation}
+V_{\text{predicted}} = V_{\text{mathematical}} + \Delta V_{\text{LSTM}}
+\end{equation}
+This preserves clinical interpretability while capturing non-linear temporal patterns that pure mathematical models miss.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.85\textwidth]{07_progression_pipeline.png}
+\caption{Progression Forecasting Pipeline}
+\label{fig:app_prog}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.6\textwidth]{08_lstm_architecture.png}
+\caption{LSTM Hybrid Architecture}
+\label{fig:app_lstm}
+\end{figure}

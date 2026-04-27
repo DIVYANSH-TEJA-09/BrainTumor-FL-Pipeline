@@ -1,0 +1,60 @@
+flowchart TB
+    subgraph System["Brain Tumor Analysis System"]
+        subgraph M1["Module 1: Federated Classification"]
+            direction TB
+            M1A["ResNet-18\nClassifier"]
+            M1B["FederatedClient\nLocal Training"]
+            M1C["AggregationServer\nFedAvg / FedProx / QPSO"]
+            M1D["DataLoader\nMasoud + BRISC"]
+            M1E["MetricsLogger\nAccuracy, Fairness"]
+            M1D --> M1B
+            M1B --> M1A
+            M1B --> M1C
+            M1C --> M1A
+            M1C --> M1E
+        end
+
+        subgraph M2["Module 2: 3D Segmentation"]
+            direction TB
+            M2A["3D Attention U-Net"]
+            M2B["MONAI Preprocessing\nTransforms Pipeline"]
+            M2C["Sliding Window\nInference Engine"]
+            M2D["BraTS DataLoader"]
+            M2D --> M2B
+            M2B --> M2C
+            M2C --> M2A
+        end
+
+        subgraph M3["Module 3: Progression Forecasting"]
+            direction TB
+            M3A["Mathematical Models\nLogistic, Gompertz, Exponential"]
+            M3B["Residual LSTM\nHybrid Corrector"]
+            M3C["Volume Extractor"]
+            M3D["TCIA DataLoader"]
+            M3D --> M3C
+            M3C --> M3A
+            M3A --> M3B
+        end
+
+        subgraph Shared["Shared Components"]
+            S1["PyTorch 2.0+"]
+            S2["MONAI Framework"]
+            S3["NumPy / SciPy"]
+            S4["Matplotlib\nVisualization"]
+        end
+    end
+
+    M1 -->|"Glioma Classification\nResult"| M2
+    M2 -->|"Tumor Volume\n(mm³)"| M3
+
+    M1A -.-> S1
+    M2A -.-> S1
+    M2A -.-> S2
+    M3B -.-> S1
+    M3A -.-> S3
+    M1E -.-> S4
+
+    style M1 fill:#e3f2fd,stroke:#1565c0
+    style M2 fill:#e8f5e9,stroke:#2e7d32
+    style M3 fill:#fff3e0,stroke:#e65100
+    style Shared fill:#f3e5f5,stroke:#7b1fa2

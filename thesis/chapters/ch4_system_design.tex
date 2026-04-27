@@ -1,0 +1,441 @@
+\chapter{System Design}
+\label{ch:4}
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.85\textwidth]{01_system_architecture.png}
+\caption{High-Level System Architecture}
+\label{fig:01_system_architecture}
+\end{figure}
+
+
+\section{4.1 Overall System Architecture}
+
+\subsection{4.1.1 High-Level System Diagram}
+The system comprises three independent modules operating in sequence, with federated learning applied exclusively to Module 1:
+
+See also: 01\_system\_architecture.png in /diagrams/rendered/
+
+
+\subsection{4.1.2 Federated Learning Communication Flow}
+The federated learning component (Module 1) follows a standard synchronous FL protocol:
+
+See also: 04\_fl\_sequence.png (Mermaid Sequence Diagram) in /diagrams/rendered/
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{12_class_diagram.png}
+\caption{UML Class Diagram}
+\label{fig:12_class_diagram}
+\end{figure}
+
+
+\section{4.2 Module 1: Federated Classification Architecture}
+
+\subsection{4.2.1 Client-Server Architecture}
+Role: Central Server
+
+\begin{itemize}
+  \item Maintains global ResNet-18 model (11.2M parameters)
+  \item Coordinates 100 federated rounds
+  \item Implements aggregation strategy (FedAvg, FedProx, or QPSO)
+  \item Evaluates on balanced global test set
+  \item Logs metrics and checkpoints
+\end{itemize}
+
+Role: Hospital Clients (3 instances)
+
+\begin{itemize}
+  \item Receive broadcast global model from server
+  \item Perform local training on private hospital data (5 epochs per round)
+  \item Send updated model weights back to server
+  \item Receive updated global model for next round
+  \item Compute local validation metrics (tracking fairness)
+\end{itemize}
+
+
+\subsection{4.2.2 Model Architecture: ResNet-18 for Brain Tumor Classification}
+INPUT (224 × 224 × 3)
+  ↓
+[Conv 7×7, 64 filters, stride 2]
+[BatchNorm + ReLU]
+[MaxPool 3×3, stride 2]
+  ↓
+[ResNet Block 1: 64 filters × 2 blocks]
+  ↓
+[ResNet Block 2: 128 filters × 2 blocks]
+  ↓
+[ResNet Block 3: 256 filters × 2 blocks]
+  ↓
+[ResNet Block 4: 512 filters × 2 blocks]
+  ↓
+[GlobalAvgPool → 512-dim feature vector]
+  ↓
+[FC Layer: 512 → 3 classes]
+  (Glioma, Meningioma, Pituitary)
+  
+OUTPUT: Logits (3-dim)
+  ↓
+[Softmax + Cross-Entropy Loss]
+  ↓
+Predicted Class + Confidence
+
+Configuration:
+
+\begin{itemize}
+  \item **Pretrained Weights:** ImageNet (transfer learning)
+  \item **Total Parameters:** 11,178,051 (all trainable)
+  \item **Memory:** \~45 MB model size
+  \item **Input:** 224×224 RGB images
+  \item **Output:** 3-class or 4-class probabilities (depending on experimental setup)
+\end{itemize}
+
+
+\subsection{4.2.3 Aggregation Strategies}
+
+\subsubsection{**Strategy 1: Federated Averaging (FedAvg)**}
+\# Pseudocode
+for round t in 1..100:
+    \# Server broadcasts
+    send w\_global to all clients
+    
+    \# Clients train locally
+    for each client c:
+        w\_c ← local\_training(data\_c, w\_global, epochs=5)
+        send w\_c to server
+    
+    \# Server aggregates (weighted by dataset size)
+    n\_total ← sum of all client dataset sizes
+    w\_global ← (0, 0, 0)
+    for each client c:
+        w\_global ← w\_global + (n\_c / n\_total) * w\_c
+
+Characteristics:
+
+\begin{itemize}
+  \item **Deterministic:** Same input always produces same output
+  \item **Fast:** O(n\_clients) computation, minimal memory
+  \item **Non-memory:** No tracking of previous solutions
+  \item **Prone to averaging:** May lose distinct features learned by individual clients
+\end{itemize}
+
+
+\subsubsection{**Strategy 2: Federated Proximal (FedProx)**}
+\# Server side: SAME as FedAvg
+\# Client side: MODIFIED local training objective
+
+for round t in 1..100:
+    send w\_global to all clients
+    
+    for each client c:
+        \# FedProx modification: Add proximal term
+        for epoch in 1..5:
+            for batch (x, y) in train\_loader\_c:
+                pred ← model(x)
+                loss\_data ← CrossEntropy(pred, y)
+                
+                \# Proximal regularization prevents drift
+                loss\_prox ← (μ / 2) * ||w\_local - w\_global||²
+                loss\_total ← loss\_data + loss\_prox
+                
+                optimizer.step(loss\_total)
+        
+        w\_c ← model.state\_dict()
+        send w\_c to server
+    
+    w\_global ← weighted\_average(w\_1, w\_2, w\_3)
+
+Characteristics:
+
+\begin{itemize}
+  \item **Regularized:** Proximal term penalizes large client divergence
+  \item **μ = 0.01:** Tunable hyperparameter (higher = more constraint)
+  \item **Intent:** Stabilize learning under non-IID data
+  \item **Risk:** Can over-constrain, preventing beneficial local adaptation
+\end{itemize}
+
+
+\subsubsection{**Strategy 3: Quantum Particle Swarm Optimization FL (QPSO-FL)** - Novel Contribution}
+\# Server-side aggregation strategy using QPSO
+
+class QPSOServer:
+    def \_\_init\_\_(self, clients, beta=0.7):
+        self.personal\_best = \{\}        \# per-client best weights found
+        self.personal\_best\_scores = \{\} \# per-client best validation accuracy
+        self.global\_best = None        \# best weights across all clients
+        self.global\_best\_score = 0.0
+        self.mean\_best = None          \# element-wise mean of pbests
+        
+    def initialize\_particles(self):
+        """Initialize all pbests and gbest to current global model"""
+        for client in self.clients:
+            self.personal\_best[client.id] = deepcopy(self.global\_model)
+            self.personal\_best\_scores[client.id] = 0.0
+        self.global\_best = deepcopy(self.global\_model)
+    
+    def aggregate\_qpso(self, client\_weights, client\_val\_accs):
+        """
+        QPSO Aggregation Step:
+        1. Update personal best (pbest) and global best (gbest)
+        2. Compute mean best (mbest)
+        3. Apply quantum position update
+        """
+        
+        \# Step 1: Update pbest and gbest
+        for client\_id, weights in client\_weights.items():
+            val\_acc = client\_val\_accs[client\_id]
+            
+            if val\_acc > self.personal\_best\_scores[client\_id]:
+                self.personal\_best[client\_id] = weights
+                self.personal\_best\_scores[client\_id] = val\_acc
+            
+            if val\_acc > self.global\_best\_score:
+                self.global\_best = weights
+                self.global\_best\_score = val\_acc
+        
+        \# Step 2: Compute mean best (element-wise mean of all pbests)
+        self.mean\_best = compute\_mean\_state\_dict(
+            [self.personal\_best[c\_id] for c\_id in self.clients]
+        )
+        
+        \# Step 3: Quantum position update for each parameter
+        for param\_name in self.global\_model.state\_dict():
+            \# Per-parameter vectors
+            φ = random.uniform(0, 1)  \# per-client attraction weight
+            u = random.uniform(0.3, 1.0)  \# quantum randomness
+            
+            \# Attraction point: weighted combination of pbest and gbest
+            p = φ * mean\_best[param\_name] + (1 - φ) * gbest[param\_name]
+            
+            \# Quantum update: stochastic jump with bounded magnitude
+            perturbation = β * abs(mean\_best[param\_name] - gbest[param\_name]) * ln(1/u)
+            perturbation = clip(perturbation, -0.1, 0.1)  \# Safety bounds
+            
+            new\_position = p + random.choice([-1, 1]) * perturbation
+            
+            w\_new[param\_name] = new\_position
+        
+        return w\_new
+
+QPSO Advantages:
+
+\begin{itemize}
+  \item **Memory-Based:** Tracks pbest (personal best) and gbest (global best)
+  \item **Stochastic Exploration:** Quantum jumps escape local optima
+  \item **Adaptive:** Attraction point balances individual and global solutions
+  \item **Fairness:** Validates based on loss surface (implicitly penalizes unfair models)
+\end{itemize}
+
+Parameters:
+
+\begin{itemize}
+  \item **β = 0.7:** Contraction-expansion coefficient (exploration vs. exploitation)
+  \item **u ∈ [0.3, 1.0]:** Quantum randomness range
+  \item **Perturbation clamp [-0.1, 0.1]:** Safety constraint (prevents divergence)
+\end{itemize}
+
+See also: 05\_aggregation\_strategies.png (comparison of all 3 strategies)
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.85\textwidth]{13_use_case_diagram.png}
+\caption{UML Use Case Diagram}
+\label{fig:13_use_case_diagram}
+\end{figure}
+
+
+\section{4.3 Module 2: 3D Brain Tumor Segmentation Architecture}
+
+\subsection{4.3.1 Model Architecture: 3D Attention U-Net}
+Attention Gate Mechanism (per skip connection):
+
+Configuration:
+
+\begin{itemize}
+  \item **Channels:** 16, 32, 64, 128, 256 (per MONAI standard)
+  \item **Strides:** (2, 2, 2, 2) depth-wise
+  \item **Patch Size (during training):** 96³ voxels
+  \item **Loss Function:** Generalized Dice Loss (handles class imbalance)
+  \item **Optimizer:** Adam (lr=1e-4, weight\_decay=1e-5)
+  \item **Training Epochs:** 20
+  \item **Batch Size:** 1 (volumetric processing)
+\end{itemize}
+
+See also: 03\_unet\_architecture.png (detailed layer structure)
+
+
+\subsection{4.3.2 Preprocessing Pipeline (MONAI)}
+Raw NIfTI File (multi-modality)
+  ↓
+[LoadImage] → Load all 4 modalities separately
+  ↓
+[Orientation] → Reorient to RAS (Right-Anterior-Superior) standard
+  ↓
+[Spacing] → Resample to 1.0 × 1.0 × 1.0 mm³ isotropic
+  ↓
+[NormalizeIntensity] → Z-score normalization (nonzero voxels only)
+  ↓
+[RandCropByPosNegLabel] → Extract 96³ patches (balanced pos/neg samples)
+  ↓
+Preprocessed Tensor (1, 4, 96, 96, 96)
+  ↓
+[Model Forward Pass]
+  ↓
+Segmentation Output (1, 3, 96, 96, 96)
+  ↓
+[Inverse Transforms] → Map back to original space
+  ↓
+Final Segmentation Mask (same space as input)
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{14_activity_diagram.png}
+\caption{UML Activity Diagram}
+\label{fig:14_activity_diagram}
+\end{figure}
+
+
+\section{4.4 Module 3: Progression Forecasting Architecture}
+
+\subsection{4.4.1 Mathematical Models Pipeline}
+Grade-Stratified Fitting:
+
+\begin{itemize}
+  \item **HGG (High-Grade):** 89 patients, aggressive growth (exponential-like)
+  \item **LGG (Low-Grade):** 22 patients, slow growth (logistic/gompertz)
+\end{itemize}
+
+
+\subsection{4.4.2 LSTM Hybrid Architecture}
+Loss Function: Mean Squared Error (MSE) on residuals
+
+Training Configuration:
+
+\begin{itemize}
+  \item **Optimizer:** Adam (lr=0.001, weight\_decay=1e-5)
+  \item **Learning Rate Scheduler:** ReduceLROnPlateau (factor=0.5, patience=10)
+  \item **Epochs:** 50-100 (until convergence)
+  \item **Batch Size:** 8 (sequences per batch)
+  \item **Train/Test Split:** 80/20 per grade
+\end{itemize}
+
+
+\subsection{4.4.3 Prediction Pipeline}
+See also: 07\_progression\_pipeline.png (detailed flowchart)
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.85\textwidth]{15_component_diagram.png}
+\caption{UML Component Diagram}
+\label{fig:15_component_diagram}
+\end{figure}
+
+
+\section{4.5 Cross-Module Data Flow}
+
+\subsection{4.5.1 Complete End-to-End Data Flow}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.85\textwidth]{16_deployment_diagram.png}
+\caption{UML Deployment Diagram}
+\label{fig:16_deployment_diagram}
+\end{figure}
+
+
+\section{4.6 Error Handling and Data Validation}
+
+\subsection{4.6.1 Input Validation (All Modules)}
+Classification Module:
+
+\begin{itemize}
+  \item Check image dimensions: must be 224×224
+  \item Check color channels: must be 3 (RGB)
+  \item Check pixel range: must be [0, 1] after normalization
+  \item Reject images with >10\% black borders (non-brain)
+\end{itemize}
+
+Segmentation Module:
+
+\begin{itemize}
+  \item Check 3D volume dimensions: typically 155×188×155 (BraTS standard)
+  \item Check 4 modalities present: T1, T1ce, T2, FLAIR
+  \item Check pixel range after preprocessing: typically [-3, 3] (Z-norm)
+  \item Reject volumes with >50\% missing slices
+\end{itemize}
+
+Progression Module:
+
+\begin{itemize}
+  \item Check ≥ 2 timepoints per patient (minimum for fitting)
+  \item Check temporal ordering: timepoints must be chronologically ordered
+  \item Check volume continuity: no abrupt 10x jumps (likely segmentation error)
+  \item Flag suspicious outliers for manual review
+\end{itemize}
+
+
+\subsection{4.6.2 Model Robustness}
+Federated Learning:
+
+\begin{itemize}
+  \item If 1 client unavailable: Continue with 2 clients (degraded fairness evaluation)
+  \item If validation loss diverges: Early stopping at round t
+  \item Model checkpointing: Save best model per 10 rounds
+\end{itemize}
+
+Segmentation:
+
+\begin{itemize}
+  \item Catch GPU out-of-memory: Reduce patch size dynamically
+  \item Handle 1-2 modality inputs: Pad missing modalities with zeros (with warning)
+\end{itemize}
+
+Progression:
+
+\begin{itemize}
+  \item Handle missing timepoints: Interpolate (with uncertainty flag)
+  \item Handle contradictory models: Use ensemble prediction (average all model predictions)
+\end{itemize}
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{17_state_chart.png}
+\caption{UML State Chart Diagram --- FL Training Lifecycle}
+\label{fig:17_state_chart}
+\end{figure}
+
+
+\section{4.7 System Configuration and Hyperparameters}
+
+\subsection{4.7.1 Module 1: Federated Classification}
+
+\subsection{4.7.2 Module 2: Segmentation}
+
+\subsection{4.7.3 Module 3: Progression}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{04_fl_sequence.png}
+\caption{FL Communication Sequence Diagram}
+\label{fig:04_fl_sequence}
+\end{figure}
+
+
+\section{4.8 Chapter Summary}
+Figure: Federated Learning System Architecture
+
+Figure: 3D U-Net Segmentation Architecture
+
+Figure: Aggregation Strategies Comparison
+
+Figure: End-to-End Integration Architecture
+
+
+\section{Chapter Summary}
+This chapter detailed the system design with UML diagrams, data flow diagrams, and mathematical formulations for all three aggregation strategies.

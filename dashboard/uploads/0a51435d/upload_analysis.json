@@ -1,0 +1,99 @@
+{
+  "files": [
+    "D:\\Major_Project\\FL_QPSO_FedAvg\\dashboard\\uploads\\0a51435d\\BraTS2021_01615_flair.nii.gz",
+    "D:\\Major_Project\\FL_QPSO_FedAvg\\dashboard\\uploads\\0a51435d\\BraTS2021_01615_seg.nii.gz",
+    "D:\\Major_Project\\FL_QPSO_FedAvg\\dashboard\\uploads\\0a51435d\\BraTS2021_01615_t1.nii.gz",
+    "D:\\Major_Project\\FL_QPSO_FedAvg\\dashboard\\uploads\\0a51435d\\BraTS2021_01615_t1ce.nii.gz",
+    "D:\\Major_Project\\FL_QPSO_FedAvg\\dashboard\\uploads\\0a51435d\\BraTS2021_01615_t2.nii.gz"
+  ],
+  "nifti_files": [
+    "D:\\Major_Project\\FL_QPSO_FedAvg\\dashboard\\uploads\\0a51435d\\BraTS2021_01615_flair.nii.gz",
+    "D:\\Major_Project\\FL_QPSO_FedAvg\\dashboard\\uploads\\0a51435d\\BraTS2021_01615_seg.nii.gz",
+    "D:\\Major_Project\\FL_QPSO_FedAvg\\dashboard\\uploads\\0a51435d\\BraTS2021_01615_t1.nii.gz",
+    "D:\\Major_Project\\FL_QPSO_FedAvg\\dashboard\\uploads\\0a51435d\\BraTS2021_01615_t1ce.nii.gz",
+    "D:\\Major_Project\\FL_QPSO_FedAvg\\dashboard\\uploads\\0a51435d\\BraTS2021_01615_t2.nii.gz"
+  ],
+  "modalities": {
+    "flair": "D:\\Major_Project\\FL_QPSO_FedAvg\\dashboard\\uploads\\0a51435d\\BraTS2021_01615_flair.nii.gz",
+    "seg": "D:\\Major_Project\\FL_QPSO_FedAvg\\dashboard\\uploads\\0a51435d\\BraTS2021_01615_seg.nii.gz",
+    "t1": "D:\\Major_Project\\FL_QPSO_FedAvg\\dashboard\\uploads\\0a51435d\\BraTS2021_01615_t1.nii.gz",
+    "t1ce": "D:\\Major_Project\\FL_QPSO_FedAvg\\dashboard\\uploads\\0a51435d\\BraTS2021_01615_t1ce.nii.gz",
+    "t2": "D:\\Major_Project\\FL_QPSO_FedAvg\\dashboard\\uploads\\0a51435d\\BraTS2021_01615_t2.nii.gz"
+  },
+  "unmatched": [],
+  "has_all_required": true,
+  "has_seg": true,
+  "missing": [],
+  "quality_checks": {
+    "flair": {
+      "shape": [
+        240,
+        240,
+        155
+      ],
+      "nonzero_ratio": 0.1471499775985663,
+      "intensity_percentiles": {
+        "p1": 40.067385559082034,
+        "p50": 217.90684509277344,
+        "p99": 292.8638140869141
+      },
+      "dynamic_range": 252.79642852783206,
+      "status": "ok",
+      "warnings": []
+    },
+    "t1": {
+      "shape": [
+        240,
+        240,
+        155
+      ],
+      "nonzero_ratio": 0.1471499775985663,
+      "intensity_percentiles": {
+        "p1": 165.57215087890626,
+        "p50": 461.017333984375,
+        "p99": 567.6871008300782
+      },
+      "dynamic_range": 402.1149499511719,
+      "status": "ok",
+      "warnings": []
+    },
+    "t1ce": {
+      "shape": [
+        240,
+        240,
+        155
+      ],
+      "nonzero_ratio": 0.1471499775985663,
+      "intensity_percentiles": {
+        "p1": 182.90793853759766,
+        "p50": 486.679931640625,
+        "p99": 698.2750830078115
+      },
+      "dynamic_range": 515.3671444702138,
+      "status": "ok",
+      "warnings": []
+    },
+    "t2": {
+      "shape": [
+        240,
+        240,
+        155
+      ],
+      "nonzero_ratio": 0.1471486335125448,
+      "intensity_percentiles": {
+        "p1": 186.855322265625,
+        "p50": 468.7719421386719,
+        "p99": 1015.1995385742191
+      },
+      "dynamic_range": 828.3442163085941,
+      "status": "ok",
+      "warnings": []
+    }
+  },
+  "quality_overview": {
+    "status": "ok",
+    "warnings": [],
+    "modalities_checked": 4
+  },
+  "session_id": "0a51435d"
+}

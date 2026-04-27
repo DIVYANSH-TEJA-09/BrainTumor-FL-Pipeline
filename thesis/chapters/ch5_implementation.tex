@@ -1,0 +1,1179 @@
+\chapter{Implementation}
+\label{ch:5}
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{04_fl_sequence.png}
+\caption{Federated Learning Training Sequence}
+\label{fig:04_fl_sequence}
+\end{figure}
+
+
+\section{5.1 Development Environment Setup}
+
+\subsection{5.1.1 Infrastructure Requirements}
+Hardware:
+
+\begin{itemize}
+  \item GPU: NVIDIA Tesla P100/T4 (16GB+ VRAM) recommended
+  \item RAM: 32GB system memory (for full dataset preloading)
+  \item Storage: 100GB+ (raw data + models + results)
+  \item Network: ≥ 10Mbps (for dataset downloads)
+\end{itemize}
+
+Software Stack:
+
+\begin{itemize}
+  \item Python 3.10+
+  \item PyTorch 2.0+
+  \item MONAI 1.3+ (medical imaging framework)
+  \item scikit-learn 1.3+
+  \item NumPy 1.24+, Pandas
+  \item Matplotlib/Seaborn (visualization)
+  \item Kaggle API (dataset access)
+\end{itemize}
+
+Recommended Platforms:
+
+\begin{itemize}
+  \item Kaggle Notebooks (free GPU, simplified setup)
+  \item Google Colab (free T4 GPU)
+  \item Local machine with NVIDIA GPU + CUDA 11.8/12.1
+  \item Docker container (reproducible environment)
+\end{itemize}
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.85\textwidth]{07_progression_pipeline.png}
+\caption{Progression Module Workflow}
+\label{fig:07_progression_pipeline}
+\end{figure}
+
+
+\section{5.2 Module 1: Federated Classification Implementation}
+
+\subsection{5.2.1 Model Definition: ResNet-18 Brain Tumor Classifier}
+File: federated\_learning/src/model.py
+
+"""
+ResNet-18 model for brain tumor classification.
+Pretrained on ImageNet; final FC layer replaced for 3-class output.
+"""
+import torch
+import torch.nn as nn
+import torchvision.models as models
+
+class BrainTumorResNet(nn.Module):
+    """
+    ResNet-18 with custom FC head for brain tumor classification.
+    Input: (B, 3, 224, 224) RGB images
+    Output: (B, num\_classes) logits
+    """
+    def \_\_init\_\_(self, num\_classes=3, pretrained=True):
+        super().\_\_init\_\_()
+        \# Load pretrained ResNet-18
+        weights = models.ResNet18\_Weights.DEFAULT if pretrained else None
+        self.model = models.resnet18(weights=weights)
+        
+        \# Replace final FC layer
+        num\_features = self.model.fc.in\_features  \# 512
+        self.model.fc = nn.Linear(num\_features, num\_classes)
+    
+    def forward(self, x):
+        """Forward pass"""
+        return self.model(x)
+
+def create\_model(num\_classes=3, device="cuda"):
+    """Instantiate model, move to device, print summary"""
+    model = BrainTumorResNet(num\_classes=num\_classes, pretrained=True)
+    model = model.to(device)
+    
+    total\_params = sum(p.numel() for p in model.parameters())
+    trainable\_params = sum(p.numel() for p in model.parameters() if p.requires\_grad)
+    mb = total\_params * 4 / (1024 ** 2)
+    
+    print(f"Model: ResNet-18 | Params: \{total\_params:,\} | "
+          f"Trainable: \{trainable\_params:,\} | Size: \~\{mb:.1f\}MB")
+    return model
+
+
+\subsection{5.2.2 Federated Client Implementation}
+File: federated\_learning/src/client.py
+
+"""
+FederatedClient: Handles local training for one hospital/client.
+"""
+import copy
+import torch
+import torch.nn as nn
+import torch.optim as optim
+from tqdm.notebook import tqdm
+
+class FederatedClient:
+    """
+    Represents one hospital/silo in federated setting.
+    Typical round:
+        client.set\_model(global\_model)
+        client.set\_optimizer(lr=0.001)
+        weights, losses, accs = client.train\_local(epochs=5)
+        val\_loss, val\_acc = client.validate()
+    """
+    def \_\_init\_\_(self, client\_id, train\_loader, val\_loader, device="cuda"):
+        self.client\_id = client\_id
+        self.train\_loader = train\_loader
+        self.val\_loader = val\_loader
+        self.device = device
+        self.model = None
+        self.optimizer = None
+        self.criterion = nn.CrossEntropyLoss()
+        self.dataset\_size = len(train\_loader.dataset)
+    
+    def set\_model(self, global\_model):
+        """Deep-copy server's global model to local client"""
+        self.model = copy.deepcopy(global\_model)
+        self.model.to(self.device)
+    
+    def set\_optimizer(self, learning\_rate=0.001):
+        """Initialize optimizer with client's model parameters"""
+        self.optimizer = optim.Adam(self.model.parameters(), lr=learning\_rate)
+    
+    def train\_local(self, epochs=5, verbose=False):
+        """
+        Local training on private hospital data.
+        Returns: (state\_dict, train\_losses, train\_accs)
+        """
+        self.model.train()
+        epoch\_losses, epoch\_accs = [], []
+        
+        for ep in range(epochs):
+            running\_loss = 0.0
+            correct = total = 0
+            
+            pbar = tqdm(self.train\_loader, 
+                       desc=f"\{self.client\_id\} Epoch \{ep+1\}/\{epochs\}",
+                       disable=not verbose, leave=False)
+            
+            for images, labels in pbar:
+                images = images.to(self.device)
+                labels = labels.to(self.device)
+                
+                self.optimizer.zero\_grad()
+                outputs = self.model(images)
+                loss = self.criterion(outputs, labels)
+                loss.backward()
+                self.optimizer.step()
+                
+                running\_loss += loss.item()
+                \_, predicted = outputs.max(1)
+                total += labels.size(0)
+                correct += predicted.eq(labels).sum().item()
+            
+            ep\_loss = running\_loss / len(self.train\_loader)
+            ep\_acc = 100.0 * correct / total
+            epoch\_losses.append(ep\_loss)
+            epoch\_accs.append(ep\_acc)
+        
+        return self.model.state\_dict(), epoch\_losses, epoch\_accs
+    
+    def validate(self):
+        """Evaluate on local validation set. Returns (loss, accuracy\%)"""
+        self.model.eval()
+        val\_loss = 0.0
+        correct = total = 0
+        
+        with torch.no\_grad():
+            for images, labels in self.val\_loader:
+                images = images.to(self.device)
+                labels = labels.to(self.device)
+                
+                outputs = self.model(images)
+                loss = self.criterion(outputs, labels)
+                
+                val\_loss += loss.item()
+                \_, predicted = outputs.max(1)
+                total += labels.size(0)
+                correct += predicted.eq(labels).sum().item()
+        
+        val\_loss /= len(self.val\_loader)
+        val\_acc = 100.0 * correct / total
+        return val\_loss, val\_acc
+
+
+\subsection{5.2.3 QPSO Server Implementation (Core Aggregation)}
+File: federated\_learning/src/server\_qpso.py (excerpt)
+
+"""
+QPSOServer: Quantum Particle Swarm Optimization for FL aggregation.
+Maintains pbest (personal best), gbest (global best), mbest (mean best).
+"""
+import copy
+import torch
+import math
+
+class QPSOServer:
+    """Central server using QPSO-based aggregation strategy."""
+    
+    def \_\_init\_\_(self, global\_model, clients, device="cuda", beta=0.7):
+        self.global\_model = global\_model
+        self.clients = clients
+        self.device = device
+        self.beta = beta
+        
+        \# Per-client personal bests and scores
+        self.personal\_best = \{\}
+        self.personal\_best\_scores = \{\}
+        
+        \# Global best
+        self.global\_best = None
+        self.global\_best\_score = 0.0
+        
+        \# Mean best (computed each round)
+        self.mean\_best = None
+        print(f"QPSO Server initialized | Clients=\{len(clients)\} | β=\{beta\}")
+    
+    def initialize\_particles(self):
+        """Set all pbest and gbest to current global model"""
+        state = copy.deepcopy(self.global\_model.state\_dict())
+        for c in self.clients:
+            self.personal\_best[c.client\_id] = copy.deepcopy(state)
+            self.personal\_best\_scores[c.client\_id] = 0.0
+        self.global\_best = copy.deepcopy(state)
+        self.global\_best\_score = 0.0
+        print("✅ QPSO particles initialized")
+    
+    def update\_personal\_best(self, client\_id, weights, val\_acc):
+        """Update client's personal best if new accuracy is better"""
+        if val\_acc > self.personal\_best\_scores[client\_id]:
+            self.personal\_best[client\_id] = copy.deepcopy(weights)
+            self.personal\_best\_scores[client\_id] = val\_acc
+            return True
+        return False
+    
+    def update\_global\_best(self, client\_id, val\_acc):
+        """Update global best if this client is better"""
+        if val\_acc > self.global\_best\_score:
+            self.global\_best = copy.deepcopy(self.personal\_best[client\_id])
+            self.global\_best\_score = val\_acc
+            return True
+        return False
+    
+    def calculate\_mean\_best(self):
+        """Compute element-wise mean of all personal-best state\_dicts"""
+        first\_id = self.clients[0].client\_id
+        self.mean\_best = copy.deepcopy(self.personal\_best[first\_id])
+        
+        \# Average all pbests
+        for key in self.mean\_best:
+            sum\_tensor = torch.zeros\_like(self.mean\_best[key])
+            for client in self.clients:
+                sum\_tensor += self.personal\_best[client.client\_id][key]
+            self.mean\_best[key] = sum\_tensor / len(self.clients)
+    
+    def aggregate\_qpso(self):
+        """
+        QPSO aggregation step:
+        For each parameter: x\_new = p ± β * |mbest - x| * ln(1/u)
+        where p = φ*mbest + (1-φ)*gbest is the attraction point
+        """
+        self.calculate\_mean\_best()
+        w\_new = copy.deepcopy(self.global\_best)
+        
+        for param\_name in w\_new:
+            \# Per-parameter quantum update
+            phi = torch.rand(1).item()  \# ∈ [0,1]
+            u = torch.rand(1).item()  \# ∈ [0,1], then clamp to [0.3, 1.0]
+            u = max(u, 0.3)
+            
+            \# Attraction point
+            p = (phi * self.mean\_best[param\_name] + 
+                 (1 - phi) * self.global\_best[param\_name])
+            
+            \# Quantum position update
+            if u > 0:
+                ln\_term = math.log(1.0 / u)
+                perturbation = (self.beta * 
+                               torch.abs(self.mean\_best[param\_name] - 
+                                        self.global\_best[param\_name]) * 
+                               ln\_term)
+                
+                \# Clamp perturbation for stability
+                perturbation = torch.clamp(perturbation, -0.1, 0.1)
+                
+                \# Random sign
+                sign = 1 if torch.rand(1).item() > 0.5 else -1
+                w\_new[param\_name] = p + sign * perturbation
+        
+        \# Load aggregated weights into global model
+        self.global\_model.load\_state\_dict(w\_new)
+        return self.global\_best\_score
+    
+    def federated\_round(self, round\_num, test\_loader):
+        """Execute one complete FL round"""
+        \# Broadcast global model to all clients
+        for client in self.clients:
+            client.set\_model(self.global\_model)
+        
+        \# Local training
+        client\_weights = \{\}
+        for client in self.clients:
+            \_, \_, \_ = client.train\_local(epochs=5, verbose=False)
+            val\_loss, val\_acc = client.validate()
+            
+            client\_weights[client.client\_id] = client.model.state\_dict()
+            self.update\_personal\_best(client.client\_id, 
+                                     client.model.state\_dict(), 
+                                     val\_acc)
+            self.update\_global\_best(client.client\_id, val\_acc)
+        
+        \# QPSO Aggregation
+        best\_score = self.aggregate\_qpso()
+        
+        \# Evaluate on global test set
+        test\_acc = self.evaluate\_on\_test\_set(test\_loader)
+        
+        return best\_score, test\_acc
+    
+    def evaluate\_on\_test\_set(self, test\_loader):
+        """Evaluate global model on balanced test set"""
+        self.global\_model.eval()
+        correct = total = 0
+        
+        with torch.no\_grad():
+            for images, labels in test\_loader:
+                images = images.to(self.device)
+                labels = labels.to(self.device)
+                outputs = self.global\_model(images)
+                \_, predicted = outputs.max(1)
+                total += labels.size(0)
+                correct += predicted.eq(labels).sum().item()
+        
+        return 100.0 * correct / total
+
+
+\section{5.3 Module 2: Segmentation Implementation}
+
+\subsection{5.3.1 Data Loading and Preprocessing (MONAI)}
+"""
+Segmentation preprocessing using MONAI framework.
+Handles 3D MRI volumes with 4 modalities (T1, T1ce, T2, FLAIR).
+"""
+from monai.transforms import (
+    Compose, LoadImaged, NormalizeIntensityd, 
+    Orientationd, Spacingd, RandCropByPosNegLabel,
+    EnsureChannelFirstd, EnsureTyped
+)
+from monai.data import Dataset, DataLoader
+
+def get\_preprocessing\_transforms(training=True):
+    """Define preprocessing pipeline for BraTS data"""
+    transforms = Compose([
+        LoadImaged(keys=["image", "label"]),
+        EnsureChannelFirstd(keys=["image", "label"]),
+        EnsureTyped(keys=["image", "label"]),
+        
+        \# Reorient to RAS standard
+        Orientationd(keys=["image", "label"], axcodes="RAS"),
+        
+        \# Resample to 1mm³ isotropic
+        Spacingd(keys=["image", "label"], 
+                pixdim=(1.0, 1.0, 1.0),
+                mode=("bilinear", "nearest")),
+        
+        \# Normalize intensity (nonzero voxels only)
+        NormalizeIntensityd(keys=["image"], 
+                           nonzero=True, 
+                           channel\_wise=True),
+        
+        \# Random crop during training (96³ patches, balanced pos/neg)
+        RandCropByPosNegLabel(keys=["image", "label"],
+                             label\_key="label",
+                             spatial\_size=(96, 96, 96),
+                             pos=1.0,  \# 50\% positive (tumor) samples
+                             neg=1.0,  \# 50\% negative (background)
+                             num\_samples=4) if training else None,
+    ])
+    
+    \# Filter None
+    return Compose([t for t in transforms if t is not None])
+
+\# Load dataset
+train\_transforms = get\_preprocessing\_transforms(training=True)
+train\_ds = Dataset(data=train\_files, transform=train\_transforms)
+train\_loader = DataLoader(train\_ds, batch\_size=1, shuffle=True, num\_workers=2)
+
+
+\subsection{5.3.2 Inference: Sliding Window with Model}
+"""
+3D Segmentation inference using sliding window approach.
+Handles large volumes by processing overlapping patches.
+"""
+from monai.inferers import sliding\_window\_inference
+
+def segment\_patient(model, patient\_image\_path, device):
+    """
+    Segment one patient's 3D MRI volume.
+    Args:
+        model: Trained AttentionUnet
+        patient\_image\_path: Path to .nii.gz file
+        device: torch device (cuda/cpu)
+    Returns:
+        predictions: (1, 3, H, W, D) segmentation mask
+    """
+    \# Load and preprocess
+    sample = train\_transforms(\{"image": patient\_image\_path, 
+                              "label": patient\_image\_path\})
+    image = sample["image"].unsqueeze(0).to(device)  \# (1, 4, H, W, D)
+    
+    model.eval()
+    with torch.no\_grad():
+        \# Sliding window inference: process in 96³ patches
+        outputs = sliding\_window\_inference(
+            inputs=image,
+            roi\_size=(96, 96, 96),
+            sw\_batch\_size=4,
+            predictor=model,
+            overlap=0.5  \# 50\% overlap between patches
+        )
+        
+        \# Apply sigmoid + threshold
+        predictions = (outputs.sigmoid() > 0.5).float()
+    
+    return predictions  \# (1, 3, H, W, D)
+
+\# Example usage
+model = AttentionUnet(spatial\_dims=3, in\_channels=4, out\_channels=3)
+model.load\_state\_dict(torch.load("best\_model.pth", map\_location=device))
+
+pred = segment\_patient(model, "patient\_T1.nii.gz", device)
+print(f"Segmentation shape: \{pred.shape\}")
+print(f"Tumor voxels: TC=\{pred[0,0].sum():.0f\}, "
+      f"WT=\{pred[0,1].sum():.0f\}, ET=\{pred[0,2].sum():.0f\}")
+
+
+\section{5.4 Module 3: Progression Implementation}
+
+\subsection{5.4.1 Mathematical Model Fitting}
+File: progression/src/01\_mathematical\_models.py (excerpt)
+
+"""
+Fit mathematical models to tumor volume time series.
+"""
+import numpy as np
+from scipy.optimize import curve\_fit
+
+class MathematicalModels:
+    """Classical tumor growth models"""
+    
+    @staticmethod
+    def logistic(t, V0, K, r):
+        """V(t) = K / (1 + ((K-V0)/V0)*exp(-r*t))"""
+        return K / (1 + ((K - V0) / V0) * np.exp(-r * t))
+    
+    @staticmethod
+    def gompertz(t, V0, a, b):
+        """V(t) = V0 * exp((a/b)*(1-exp(-b*t)))"""
+        return V0 * np.exp((a / b) * (1 - np.exp(-b * t)))
+    
+    @staticmethod
+    def exponential(t, V0, lam):
+        """V(t) = V0 * exp(λ*t)"""
+        return V0 * np.exp(lam * t)
+
+def fit\_models\_per\_patient(times, volumes, grade="HGG"):
+    """
+    Fit all models to patient data.
+    Args:
+        times: Array of time points (days from first scan)
+        volumes: Array of tumor volumes (mm³)
+        grade: 'HGG' or 'LGG' for model parameter initialization
+    Returns:
+        best\_model\_name, best\_r2, fitted\_params
+    """
+    results = \{\}
+    
+    \# Logistic fit
+    try:
+        V0 = volumes[0]
+        K = volumes.max() * 1.5
+        r = 0.01
+        popt, \_ = curve\_fit(MathematicalModels.logistic, 
+                           times, volumes,
+                           p0=[V0, K, r],
+                           bounds=([V0*0.5, K, 0.0001], 
+                                   [V0*1.5, K*2, 1.0]))
+        pred = MathematicalModels.logistic(times, *popt)
+        r2 = 1 - np.sum((volumes - pred)**2) / np.sum((volumes - volumes.mean())**2)
+        results['logistic'] = \{'params': popt, 'r2': r2, 'pred': pred\}
+    except:
+        pass
+    
+    \# Select best model
+    best\_model = max(results, key=lambda k: results[k]['r2'])
+    return best\_model, results[best\_model]['r2'], results[best\_model]['params']
+
+
+\subsection{5.4.2 LSTM Hybrid Training}
+File: progression/src/07\_hybrid\_lstm\_training.py (excerpt)
+
+"""
+Train LSTM to learn residuals from mathematical model.
+"""
+import torch
+import torch.nn as nn
+
+class ResidualLSTM(nn.Module):
+    """LSTM learns where mathematical model fails"""
+    
+    def \_\_init\_\_(self, input\_size=1, hidden\_size=32, num\_layers=1):
+        super().\_\_init\_\_()
+        self.lstm = nn.LSTM(input\_size, hidden\_size, num\_layers, batch\_first=True)
+        self.fc1 = nn.Linear(hidden\_size, 64)
+        self.fc2 = nn.Linear(64, 32)
+        self.fc3 = nn.Linear(32, 1)
+        self.relu = nn.ReLU()
+    
+    def forward(self, x):
+        """x: (batch, seq\_len, 1) residual sequence"""
+        lstm\_out, (h\_n, c\_n) = self.lstm(x)
+        last\_hidden = lstm\_out[:, -1, :]  \# (batch, hidden\_size)
+        
+        x = self.relu(self.fc1(last\_hidden))
+        x = self.relu(self.fc2(x))
+        residual\_correction = self.fc3(x)
+        
+        return residual\_correction
+
+def train\_hybrid\_lstm(model, train\_loader, val\_loader, device, epochs=50):
+    """Train LSTM on residual sequences"""
+    optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
+    criterion = nn.MSELoss()
+    
+    for epoch in range(epochs):
+        model.train()
+        train\_loss = 0.0
+        
+        for x\_batch, y\_batch in train\_loader:
+            x\_batch = x\_batch.to(device)
+            y\_batch = y\_batch.to(device)
+            
+            optimizer.zero\_grad()
+            y\_pred = model(x\_batch)
+            loss = criterion(y\_pred, y\_batch)
+            loss.backward()
+            optimizer.step()
+            
+            train\_loss += loss.item()
+        
+        train\_loss /= len(train\_loader)
+        
+        \# Validation
+        model.eval()
+        val\_loss = 0.0
+        with torch.no\_grad():
+            for x\_batch, y\_batch in val\_loader:
+                x\_batch = x\_batch.to(device)
+                y\_batch = y\_batch.to(device)
+                y\_pred = model(x\_batch)
+                loss = criterion(y\_pred, y\_batch)
+                val\_loss += loss.item()
+        
+        val\_loss /= len(val\_loader)
+        
+        if epoch \% 10 == 0:
+            print(f"Epoch \{epoch\}: Train Loss=\{train\_loss:.6f\}, Val Loss=\{val\_loss:.6f\}")
+
+
+\section{5.5 Key Implementation Details}
+
+\subsection{5.5.1 Data Privacy in FL}
+How FL achieves privacy:
+
+\# PRIVATE (on Hospital Client)
+hospital\_data = load\_private\_patient\_data()  \# Raw images
+hospital\_model.train(hospital\_data)  \# Train locally
+updated\_weights = hospital\_model.state\_dict()  \# Extract weights only
+
+\# TRANSMITTED (Hospital → Server)
+\# Only send: updated\_weights  (\~45 MB)
+\# Never send: hospital\_data, intermediate activations, gradients
+
+\# SERVER receives only weights, aggregates them
+global\_weights = aggregate([hospital1\_weights, hospital2\_weights, hospital3\_weights])
+
+\# Result: Hospital data never leaves premises ✓
+
+
+\subsection{5.5.2 Federated Round Pseudocode}
+\# Main FL Training Loop
+for round\_t in range(1, 101):
+    \# 1. Server broadcasts to all clients
+    for client in clients:
+        client.receive\_global\_model(global\_model)
+    
+    \# 2. Clients train locally (parallel)
+    client\_weights = []
+    for client in clients:
+        weights, losses, accs = client.train\_local(epochs=5)
+        val\_loss, val\_acc = client.validate()
+        client\_weights.append((weights, val\_acc))
+    
+    \# 3. Server aggregates
+    if strategy == "FedAvg":
+        global\_weights = fedavg\_aggregate(client\_weights)
+    elif strategy == "QPSO":
+        global\_weights = qpso\_aggregate(client\_weights)
+    
+    \# 4. Evaluate on global test set
+    test\_acc = evaluate(global\_model, test\_loader)
+    
+    \# Log metrics
+    log(round=round\_t, test\_acc=test\_acc, fairness\_sigma=fairness\_metric)
+
+\# Save final model
+torch.save(global\_model.state\_dict(), "final\_fl\_model.pth")
+
+
+\section{5.6 Performance Optimizations}
+
+\subsection{5.6.1 GPU Memory Optimization}
+\begin{itemize}
+  \item **Gradient Checkpointing:** Save only select activations, recompute others during backprop
+  \item **Mixed Precision:** Use float16 for forward pass, float32 for loss
+  \item **Batch Size Tuning:** Max batch size before OOM; found to be 32 for ResNet-18 on 16GB GPU
+  \item **Data Prefetching:** Load next batch while GPU processes current batch
+\end{itemize}
+
+
+\subsection{5.6.2 Communication Efficiency}
+\begin{itemize}
+  \item **Model Quantization (Future):** Compress weights from float32 → int8 (4x reduction)
+  \item **Gradient Sparsification (Future):** Send only top-k gradients
+  \item **Synchronous SGD (Current):** All clients must finish before aggregation (simple but suboptimal)
+\end{itemize}
+
+
+\section{5.7 Chapter Summary}
+Figure: Federated Learning Sequence Diagram
+
+Figure: LSTM Progression Forecasting Architecture
+
+Figure: Progression Pipeline Workflow
+
+
+\section{Chapter Summary}
+This chapter described implementation details of all three modules using Python, PyTorch, MONAI, and SciPy with key code components.
+
+
+\section{Key Code Components}
+
+\subsection{BrainTumorResNet --- Classification Model}
+\begin{lstlisting}[caption={ResNet-18 Brain Tumor Classifier (model.py)}, label={lst:model}]
+"""
+ResNet-18 model for 3-class brain tumour classification.
+Pretrained on ImageNet; final FC layer replaced.
+"""
+
+import torch
+import torch.nn as nn
+import torchvision.models as models
+
+
+class BrainTumorResNet(nn.Module):
+    """
+    ResNet-18 with the last FC layer replaced:
+        512 → num_classes (default 3).
+    """
+
+    def __init__(self, num_classes=3, pretrained=True):
+        super().__init__()
+        weights = models.ResNet18_Weights.DEFAULT if pretrained else None
+        self.model = models.resnet18(weights=weights)
+        num_features = self.model.fc.in_features
+        self.model.fc = nn.Linear(num_features, num_classes)
+
+    def forward(self, x):
+        return self.model(x)
+
+
+def create_model(num_classes=3, device="cuda"):
+    """Instantiate, move to device, and print a quick param summary."""
+    model = BrainTumorResNet(num_classes=num_classes, pretrained=True)
+    model = model.to(device)
+
+    total  = sum(p.numel() for p in model.parameters())
+    train  = sum(p.numel() for p in model.parameters() if p.requires_grad)
+    mb     = total * 4 / (1024 ** 2)
+
+    print(f"Model: ResNet-18  |  Params: {total:,} (trainable {train:,})  |  ~{mb:.1f} MB")
+    return model
+\end{lstlisting}
+
+\subsection{FederatedClient --- Local Training}
+\begin{lstlisting}[caption={Federated Client (client.py)}, label={lst:client}]
+"""
+FederatedClient — handles local training and validation for one FL client.
+"""
+
+import copy
+import torch
+import torch.nn as nn
+import torch.optim as optim
+
+try:
+    from tqdm.notebook import tqdm
+except ImportError:
+    from tqdm import tqdm
+
+
+class FederatedClient:
+    """
+    Represents one hospital / data silo in the federation.
+
+    Typical round:
+        client.set_model(global_model)
+        client.set_optimizer(lr)
+        weights, losses, accs = client.train_local(epochs)
+        val_loss, val_acc = client.validate()
+    """
+
+    def __init__(self, client_id, train_loader, val_loader, device="cuda"):
+        self.client_id    = client_id
+        self.train_loader = train_loader
+        self.val_loader   = val_loader
+        self.device       = device
+        self.model        = None
+        self.optimizer    = None
+        self.criterion    = nn.CrossEntropyLoss()
+        self.dataset_size = len(train_loader.dataset)
+
+    # ----- model / optimiser --------------------------------------------------
+
+    def set_model(self, global_model):
+        """Deep-copy the server's global model."""
+        self.model = copy.deepcopy(global_model)
+        self.model.to(self.device)
+
+    def set_optimizer(self, learning_rate=0.001):
+        self.optimizer = optim.Adam(self.model.parameters(), lr=learning_rate)
+
+    # ----- local training -----------------------------------------------------
+
+    def train_local(self, epochs=5, verbose=False):
+        """
+        Run local training on client data.
+
+        Returns
+        -------
+        state_dict, list[float], list[float]
+        """
+        self.model.train()
+        epoch_losses, epoch_accs = [], []
+
+        for ep in range(epochs):
+            running_loss = 0.0
+            correct = total = 0
+
+            pbar = tqdm(self.train_loader,
+                        desc=f"{self.client_id} Epoch {ep+1}/{epochs}",
+                        disable=not verbose, leave=False)
+
+            for batch_idx, (images, labels) in enumerate(pbar):
+                images, labels = images.to(self.device), labels.to(self.device)
+
+                self.optimizer.zero_grad()
+                outputs = self.model(images)
+                loss = self.criterion(outputs, labels)
+                loss.backward()
+                self.optimizer.step()
+
+                running_loss += loss.item()
+                _, predicted  = outputs.max(1)
+                total   += labels.size(0)
+                correct += predicted.eq(labels).sum().item()
+
+                if verbose:
+                    pbar.set_postfix(Loss=f"{running_loss/(batch_idx+1):.4f}",
+                                    Acc=f"{100.*correct/total:.2f}%")
+
+            ep_loss = running_loss / len(self.train_loader)
+            ep_acc  = 100.0 * correct / total
+            epoch_losses.append(ep_loss)
+            epoch_accs.append(ep_acc)
+
+            if verbose:
+                print(f"  {self.client_id} E{ep+1}: Loss={ep_loss:.4f}  Acc={ep_acc:.2f}%")
+
+        return self.model.state_dict(), epoch_losses, epoch_accs
+
+    # ----- validation ---------------------------------------------------------
+
+    def validate(self):
+        """Evaluate on the local validation set. Returns (loss, accuracy%)."""
+        self.model.eval()
+        val_loss = 0.0
+        correct = total = 0
+
+        with torch.no_grad():
+            for images, labels in self.val_loader:
+                images, labels = images.to(self.device), labels.to(self.device)
+                outputs = self.model(images)
+                loss    = self.criterion(outputs, labels)
+
+                val_loss += loss.item()
+                _, predicted = outputs.max(1)
+                total   += labels.size(0)
+                correct += predicted.eq(labels).sum().item()
+
+        return val_loss / len(self.val_loader), 100.0 * correct / total
+
+    # ----- helpers ------------------------------------------------------------
+
+    def get_dataset_size(self):
+        return self.dataset_size
+\end{lstlisting}
+
+\subsection{QPSOServer --- Novel Aggregation}
+\begin{lstlisting}[caption={QPSO Server Aggregation (server\_qpso.py)}, label={lst:qpso}]
+"""
+QPSOServer — Quantum-behaved Particle Swarm Optimisation for FL aggregation.
+
+Each client is a "particle".  The server maintains:
+  • personal best (pbest)  — best state_dict each client has ever produced.
+  • global  best (gbest)   — best state_dict across all clients.
+  • mean    best (mbest)   — element-wise mean of all pbests.
+
+Position update (per parameter tensor):
+    φ  ~ U(0,1)    u ~ U(0,1)
+    p  = φ·mean(pbests) + (1−φ)·gbest          # attraction point
+    x' = p  ±  β · |mbest − x| · ln(1/u)       # QPSO step
+
+β (contraction-expansion coefficient) controls exploration vs exploitation.
+"""
+
+import copy
+import torch
+import torch.nn as nn
+
+
+class QPSOServer:
+    """Central server using QPSO-based aggregation."""
+
+    def __init__(self, global_model, clients, device="cuda", beta=0.7):
+        self.global_model = global_model
+        self.clients      = clients
+        self.device       = device
+        self.beta         = beta
+
+        # per-client personal bests
+        self.personal_best        = {}          # client_id → state_dict
+        self.personal_best_scores = {}          # client_id → float (val acc)
+
+        # global best
+        self.global_best       = None           # state_dict
+        self.global_best_score = 0.0
+
+        # mean best (computed each round)
+        self.mean_best = None
+
+        print(f"QPSO Server  |  clients={len(clients)}  β={beta}")
+
+    # ----- initialisation -----------------------------------------------------
+
+    def initialize_particles(self):
+        """Set every pbest and gbest to the current global model."""
+        state = copy.deepcopy(self.global_model.state_dict())
+        for c in self.clients:
+            self.personal_best[c.client_id]        = copy.deepcopy(state)
+            self.personal_best_scores[c.client_id] = 0.0
+        self.global_best       = copy.deepcopy(state)
+        self.global_best_score = 0.0
+        print("✅ QPSO particles initialised")
+
+    # ----- pbest / gbest updates ----------------------------------------------
+
+    def update_personal_best(self, client_id, weights, val_acc):
+        if val_acc > self.personal_best_scores[client_id]:
+            self.personal_best[client_id]        = copy.deepcopy(weights)
+            self.personal_best_scores[client_id] = val_acc
+            return True
+        return False
+
+    def update_global_best(self, client_id, val_acc):
+        if val_acc > self.global_best_score:
+            self.global_best       = copy.deepcopy(self.personal_best[client_id])
+            self.global_best_score = val_acc
+            return True
+        return False
+
+    # ----- mbest ---------------------------------------------------------------
+
+    def calculate_mean_best(self):
+        """Element-wise mean of all personal-best state_dicts."""
+        first_id = self.clients[0].client_id
+        self.mean_best = copy.deepcopy(self.personal_best[first_id])
+
+        for k in self.mean_best:
+            self.mean_best[k] = torch.zeros_like(self.mean_best[k],
+                                                 dtype=torch.float32)
+        for c in self.clients:
+            pb = self.personal_best[c.client_id]
+            for k in self.mean_best:
+                self.mean_best[k] += pb[k].float()
+
+        n = len(self.clients)
+        for k in self.mean_best:
+            self.mean_best[k] /= n
+
+    # ----- QPSO aggregation ---------------------------------------------------
+
+    def qpso_aggregate(self, client_weights_list):
+        """
+        Perform one QPSO aggregation step.
+
+        Parameters
+        ----------
+        client_weights_list : list[(client_id, state_dict, val_acc)]
+
+        Returns
+        -------
+        aggregated state_dict
+        """
+        # 1. update personal / global bests
+        for cid, w, acc in client_weights_list:
+            pb = self.update_personal_best(cid, w, acc)
+            gb = self.update_global_best(cid, acc)
+            if pb:
+                print(f"  {cid}: pbest ↑ {acc:.2f}%")
+            if gb:
+                print(f"  {cid}: gbest ↑ {acc:.2f}%")
+
+        # 2. mean best
+        self.calculate_mean_best()
+
+        # 3. QPSO position update for every parameter key
+        agg = copy.deepcopy(self.global_best)
+
+        for k in agg:
+            # sum of personal bests  (used to get mean pbest for attraction)
+            pbest_sum = torch.zeros_like(agg[k], dtype=torch.float32)
+            for c in self.clients:
+                pbest_sum += self.personal_best[c.client_id][k].float()
+
+            phi  = torch.rand_like(agg[k].float())
+            u    = torch.rand_like(agg[k].float())
+
+            # attraction point
+            p = phi * (pbest_sum / len(self.clients)) \
+              + (1 - phi) * self.global_best[k].float()
+
+            # sign ±1
+            sign = torch.where(
+                torch.rand_like(agg[k].float()) < 0.5,
+                torch.ones_like(agg[k].float()),
+               -torch.ones_like(agg[k].float()),
+            )
+
+            mbest   = self.mean_best[k].float()
+            current = agg[k].float()
+
+            # QPSO step
+            new_val = p + sign * self.beta \
+                      * torch.abs(mbest - current) \
+                      * torch.log(1.0 / (u + 1e-8))
+
+            agg[k] = new_val.to(self.global_best[k].dtype)
+
+        return agg
+
+    # ----- evaluation ---------------------------------------------------------
+
+    def evaluate_global_model(self, test_loader):
+        """Return (accuracy%, loss) on a test DataLoader."""
+        self.global_model.eval()
+        criterion = nn.CrossEntropyLoss()
+        total_loss = 0.0
+        correct = total = 0
+
+        with torch.no_grad():
+            for images, labels in test_loader:
+                images, labels = images.to(self.device), labels.to(self.device)
+                outputs = self.global_model(images)
+                total_loss += criterion(outputs, labels).item()
+                _, pred = outputs.max(1)
+                total   += labels.size(0)
+                correct += pred.eq(labels).sum().item()
+
+        return 100.0 * correct / total, total_loss / len(test_loader)
+
+    # ----- helpers ------------------------------------------------------------
+
+    def get_global_model(self):
+        return copy.deepcopy(self.global_model)
+\end{lstlisting}
+
+\subsection{FedAvgServer --- Baseline Aggregation}
+\begin{lstlisting}[caption={FedAvg Server (server\_fedavg.py)}, label={lst:fedavg}]
+"""
+FedAvgServer — Federated Averaging aggregation.
+
+Aggregation rule
+    w_global = Σ (n_k / n_total) · w_k
+where n_k is the training-set size of client k.
+"""
+
+import copy
+import torch
+import torch.nn as nn
+
+
+class FedAvgServer:
+    """Central server implementing the FedAvg algorithm."""
+
+    def __init__(self, global_model, clients, device="cuda"):
+        self.global_model = global_model
+        self.clients      = clients
+        self.device       = device
+        self.total_samples = sum(c.get_dataset_size() for c in clients)
+
+        print(f"FedAvg Server  |  clients={len(clients)}  "
+              f"total_samples={self.total_samples}")
+
+    # ----- aggregation --------------------------------------------------------
+
+    def aggregate_weights(self, client_weights):
+        """
+        Weighted average of client state_dicts.
+
+        Parameters
+        ----------
+        client_weights : list[(state_dict, dataset_size)]
+
+        Returns
+        -------
+        aggregated state_dict
+        """
+        first_sd = client_weights[0][0]
+        agg = {}
+
+        for k in first_sd:
+            if first_sd[k].is_floating_point():
+                # Weighted average for float params
+                accumulated = torch.zeros_like(first_sd[k], dtype=torch.float32)
+                for state_dict, n_k in client_weights:
+                    w = n_k / self.total_samples
+                    accumulated = accumulated + state_dict[k].float() * w
+                agg[k] = accumulated.to(first_sd[k].dtype)
+            else:
+                # Non-float (e.g. num_batches_tracked): copy from first client
+                agg[k] = first_sd[k].clone()
+
+        return agg
+
+    # ----- evaluation ---------------------------------------------------------
+
+    def evaluate_global_model(self, test_loader):
+        """Return (accuracy%, loss) on a test DataLoader."""
+        self.global_model.eval()
+        criterion = nn.CrossEntropyLoss()
+        total_loss = 0.0
+        correct = total = 0
+
+        with torch.no_grad():
+            for images, labels in test_loader:
+                images, labels = images.to(self.device), labels.to(self.device)
+                outputs = self.global_model(images)
+                total_loss += criterion(outputs, labels).item()
+                _, pred = outputs.max(1)
+                total   += labels.size(0)
+                correct += pred.eq(labels).sum().item()
+
+        return 100.0 * correct / total, total_loss / len(test_loader)
+
+    # ----- helpers ------------------------------------------------------------
+
+    def get_global_model(self):
+        return copy.deepcopy(self.global_model)
+\end{lstlisting}
+
+\subsection{ResidualLSTM --- Progression Model}
+\begin{lstlisting}[caption={LSTM Hybrid Residual Model (infrastructure\_lstm.py, lines 273--349)}, label={lst:lstm}]
+class ResidualLSTM(nn.Module):
+    """
+    LSTM model to predict next residual from previous residuals.
+    
+    Architecture:
+      - Input: sequence of residuals (lookback length)
+      - LSTM: capture temporal dependencies in residuals
+      - Fully connected layers: output prediction
+      - Output: predicted next residual
+    """
+    
+    def __init__(
+        self,
+        lookback: int = 3,
+        hidden_size: int = 32,
+        num_layers: int = 1,
+        dropout: float = 0.2,
+    ):
+        super().__init__()
+        
+        self.lookback = lookback
+        self.hidden_size = hidden_size
+        self.num_layers = num_layers
+        
+        # LSTM layers
+        self.lstm = nn.LSTM(
+            input_size=1,
+            hidden_size=hidden_size,
+            num_layers=num_layers,
+            batch_first=True,
+            dropout=dropout if num_layers > 1 else 0,
+        )
+        
+        # Attention layer (optional): weight different timesteps
+        self.attention = nn.MultiheadAttention(
+            embed_dim=hidden_size,
+            num_heads=4,
+            dropout=dropout,
+            batch_first=True,
+        )
+        
+        # Fully connected layers
+        self.fc = nn.Sequential(
+            nn.Linear(hidden_size, 64),
+            nn.ReLU(),
+            nn.Dropout(dropout),
+            nn.Linear(64, 32),
+            nn.ReLU(),
+            nn.Dropout(dropout),
+            nn.Linear(32, 1),
+        )
+    
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
+        """
+        Args:
+            x: Tensor of shape (batch_size, lookback)
+        
+        Returns:
+            output: Tensor of shape (batch_size, 1) - predicted residual
+        """
+        
+        # Reshape for LSTM: (batch_size, lookback, 1)
+        x = x.unsqueeze(-1)
+        
+        # LSTM forward
+        lstm_out, (h_n, c_n) = self.lstm(x)  # lstm_out: (batch, lookback, hidden)
+        
+        # Attention: weight the LSTM outputs
+        attn_out, _ = self.attention(lstm_out, lstm_out, lstm_out)  # (batch, lookback, hidden)
+        
+        # Take the final hidden state (could also use attention)
+        final_hidden = attn_out[:, -1, :]  # (batch, hidden)
+        
+        # Fully connected layers
+        output = self.fc(final_hidden)  # (batch, 1)
+        
+        return output.squeeze(-1)  # (batch,)
+\end{lstlisting}

@@ -1,0 +1,96 @@
+classDiagram
+    class BrainTumorResNet {
+        -model: ResNet18
+        -fc: Linear
+        -num_classes: int
+        +__init__(num_classes)
+        +forward(x): Tensor
+        +get_features(x): Tensor
+    }
+
+    class FederatedClient {
+        -client_id: str
+        -model: BrainTumorResNet
+        -train_loader: DataLoader
+        -val_loader: DataLoader
+        -optimizer: Adam
+        -criterion: CrossEntropyLoss
+        +__init__(client_id, data, model)
+        +receive_global_model(weights)
+        +local_training(epochs): dict
+        +get_weights(): OrderedDict
+        +evaluate(): float
+    }
+
+    class FedAvgServer {
+        -global_model: BrainTumorResNet
+        -clients: List~FederatedClient~
+        -test_loader: DataLoader
+        +__init__(model, clients)
+        +broadcast_model()
+        +aggregate(client_weights): OrderedDict
+        +evaluate_global(): float
+        +train(num_rounds)
+    }
+
+    class FedProxServer {
+        -global_model: BrainTumorResNet
+        -clients: List~FederatedClient~
+        -mu: float
+        +__init__(model, clients, mu)
+        +aggregate(client_weights): OrderedDict
+        +train(num_rounds)
+    }
+
+    class QPSOServer {
+        -global_model: BrainTumorResNet
+        -clients: List~FederatedClient~
+        -personal_best: dict
+        -global_best: OrderedDict
+        -mbest: OrderedDict
+        -beta: float
+        +__init__(model, clients, beta)
+        +update_personal_best(client_id, weights, score)
+        +compute_mbest()
+        +qpso_aggregate(client_weights): OrderedDict
+        +train(num_rounds)
+    }
+
+    class AttentionUNet3D {
+        -encoder: ModuleList
+        -decoder: ModuleList
+        -attention_gates: ModuleList
+        -in_channels: int
+        -out_channels: int
+        +__init__(in_ch, out_ch, features)
+        +forward(x): Tensor
+    }
+
+    class ResidualLSTM {
+        -lstm: LSTM
+        -attention: MultiheadAttention
+        -fc: Sequential
+        -hidden_size: int
+        +__init__(input_size, hidden_size)
+        +forward(x): Tensor
+        +predict(sequence): float
+    }
+
+    class MathematicalModels {
+        +logistic(t, V0, K, r): float
+        +gompertz(t, V0, a, b): float
+        +exponential(t, V0, r): float
+        +linear(t, V0, m): float
+        +fit_best(volumes, times): dict
+    }
+
+    FedAvgServer --> BrainTumorResNet : uses
+    FedProxServer --> BrainTumorResNet : uses
+    QPSOServer --> BrainTumorResNet : uses
+    FedAvgServer --> FederatedClient : manages
+    FedProxServer --> FederatedClient : manages
+    QPSOServer --> FederatedClient : manages
+    FederatedClient --> BrainTumorResNet : trains
+    FedProxServer --|> FedAvgServer : extends
+    QPSOServer --|> FedAvgServer : extends
+    ResidualLSTM --> MathematicalModels : corrects

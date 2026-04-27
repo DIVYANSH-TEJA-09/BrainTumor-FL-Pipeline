@@ -1,0 +1,48 @@
+flowchart TB
+    subgraph Cloud["Central Aggregation Server"]
+        CS["Aggregation Server\nPython 3.10 + PyTorch\nQPSO / FedAvg / FedProx\n(GPU Optional)"]
+    end
+
+    subgraph HospA["Hospital A - Small"]
+        HA_GPU["NVIDIA GPU Server\nTesla P100 16GB"]
+        HA_DATA[("Local MRI Data\n~1,300 images\n(Never Shared)")]
+        HA_MODEL["ResNet-18\nLocal Training"]
+        HA_DATA --> HA_MODEL
+        HA_MODEL --> HA_GPU
+    end
+
+    subgraph HospB["Hospital B - Medium"]
+        HB_GPU["NVIDIA GPU Server\nTesla T4 16GB"]
+        HB_DATA[("Local MRI Data\n~4,600 images\n(Never Shared)")]
+        HB_MODEL["ResNet-18\nLocal Training"]
+        HB_SEG["3D Attention U-Net\nLocal Segmentation"]
+        HB_PROG["LSTM Hybrid\nLocal Progression"]
+        HB_DATA --> HB_MODEL
+        HB_MODEL --> HB_GPU
+        HB_SEG --> HB_GPU
+        HB_PROG --> HB_GPU
+    end
+
+    subgraph HospC["Hospital C - Large"]
+        HC_GPU["NVIDIA GPU Server\nRTX 3090 24GB"]
+        HC_DATA[("Local MRI Data\n~5,700 images\n(Never Shared)")]
+        HC_MODEL["ResNet-18\nLocal Training"]
+        HC_DATA --> HC_MODEL
+        HC_MODEL --> HC_GPU
+    end
+
+    subgraph Dashboard["Visualization Layer"]
+        DASH["Streamlit Dashboard\nPython 3.10+\nWeb Browser Access"]
+    end
+
+    HA_GPU <-->|"Model Weights Only\n~44 MB per round\n(Encrypted Channel)"| CS
+    HB_GPU <-->|"Model Weights Only\n~44 MB per round\n(Encrypted Channel)"| CS
+    HC_GPU <-->|"Model Weights Only\n~44 MB per round\n(Encrypted Channel)"| CS
+
+    CS --> DASH
+
+    style Cloud fill:#e8eaf6,stroke:#283593
+    style HospA fill:#fce4ec,stroke:#c62828
+    style HospB fill:#e8f5e9,stroke:#2e7d32
+    style HospC fill:#fff8e1,stroke:#f57f17
+    style Dashboard fill:#f3e5f5,stroke:#7b1fa2

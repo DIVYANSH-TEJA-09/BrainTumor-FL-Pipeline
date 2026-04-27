@@ -1,0 +1,55 @@
+stateDiagram-v2
+    [*] --> Initialization
+
+    state Initialization {
+        [*] --> LoadConfig
+        LoadConfig --> InitGlobalModel: Load ResNet-18\nImageNet Weights
+        InitGlobalModel --> InitClients: Create 3\nHospital Clients
+        InitClients --> [*]
+    }
+
+    Initialization --> FederatedRound: Round t=1
+
+    state FederatedRound {
+        [*] --> Broadcasting
+        Broadcasting --> LocalTraining: Send Global Weights\nto All Clients
+
+        state LocalTraining {
+            [*] --> Client1Training
+            [*] --> Client2Training
+            [*] --> Client3Training
+            Client1Training --> Client1Done: 5 Epochs
+            Client2Training --> Client2Done: 5 Epochs
+            Client3Training --> Client3Done: 5 Epochs
+        }
+
+        LocalTraining --> WeightsCollection: All Clients\nFinished
+
+        state Aggregation {
+            [*] --> StrategySelection
+            StrategySelection --> FedAvgAgg: FedAvg
+            StrategySelection --> FedProxAgg: FedProx
+            StrategySelection --> QPSOAgg: QPSO-FL
+            FedAvgAgg --> UpdateGlobal: Weighted Average
+            FedProxAgg --> UpdateGlobal: Proximal +\nWeighted Average
+            QPSOAgg --> UpdateGlobal: Quantum PSO\npbest/gbest Update
+        }
+
+        WeightsCollection --> Aggregation
+        Aggregation --> Evaluation: Test on\nGlobal Set
+    }
+
+    FederatedRound --> RoundCheck: Round Complete
+
+    state RoundCheck <<choice>>
+    RoundCheck --> FederatedRound: t < 100\nt = t + 1
+    RoundCheck --> Completed: t = 100
+
+    state Completed {
+        [*] --> SaveBestModel
+        SaveBestModel --> GenerateMetrics: Accuracy\nFairness\nROC-AUC
+        GenerateMetrics --> ExportResults
+        ExportResults --> [*]
+    }
+
+    Completed --> [*]

@@ -177,63 +177,86 @@ Upload notebooks from `federated_learning/notebooks/` to Kaggle:
 
 ## Repository Structure
 
-```
-FL_QPSO_FedAvg/
-│
-├── segmentation/              # Module 1: 3D Attention U-Net
-│   ├── dataset_step1_refined.ipynb
-│   ├── streamlit_app/         # Interactive demo app
-│   ├── extract_demo_data.py
-│   └── inspect_data.py
-│
-├── segmentation_2d/           # 2D BraTS segmentation experiments
-│   ├── BinarySeg.ipynb
-│   └── MulticlassSeg.ipynb
-│
-├── federated_learning/        # Module 2: FL-QPSO Classification
-│   ├── src/                   # Core implementation
-│   │   ├── model.py           # ResNet-18 classifier
-│   │   ├── client.py          # Federated client
-│   │   ├── server_fedavg.py   # FedAvg aggregation
-│   │   ├── server_qpso.py     # QPSO aggregation
-│   │   ├── trainer_fedavg.py  # FedAvg training loop
-│   │   ├── trainer_qpso.py    # QPSO training loop
-│   │   ├── data_loader.py     # Multi-source data loading
-│   │   ├── preprocessor.py    # Image preprocessing
-│   │   ├── dataset.py         # PyTorch Dataset
-│   │   ├── analysis.py        # Statistical analysis
-│   │   ├── visualize.py       # Plotting utilities
-│   │   └── utils.py           # Helper functions
-│   ├── notebooks/             # Kaggle execution notebooks
-│   ├── setup1_natural/        # Setup 1: Natural heterogeneity
-│   ├── setup2_label_skew/     # Setup 2: 80/10/10 skew
-│   └── setup3_extreme_skew/   # Setup 3: Single-class extreme
-│
-├── progression/               # Module 3: Tumor Time Travel
-│
-├── docs/                      # Documentation
-│   ├── FINAL_PROJECT_PROPOSAL.md
-│   ├── INTEGRATION_GUIDE.md
-│   ├── TUMOR_PROGRESSION_COMPLETE_GUIDE.md
-│   ├── PPT_CONTENT_AND_DIAGRAMS.md
-│   └── PROJECT_DOCUMENTS_INDEX.md
-│
-├── diagrams/                  # Architecture diagrams
-│   ├── mermaid/               # Mermaid source files
-│   └── rendered/              # Exported PNGs
-│
-├── presentation/              # Presentation assets
-│
-├── .github/                   # GitHub templates
-│   ├── ISSUE_TEMPLATE/
-│   └── PULL_REQUEST_TEMPLATE.md
-│
-├── .gitignore
-├── CONTRIBUTING.md
-├── LICENSE
-├── README.md
-└── requirements.txt
-```
+180: ```
+181: FL_QPSO_FedAvg/
+182: │
+183: ├── segmentation/              # Module 1: 3D Attention U-Net
+184: │   ├── dataset_step1_refined.ipynb
+185: │   ├── streamlit_app/         # Interactive demo app
+186: │   ├── extract_demo_data.py
+187: │   └── inspect_data.py
+188: │
+189: ├── segmentation_2d/           # 2D BraTS segmentation experiments
+190: │   ├── BinarySeg.ipynb
+191: │   └── MulticlassSeg.ipynb
+192: │
+193: ├── federated_learning/        # Module 2: FL-QPSO Classification
+194: │   ├── src/                   # Core implementation
+195: │   │   ├── model.py           # ResNet-18 classifier
+196: │   │   ├── client.py          # Federated client
+197: │   │   ├── server_fedavg.py   # FedAvg aggregation
+198: │   │   ├── server_qpso.py     # QPSO aggregation
+199: │   │   ├── trainer_fedavg.py  # FedAvg training loop
+200: │   │   ├── trainer_qpso.py    # QPSO training loop
+201: │   │   ├── data_loader.py     # Multi-source data loading
+202: │   │   ├── preprocessor.py    # Image preprocessing
+203: │   │   ├── dataset.py         # PyTorch Dataset
+204: │   │   ├── analysis.py        # Statistical analysis
+205: │   │   ├── visualize.py       # Plotting utilities
+206: │   │   └── utils.py           # Helper functions
+207: │   ├── notebooks/             # Kaggle execution notebooks
+208: │   ├── setup1_natural/        # Setup 1: Natural heterogeneity
+209: │   ├── setup2_label_skew/     # Setup 2: 80/10/10 skew
+210: │   └── setup3_extreme_skew/   # Setup 3: Single-class extreme
+211: │
+212: ├── progression/               # Module 3: Tumor Time Travel
+213: │
+214: ├── dashboard/                 # Clinical Dashboard
+215: │   ├── app.py                 # Streamlit application
+216: │   ├── config.py
+217: │   ├── models/
+218: │   ├── static/
+219: │   ├── templates/
+220: │   └── utils/
+221: │
+222: ├── paper/                     # IEEE Paper Sources
+223: │   ├── paper.tex              # 3-method (FedAvg vs FedProx vs FedQPSO)
+224: │   ├── paper_fedavg_vs_qpso.tex # 2-method comparison
+225: │   └── figs/                  # Paper figures
+226: │
+227: ├── thesis/                    # Thesis Documentation (LaTeX)
+228: │   ├── main.tex
+229: │   ├── references.bib
+230: │   ├── generate_chapters.py
+231: │   ├── chapters/
+232: │   └── figures/
+233: │
+234: ├── docs/                      # Documentation
+235: │   ├── FINAL_PROJECT_PROPOSAL.md
+236: │   ├── INTEGRATION_GUIDE.md
+237: │   ├── TUMOR_PROGRESSION_COMPLETE_GUIDE.md
+238: │   ├── PPT_CONTENT_AND_DIAGRAMS.md
+239: │   ├── PROJECT_DOCUMENTS_INDEX.md
+240: │   ├── chapters/              # Finalized markdown chapters
+241: │   └── reference/             # Department guidelines
+242: │
+243: ├── diagrams/                  # Architecture diagrams
+244: │   ├── mermaid/               # Mermaid source files
+245: │   ├── rendered/              # Exported PNGs
+246: │   └── render_diagrams.py     # Rendering script
+247: │
+248: ├── presentation/              # Presentation assets
+249: │
+250: ├── .github/                   # GitHub templates
+251: │   ├── ISSUE_TEMPLATE/
+252: │   └── PULL_REQUEST_TEMPLATE.md
+253: │
+254: ├── .gitignore
+255: ├── CONTRIBUTING.md
+256: ├── LICENSE
+257: ├── README.md
+258: └── requirements.txt
+259: ```
 
 ---
 

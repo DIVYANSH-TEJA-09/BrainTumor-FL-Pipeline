@@ -70,6 +70,18 @@ desktop.ini
 # ---------- Streamlit ----------
 .streamlit/secrets.toml
 
+# ---------- LaTeX ----------
+*.aux
+*.out
+*.toc
+*.lof
+*.lot
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.bbl
+*.blg
+
 # ---------- Misc ----------
 *.bak
 *.tmp

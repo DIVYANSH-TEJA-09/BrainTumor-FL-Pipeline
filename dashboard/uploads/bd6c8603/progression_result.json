@@ -1,0 +1,68 @@
+{
+  "current_volume": 186228.0,
+  "grade": "HGG",
+  "logistic": {
+    "params": {
+      "v0": 186228.0,
+      "k": 1900000.0,
+      "r": 0.073,
+      "grade": "HGG"
+    },
+    "projections": [
+      {
+        "day": 30,
+        "volume": 935997.8532152729,
+        "growth_pct": 402.60855146125874
+      },
+      {
+        "day": 60,
+        "volume": 1703630.660004069,
+        "growth_pct": 814.8090834912415
+      },
+      {
+        "day": 90,
+        "volume": 1875801.9538011458,
+        "growth_pct": 907.260967094715
+      },
+      {
+        "day": 180,
+        "volume": 1899965.642281342,
+        "growth_pct": 920.2362922231578
+      },
+      {
+        "day": 365,
+        "volume": 1899999.9999531312,
+        "growth_pct": 920.2547414744996
+      }
+    ]
+  },
+  "spatial": {
+    "stats": {
+      "growth_voxels": 453,
+      "regression_voxels": 17798,
+      "stable_voxels": 168430,
+      "input_volume": 186228.0,
+      "predicted_volume": 168883.0,
+      "volume_change_pct": -9.313851837532487
+    }
+  },
+  "insights": [
+    "Current tumor burden is high; prioritize close follow-up intervals.",
+    "6-month logistic projection indicates notable volumetric increase.",
+    "Spatial model suggests regression-dominant morphology."
+  ],
+  "explainability": {
+    "drivers": {
+      "initial_volume_mm3": 186228.0,
+      "growth_rate_r_per_day": 0.073,
+      "carrying_capacity_mm3": 1900000.0
+    },
+    "grade_context": "High-Grade Glioma",
+    "spatial_balance": {
+      "growth_voxels": 453,
+      "stable_voxels": 168430,
+      "regression_voxels": 17798,
+      "volume_change_pct": -9.313851837532487
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "volumes": {
+    "TC": 1594.0,
+    "WT": 4326.0,
+    "ET": 1758.0
+  },
+  "total_voxels": 8928000,
+  "region_names": [
+    "Tumor Core (TC)",
+    "Whole Tumor (WT)",
+    "Enhancing Tumor (ET)"
+  ],
+  "region_colors": [
+    "#E74C3C",
+    "#3498DB",
+    "#F39C12"
+  ],
+  "uncertainty_summary": {
+    "level": "low",
+    "mean": 0.06192996725440025,
+    "p95": 0.14641980826854706,
+    "high_uncertainty_threshold": 0.6,
+    "high_uncertainty_ratio": 0.0002176299283154122,
+    "review_recommended": false
+  }
+}

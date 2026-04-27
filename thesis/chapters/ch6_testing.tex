@@ -1,0 +1,376 @@
+\chapter{System Testing}
+\label{ch:6}
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{06_experimental_setups.png}
+\caption{Experimental Setup Configuration}
+\label{fig:06_experimental_setups}
+\end{figure}
+
+
+\section{6.1 Testing Strategy and Coverage}
+
+\subsection{6.1.1 Test Categories}
+
+\section{6.2 Module 1: Federated Learning Tests}
+
+\subsection{6.2.1 Classification Model Tests}
+Test FL-C1: ResNet-18 Forward Pass
+
+\begin{itemize}
+  \item **File:** `federated\_learning/tests/test\_model.py`
+  \item **Description:** Verify model produces correct output shape and logits
+  \item **Input:** Batch of (B, 3, 224, 224) images
+  \item **Expected Output:** (B, 3) logits for 3 classes
+  \item **Validation:** No NaN/Inf values, output in reasonable range
+\end{itemize}
+
+def test\_model\_forward():
+    model = BrainTumorResNet(num\_classes=3)
+    x = torch.randn(4, 3, 224, 224)
+    output = model(x)
+    
+    assert output.shape == (4, 3), f"Expected (4,3), got \{output.shape\}"
+    assert not torch.isnan(output).any(), "Output contains NaN"
+    assert not torch.isinf(output).any(), "Output contains Inf"
+
+Test FL-C2: Client Local Training
+
+\begin{itemize}
+  \item **Description:** Verify client training loop updates weights and produces decreasing loss
+  \item **Dataset:** Toy dataset (100 images, 4 classes)
+  \item **Epochs:** 3
+  \item **Expected:** Loss decreases, accuracy increases
+\end{itemize}
+
+Test FL-C3: Federated Round Execution
+
+\begin{itemize}
+  \item **Description:** Execute one complete FL round (broadcast → local training → aggregation)
+  \item **Clients:** 3 simulated hospitals
+  \item **Expected:** Global model weights updated, test accuracy computed
+\end{itemize}
+
+
+\subsection{6.2.2 Aggregation Strategy Tests}
+Test FL-A1: FedAvg Weighted Averaging
+
+\begin{itemize}
+  \item **Description:** Verify FedAvg correctly computes weighted average of client weights
+  \item **Setup:** 3 clients with dataset sizes [1000, 2000, 3000]
+  \item **Validation:** w\_global = (1000/6000)*w1 + (2000/6000)*w2 + (3000/6000)*w3
+\end{itemize}
+
+Test FL-A2: FedProx Proximal Regularization
+
+\begin{itemize}
+  \item **Description:** Verify proximal term is added to local loss
+  \item **Loss Decomposition:** total\_loss = data\_loss + (μ/2)*||w\_local - w\_global||²
+  \item **Validation:** Check gradient includes proximal term
+\end{itemize}
+
+Test FL-A3: QPSO Particle Updates
+
+\begin{itemize}
+  \item **Description:** Verify QPSO correctly updates pbest, gbest, and applies quantum jump
+  \item **Validation:**
+\end{itemize}
+
+- pbest increases or stays same (never decreases)
+
+- gbest is maximum of all pbests
+
+- New position has bounded magnitude (no explosion)
+
+
+\section{6.3 Module 2: Segmentation Tests}
+
+\subsection{6.3.1 Data Loading and Preprocessing}
+Test SEG-D1: MONAI Transform Pipeline
+
+\begin{itemize}
+  \item **File:** `segmentation/test\_preprocessing.py`
+  \item **Description:** Verify preprocessing preserves data integrity
+  \item **Checks:**
+\end{itemize}
+
+- Output shape: (batch, 4, 96, 96, 96) or (4, 128, 128, 128)
+
+- Value range after normalization: typically [-3, +3] (Z-norm)
+
+- No NaN/Inf values
+
+- Orientation is RAS (verified against expected affine matrix)
+
+Test SEG-D2: BraTS Dataset Loading
+
+\begin{itemize}
+  \item **File:** `segmentation/test\_data\_loading.py`
+  \item **Description:** Load and verify BraTS 2021 dataset structure
+  \item **Checks:**
+\end{itemize}
+
+- All 4 modalities present (T1, T1ce, T2, FLAIR)
+
+- Ground truth labels present (WT, TC, ET as multi-channel)
+
+- No missing or corrupted files
+
+
+\subsection{6.3.2 Segmentation Model Tests}
+Test SEG-M1: Model Forward Pass
+
+\begin{itemize}
+  \item **File:** `segmentation/test\_model.py`
+  \item **Input:** (1, 4, 96, 96, 96) - 4-channel 3D volume
+  \item **Expected Output:** (1, 3, 96, 96, 96) - 3-channel segmentation
+  \item **Validation:** Output in [0, 1] (after sigmoid), no NaN
+\end{itemize}
+
+Test SEG-M2: Attention Gate Functionality
+
+\begin{itemize}
+  \item **Description:** Verify attention gates suppress background
+  \item **Method:** Compare predictions with/without attention
+  \item **Expected:** Attention reduces false positives in non-tumor regions
+\end{itemize}
+
+Test SEG-I1: Inference with Sliding Window
+
+\begin{itemize}
+  \item **File:** `segmentation/test\_inference.py`
+  \item **Description:** Test full inference pipeline on sample patient
+  \item **Input:** Full 3D volume (\~155×188×155 voxels)
+  \item **Expected Output:** Segmentation masks without edge artifacts
+  \item **Validation:**
+\end{itemize}
+
+- Dice score ≥ 0.75 on held-out test set
+
+- Processing time ≤ 30 seconds per patient
+
+- Tumor Core Dice ≥ 0.80 (clinically important region)
+
+
+\section{6.4 Module 3: Progression Tests}
+
+\subsection{6.4.1 Mathematical Model Fitting}
+Test PROG-M1: Logistic Model Fit
+
+\begin{itemize}
+  \item **File:** `progression/test\_growth\_metrics.py`
+  \item **Description:** Verify logistic model fits synthetic growth curve correctly
+  \item **Setup:** Generate synthetic volume data: V(t) = K/(1 + ((K-V0)/V0)*exp(-r*t))
+  \item **Fit:** Recover parameters and verify R² ≥ 0.95
+\end{itemize}
+
+Test PROG-M2: Model Selection
+
+\begin{itemize}
+  \item **Description:** Test automatic best-fit model selection
+  \item **Setup:** 4 synthetic volume trajectories (one each for Logistic, Gompertz, Exponential, Linear)
+  \item **Expected:** Best-fit model correctly identifies each trajectory type
+\end{itemize}
+
+
+\subsection{6.4.2 LSTM Hybrid Tests}
+Test PROG-L1: LSTM Residual Learning
+
+\begin{itemize}
+  \item **File:** `progression/test\_lstm\_training.py`
+  \item **Description:** Verify LSTM learns residuals from mathematical baseline
+  \item **Setup:**
+\end{itemize}
+
+- Train on patient residuals (actual - logistic\_predicted)
+
+- Evaluate on held-out test patients
+
+\begin{itemize}
+  \item **Expected:**
+\end{itemize}
+
+- Training loss decreases
+
+- Hybrid MAE < Baseline MAE
+
+- Improvement ≥ 5\% for HGG patients
+
+Test PROG-P1: Prediction with Uncertainty
+
+\begin{itemize}
+  \item **Description:** Test end-to-end prediction pipeline with confidence intervals
+  \item **Input:** Patient with 3-4 historical timepoints
+  \item **Output:** 6-month prediction with [lower\_CI, predicted, upper\_CI]
+  \item **Validation:**
+\end{itemize}
+
+- Confidence interval width is reasonable (5-20\% of prediction)
+
+- Predicted value within 2 standard deviations of held-out test
+
+
+\section{6.5 Integration and End-to-End Tests}
+
+\subsection{6.5.1 Complete FL Pipeline}
+Test INT-FL: 100-Round FL Training
+
+\begin{itemize}
+  \item **Scope:** Full federated learning experiment
+  \item **Setup:** 3 clients, 100 rounds, 5 local epochs per round
+  \item **Metrics Tracked:**
+\end{itemize}
+
+- Global test accuracy (should ≥ 95\%)
+
+- Per-client fairness (σ should be minimized)
+
+- Rounds to 80\% accuracy
+
+- Total training time
+
+\begin{itemize}
+  \item **Expected Results:**
+\end{itemize}
+
+- FedAvg: \~90-98\% final accuracy
+
+- QPSO: \~90-98\% accuracy WITH better fairness (σ ≤ FedAvg σ)
+
+
+\subsection{6.5.2 Complete Workflow: Classification → Segmentation → Progression}
+Test INT-E2E: End-to-End Patient Analysis
+
+\begin{itemize}
+  \item **File:** `tests/test\_end\_to\_end.py`
+  \item **Workflow:**
+\end{itemize}
+
+1. Load sample Glioma patient MRI
+
+2. Run FL Classification (inference only)
+
+3. If Glioma → Run Segmentation
+
+4. Extract tumor volume → Run Progression
+
+5. Return: Diagnosis + Volumetric Analysis + 6-month Prognosis
+
+\begin{itemize}
+  \item **Validation:**
+\end{itemize}
+
+- All modules execute without errors
+
+- Output types correct (class probabilities, segmentation mask, volume prediction)
+
+- Processing time < 2 minutes total
+
+
+\section{6.6 Performance and Scalability Tests}
+
+\subsection{6.6.1 Training Performance}
+
+\subsection{6.6.2 Accuracy Benchmarks}
+Classification Accuracy:
+
+\begin{itemize}
+  \item FedAvg: 98.79\% (Setup 1), 90.56\% (Setup 2, Label Skew)
+  \item FedProx: 99.29\% (Setup 1), 93.02\% (Setup 2)
+  \item QPSO-FL: 98.43\% (Setup 1), 92.09\% (Setup 2) ← Best fairness
+\end{itemize}
+
+Segmentation Metrics (BraTS 2021 Validation Set):
+
+\begin{itemize}
+  \item Mean Dice: 0.76 (target ≥ 0.75) ✅
+  \item Tumor Core Dice: 0.85 (target ≥ 0.80) ✅
+  \item Enhancing Tumor Dice: 0.79 (target ≥ 0.75) ✅
+\end{itemize}
+
+Progression Accuracy (MU-Glioma-Post):
+
+\begin{itemize}
+  \item HGG MAE (Baseline Logistic): 24,672 mm³
+  \item HGG MAE (LSTM Hybrid): 22,728 mm³
+  \item **Improvement: 7.88\%** (target ≥ 5\%) ✅
+\end{itemize}
+
+
+\section{6.7 Robustness and Error Handling}
+
+\subsection{6.7.1 Invalid Input Handling}
+Test ROB-1: Image Dimension Validation
+
+\begin{itemize}
+  \item Input: 256×256 image (wrong size)
+  \item Expected: Graceful resize to 224×224 (with warning) OR error with helpful message
+\end{itemize}
+
+Test ROB-2: Missing Modalities
+
+\begin{itemize}
+  \item Segmentation input: Only T1 provided (should have T1, T1ce, T2, FLAIR)
+  \item Expected: Pad missing channels with zeros (with warning)
+\end{itemize}
+
+Test ROB-3: Insufficient Timepoints for Progression
+
+\begin{itemize}
+  \item Input: Single timepoint (need ≥ 2)
+  \item Expected: Error message "Need at least 2 timepoints to fit model"
+\end{itemize}
+
+
+\subsection{6.7.2 Numerical Stability}
+Test ROB-4: Large Gradient Values
+
+\begin{itemize}
+  \item Input: Very bright MRI slices (causing large gradients)
+  \item Expected: Gradient clipping prevents NaN, training continues
+\end{itemize}
+
+Test ROB-5: Division by Zero in Logistic Model
+
+\begin{itemize}
+  \item Input: V0 = 0 (zero initial volume)
+  \item Expected: Handled gracefully (skip patient or use alternative model)
+\end{itemize}
+
+
+\section{6.8 Actual Test Files in Repository}
+
+\subsection{File Inventory}
+
+\section{6.9 Running Tests}
+
+\subsection{Command Line}
+\# Run all tests
+pytest tests/ -v
+
+\# Run specific module tests
+pytest segmentation/test\_inference.py -v
+pytest progression/test\_growth\_metrics.py -v
+
+\# Run with coverage report
+pytest tests/ --cov=federated\_learning --cov-report=html
+
+
+\subsection{CI/CD Integration}
+Tests automatically run on:
+
+\begin{itemize}
+  \item Every git push (GitHub Actions)
+  \item Pull requests before merge
+  \item Nightly full test suite
+\end{itemize}
+
+
+\section{6.10 Test Summary}
+Figure: Experimental Setup Configuration
+
+
+\section{Chapter Summary}
+This chapter documented the testing methodology including unit, integration, and performance testing under IID and non-IID distributions.
