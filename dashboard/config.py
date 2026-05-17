@@ -50,7 +50,7 @@ for _c in _seg_candidates:
         break
 
 SEG_TUMOR_REGIONS = ["Tumor Core (TC)", "Whole Tumor (WT)", "Enhancing Tumor (ET)"]
-SEG_REGION_COLORS = ["#E74C3C", "#3498DB", "#F39C12"]
+SEG_REGION_COLORS = ["#E74C3C", "#F59E0B", "#F97316"]
 
 # ─── Progression ─────────────────────────────────────────────────────
 PROGRESSION_DIR = PROJECT_ROOT / "progression"
@@ -75,3 +75,37 @@ LOGISTIC_DEFAULTS = {
 # ─── Flask ───────────────────────────────────────────────────────────
 SECRET_KEY = os.environ.get("FLASK_SECRET_KEY", "neuroai-dashboard-dev-key")
 MAX_CONTENT_LENGTH = 2 * 1024 * 1024 * 1024  # 2GB upload limit
+
+# ─── Clinical Context (Streamlit Dashboard) ─────────────────────
+CLINICAL_CONTEXT = {
+    "Glioma": (
+        "High-grade gliomas are aggressive. Immediate neurosurgery referral, "
+        "MRI contrast enhancement, molecular profiling (IDH1, MGMT) recommended. "
+        "RANO criteria apply for follow-up."
+    ),
+    "Meningioma": (
+        "Usually benign. Watchful waiting or surgical resection depending on size "
+        "and symptoms. Annual MRI follow-up standard."
+    ),
+    "Pituitary": (
+        "Evaluate for hormonal dysfunction (prolactin, GH, ACTH). Ophthalmology "
+        "referral if visual field defects. Transsphenoidal surgery if indicated."
+    ),
+    "No Tumor": (
+        "No tumor detected. If clinical suspicion persists, consider repeat imaging "
+        "with contrast enhancement or alternative modalities."
+    ),
+}
+
+CONFIDENCE_COLORS = {
+    "high": "#22C55E",    # green  — ≥ 85 %
+    "medium": "#F59E0B",  # amber  — 65-84 %
+    "low": "#EF4444",     # red    — < 65 %
+}
+
+RANO_THRESHOLDS = {
+    "CR": (-100.0, "Complete Response",  "#22C55E"),
+    "PR": (-25.0,  "Partial Response",   "#3B82F6"),
+    "SD": (25.0,   "Stable Disease",     "#F59E0B"),
+    "PD": (float("inf"), "Progressive Disease", "#EF4444"),
+}

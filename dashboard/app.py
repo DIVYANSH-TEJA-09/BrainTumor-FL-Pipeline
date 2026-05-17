@@ -423,6 +423,88 @@ async def index():
     return FileResponse(str(DASHBOARD_DIR / "templates" / "index.html"))
 
 
+# ─── Sample Patient Data ────────────────────────────────────────────
+SAMPLE_DATA_DIR = DASHBOARD_DIR / "sample_data"
+
+
+@app.get("/api/samples")
+async def list_samples():
+    """List available pre-loaded sample patients."""
+    registry = SAMPLE_DATA_DIR / "patients.json"
+    if not registry.exists():
+        return JSONResponse({"patients": []})
+
+    patients = json.loads(registry.read_text(encoding="utf-8"))
+    # Verify each patient's data directory exists
+    available = []
+    for p in patients:
+        patient_dir = SAMPLE_DATA_DIR / p["id"]
+        if patient_dir.exists():
+            nifti_count = len(list(patient_dir.glob("*.nii.gz")))
+            p["file_count"] = nifti_count
+            p["available"] = nifti_count >= 4
+            available.append(p)
+
+    return JSONResponse({"patients": available})
+
+
+@app.post("/api/samples/load")
+async def load_sample(sample_id: str = Form(...)):
+    """Load a sample patient's data into a new session."""
+    patient_dir = SAMPLE_DATA_DIR / sample_id
+    if not patient_dir.exists():
+        raise HTTPException(status_code=404, detail=f"Sample '{sample_id}' not found")
+
+    # Create a new session and copy the NIfTI files
+    session_id, session_dir = create_session_dir()
+
+    try:
+        import shutil
+        for src_file in patient_dir.glob("*.nii.gz"):
+            dst_file = session_dir / src_file.name
+            shutil.copy2(str(src_file), str(dst_file))
+
+        # Analyze the copied files
+        all_files = [str(f) for f in session_dir.glob("*.nii.gz")]
+        result = analyze_uploaded_files(all_files)
+
+        quality_checks = {}
+        for mod, path in (result.get("modalities") or {}).items():
+            if mod == "seg":
+                continue
+            try:
+                quality_checks[mod] = assess_nifti_quality(path)
+            except Exception as q_err:
+                quality_checks[mod] = {
+                    "status": "review",
+                    "warnings": [f"Quality check unavailable: {q_err}"],
+                }
+
+        if quality_checks:
+            result["quality_checks"] = quality_checks
+            result["quality_overview"] = _summarize_quality_checks(quality_checks)
+
+        # Load patient metadata
+        registry = SAMPLE_DATA_DIR / "patients.json"
+        if registry.exists():
+            patients = json.loads(registry.read_text(encoding="utf-8"))
+            meta = next((p for p in patients if p["id"] == sample_id), None)
+            if meta:
+                result["patient_meta"] = meta
+
+        result["session_id"] = session_id
+        result["source"] = "sample_database"
+        _write_json(
+            session_dir / "upload_analysis.json",
+            _compact_payload_for_storage(result),
+        )
+        return JSONResponse(result)
+
+    except Exception as e:
+        cleanup_session(session_id)
+        raise HTTPException(status_code=500, detail=str(e))
+
+
 # ─── Upload Endpoint ────────────────────────────────────────────────
 @app.post("/api/upload")
 async def upload_files(
@@ -640,6 +722,15 @@ async def classify(session_id: str = Form(...)):
                 response["slice_index"] = preview_idx
                 response["total_slices"] = total_slices
                 response["slice_image_b64"] = base64.b64encode(buf.getvalue()).decode("utf-8")
+
+                try:
+                    from models.classifier import generate_gradcam_for_class
+                    response["explainability"] = generate_gradcam_for_class(
+                        preview_img,
+                        class_idx=glioma_idx,
+                    )
+                except Exception:
+                    response["explainability"] = None
             except Exception:
                 pass
 
@@ -934,8 +1025,15 @@ async def progression(
 
 # ─── Report Endpoint ────────────────────────────────────────────────
 @app.get("/api/report/{session_id}")
-async def download_report(session_id: str):
-    """Generate and download a concise clinical-style PDF report."""
+async def download_report(
+    session_id: str,
+    patient_id: str | None = None,
+    age: str | None = None,
+    sex: str | None = None,
+    scan_date: str | None = None,
+    notes: str | None = None,
+):
+    """Generate and download a comprehensive clinical PDF report."""
     session_dir = UPLOAD_DIR / session_id
     if not session_dir.exists():
         raise HTTPException(status_code=404, detail="Session not found")
@@ -947,15 +1045,135 @@ async def download_report(session_id: str):
             detail="Classification must be completed before report export",
         )
 
-    payload = _build_report_payload(session_id, session_dir)
-    lines = _render_report_lines(payload)
-    pdf_bytes = _build_minimal_pdf(lines)
+    # Load all available results
+    import json
+    classification = None
+    segmentation = None
+    progression = None
+    upload_analysis = None
 
-    report_json_path = session_dir / "report_payload.json"
-    _write_json(report_json_path, _compact_payload_for_storage(payload))
+    if classification_json.exists():
+        classification = json.loads(classification_json.read_text(encoding="utf-8"))
+
+    seg_json = session_dir / "segmentation_result.json"
+    if seg_json.exists():
+        segmentation = json.loads(seg_json.read_text(encoding="utf-8"))
+
+    prog_json = session_dir / "progression_result.json"
+    if prog_json.exists():
+        progression = json.loads(prog_json.read_text(encoding="utf-8"))
+
+    upload_json = session_dir / "upload_analysis.json"
+    if upload_json.exists():
+        upload_analysis = json.loads(upload_json.read_text(encoding="utf-8"))
+
+    # Patient metadata
+    patient_meta = {
+        "patient_id": patient_id or session_id[:8].upper(),
+        "age": age or "N/A",
+        "sex": sex or "N/A",
+        "scan_date": scan_date or datetime.now().strftime("%Y-%m-%d"),
+        "notes": notes or "",
+    }
+
+    # Build report assets (slices + overlays)
+    report_assets = {}
+    scan_summary = {}
+
+    if upload_analysis:
+        modalities = upload_analysis.get("modalities", {}) or {}
+        detected = ", ".join(sorted(modalities.keys())) if modalities else "N/A"
+        scan_summary["summary"] = f"Detected modalities: {detected}."
+        quality_overview = upload_analysis.get("quality_overview") or {}
+        if quality_overview:
+            scan_summary["quality"] = f"{str(quality_overview.get('status', 'review')).upper()}"
+            warnings = quality_overview.get("warnings") or []
+            if warnings:
+                scan_summary["warnings"] = warnings[:4]
+        report_assets["scan_summary"] = scan_summary
+
+    seg_npz = session_dir / "seg_prediction.npz"
+    if seg_npz.exists():
+        try:
+            from utils.pdf_report import build_segmentation_overlays, slice_to_image
+
+            seg_data = np.load(str(seg_npz))
+            pred_mask = seg_data["pred_mask"]
+            image_data = seg_data["image_data"] if "image_data" in seg_data.files else None
+
+            if pred_mask is not None and image_data is not None:
+                wt_vol = pred_mask[:, :, :, 1]
+                tumor_slices = np.where(wt_vol.sum(axis=(1, 2)) > 0)[0]
+                if len(tumor_slices) > 0:
+                    idx = int(tumor_slices[len(tumor_slices) // 2])
+                else:
+                    idx = int(pred_mask.shape[0] // 2)
+
+                wt = pred_mask[idx, :, :, 1]
+                tc = pred_mask[idx, :, :, 0]
+                et = pred_mask[idx, :, :, 2]
+
+                modality_imgs = {}
+                for key, ch in (("t1", 0), ("t1ce", 1), ("t2", 2), ("flair", 3)):
+                    if image_data.shape[3] > ch:
+                        modality_imgs[key] = slice_to_image(image_data[idx, :, :, ch])
+
+                report_assets["modality_slices"] = {
+                    k.upper(): v for k, v in modality_imgs.items()
+                }
+                report_assets["segmentation_overlays"] = build_segmentation_overlays(
+                    modality_imgs,
+                    {"WT": wt, "TC": tc, "ET": et},
+                )
+        except Exception:
+            pass
+    elif upload_analysis:
+        try:
+            from utils.preprocessing import render_report_slice
+            modalities = upload_analysis.get("modalities", {}) or {}
+            modality_imgs = {}
+            for key in ("t1", "t1ce", "t2", "flair"):
+                if key in modalities:
+                    img, _, _ = render_report_slice(modalities[key], slice_index=None)
+                    modality_imgs[key] = img
+            report_assets["modality_slices"] = {
+                k.upper(): v for k, v in modality_imgs.items()
+            }
+        except Exception:
+            pass
+
+    # Explainability for all classes (if slice available)
+    try:
+        if classification and classification.get("slice_image_b64"):
+            from models.classifier import generate_gradcam_bundle, CLASS_NAMES_3
+            from PIL import Image
+            img = Image.open(BytesIO(base64.b64decode(classification["slice_image_b64"]))).convert("RGB")
+            classification["explainability_bundle"] = generate_gradcam_bundle(img, class_names=CLASS_NAMES_3)
+    except Exception:
+        pass
+
+    # Clinical context from config
+    try:
+        from config import CLINICAL_CONTEXT
+        if classification:
+            cls_name = (classification.get("consensus") or {}).get("class_name")
+            if cls_name and cls_name in CLINICAL_CONTEXT:
+                classification["clinical_context"] = CLINICAL_CONTEXT[cls_name]
+    except Exception:
+        pass
+
+    # Generate comprehensive PDF
+    from utils.pdf_report import generate_clinical_pdf
+    pdf_bytes = generate_clinical_pdf(
+        patient_meta=patient_meta,
+        classification=classification,
+        segmentation=segmentation,
+        progression=progression,
+        report_assets=report_assets,
+    )
 
     headers = {
-        "Content-Disposition": f'attachment; filename="neuroai_report_{session_id}.pdf"'
+        "Content-Disposition": f'attachment; filename="NeuroAI_Report_{session_id[:8]}.pdf"'
     }
     return StreamingResponse(
         BytesIO(pdf_bytes),

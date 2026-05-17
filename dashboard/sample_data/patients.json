@@ -1,0 +1,35 @@
+[
+  {
+    "id": "BraTS2021_01610",
+    "patient_id": "PT-1610",
+    "display_name": "Patient 1610 — HGG (M, 52y)",
+    "age": 52,
+    "sex": "Male",
+    "grade": "HGG",
+    "scan_date": "2021-03-15",
+    "notes": "High-grade glioma, left temporal lobe. Follow-up study.",
+    "modalities": ["t1", "t1ce", "t2", "flair", "seg"]
+  },
+  {
+    "id": "BraTS2021_01615",
+    "patient_id": "PT-1615",
+    "display_name": "Patient 1615 — HGG (F, 38y)",
+    "age": 38,
+    "sex": "Female",
+    "grade": "HGG",
+    "scan_date": "2021-04-02",
+    "notes": "High-grade glioma, right frontal region. Initial diagnosis scan.",
+    "modalities": ["t1", "t1ce", "t2", "flair", "seg"]
+  },
+  {
+    "id": "BraTS2021_01639",
+    "patient_id": "PT-1639",
+    "display_name": "Patient 1639 — HGG (M, 61y)",
+    "age": 61,
+    "sex": "Male",
+    "grade": "HGG",
+    "scan_date": "2021-05-18",
+    "notes": "High-grade glioma, parietal-occipital region. Pre-operative assessment.",
+    "modalities": ["t1", "t1ce", "t2", "flair", "seg"]
+  }
+]

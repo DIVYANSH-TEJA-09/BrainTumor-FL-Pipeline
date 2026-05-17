@@ -2,6 +2,7 @@
 fastapi>=0.104.0
 uvicorn[standard]>=0.24.0
 python-multipart>=0.0.6
+fpdf2>=2.7.0
 
 # Already in project requirements.txt:
 # torch, torchvision, numpy, Pillow, nibabel, monai, scipy, plotly, scikit-image

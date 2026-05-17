@@ -225,6 +225,67 @@ def _generate_gradcam(model, device, image: Image.Image, target_class_idx=None):
         h2.remove()
 
 
+def generate_gradcam_for_class(
+    image: Image.Image,
+    class_idx: int,
+    model_name: str = "QPSO-FL",
+):
+    """
+    Generate Grad-CAM heatmap for a specific class index.
+
+    Parameters
+    ----------
+    image : PIL.Image
+        Input image slice.
+    class_idx : int
+        Target class index.
+    model_name : str
+        Classification model to use.
+
+    Returns
+    -------
+    dict
+        Grad-CAM payload with heatmap/blend base64 images.
+    """
+    model, device = load_model(model_name)
+    result = _generate_gradcam(model, device, image, target_class_idx=class_idx)
+    return result or {}
+
+
+def generate_gradcam_bundle(
+    image: Image.Image,
+    class_names: list[str] | None = None,
+    model_name: str = "QPSO-FL",
+):
+    """
+    Generate Grad-CAM heatmaps for all classes.
+
+    Parameters
+    ----------
+    image : PIL.Image
+        Input image slice.
+    class_names : list[str] or None
+        Optional class names in index order. Defaults to CLASS_NAMES_3.
+    model_name : str
+        Classification model to use.
+
+    Returns
+    -------
+    dict
+        Mapping of class name -> Grad-CAM payload.
+    """
+    if class_names is None:
+        class_names = CLASS_NAMES_3
+
+    model, device = load_model(model_name)
+    bundle = {}
+    for idx, name in enumerate(class_names):
+        payload = _generate_gradcam(model, device, image, target_class_idx=idx)
+        if payload:
+            bundle[name] = payload
+    return bundle
+
+
 def classify_image(image: Image.Image, model_names=None, include_explainability=False):
     """
     Classify a single image with the QPSO-FL model (or multiple models).

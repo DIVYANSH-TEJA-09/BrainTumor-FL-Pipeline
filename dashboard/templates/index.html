@@ -4,415 +4,453 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NeuroAI — Brain Tumor Analysis Dashboard</title>
-    <meta name="description" content="AI-powered brain tumor classification, segmentation, and progression tracking. Federated Learning + 3D Attention U-Net + LSTM growth prediction.">
-
-    <!-- Fonts -->
+    <meta name="description" content="AI-powered brain tumor classification, segmentation, and progression tracking.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-
-    <!-- Plotly for 3D/Charts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
-
-    <!-- Styles -->
-    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/style.css?v=20260517">
 </head>
 <body>
-    <!-- ═══════════════ BACKGROUND EFFECTS ═══════════════ -->
-    <div class="bg-effects">
-        <div class="bg-orb bg-orb-1"></div>
-        <div class="bg-orb bg-orb-2"></div>
-        <div class="bg-orb bg-orb-3"></div>
-        <div class="bg-grid"></div>
-    </div>
-
-    <!-- ═══════════════ NAVBAR ═══════════════ -->
-    <nav class="navbar" id="navbar">
-        <div class="nav-brand">
-            <span class="nav-logo">🧠</span>
-            <span class="nav-title">NeuroAI</span>
-            <span class="nav-badge">v1.0</span>
-        </div>
-        <div class="nav-steps" id="navSteps">
-            <div class="step-item active" data-step="0">
-                <span class="step-num">1</span>
-                <span class="step-label">Upload</span>
-            </div>
-            <div class="step-connector"></div>
-            <div class="step-item" data-step="1">
-                <span class="step-num">2</span>
-                <span class="step-label">Classify</span>
-            </div>
-            <div class="step-connector"></div>
-            <div class="step-item" data-step="2">
-                <span class="step-num">3</span>
-                <span class="step-label">Segment</span>
-            </div>
-            <div class="step-connector"></div>
-            <div class="step-item" data-step="3">
-                <span class="step-num">4</span>
-                <span class="step-label">Prognosis</span>
-            </div>
-        </div>
-        <div class="nav-status" id="navStatus">
-            <span class="status-dot"></span>
-            <span class="status-text">Ready</span>
-        </div>
-    </nav>
-
-    <!-- ═══════════════ MAIN CONTENT ═══════════════ -->
-    <main class="main-content" id="mainContent">
-
-        <!-- ─── STEP 0: UPLOAD ─── -->
-        <section class="panel panel-active" id="panelUpload" data-step="0">
-            <div class="panel-header">
-                <h1 class="panel-title">
-                    <span class="title-icon">📤</span>
-                    Upload MRI Data
-                </h1>
-                <p class="panel-subtitle">Drop a ZIP file containing NIfTI modalities (T1, T1ce, T2, FLAIR) or upload them individually</p>
+    <div class="app-layout">
+        <!-- ═══ SIDEBAR ═══ -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-brand">
+                <span class="brand-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 3c3.9 0 7 2.6 7 6.5 0 2.8-1.6 5.1-4 6v3.5H9V15c-2.4-.9-4-3.2-4-6C5 5.6 8.1 3 12 3z" />
+                        <path d="M9 21h6" />
+                    </svg>
+                </span>
+                <span class="brand-title">NeuroAI</span>
+                <span class="brand-badge">v1.0</span>
             </div>
 
-            <div class="setup-summary" id="setupSummary">
-                <div class="setup-card">
-                    <div class="setup-label">Backend</div>
-                    <div class="setup-value">FastAPI Inference API</div>
-                </div>
-                <div class="setup-card">
-                    <div class="setup-label">Classification</div>
-                    <div class="setup-value">QPSO-FL ResNet + BraTS Safeguard</div>
-                </div>
-                <div class="setup-card">
-                    <div class="setup-label">Segmentation</div>
-                    <div class="setup-value">3D Attention U-Net (MONAI)</div>
-                </div>
-                <div class="setup-card">
-                    <div class="setup-label">Prognosis</div>
-                    <div class="setup-value">Logistic + Spatial U-Net</div>
-                </div>
-            </div>
-
-            <div class="pipeline-strip">
-                <span>Upload</span>
-                <span>→</span>
-                <span>Classify</span>
-                <span>→</span>
-                <span>Segment</span>
-                <span>→</span>
-                <span>Prognosis</span>
-            </div>
-
-            <div class="health-panel" id="healthPanel">
-                <div class="health-title">System Status</div>
-                <div class="health-items" id="healthItems"></div>
-            </div>
-
-            <div class="upload-zone" id="uploadZone">
-                <div class="upload-zone-inner">
-                    <div class="upload-icon">
-                        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                            <polyline points="17 8 12 3 7 8"/>
-                            <line x1="12" y1="3" x2="12" y2="15"/>
+            <nav class="sidebar-nav" id="sidebarNav">
+                <button class="nav-item active" data-page="upload" id="navUpload">
+                    <span class="nav-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 3v10" />
+                            <path d="M8 7l4-4 4 4" />
+                            <path d="M4 14v4a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-4" />
                         </svg>
+                    </span> Patient Upload
+                </button>
+                <button class="nav-item" data-page="classify" id="navClassify">
+                    <span class="nav-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M6 2h8l4 4v16H6z" />
+                            <path d="M14 2v4h4" />
+                            <path d="M8 12h8" />
+                            <path d="M8 16h8" />
+                        </svg>
+                    </span> Classification Report
+                </button>
+                <button class="nav-item" data-page="segment" id="navSegment">
+                    <span class="nav-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="7" />
+                            <path d="M12 8v8" />
+                            <path d="M8 12h8" />
+                        </svg>
+                    </span> Segmentation Viewer
+                </button>
+                <button class="nav-item" data-page="progression" id="navProgression">
+                    <span class="nav-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 17l6-6 4 4 7-7" />
+                            <path d="M14 8h6v6" />
+                        </svg>
+                    </span> Progression Forecast
+                </button>
+                <button class="nav-item" data-page="multi" id="navMulti">
+                    <span class="nav-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M16 11a4 4 0 1 0-8 0" />
+                            <path d="M6 20a6 6 0 0 1 12 0" />
+                            <path d="M21 20a5 5 0 0 0-6-4" />
+                        </svg>
+                    </span> Multi-Patient View
+                </button>
+            </nav>
+
+            <div class="sidebar-section">
+                <div class="sidebar-section-title">System Status</div>
+                <div id="healthItems" class="health-items">
+                    <span class="health-item">Checking...</span>
+                </div>
+            </div>
+
+            <!-- Phase 3 Stub: Federated Node Selector -->
+            <div class="sidebar-section sidebar-stub">
+                <div class="sidebar-section-title">Federated Node</div>
+                <select class="stub-select" disabled title="TODO: Phase 3 — Switch hospital node weights">
+                    <option>Default (QPSO-FL)</option>
+                    <option>Hospital A</option>
+                    <option>Hospital B</option>
+                </select>
+                <span class="stub-tag">Coming Soon</span>
+            </div>
+
+            <!-- Phase 3 Stub: AI Assistant -->
+            <div class="sidebar-section sidebar-stub">
+                <div class="sidebar-section-title">AI Assistant</div>
+                <span class="stub-tag">Coming Soon</span>
+            </div>
+        </aside>
+
+        <!-- ═══ MAIN CONTENT ═══ -->
+        <main class="main-content" id="mainContent">
+
+            <!-- ─── PAGE: UPLOAD ─── -->
+            <section class="page page-active" id="pageUpload" data-page="upload">
+                <div class="page-header">
+                    <h1>Patient Upload</h1>
+                    <p class="page-subtitle">Upload MRI data for AI-powered analysis</p>
+                </div>
+
+                <!-- Patient Metadata Form -->
+                <div class="card metadata-card" id="metadataCard">
+                    <h3 class="card-title">Patient Information</h3>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="patientId">Patient ID</label>
+                            <input type="text" id="patientId" placeholder="e.g. PT-001">
+                        </div>
+                        <div class="form-group">
+                            <label for="patientAge">Age</label>
+                            <input type="number" id="patientAge" placeholder="e.g. 45" min="0" max="120">
+                        </div>
+                        <div class="form-group">
+                            <label for="patientSex">Sex</label>
+                            <select id="patientSex">
+                                <option value="">Select</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="scanDate">Scan Date</label>
+                            <input type="date" id="scanDate">
+                        </div>
                     </div>
-                    <p class="upload-text">Drag & drop your files here</p>
-                    <p class="upload-subtext">ZIP file with NIfTI modalities or individual .nii.gz files</p>
-                    <label class="upload-btn" for="fileInput">
-                        Browse Files
-                    </label>
-                    <input type="file" id="fileInput" multiple accept=".zip,.nii,.nii.gz,.gz,.jpg,.jpeg,.png" hidden>
-                </div>
-            </div>
-
-            <!-- Upload Progress -->
-            <div class="upload-progress hidden" id="uploadProgress">
-                <div class="progress-bar">
-                    <div class="progress-fill" id="uploadProgressFill"></div>
-                </div>
-                <p class="progress-text" id="uploadProgressText">Uploading...</p>
-            </div>
-
-            <!-- File Analysis Results -->
-            <div class="file-analysis hidden" id="fileAnalysis">
-                <h3 class="section-label">Detected Modalities</h3>
-                <div class="modality-grid" id="modalityGrid"></div>
-                <div class="upload-quality hidden" id="uploadQualitySummary">
-                    <div class="upload-quality-title">Quality & OOD Checks</div>
-                    <p class="signal-line" id="uploadQualityLine"></p>
-                    <ul class="insights-list" id="uploadQualityWarnings"></ul>
-                </div>
-                <div class="analysis-actions">
-                    <button class="btn btn-primary btn-lg" id="btnStartClassification" disabled>
-                        <span class="btn-icon">🔬</span>
-                        Start Classification
-                    </button>
-                </div>
-            </div>
-        </section>
-
-        <!-- ─── STEP 1: CLASSIFICATION ─── -->
-        <section class="panel" id="panelClassify" data-step="1">
-            <div class="panel-header">
-                <h1 class="panel-title">
-                    <span class="title-icon">🔬</span>
-                    Tumor Classification
-                </h1>
-                <p class="panel-subtitle">QPSO-FL ResNet inference with BraTS protocol safeguards</p>
-            </div>
-
-            <!-- Loading State -->
-            <div class="inference-loading" id="classifyLoading">
-                <div class="brain-loader">
-                    <div class="brain-pulse"></div>
-                    <span class="brain-emoji">🧠</span>
-                </div>
-                <p class="loading-text">Running Classification Models...</p>
-                <p class="loading-subtext">Analyzing MRI slices with clinical protocol checks</p>
-            </div>
-
-            <!-- Results -->
-            <div class="classify-results hidden" id="classifyResults">
-                <!-- Input Preview -->
-                <div class="input-preview" id="inputPreview">
-                    <div class="preview-card">
-                        <div class="preview-label">Input Slice</div>
-                        <img id="classifySliceImg" alt="MRI Slice" class="preview-img">
-                        <div class="preview-meta" id="classifySliceMeta"></div>
-                    </div>
-                </div>
-
-                <div class="protocol-banner hidden" id="protocolBanner"></div>
-
-                <!-- Consensus Card -->
-                <div class="consensus-card" id="consensusCard">
-                    <div class="consensus-icon" id="consensusIcon"></div>
-                    <div class="consensus-class" id="consensusClass"></div>
-                    <div class="consensus-detail" id="consensusDetail"></div>
-                </div>
-
-                <!-- Model Results Grid -->
-                <div class="model-results-grid" id="modelResultsGrid"></div>
-
-                <!-- Ensemble Chart -->
-                <div class="ensemble-section">
-                    <h3 class="section-label">Ensemble Probability Distribution</h3>
-                    <div id="ensembleChart" class="chart-container"></div>
-                </div>
-
-                <div class="viewer-card hidden" id="classifyExplainSection">
-                    <h3 class="section-label">Classification Explainability (Grad-CAM)</h3>
-                    <div class="overlay-controls" id="classifyExplainControls"></div>
-                    <div class="classify-explain-img-wrap">
-                        <img id="classifyExplainImg" alt="Classification explainability" class="classify-explain-img">
-                    </div>
-                    <div class="slice-info" id="classifyExplainNote"></div>
-                </div>
-
-                <div class="viewer-card hidden" id="classifyRiskSection">
-                    <h3 class="section-label">Risk & Quality Signals</h3>
-                    <p id="uncertaintyLine" class="signal-line"></p>
-                    <p id="qualityLine" class="signal-line"></p>
-                    <ul class="insights-list" id="classifyInsightsList"></ul>
-                </div>
-
-                <!-- Action -->
-                <div class="classify-actions" id="classifyActions"></div>
-            </div>
-        </section>
-
-        <!-- ─── STEP 2: SEGMENTATION ─── -->
-        <section class="panel" id="panelSegment" data-step="2">
-            <div class="panel-header">
-                <h1 class="panel-title">
-                    <span class="title-icon">🎯</span>
-                    3D Tumor Segmentation
-                </h1>
-                <p class="panel-subtitle">3D Attention U-Net · MONAI Framework · Sliding Window Inference</p>
-            </div>
-
-            <!-- Loading -->
-            <div class="inference-loading" id="segmentLoading">
-                <div class="brain-loader">
-                    <div class="brain-pulse"></div>
-                    <span class="brain-emoji">🧠</span>
-                </div>
-                <p class="loading-text">Running 3D Segmentation...</p>
-                <p class="loading-subtext">This may take 30-60 seconds on CPU</p>
-                <div class="progress-wrap">
-                    <div class="progress-bar" style="margin-top:1rem;max-width:400px;">
-                    <div class="progress-fill progress-indeterminate"></div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Results -->
-            <div class="segment-results hidden" id="segmentResults">
-                <!-- Volume Stats -->
-                <div class="stats-row" id="segStatsRow"></div>
-
-                <div class="viewer-card seg-uncertainty-card" id="segUncertaintyCard">
-                    <h3 class="section-label">Segmentation Uncertainty</h3>
-                    <p class="signal-line" id="segUncertaintyText"></p>
-                    <div class="overlay-controls seg-uncertainty-controls" id="segUncertaintyControls">
-                        <label for="segUncertaintyOpacity" class="mini-label">Uncertainty Overlay Opacity</label>
-                        <input type="range" id="segUncertaintyOpacity" class="slice-slider" min="0.1" max="0.9" step="0.05" value="0.55">
+                    <div class="form-group form-group-full">
+                        <label for="clinicalNotes">Clinical Notes (optional)</label>
+                        <textarea id="clinicalNotes" rows="2" placeholder="Any relevant clinical notes..."></textarea>
                     </div>
                 </div>
 
-                <!-- 3D Viewer + Slice Viewer -->
-                <div class="seg-viewer-grid">
-                    <div class="viewer-card">
-                        <h3 class="section-label">3D Tumor Visualization</h3>
-                        <div class="overlay-controls" id="segOverlayControls"></div>
-                        <div id="seg3dViewer" class="viewer-3d"></div>
+                <!-- Upload Zone -->
+                <div class="upload-zone" id="uploadZone">
+                    <div class="upload-zone-inner">
+                        <div class="upload-icon">
+                            <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                <polyline points="17 8 12 3 7 8"/>
+                                <line x1="12" y1="3" x2="12" y2="15"/>
+                            </svg>
+                        </div>
+                        <p class="upload-text">Drag & drop your files here</p>
+                        <p class="upload-subtext">MRI image (JPG/PNG) or NIfTI modalities (.nii.gz) or ZIP archive</p>
+                        <label class="upload-btn" for="fileInput">Browse Files</label>
+                        <input type="file" id="fileInput" multiple accept=".zip,.nii,.nii.gz,.gz,.jpg,.jpeg,.png" hidden>
                     </div>
-                    <div class="viewer-card">
-                        <h3 class="section-label">Axial Slice View</h3>
-                        <div id="segSliceViewer" class="viewer-slices"></div>
-                        <div class="overlay-controls" id="sliceOverlayControls"></div>
-                        <input type="range" id="segSliceSlider" class="slice-slider" min="0" max="6" value="3">
-                        <div class="slice-info" id="segSliceInfo">Slice 4 / 7</div>
+                </div>
+
+                <!-- OR Divider -->
+                <div class="or-divider" id="orDivider">
+                    <span class="or-line"></span>
+                    <span class="or-text">or load from clinical database</span>
+                    <span class="or-line"></span>
+                </div>
+
+                <!-- Sample Patient Selector -->
+                <div class="card sample-patients-card" id="samplePatientsCard">
+                    <h3 class="card-title">
+                        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.7" style="vertical-align: -2px; margin-right: 4px">
+                            <ellipse cx="12" cy="5" rx="8" ry="3"/>
+                            <path d="M20 5v6c0 1.66-3.58 3-8 3s-8-1.34-8-3V5"/>
+                            <path d="M20 11v6c0 1.66-3.58 3-8 3s-8-1.34-8-3v-6"/>
+                        </svg>
+                        Patient Records
+                    </h3>
+                    <p class="sample-hint">Select a patient from the institutional database to begin analysis</p>
+                    <div class="sample-grid" id="sampleGrid">
+                        <div class="sample-loading">Loading records...</div>
                     </div>
                 </div>
 
-                <!-- Action -->
-                <div class="segment-actions">
-                    <button class="btn btn-primary btn-lg" id="btnStartProgression">
-                        <span class="btn-icon">📈</span>
-                        Run Progression Analysis
-                    </button>
-                </div>
-            </div>
-        </section>
-
-        <!-- ─── STEP 3: PROGRESSION ─── -->
-        <section class="panel" id="panelProgression" data-step="3">
-            <div class="panel-header">
-                <h1 class="panel-title">
-                    <span class="title-icon">📈</span>
-                    Tumor Progression Forecast
-                </h1>
-                <p class="panel-subtitle">Logistic Growth Model + Spatial U-Net Growth Prediction</p>
-            </div>
-
-            <!-- Loading -->
-            <div class="inference-loading" id="progressionLoading">
-                <div class="brain-loader">
-                    <div class="brain-pulse"></div>
-                    <span class="brain-emoji">🧠</span>
-                </div>
-                <p class="loading-text">Running Progression Analysis...</p>
-                <p class="loading-subtext">Fitting growth models and spatial prediction</p>
-            </div>
-
-            <!-- Results -->
-            <div class="progression-results hidden" id="progressionResults">
-                <!-- Current Volume Card -->
-                <div class="stats-row" id="progStatsRow"></div>
-
-                <!-- Grade Selector -->
-                <div class="grade-selector" id="gradeSelector">
-                    <span class="grade-label">Tumor Grade:</span>
-                    <button class="grade-btn active" data-grade="HGG">HGG (High-Grade)</button>
-                    <button class="grade-btn" data-grade="LGG">LGG (Low-Grade)</button>
+                <!-- Upload Progress -->
+                <div class="upload-progress hidden" id="uploadProgress">
+                    <div class="progress-bar"><div class="progress-fill" id="uploadProgressFill"></div></div>
+                    <p class="progress-text" id="uploadProgressText">Uploading...</p>
                 </div>
 
-                <!-- Growth Curve -->
-                <div class="viewer-card">
-                    <h3 class="section-label">Projected Growth Curve</h3>
-                    <div id="growthCurveChart" class="chart-container chart-lg"></div>
+                <!-- File Analysis -->
+                <div class="file-analysis hidden" id="fileAnalysis">
+                    <h3 class="card-title">Detected Modalities</h3>
+                    <div class="modality-grid" id="modalityGrid"></div>
+                    <div class="quality-summary hidden" id="uploadQualitySummary">
+                        <div class="quality-title">Quality & OOD Checks</div>
+                        <p id="uploadQualityLine"></p>
+                        <ul id="uploadQualityWarnings"></ul>
+                    </div>
+                    <div class="page-actions">
+                        <button class="btn btn-primary btn-lg" id="btnAnalyze" disabled>
+                            Analyze
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- ─── PAGE: CLASSIFICATION ─── -->
+            <section class="page" id="pageClassify" data-page="classify">
+                <div class="page-header">
+                    <h1>Classification Report</h1>
+                    <p class="page-subtitle">QPSO-FL ResNet-18 tumor classification results</p>
                 </div>
 
-                <!-- Projections Table -->
-                <div class="viewer-card">
-                    <h3 class="section-label">Volume Projections</h3>
-                    <div class="projections-table-wrap">
+                <div class="empty-state" id="classifyEmpty">
+                    <p>Upload and analyze MRI data first to see classification results.</p>
+                </div>
+
+                <div class="inference-loading hidden" id="classifyLoading">
+                    <div class="loader-spinner"></div>
+                    <p class="loading-text">Running Classification Models...</p>
+                    <p class="loading-subtext">Analyzing MRI slices with clinical protocol checks</p>
+                </div>
+
+                <div class="classify-results hidden" id="classifyResults">
+                    <div class="protocol-banner hidden" id="protocolBanner"></div>
+
+                    <!-- Input Preview + Consensus side by side -->
+                    <div class="results-hero">
+                        <div class="input-preview hidden" id="inputPreview">
+                            <div class="preview-card">
+                                <div class="preview-label">Input Slice</div>
+                                <img id="classifySliceImg" alt="MRI Slice" class="preview-img">
+                                <div class="preview-meta" id="classifySliceMeta"></div>
+                            </div>
+                        </div>
+                        <div class="consensus-card" id="consensusCard">
+                            <div class="consensus-icon" id="consensusIcon"></div>
+                            <div class="consensus-class" id="consensusClass"></div>
+                            <div class="confidence-bar-wrap" id="confidenceBarWrap"></div>
+                            <div class="consensus-detail" id="consensusDetail"></div>
+                        </div>
+                    </div>
+
+                    <!-- Per-class probabilities -->
+                    <div class="card">
+                        <h3 class="card-title">Per-Class Probability Distribution</h3>
+                        <div class="model-results-grid" id="modelResultsGrid"></div>
+                        <div id="ensembleChart" class="chart-container"></div>
+                    </div>
+
+                    <!-- Clinical Context (collapsible) -->
+                    <details class="card collapsible" id="clinicalContextSection">
+                        <summary class="collapsible-header">Clinical Context</summary>
+                        <div class="clinical-context-body" id="clinicalContextBody"></div>
+                    </details>
+
+                    <!-- Explainability -->
+                    <details class="card collapsible hidden" id="classifyExplainSection">
+                        <summary class="collapsible-header">Explainability (Grad-CAM)</summary>
+                        <div class="explain-body">
+                            <div class="overlay-controls" id="classifyExplainControls"></div>
+                            <div class="explain-img-wrap">
+                                <img id="classifyExplainImg" alt="Grad-CAM" class="explain-img">
+                            </div>
+                            <div class="explain-note" id="classifyExplainNote"></div>
+                        </div>
+                    </details>
+
+                    <!-- Risk & Quality -->
+                    <details class="card collapsible hidden" id="classifyRiskSection">
+                        <summary class="collapsible-header">Risk & Quality Signals</summary>
+                        <div class="risk-body">
+                            <p id="uncertaintyLine"></p>
+                            <p id="qualityLine"></p>
+                            <ul id="classifyInsightsList"></ul>
+                        </div>
+                    </details>
+
+                    <!-- Actions -->
+                    <div class="page-actions" id="classifyActions"></div>
+                </div>
+            </section>
+
+            <!-- ─── PAGE: SEGMENTATION ─── -->
+            <section class="page" id="pageSegment" data-page="segment">
+                <div class="page-header">
+                    <h1>Segmentation Viewer</h1>
+                    <p class="page-subtitle">3D Attention U-Net · MONAI Framework · Sliding Window Inference</p>
+                </div>
+
+                <div class="empty-state" id="segmentEmpty">
+                    <p>Segmentation requires Glioma classification with all 4 NIfTI modalities (T1, T1ce, T2, FLAIR).</p>
+                </div>
+
+                <div class="inference-loading hidden" id="segmentLoading">
+                    <div class="loader-spinner"></div>
+                    <p class="loading-text">Running 3D Segmentation...</p>
+                    <p class="loading-subtext">This may take 30-60 seconds on CPU</p>
+                    <div class="progress-bar" style="max-width:400px;margin:1rem auto;">
+                        <div class="progress-fill progress-indeterminate"></div>
+                    </div>
+                </div>
+
+                <div class="segment-results hidden" id="segmentResults">
+                    <div class="stats-row" id="segStatsRow"></div>
+
+                    <details class="card collapsible" id="segUncertaintyCard">
+                        <summary class="collapsible-header">Segmentation Uncertainty</summary>
+                        <p id="segUncertaintyText"></p>
+                        <div class="overlay-controls" id="segUncertaintyControls">
+                            <label for="segUncertaintyOpacity">Uncertainty Overlay Opacity</label>
+                            <input type="range" id="segUncertaintyOpacity" min="0.1" max="0.9" step="0.05" value="0.55">
+                        </div>
+                    </details>
+
+                    <div class="viewer-grid">
+                        <div class="card">
+                            <h3 class="card-title">3D Tumor Visualization</h3>
+                            <div class="overlay-controls" id="segOverlayControls"></div>
+                            <div id="seg3dViewer" class="viewer-3d"></div>
+                        </div>
+                        <div class="card">
+                            <h3 class="card-title">Axial Slice View</h3>
+                            <div id="segSliceViewer" class="viewer-slices"></div>
+                            <div class="overlay-controls" id="sliceOverlayControls"></div>
+                            <input type="range" id="segSliceSlider" class="slice-slider" min="0" max="6" value="3">
+                            <div class="slice-info" id="segSliceInfo">Slice 4 / 7</div>
+                        </div>
+                    </div>
+
+                    <div class="page-actions">
+                        <button class="btn btn-primary btn-lg" id="btnStartProgression">
+                            Run Progression Analysis
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ─── PAGE: PROGRESSION ─── -->
+            <section class="page" id="pageProgression" data-page="progression">
+                <div class="page-header">
+                    <h1>Progression Forecast</h1>
+                    <p class="page-subtitle">Logistic Growth Model + Spatial U-Net Growth Prediction</p>
+                </div>
+
+                <div class="empty-state" id="progressionEmpty">
+                    <p>Run segmentation first to generate progression forecasts.</p>
+                </div>
+
+                <div class="inference-loading hidden" id="progressionLoading">
+                    <div class="loader-spinner"></div>
+                    <p class="loading-text">Running Progression Analysis...</p>
+                    <p class="loading-subtext">Fitting growth models and spatial prediction</p>
+                </div>
+
+                <div class="progression-results hidden" id="progressionResults">
+                    <div class="stats-row" id="progStatsRow"></div>
+
+                    <div class="grade-selector" id="gradeSelector">
+                        <span class="grade-label">Tumor Grade:</span>
+                        <button class="grade-btn active" data-grade="HGG">HGG (High-Grade)</button>
+                        <button class="grade-btn" data-grade="LGG">LGG (Low-Grade)</button>
+                    </div>
+
+                    <!-- RANO Status -->
+                    <div class="rano-section hidden" id="ranoSection">
+                        <span class="rano-badge" id="ranoBadge"></span>
+                        <div class="risk-alert hidden" id="riskAlert"></div>
+                    </div>
+
+                    <div class="card">
+                        <h3 class="card-title">Projected Growth Curve</h3>
+                        <div id="growthCurveChart" class="chart-container chart-lg"></div>
+                    </div>
+
+                    <div class="card">
+                        <h3 class="card-title">Volume Projections</h3>
                         <table class="projections-table" id="projectionsTable">
                             <thead>
-                                <tr>
-                                    <th>Timepoint</th>
-                                    <th>Projected Volume</th>
-                                    <th>Growth</th>
-                                    <th>Status</th>
-                                </tr>
+                                <tr><th>Timepoint</th><th>Projected Volume</th><th>Growth</th><th>Status</th></tr>
                             </thead>
                             <tbody id="projectionsBody"></tbody>
                         </table>
                     </div>
-                </div>
 
-                <!-- Spatial Prediction -->
-                <div class="spatial-section hidden" id="spatialSection">
-                    <h3 class="section-label">Spatial Growth Prediction (3D U-Net)</h3>
-                    <div class="spatial-stats" id="spatialStats"></div>
-                    <div class="overlay-controls" id="spatialOverlayControls"></div>
-                    <div id="spatial3dViewer" class="viewer-3d"></div>
-                </div>
-
-                <!-- Method Cards -->
-                <div class="method-grid">
-                    <div class="method-card method-math">
-                        <div class="method-icon">📐</div>
-                        <div class="method-name">Logistic Growth</div>
-                        <div class="method-formula">V(t) = K / (1 + ((K-V₀)/V₀) × e<sup>-rt</sup>)</div>
-                        <div class="method-desc">Classical per-patient fitted model. Predicts HOW MUCH growth.</div>
+                    <div class="spatial-section hidden" id="spatialSection">
+                        <h3 class="card-title">Spatial Growth Prediction (3D U-Net)</h3>
+                        <div class="spatial-stats" id="spatialStats"></div>
+                        <div class="overlay-controls" id="spatialOverlayControls"></div>
+                        <div id="spatial3dViewer" class="viewer-3d"></div>
                     </div>
-                    <div class="method-card method-spatial">
-                        <div class="method-icon">🔮</div>
-                        <div class="method-name">Spatial U-Net</div>
-                        <div class="method-formula">Mask(T+1) = UNet3D(Mask(T))</div>
-                        <div class="method-desc">3D CNN predicts WHERE growth occurs. Trained on 391 mask pairs.</div>
+
+                    <details class="card collapsible" id="progressionInsightsCard">
+                        <summary class="collapsible-header">Progression Explainability</summary>
+                        <p id="progDriverLine"></p>
+                        <p id="progSpatialLine"></p>
+                        <ul id="progInsightsList"></ul>
+                    </details>
+
+                    <div class="page-actions">
+                        <button class="btn btn-secondary btn-lg" id="btnDownloadReport">
+                            Download Clinical Report (PDF)
+                        </button>
                     </div>
                 </div>
+            </section>
 
-                <div class="viewer-card" id="progressionInsightsCard">
-                    <h3 class="section-label">Progression Explainability Insights</h3>
-                    <p class="signal-line" id="progDriverLine"></p>
-                    <p class="signal-line" id="progSpatialLine"></p>
-                    <ul class="insights-list" id="progInsightsList"></ul>
+            <!-- ─── PAGE: MULTI-PATIENT (Stub) ─── -->
+            <section class="page" id="pageMulti" data-page="multi">
+                <div class="page-header">
+                    <h1>Multi-Patient View</h1>
+                    <p class="page-subtitle">Compare and manage multiple patient records</p>
                 </div>
-
-                <div class="segment-actions">
-                    <button class="btn btn-secondary btn-lg" id="btnDownloadReport">
-                        <span class="btn-icon">📄</span>
-                        Download Clinical Report (PDF)
-                    </button>
+                <div class="coming-soon">
+                    <div class="coming-soon-icon">···</div>
+                    <h2>Coming Soon</h2>
+                    <p>Multi-patient session management with side-by-side comparisons will be available in a future release.</p>
+                    <!-- Phase 3 Stub: multi-patient selectbox will go here -->
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- ─── NON-GLIOMA RESULT ─── -->
-        <section class="panel" id="panelNonGlioma" data-step="99">
-            <div class="panel-header">
-                <h1 class="panel-title">
-                    <span class="title-icon">📋</span>
-                    Classification Result
-                </h1>
-                <p class="panel-subtitle">Segmentation and progression tracking are available for Glioma tumors only</p>
-            </div>
-
-            <div class="non-glioma-card" id="nonGliomaCard">
-                <div class="non-glioma-icon" id="nonGliomaIcon"></div>
-                <div class="non-glioma-class" id="nonGliomaClass"></div>
-                <div class="non-glioma-msg">
-                    This tumor type was classified as <strong>non-Glioma</strong>.
-                    Segmentation and progression analysis are specifically designed for
-                    Glioma tumors using multi-modal NIfTI data (BraTS protocol).
+            <!-- ─── NON-GLIOMA RESULT (overlay page) ─── -->
+            <section class="page" id="panelNonGlioma" data-page="nonglioma">
+                <div class="page-header">
+                    <h1>Classification Complete</h1>
+                    <p class="page-subtitle">Segmentation and progression are available for Glioma tumors only</p>
                 </div>
-                <button class="btn btn-secondary" id="btnRestart">
-                    <span class="btn-icon">🔄</span>
-                    Start New Analysis
-                </button>
-            </div>
-        </section>
+                <div class="non-glioma-card" id="nonGliomaCard">
+                    <div class="non-glioma-icon" id="nonGliomaIcon"></div>
+                    <div class="non-glioma-class" id="nonGliomaClass"></div>
+                    <div id="nonGliomaClinicalContext" class="clinical-context-inline"></div>
+                    <p class="non-glioma-msg">
+                        Segmentation and progression analysis are specifically designed for
+                        Glioma tumors using multi-modal NIfTI data (BraTS protocol).
+                    </p>
+                    <button class="btn btn-primary" id="btnRestart">Start New Analysis</button>
+                </div>
+            </section>
 
-    </main>
+        </main>
+    </div>
 
-    <!-- ═══════════════ TOAST NOTIFICATIONS ═══════════════ -->
+    <!-- Toast Container -->
     <div class="toast-container" id="toastContainer"></div>
 
-    <!-- Scripts -->
-    <script src="/static/js/app.js"></script>
+    <!-- Phase 3 Stub: AI Chatbot Panel (hidden) -->
+    <div class="chatbot-stub hidden" id="chatbotStub">
+        <!-- TODO: st.chat_input / st.chat_message equivalent -->
+        <!-- Will query a RAG system about the patient's scan -->
+    </div>
+
+    <script src="/static/js/app.js?v=20260517"></script>
+    <script src="/static/js/pipeline.js?v=20260517"></script>
 </body>
 </html>

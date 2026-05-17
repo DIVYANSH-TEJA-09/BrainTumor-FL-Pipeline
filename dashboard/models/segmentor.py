@@ -260,7 +260,7 @@ def _extract_mesh_data(pred_np, img_np=None, uncertainty_map=None, step=2):
     """Extract 3D mesh vertices and faces for Plotly rendering."""
     meshes = {}
 
-    labels = [("TC", 0, "#E74C3C"), ("WT", 1, "#3498DB"), ("ET", 2, "#F39C12")]
+    labels = [("TC", 0, "#E74C3C"), ("WT", 1, "#F59E0B"), ("ET", 2, "#F97316")]
 
     for name, ch, color in labels:
         vol = pred_np[:, :, :, ch]

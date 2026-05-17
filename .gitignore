@@ -91,3 +91,7 @@ desktop.ini
 node_modules/
 package-lock.json
 package.json
+
+# ---------- Dashboard ----------
+dashboard/uploads/
+# Note: dashboard/sample_data/*.nii.gz must be tracked via Git LFS for HF deployment

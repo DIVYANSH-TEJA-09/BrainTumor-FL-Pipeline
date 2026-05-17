@@ -13,6 +13,7 @@ with percentile-based windowing and brain-region cropping.
 import numpy as np
 from PIL import Image, ImageFilter
 from pathlib import Path
+from typing import Tuple
 
 try:
     import nibabel as nib
@@ -199,6 +200,70 @@ def extract_classification_slices_for_voting(nifti_path, n_slices=5):
         results.append((img, idx))
 
     return results, total
+
+
+def extract_axial_slice(nifti_path: str | Path, slice_index: int | None = None) -> tuple[np.ndarray, int, int]:
+    """
+    Extract a single axial slice from a NIfTI volume without loading the full data.
+
+    Parameters
+    ----------
+    nifti_path : str or Path
+        Path to a NIfTI file.
+    slice_index : int or None
+        Optional axial index. Defaults to middle slice if out of range or None.
+
+    Returns
+    -------
+    np.ndarray
+        2D slice array.
+    int
+        Slice index used.
+    int
+        Total number of slices.
+    """
+    if not HAS_NIBABEL:
+        raise ImportError("nibabel is required")
+
+    nii = nib.load(str(nifti_path))
+    data = nii.dataobj
+
+    if data.ndim == 4:
+        data = data[:, :, :, 0]
+
+    n_slices = int(data.shape[2])
+    if slice_index is None or slice_index < 0 or slice_index >= n_slices:
+        slice_index = n_slices // 2
+
+    slice_2d = np.asanyarray(data[:, :, slice_index])
+    return slice_2d, int(slice_index), n_slices
+
+
+def render_report_slice(nifti_path: str | Path, slice_index: int | None = None) -> tuple[Image.Image, int, int]:
+    """
+    Render a normalized axial slice for reporting from a NIfTI file.
+
+    Parameters
+    ----------
+    nifti_path : str or Path
+        Path to NIfTI file.
+    slice_index : int or None
+        Optional axial slice index. Defaults to middle slice.
+
+    Returns
+    -------
+    PIL.Image
+        RGB image suitable for reporting.
+    int
+        Slice index used.
+    int
+        Total number of slices.
+    """
+    slice_2d, idx, total = extract_axial_slice(nifti_path, slice_index=slice_index)
+    normalized = _normalize_brain_slice(slice_2d)
+    cropped = _crop_brain_region(normalized)
+    img = Image.fromarray(cropped, mode="L").convert("RGB")
+    return img, idx, total
 
 
 def extract_multi_slices(nifti_path, n_slices=5):
